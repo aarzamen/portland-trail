@@ -1,13 +1,28 @@
 {
   "name": "the-portland-trail",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
   "type": "module",
   "scripts": {
     "test": "node --test tests/*.test.js",
+    "test:browser": "node scripts/test-browser.mjs",
     "build": "node scripts/build.mjs",
-    "start": "node scripts/serve.mjs",
-    "dev": "node scripts/serve.mjs"
+    "start": "node scripts/build.mjs && node scripts/serve.mjs --dist",
+    "dev": "node scripts/serve.mjs",
+    "assets": "uv run scripts/prepare-assets.py",
+    "balance": "node scripts/balance.mjs",
+    "checksums": "node scripts/checksums.mjs",
+    "checksums:check": "node scripts/checksums.mjs --check",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "typecheck": "tsc -p jsconfig.json"
   },
-  "engines": { "node": ">=22" }
+  "engines": {
+    "node": ">=22"
+  },
+  "devDependencies": {
+    "playwright": "^1.63.0",
+    "prettier": "^3.9.9",
+    "typescript": "^7.0.2"
+  }
 }

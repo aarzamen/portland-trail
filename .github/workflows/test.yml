@@ -1,0 +1,37 @@
+name: Test
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22
+
+      - name: Rules, saves and tooling tests (no install)
+        working-directory: app
+        run: npm test
+
+      - name: Checksum manifests are current
+        run: node app/scripts/checksums.mjs --check
+
+      - name: Install development tools
+        working-directory: app
+        run: npm ci
+
+      - name: Formatting
+        working-directory: app
+        run: npm run format:check
+
+      - name: Type check
+        working-directory: app
+        run: npm run typecheck
