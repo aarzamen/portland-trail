@@ -16,7 +16,7 @@ The [version 2 archive](../../Portland_Trail_Project_Handoff_v2.zip) has been un
 
 The [public snapshot](evidence/public-snapshot/) and [provided export](evidence/provided-export/) are unchanged reference evidence. All original local JPEGs and three PNG masters are preserved. The game's images are separate copies with semantic names. Local and exported numbered filenames sometimes depict different subjects; mappings must follow visual contents.
 
-The current Git branch is `feat/playable-rebuild`, with local commits and no remote. The archive remains the historical package; current loose-file checksum manifests describe the reconciled local files. No new archive has been prepared.
+The current Git branch is `main`, published in [aarzamen/portland-trail](https://github.com/aarzamen/portland-trail) with the full local commit history. The `origin` remote uses SSH. The separate private `aarzamen/The-Portland-Trail` repository remains unchanged. The archive remains the historical package; current loose-file checksum manifests describe the reconciled local files. No new archive has been prepared.
 
 ## Implemented behavior
 

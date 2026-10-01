@@ -6,7 +6,7 @@ Updated October 1, 2026. Project root: `/Users/ama/The Portland Trail` on the Ma
 
 The first playable rebuild lives in [app/](app/). It is a static browser game with no runtime dependencies or backend. The original audit, source snapshots, and graphics masters are unpacked under [docs/handoff/](docs/handoff/). Their evidence and image bytes remain unchanged. The archive's duplicate AGENTS.md was removed at the user's request; the root [AGENTS.md](AGENTS.md) remains authoritative.
 
-A local Git repository now tracks the project on `feat/playable-rebuild`. There is no remote or publication configured. The original staging README and local-image status are preserved as `docs/handoff/README.archive-v2.md` and `docs/handoff/LOCAL_IMAGE_REVIEW.archive-v2.md`. The original setup document remains inside the handoff ZIP.
+The project is tracked on `main` in the public GitHub repository [aarzamen/portland-trail](https://github.com/aarzamen/portland-trail). The `origin` remote uses SSH; `feat/playable-rebuild` preserves the last development checkpoint. The existing private `aarzamen/The-Portland-Trail` repository is separate. The original staging README and local-image status are preserved as `docs/handoff/README.archive-v2.md` and `docs/handoff/LOCAL_IMAGE_REVIEW.archive-v2.md`. The original setup document remains inside the handoff ZIP.
 
 The roadtrip update adds Auto-buy essentials, animated travel and daily summaries, four new illustrated stops (11 locations total), and desktop/home-screen icons. Save version 2 imports the original version 1 journeys without resetting progress. See the [update validation](docs/validation/2026-10-01-roadtrip-update.md).
 
