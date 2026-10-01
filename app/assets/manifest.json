@@ -20,10 +20,15 @@
       "file": "travel.jpg",
       "source": "images/the_portland_trail_00008.jpg",
       "source_sha256": "0be1eacf70dbf377b73141e0959c1983ff6ab4d66b5b4504d7a6b2345ca47edc",
-      "crop": null,
+      "crop": [
+        0,
+        340,
+        1024,
+        940
+      ],
       "width": 1024,
-      "height": 1024,
-      "sha256": "522d4108eeb79dadf9a6b00da160560d19ae90afe5499a4eb1634f5d98f8bb61"
+      "height": 600,
+      "sha256": "fba3193a38cc34b04e7b45e6a65f445d301c6971fbac4d070f6c5206e5dee160"
     },
     {
       "file": "departure.jpg",

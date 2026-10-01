@@ -1,63 +1,37 @@
-# The Portland Trail handoff
+# The Portland Trail development handoff
 
-Prepared October 1, 2026 for the next project session.
+Updated October 1, 2026. The first playable replacement is implemented in [app/](../../app/), with setup, supplies, travel, encounters, save/resume, and distinct endings. Start with [Project setup](../../PROJECT_SETUP.md) for runnable commands and [Validation](../validation/2026-10-01.md) for evidence.
 
-The handoff package is present as [Portland_Trail_Project_Handoff_v2.zip](../../Portland_Trail_Project_Handoff_v2.zip). It contains the earlier audit, original source snapshots, image inventories, screenshots, and three concept masters. The project root also contains [AGENTS.md](../../AGENTS.md) and [19 local images](../../images/). No replacement app has been built in this session.
+## Read next
 
-## Completed this session
+1. [Root instructions](../../AGENTS.md).
+2. [Implementation design](../superpowers/specs/2026-10-01-playable-rebuild-design.md) and [completed plan](../superpowers/plans/2026-10-01-playable-rebuild.md).
+3. [Illustrated original audit](Portland_Trail_Audit.pdf), [rebuild brief](HANDOFF_TO_CODEX.txt), and [18 original findings](findings.json).
+4. [Local image review](LOCAL_IMAGE_REVIEW.md), [deployed inventory](asset_inventory.json), [export inventory](provided_export_asset_inventory.json), and [current app asset manifest](../../app/assets/manifest.json).
+5. [Asset brief](ASSET_BRIEF.txt), [graphics notes](graphics-v1/README.txt), and [concept manifest](graphics-v1/manifest.json).
 
-- Reviewed the full root AGENTS.md and the archive's setup document, handoff index, rebuild brief, asset brief, graphics production notes and manifest, local-image status, and 18 structured findings.
-- At the user's request, removed `The-Portland-Trail/AGENTS.md` from the ZIP. It was byte-identical to the root AGENTS.md, which remains unchanged.
-- Removed the deleted file's entry from the archive's root `checksums.json`. Both archive checksum manifests pass verification, as does the ZIP integrity check. All other member contents remain unchanged; the archive now contains 100 files.
-- Reviewed all 19 local images and recorded dimensions, hashes, proposed uses, and limitations in [Local image review](LOCAL_IMAGE_REVIEW.md).
+## Preservation and placement
 
-An initial folder inspection occurred before the ZIP appeared in the directory listing. The package is now verified present; earlier missing-package observations are superseded by this document.
+The [version 2 archive](../../Portland_Trail_Project_Handoff_v2.zip) has been unpacked into this project. Its extra AGENTS.md was removed at the user's request in the earlier review; the root instructions are unchanged. The two conflicting handoff documents were retained alongside the local versions as [original package index](README.archive-v2.md) and [original pending image review](LOCAL_IMAGE_REVIEW.archive-v2.md). Relative links remain valid from those sibling locations; their status statements describe the earlier staging session.
 
-## Current layout and evidence
+The [public snapshot](evidence/public-snapshot/) and [provided export](evidence/provided-export/) are unchanged reference evidence. All original local JPEGs and three PNG masters are preserved. The game's images are separate copies with semantic names. Local and exported numbered filenames sometimes depict different subjects; mappings must follow visual contents.
 
-The project root is `/Users/ama/The Portland Trail`. It is a local folder without Git metadata. There is no active app structure outside the ZIP. The archive's vanilla HTML/CSS/JavaScript snapshots are reference evidence for a future rebuild.
+The current Git branch is `feat/playable-rebuild`, with local commits and no remote. The archive remains the historical package; current loose-file checksum manifests describe the reconciled local files. No new archive has been prepared.
 
-The ZIP has a `The-Portland-Trail/` prefix. Its contents remain compressed; no archive files have been extracted into the project. The local `docs/handoff/README.md` and `LOCAL_IMAGE_REVIEW.md` are this session's new documents. When unpacking later, preserve the archived versions separately and reconcile deliberately instead of overwriting these local reviews.
+## Implemented behavior
 
-Key paths inside the archive, beneath `The-Portland-Trail/`:
+- Four backgrounds with actual abilities, five editable names, and clean New Game.
+- Seven milestones from the co-op to Portland, with shops and activities controlled by location data.
+- Nine encounters with stable ids and exactly-once pending tokens. Events resume after loading.
+- Permanent death, affordable action checks, nonnegative inventory, and terminal states that stop further play.
+- Seed bombs and kombucha have usable actions; parts repair the van; NFTs can be sold in shops or traded at the fair.
+- Version 1 local saves validate shape and coherent state. Unreadable saves and storage failures are surfaced visibly.
+- Responsive green illustrated interface, real portrait/icon exports, quantity purchases, keyboard background selection, and native event dialogs.
 
-| Path | Role |
-|---|---|
-| `PROJECT_SETUP.md` | Historical staging and placement status |
-| `docs/handoff/README.md` | Original package index and evidence scope |
-| `docs/handoff/Portland_Trail_Audit.pdf` | Illustrated evaluation; present and hash-verified, not read in this session |
-| `docs/handoff/HANDOFF_TO_CODEX.txt` | Rebuild priorities and 12 acceptance checks |
-| `docs/handoff/ASSET_BRIEF.txt` | Style and production contract |
-| `docs/handoff/findings.json` | 18 findings: five P0, ten P1, three P2 |
-| `docs/handoff/asset_inventory.json` and `provided_export_asset_inventory.json` | Original image inventories; present and hash-verified |
-| `docs/handoff/evidence/` | Source snapshots, runtime observations, and screenshots |
-| `docs/handoff/graphics-v1/` | Three PNG concept masters, production notes, prompts, and manifest |
+Balance intentionally differs from the original: prices and travel distances make resupply workable. The original starting cash/food/fuel values are retained. Current exact rules and ability descriptions live in [data.js](../../app/src/data.js). A good-weather event on the open road grants 20 miles; at an arrived stop it grants 2 fuel and preserves the opportunity to resupply. The critical encounter remains a rare losing event. The small seeded simulation is regression evidence, not a measured human-player difficulty study.
 
-The archive's old instructions to merge its AGENTS.md are superseded by the user's removal request. Use the project-root AGENTS.md. Historical archive documents otherwise remain unchanged.
+## Remaining work
 
-## Review of the instructions
+The local build is ready for playtesting. Real-device Safari, user feedback on difficulty and humor, removal of remaining decorative generated lettering, stricter visual consistency between scene vehicles, and optional animation are future improvements. Sites tooling was discoverable, but its local building/hosting skills were unavailable during development; no Site was created or published. The static build is portable for a subsequent hosting task.
 
-AGENTS.md clearly defines the premise, original preservation rules, game-rule priorities, and verification requirements. Its referenced materials are available inside the ZIP, although most referenced paths are not yet populated as loose files. Its use of “checkout” should not be taken as evidence of a Git repository.
-
-Preserve the funny road trip to Portland, five named travelers, four satirical backgrounds, scruffy loaded van, scarce resources, and green handheld-game / terminal identity. Keep interface text live and accessible. Resource ids are `money`, `food`, `fuel`, `ammo`, `parts`, `kombucha`, and `nft`; profession ids are `influencer`, `dev`, `prepper`, and `barista`. Here `ammo` means seed bombs and `parts` means repair supplies.
-
-The supplied brief proposes Sites for a later replacement and hosting. This session authorizes document preparation and archive cleanup; no implementation or deployment was performed.
-
-## Important image distinction
-
-The available local collection is `images/`. All 19 files are distinct 1024 × 1024 RGB JPEGs. None matches an exported image byte for byte. Some identical filenames describe different subjects: local 00003 is an illness character and local 00018 is a checkpoint scene, while the archived review identifies export 00003 as a rest stop and export 00018 as a departure bedroom. Never copy mappings by filename alone.
-
-The separately named “the Portland Trail images” folder has not been independently identified. This review covers the local `images/` folder. The archive additionally supplies three transparent concept masters; its production notes explicitly say they are not finished sprite cells or animation. Their visual quality was not evaluated in this session.
-
-## Next steps when implementation is requested
-
-1. Unpack and reconcile the handoff package into the expected project paths while preserving the root instructions, local reviews, and original evidence. Read the illustrated audit and inspect source and graphics directly.
-2. Resolve artwork by actual contents using both inventories and the local review. Confirm whether another image folder or source layers exist. Choose one consistent van design before making frames.
-3. Recheck for new user work, establish appropriate version control, and use `app/` if no implementation has appeared. Keep evidence snapshots unchanged.
-4. Prioritize F01–F07: critical event outcomes, clean New Game, synchronized display/save updates, restored pending events, permanent death, affordable travel costs, and terminal transitions. Then correct image mappings, location actions, profession behavior, and route balance.
-5. Use versioned serializable saves and stable ids; keep rules separate from rendering. The supplied brief requires no backend or live model.
-6. Verify every acceptance check in HANDOFF_TO_CODEX.txt, including one seeded successful route and one seeded losing route, coherent saves, replay, nonnegative resources, keyboard controls, and dialog focus. Inspect widths 390, 414, 430, 768, and 1440px. Record whether real-phone Safari was available.
-
-## Verification limits
-
-The archive findings are prior audit evidence, not defects independently reproduced here. This session checked archive integrity, both checksum manifests, original-file preservation, image metadata, and local document links. It did not run the game, inspect the PDF pages, test a browser or physical device, install dependencies, initialize Git, or publish a site.
+Do not mistake the original audit findings for current test failures. See the validation record for the rebuild's tested behavior and actual limits.

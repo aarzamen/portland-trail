@@ -31,11 +31,11 @@ Files: `app/src/data.js`, `app/src/engine.js`, `app/tests/engine.test.js`, `app/
 
 Consumes source constants and spec. Produces all data and engine exports specified in the integration contract.
 
-- [ ] Write and run behavioral tests first, verifying failure before implementation.
-- [ ] Implement validated pure transitions, deterministic RNG, coherent arrivals/endings, and safe serialization.
-- [ ] Test critical death, independent New Game, exactly-once outcomes, restored events, affordability, permanent death, restrictions, all advertised abilities and item uses.
-- [ ] Prove seeded successful and losing complete routes; tune solvability with small seeded sample.
-- [ ] Review implementation against tests and handoff.
+- [x] Write and run behavioral tests first, verifying failure before implementation.
+- [x] Implement validated pure transitions, deterministic RNG, coherent arrivals/endings, and safe serialization.
+- [x] Test critical death, independent New Game, exactly-once outcomes, restored events, affordability, permanent death, restrictions, all advertised abilities and item uses.
+- [x] Prove seeded successful and losing complete routes; tune solvability with small seeded sample.
+- [x] Review implementation against tests and handoff.
 
 ## Task 2 Browser interface
 
@@ -43,22 +43,26 @@ Files: `app/index.html`, `app/src/main.js`, `app/src/styles.css`.
 
 Consumes the exact task 1 interface and assets prepared in task 3. Produces full setup/shop/travel/location/dialog/ending flows. Can be implemented independently against the fixed contract while task 1 runs.
 
-- [ ] Build semantic controls and safe text handling for editable names.
-- [ ] Implement new/resume, all actions, live resource feedback, clear costs, and visible storage warnings.
-- [ ] Implement native dialog focus, pending-event reopening, replacement confirmation, and keyboard navigation.
-- [ ] Check script syntax and then browser integration when task 1 is ready.
+- [x] Build semantic controls and safe text handling for editable names.
+- [x] Implement new/resume, all actions, live resource feedback, clear costs, and visible storage warnings.
+- [x] Implement native dialog focus, pending-event reopening, replacement confirmation, and keyboard navigation.
+- [x] Check script syntax and then browser integration when task 1 is ready.
 
 ## Task 3 Assets and local tooling
 
 Files: `app/assets/*`, `app/package.json`, `app/scripts/*`, `app/tests/browser*`, project status documents.
 
-- [ ] Inspect PDF pages and masters; copy selected illustrations to semantic asset paths and record source hashes.
-- [ ] Provide npm test/build/start commands with zero product dependencies and a localhost server.
-- [ ] Run full rules suite, build, and browser journeys at 390/414/430/768/1440px.
-- [ ] Capture screenshots; check for overflow, missing images, and browser errors.
-- [ ] Obtain fresh review of integrated source and acceptance evidence; resolve material findings.
-- [ ] Refresh project setup and handoff with tested behavior, runnable commands, remaining limitations.
+- [x] Inspect PDF pages and masters; copy selected illustrations to semantic asset paths and record source hashes.
+- [x] Provide npm test/build/start commands with zero product dependencies and a localhost server.
+- [x] Run full rules suite, build, and browser journeys at 390/414/430/768/1440px.
+- [x] Capture screenshots; check for overflow, missing images, and browser errors.
+- [x] Obtain fresh review of integrated source and acceptance evidence; resolve material findings.
+- [x] Refresh project setup and handoff with tested behavior, runnable commands, remaining limitations.
 
 ## Execution decisions
 
 The project instructions explicitly ask for autonomous ordinary choices and parallel independent scaffolding. Use separate engine and UI implementers against the fixed contract while the controller prepares assets and tooling. This overrides generic skill approval checkpoints and serial execution where tasks do not share writable files. No prior repository existed; initialize a dedicated local development branch and preserve the existing folder as the user-designated root.
+
+## Result
+
+Implemented and verified October 1, 2026. Rules, UI, and asset/tooling tasks are complete for this static first version. Independent review found and closed two issues: a weather bonus skipping an arrived shop, and all-deceased active saves causing an encounter crash. See `../../validation/2026-10-01.md` for results and remaining scope.

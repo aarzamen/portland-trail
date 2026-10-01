@@ -6,7 +6,7 @@ Reviewed October 1, 2026. Return to the [project handoff](README.md).
 
 The available collection is [images/](../../images/) under the project root. It contains 19 RGB JPEGs, each 1024 × 1024 pixels, numbered 00000 through 00018. All SHA256 hashes differ, so there are no byte-identical duplicates. Visual review found related themes and different van designs, not identical compositions.
 
-Every image was inspected on labeled contact sheets. Images 00008, 00016, and 00017 were additionally inspected individually at full resolution. This is an initial content and reuse review; final crops, small-size readability, and in-game presentation remain untested. No original was edited or copied into an app.
+Every image was inspected on labeled contact sheets. Images 00008, 00016, and 00017 were additionally inspected individually at full resolution. This is an initial content and reuse review; final crops, small-size readability, and in-game presentation remain untested. Originals remain unchanged. The development pass now copies selected scenes and extracts separate concept portraits/icons into `app/assets/`; the [production manifest](../../app/assets/manifest.json) records exact sources, hashes, crops, and dimensions.
 
 The separately named “the Portland Trail images” folder in AGENTS.md has not been independently identified. Do not treat this local review as confirmation that a second collection was inspected. No editable layers, transparent PNGs, fixed-grid atlases, or animation files were found in the local collection. The handoff ZIP separately contains three transparent concept masters; those are outside this JPEG review.
 
@@ -73,3 +73,7 @@ Full SHA256 values below identify the reviewed originals. Recompute them after a
 | `the_portland_trail_00016.jpg` | 449614 | `ab339586dabf5de43f52bc83a8ce77d74b70bf59afd16a89e1a6ec383b9e1cc0` |
 | `the_portland_trail_00017.jpg` | 397649 | `75afc04e73755c5c401cfe1aea5156bb07049a3ce6e54160c4fc1c1a37901cff` |
 | `the_portland_trail_00018.jpg` | 387313 | `48657a3cae16d8041a42bd1ecd110b92963545c5bb1603af59d26c15be87c0d2` |
+
+## Development integration update
+
+The app now uses 16 semantically named scene copies, four 128 × 128 portrait cells, seven 64 × 64 resource cells, and one 256 × 128 static van copy. The portrait and icon copies were visually inspected on dark backgrounds, including icons at 32px; phone and desktop screenshots verify their in-game presentation. These are resampled concept illustrations, not strict four-color pixel sprites or animation. The 16 scene copies are based on the local JPEG collection; original number-to-role mappings are preserved above. Travel and title crops retain the van while avoiding unnecessary baked headings. Decorative malformed lettering and differing scene vehicle designs remain visible limitations.

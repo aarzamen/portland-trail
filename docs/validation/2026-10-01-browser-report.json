@@ -1,0 +1,228 @@
+{
+  "passed": true,
+  "checks": [
+    {
+      "name": "title-390",
+      "width": 390,
+      "scrollWidth": 390,
+      "badImages": [],
+      "outside": []
+    },
+    {
+      "name": "backgrounds-390",
+      "width": 390,
+      "scrollWidth": 390,
+      "badImages": [],
+      "outside": []
+    },
+    {
+      "name": "names-390",
+      "width": 390,
+      "scrollWidth": 390,
+      "badImages": [],
+      "outside": []
+    },
+    {
+      "name": "shop-390",
+      "width": 390,
+      "scrollWidth": 390,
+      "badImages": [],
+      "outside": []
+    },
+    {
+      "name": "travel-390",
+      "width": 390,
+      "scrollWidth": 390,
+      "badImages": [],
+      "outside": []
+    },
+    {
+      "name": "title-414",
+      "width": 414,
+      "scrollWidth": 414,
+      "badImages": [],
+      "outside": []
+    },
+    {
+      "name": "backgrounds-414",
+      "width": 414,
+      "scrollWidth": 414,
+      "badImages": [],
+      "outside": []
+    },
+    {
+      "name": "names-414",
+      "width": 414,
+      "scrollWidth": 414,
+      "badImages": [],
+      "outside": []
+    },
+    {
+      "name": "shop-414",
+      "width": 414,
+      "scrollWidth": 414,
+      "badImages": [],
+      "outside": []
+    },
+    {
+      "name": "travel-414",
+      "width": 414,
+      "scrollWidth": 414,
+      "badImages": [],
+      "outside": []
+    },
+    {
+      "name": "title-430",
+      "width": 430,
+      "scrollWidth": 430,
+      "badImages": [],
+      "outside": []
+    },
+    {
+      "name": "backgrounds-430",
+      "width": 430,
+      "scrollWidth": 430,
+      "badImages": [],
+      "outside": []
+    },
+    {
+      "name": "names-430",
+      "width": 430,
+      "scrollWidth": 430,
+      "badImages": [],
+      "outside": []
+    },
+    {
+      "name": "shop-430",
+      "width": 430,
+      "scrollWidth": 430,
+      "badImages": [],
+      "outside": []
+    },
+    {
+      "name": "travel-430",
+      "width": 430,
+      "scrollWidth": 430,
+      "badImages": [],
+      "outside": []
+    },
+    {
+      "name": "title-768",
+      "width": 768,
+      "scrollWidth": 768,
+      "badImages": [],
+      "outside": []
+    },
+    {
+      "name": "backgrounds-768",
+      "width": 768,
+      "scrollWidth": 768,
+      "badImages": [],
+      "outside": []
+    },
+    {
+      "name": "names-768",
+      "width": 768,
+      "scrollWidth": 768,
+      "badImages": [],
+      "outside": []
+    },
+    {
+      "name": "shop-768",
+      "width": 768,
+      "scrollWidth": 768,
+      "badImages": [],
+      "outside": []
+    },
+    {
+      "name": "travel-768",
+      "width": 768,
+      "scrollWidth": 768,
+      "badImages": [],
+      "outside": []
+    },
+    {
+      "name": "title-1440",
+      "width": 1440,
+      "scrollWidth": 1440,
+      "badImages": [],
+      "outside": []
+    },
+    {
+      "name": "backgrounds-1440",
+      "width": 1440,
+      "scrollWidth": 1440,
+      "badImages": [],
+      "outside": []
+    },
+    {
+      "name": "names-1440",
+      "width": 1440,
+      "scrollWidth": 1440,
+      "badImages": [],
+      "outside": []
+    },
+    {
+      "name": "shop-1440",
+      "width": 1440,
+      "scrollWidth": 1440,
+      "badImages": [],
+      "outside": []
+    },
+    {
+      "name": "travel-1440",
+      "width": 1440,
+      "scrollWidth": 1440,
+      "badImages": [],
+      "outside": []
+    },
+    {
+      "name": "pending-event-390",
+      "width": 390,
+      "scrollWidth": 390,
+      "badImages": [],
+      "outside": []
+    },
+    {
+      "name": "invalid-save-preserved"
+    },
+    {
+      "name": "storage-unavailable-430",
+      "width": 430,
+      "scrollWidth": 430,
+      "badImages": [],
+      "outside": []
+    },
+    {
+      "name": "winning-route",
+      "width": 1440,
+      "scrollWidth": 1440,
+      "badImages": [],
+      "outside": []
+    },
+    {
+      "name": "winning-route",
+      "seed": 21,
+      "distance": 1000,
+      "day": 16,
+      "outcome": "won",
+      "survivors": 5
+    },
+    {
+      "name": "losing-route",
+      "width": 390,
+      "scrollWidth": 390,
+      "badImages": [],
+      "outside": []
+    },
+    {
+      "name": "losing-route",
+      "seed": 21,
+      "distance": 350,
+      "day": 6,
+      "outcome": "lost",
+      "survivors": 5
+    }
+  ],
+  "errors": []
+}

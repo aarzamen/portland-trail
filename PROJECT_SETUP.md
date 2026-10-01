@@ -1,26 +1,54 @@
-# The Portland Trail — project placement
+# The Portland Trail project setup
 
-The intended project root is `/Users/ama/The Portland Trail` on **ama's MacBook Pro**, as specified by the user on 1 October 2026.
+Updated October 1, 2026. Project root: `/Users/ama/The Portland Trail` on the MacBook Pro.
 
-This package is staged for that folder. At preparation time the MacBook Pro was offline in Desktop Commander, so its existing project documents and separate image folder could not be inspected or changed. The connected Clyde Air is a different computer and was not used as a replacement project location.
+## Current state
 
-## Package layout
+The first playable rebuild lives in [app/](app/). It is a static browser game with no runtime dependencies or backend. The original audit, source snapshots, and graphics masters are unpacked under [docs/handoff/](docs/handoff/). Their evidence and image bytes remain unchanged. The archive's duplicate AGENTS.md was removed at the user's request; the root [AGENTS.md](AGENTS.md) remains authoritative.
 
-| Path relative to the project root | Contents |
-|---|---|
-| `AGENTS.md` | Instructions for autonomous work within the user's authorized task |
-| `PROJECT_SETUP.md` | This placement and completion-status record |
-| `docs/handoff/` | Original audit, source evidence, screenshots, inventories and updated handoff |
-| `docs/handoff/graphics-v1/` | Seven resource-icon concepts, four portrait concepts, one van master, prompts and manifest |
+A local Git repository now tracks the project on `feat/playable-rebuild`. There is no remote or publication configured. The original staging README and local-image status are preserved as `docs/handoff/README.archive-v2.md` and `docs/handoff/LOCAL_IMAGE_REVIEW.archive-v2.md`. The original setup document remains inside the handoff ZIP.
 
-The handoff's internal document references are relative to `docs/handoff/`; the root agent instructions use full project-relative paths. The historical audit PDF describes the originally inspected app and has not been rewritten to imply the new assets were present in that app.
+## Run and verify
 
-## Finish placement when the MacBook Pro is connected
+Node 22 or newer is required. No npm install is needed.
 
-1. Inspect `/Users/ama/The Portland Trail`, its current `AGENTS.md`, any parent instructions, working-tree changes and existing app structure.
-2. Merge the staged `AGENTS.md` with applicable existing project instructions. Copy `docs/handoff/` into place without overwriting unrelated material. Keep both copies if an existing handoff differs, then reconcile deliberately.
-3. Search the project's documentation for prior scratch paths, old handoff locations and broken links. Update active references to the project-relative paths above. Preserve historical evidence rather than replacing original source text indiscriminately.
-4. Locate and review the folder named “the Portland Trail images.” Record its actual relative path and the full findings in [LOCAL_IMAGE_REVIEW.md](docs/handoff/LOCAL_IMAGE_REVIEW.md).
-5. Verify every updated local document link and asset path, then update this status record to say which actions were completed.
+```bash
+cd "/Users/ama/The Portland Trail/app"
+npm start
+```
 
-No original images were moved or deleted. No replacement app was implemented or deployed in this continuation.
+Open [the local game](http://127.0.0.1:4173). Keep that terminal running. Saves belong to that browser and origin; switching ports or browsers creates a separate save area.
+
+```bash
+cd "/Users/ama/The Portland Trail/app"
+npm test
+npm run build
+```
+
+The build writes portable static files to `app/dist/`. To serve that build:
+
+```bash
+cd "/Users/ama/The Portland Trail/app"
+node scripts/serve.mjs --dist
+```
+
+Stop the existing server first if it already occupies port 4173. The server binds to localhost only.
+
+Browser checks use Playwright with installed Chrome. On this Mac, the bundled runtime supplies Playwright:
+
+```bash
+cd "/Users/ama/The Portland Trail"
+PLAYWRIGHT_MODULE="/Users/ama/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright" node app/tests/browser-smoke.mjs
+```
+
+Start the local server first. Other machines can supply their own Playwright module through PLAYWRIGHT_MODULE. Browser screenshots and the report are written to `app/test-results/browser/`; this generated directory is excluded from Git.
+
+## Development map
+
+- [Game data](app/src/data.js): professions, items, route, paces, rations, encounters.
+- [Game rules](app/src/engine.js): pure transitions, seeded randomness, versioned save validation.
+- [Browser interface](app/src/main.js) and [styles](app/src/styles.css): setup, shops, travel, dialogs, endings, local saves.
+- [Asset manifest](app/assets/manifest.json): source paths, hashes, extraction rectangles, and output sizes.
+- [Validation record](docs/validation/2026-10-01.md): checks, outcomes, and limits.
+
+This version uses static illustrations. Animated van frames, a strict pixel palette, real-device Safari validation, and hosting remain future work. The broad original art inventory remains preserved; only selected reviewed copies are used by the app.
