@@ -57,6 +57,7 @@ try {
     assert.equal(before.inventory.money - bought.inventory.money, previewCost);
     assert.equal(bought.inventory.nft, before.inventory.nft);
     assert.ok(bought.inventory.parts > before.inventory.parts);
+    assert.ok(await page.locator('.resource-changed[data-resource="parts"]').count() > 0, 'Purchased supplies receive visual feedback');
     assert.match(await page.locator('#notice').innerText(), /Packed|Bought/i);
     assert.ok(await page.getByRole('button', { name: 'Essentials packed', exact: true }).isDisabled());
     await inspect(page, `auto-buy-${width}`);
@@ -64,6 +65,8 @@ try {
     const primary = await page.locator('.primary-action button').boundingBox();
     assert.ok(primary.y + primary.height <= (width < 500 ? 844 : 1000), `Drive button fits ${width}`);
     await inspect(page, `road-${width}`);
+    const roadSource = await page.locator('.road-backdrop').evaluate(image => image.currentSrc);
+    assert.equal(roadSource.includes('/assets/mobile/'), width < 500, 'Phone scenery uses smaller artwork; desktop retains the full image');
     await page.locator('.primary-action button').click();
     assert.equal(await page.locator('.is-driving').count(), 0, 'Reduced motion skips playback');
     assert.ok(await page.locator('#event-dialog').evaluate(dialog => dialog.open));

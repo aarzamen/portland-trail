@@ -1,0 +1,2396 @@
+{
+  "engine": "chromium",
+  "baseline": false,
+  "passed": true,
+  "checks": [
+    {
+      "name": "travel-320x568: no horizontal overflow",
+      "passed": true,
+      "evidence": 320
+    },
+    {
+      "name": "travel-320x568: images loaded",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "travel-320x568: 44px touch targets",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "travel-320x568: 16px editable controls",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "travel-320x568: readable trip text",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "travel-320x568: Drive visible without scrolling",
+      "passed": true,
+      "evidence": {
+        "x": 23,
+        "y": 349.65625,
+        "width": 274,
+        "height": 48,
+        "bottom": 397.65625
+      }
+    },
+    {
+      "name": "travel-320x568: trip facts visible without scrolling",
+      "passed": true,
+      "evidence": {
+        "x": 23,
+        "y": 422.65625,
+        "width": 274,
+        "height": 53.1875,
+        "bottom": 475.84375
+      }
+    },
+    {
+      "name": "travel-320x568: whole van visible",
+      "passed": true,
+      "evidence": {
+        "x": 115.296875,
+        "y": 166.796875,
+        "width": 140.046875,
+        "height": 70.015625,
+        "bottom": 236.8125
+      }
+    },
+    {
+      "name": "travel-320x568: useful scene height",
+      "passed": true,
+      "evidence": {
+        "x": 11,
+        "y": 82,
+        "width": 298,
+        "height": 180,
+        "bottom": 262
+      }
+    },
+    {
+      "name": "travel-320x568: phone image delivered",
+      "passed": true,
+      "evidence": "http://127.0.0.1:4173/assets/mobile/road-forest-640.jpg"
+    },
+    {
+      "name": "travel-320x568: route remains available",
+      "passed": true
+    },
+    {
+      "name": "route-320x568: no horizontal overflow",
+      "passed": true,
+      "evidence": 320
+    },
+    {
+      "name": "route-320x568: images loaded",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "route-320x568: 44px touch targets",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "route-320x568: 16px editable controls",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "route-320x568: readable trip text",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "shop-320x568: no horizontal overflow",
+      "passed": true,
+      "evidence": 320
+    },
+    {
+      "name": "shop-320x568: images loaded",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "shop-320x568: 44px touch targets",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "shop-320x568: 16px editable controls",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "shop-320x568: readable trip text",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "shop-320x568: auto-buy discoverable",
+      "passed": true,
+      "evidence": {
+        "x": 152,
+        "y": 497.0625,
+        "width": 145,
+        "height": 50,
+        "bottom": 547.0625
+      }
+    },
+    {
+      "name": "shop-320x568: auto-buy works",
+      "passed": true
+    },
+    {
+      "name": "event-320x568: no horizontal overflow",
+      "passed": true,
+      "evidence": 320
+    },
+    {
+      "name": "event-320x568: images loaded",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "event-320x568: 44px touch targets",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "event-320x568: 16px editable controls",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "event-320x568: readable trip text",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "event-320x568: all choices visible",
+      "passed": true,
+      "evidence": [
+        {
+          "x": 37,
+          "y": 366.953125,
+          "width": 246,
+          "height": 48,
+          "bottom": 414.953125
+        },
+        {
+          "x": 37,
+          "y": 421.953125,
+          "width": 246,
+          "height": 48,
+          "bottom": 469.953125
+        }
+      ]
+    },
+    {
+      "name": "event-320x568: focus enters dialog",
+      "passed": true
+    },
+    {
+      "name": "event-320x568: Escape preserves pending event",
+      "passed": true
+    },
+    {
+      "name": "event-320x568: choice resolves",
+      "passed": true
+    },
+    {
+      "name": "travel-375x548: no horizontal overflow",
+      "passed": true,
+      "evidence": 375
+    },
+    {
+      "name": "travel-375x548: images loaded",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "travel-375x548: 44px touch targets",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "travel-375x548: 16px editable controls",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "travel-375x548: readable trip text",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "travel-375x548: Drive visible without scrolling",
+      "passed": true,
+      "evidence": {
+        "x": 23,
+        "y": 334.34375,
+        "width": 329,
+        "height": 48,
+        "bottom": 382.34375
+      }
+    },
+    {
+      "name": "travel-375x548: trip facts visible without scrolling",
+      "passed": true,
+      "evidence": {
+        "x": 23,
+        "y": 407.34375,
+        "width": 329,
+        "height": 50.6875,
+        "bottom": 458.03125
+      }
+    },
+    {
+      "name": "travel-375x548: whole van visible",
+      "passed": true,
+      "evidence": {
+        "x": 134.546875,
+        "y": 153.859375,
+        "width": 165.90625,
+        "height": 82.953125,
+        "bottom": 236.8125
+      }
+    },
+    {
+      "name": "travel-375x548: useful scene height",
+      "passed": true,
+      "evidence": {
+        "x": 11,
+        "y": 82,
+        "width": 353,
+        "height": 180,
+        "bottom": 262
+      }
+    },
+    {
+      "name": "travel-375x548: phone image delivered",
+      "passed": true,
+      "evidence": "http://127.0.0.1:4173/assets/mobile/road-forest-640.jpg"
+    },
+    {
+      "name": "travel-375x548: route remains available",
+      "passed": true
+    },
+    {
+      "name": "route-375x548: no horizontal overflow",
+      "passed": true,
+      "evidence": 375
+    },
+    {
+      "name": "route-375x548: images loaded",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "route-375x548: 44px touch targets",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "route-375x548: 16px editable controls",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "route-375x548: readable trip text",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "shop-375x548: no horizontal overflow",
+      "passed": true,
+      "evidence": 375
+    },
+    {
+      "name": "shop-375x548: images loaded",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "shop-375x548: 44px touch targets",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "shop-375x548: 16px editable controls",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "shop-375x548: readable trip text",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "shop-375x548: auto-buy discoverable",
+      "passed": true,
+      "evidence": {
+        "x": 188.71875,
+        "y": 472.765625,
+        "width": 163.28125,
+        "height": 44,
+        "bottom": 516.765625
+      }
+    },
+    {
+      "name": "shop-375x548: auto-buy works",
+      "passed": true
+    },
+    {
+      "name": "event-375x548: no horizontal overflow",
+      "passed": true,
+      "evidence": 375
+    },
+    {
+      "name": "event-375x548: images loaded",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "event-375x548: 44px touch targets",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "event-375x548: 16px editable controls",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "event-375x548: readable trip text",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "event-375x548: all choices visible",
+      "passed": true,
+      "evidence": [
+        {
+          "x": 37,
+          "y": 354.65625,
+          "width": 301,
+          "height": 48,
+          "bottom": 402.65625
+        },
+        {
+          "x": 37,
+          "y": 409.65625,
+          "width": 301,
+          "height": 48,
+          "bottom": 457.65625
+        }
+      ]
+    },
+    {
+      "name": "event-375x548: focus enters dialog",
+      "passed": true
+    },
+    {
+      "name": "event-375x548: Escape preserves pending event",
+      "passed": true
+    },
+    {
+      "name": "event-375x548: choice resolves",
+      "passed": true
+    },
+    {
+      "name": "travel-390x664: no horizontal overflow",
+      "passed": true,
+      "evidence": 390
+    },
+    {
+      "name": "travel-390x664: images loaded",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "travel-390x664: 44px touch targets",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "travel-390x664: 16px editable controls",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "travel-390x664: readable trip text",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "travel-390x664: Drive visible without scrolling",
+      "passed": true,
+      "evidence": {
+        "x": 23,
+        "y": 353.53125,
+        "width": 344,
+        "height": 48,
+        "bottom": 401.53125
+      }
+    },
+    {
+      "name": "travel-390x664: trip facts visible without scrolling",
+      "passed": true,
+      "evidence": {
+        "x": 23,
+        "y": 426.53125,
+        "width": 344,
+        "height": 50.6875,
+        "bottom": 477.21875
+      }
+    },
+    {
+      "name": "travel-390x664: whole van visible",
+      "passed": true,
+      "evidence": {
+        "x": 139.796875,
+        "y": 166.84375,
+        "width": 172.953125,
+        "height": 86.46875,
+        "bottom": 253.3125
+      }
+    },
+    {
+      "name": "travel-390x664: useful scene height",
+      "passed": true,
+      "evidence": {
+        "x": 11,
+        "y": 82,
+        "width": 368,
+        "height": 199.1875,
+        "bottom": 281.1875
+      }
+    },
+    {
+      "name": "travel-390x664: phone image delivered",
+      "passed": true,
+      "evidence": "http://127.0.0.1:4173/assets/mobile/road-forest-640.jpg"
+    },
+    {
+      "name": "travel-390x664: route remains available",
+      "passed": true
+    },
+    {
+      "name": "route-390x664: no horizontal overflow",
+      "passed": true,
+      "evidence": 390
+    },
+    {
+      "name": "route-390x664: images loaded",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "route-390x664: 44px touch targets",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "route-390x664: 16px editable controls",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "route-390x664: readable trip text",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "shop-390x664: no horizontal overflow",
+      "passed": true,
+      "evidence": 390
+    },
+    {
+      "name": "shop-390x664: images loaded",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "shop-390x664: 44px touch targets",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "shop-390x664: 16px editable controls",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "shop-390x664: readable trip text",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "shop-390x664: auto-buy discoverable",
+      "passed": true,
+      "evidence": {
+        "x": 203.71875,
+        "y": 485.59375,
+        "width": 163.28125,
+        "height": 44,
+        "bottom": 529.59375
+      }
+    },
+    {
+      "name": "shop-390x664: auto-buy works",
+      "passed": true
+    },
+    {
+      "name": "event-390x664: no horizontal overflow",
+      "passed": true,
+      "evidence": 390
+    },
+    {
+      "name": "event-390x664: images loaded",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "event-390x664: 44px touch targets",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "event-390x664: 16px editable controls",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "event-390x664: readable trip text",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "event-390x664: all choices visible",
+      "passed": true,
+      "evidence": [
+        {
+          "x": 37,
+          "y": 426,
+          "width": 316,
+          "height": 48,
+          "bottom": 474
+        },
+        {
+          "x": 37,
+          "y": 481,
+          "width": 316,
+          "height": 48,
+          "bottom": 529
+        }
+      ]
+    },
+    {
+      "name": "event-390x664: focus enters dialog",
+      "passed": true
+    },
+    {
+      "name": "event-390x664: Escape preserves pending event",
+      "passed": true
+    },
+    {
+      "name": "event-390x664: choice resolves",
+      "passed": true
+    },
+    {
+      "name": "travel-402x681: no horizontal overflow",
+      "passed": true,
+      "evidence": 402
+    },
+    {
+      "name": "travel-402x681: images loaded",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "travel-402x681: 44px touch targets",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "travel-402x681: 16px editable controls",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "travel-402x681: readable trip text",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "travel-402x681: Drive visible without scrolling",
+      "passed": true,
+      "evidence": {
+        "x": 23,
+        "y": 358.640625,
+        "width": 356,
+        "height": 48,
+        "bottom": 406.640625
+      }
+    },
+    {
+      "name": "travel-402x681: trip facts visible without scrolling",
+      "passed": true,
+      "evidence": {
+        "x": 23,
+        "y": 431.640625,
+        "width": 356,
+        "height": 50.6875,
+        "bottom": 482.328125
+      }
+    },
+    {
+      "name": "travel-402x681: whole van visible",
+      "passed": true,
+      "evidence": {
+        "x": 144,
+        "y": 168.40625,
+        "width": 178.59375,
+        "height": 89.296875,
+        "bottom": 257.703125
+      }
+    },
+    {
+      "name": "travel-402x681: useful scene height",
+      "passed": true,
+      "evidence": {
+        "x": 11,
+        "y": 82,
+        "width": 380,
+        "height": 204.296875,
+        "bottom": 286.296875
+      }
+    },
+    {
+      "name": "travel-402x681: phone image delivered",
+      "passed": true,
+      "evidence": "http://127.0.0.1:4173/assets/mobile/road-forest-640.jpg"
+    },
+    {
+      "name": "travel-402x681: route remains available",
+      "passed": true
+    },
+    {
+      "name": "route-402x681: no horizontal overflow",
+      "passed": true,
+      "evidence": 402
+    },
+    {
+      "name": "route-402x681: images loaded",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "route-402x681: 44px touch targets",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "route-402x681: 16px editable controls",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "route-402x681: readable trip text",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "shop-402x681: no horizontal overflow",
+      "passed": true,
+      "evidence": 402
+    },
+    {
+      "name": "shop-402x681: images loaded",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "shop-402x681: 44px touch targets",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "shop-402x681: 16px editable controls",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "shop-402x681: readable trip text",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "shop-402x681: auto-buy discoverable",
+      "passed": true,
+      "evidence": {
+        "x": 215.71875,
+        "y": 472.546875,
+        "width": 163.28125,
+        "height": 44,
+        "bottom": 516.546875
+      }
+    },
+    {
+      "name": "shop-402x681: auto-buy works",
+      "passed": true
+    },
+    {
+      "name": "event-402x681: no horizontal overflow",
+      "passed": true,
+      "evidence": 402
+    },
+    {
+      "name": "event-402x681: images loaded",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "event-402x681: 44px touch targets",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "event-402x681: 16px editable controls",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "event-402x681: readable trip text",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "event-402x681: all choices visible",
+      "passed": true,
+      "evidence": [
+        {
+          "x": 37,
+          "y": 436.453125,
+          "width": 328,
+          "height": 48,
+          "bottom": 484.453125
+        },
+        {
+          "x": 37,
+          "y": 491.453125,
+          "width": 328,
+          "height": 48,
+          "bottom": 539.453125
+        }
+      ]
+    },
+    {
+      "name": "event-402x681: focus enters dialog",
+      "passed": true
+    },
+    {
+      "name": "event-402x681: Escape preserves pending event",
+      "passed": true
+    },
+    {
+      "name": "event-402x681: choice resolves",
+      "passed": true
+    },
+    {
+      "name": "travel-414x715: no horizontal overflow",
+      "passed": true,
+      "evidence": 414
+    },
+    {
+      "name": "travel-414x715: images loaded",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "travel-414x715: 44px touch targets",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "travel-414x715: 16px editable controls",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "travel-414x715: readable trip text",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "travel-414x715: Drive visible without scrolling",
+      "passed": true,
+      "evidence": {
+        "x": 23,
+        "y": 368.84375,
+        "width": 368,
+        "height": 48,
+        "bottom": 416.84375
+      }
+    },
+    {
+      "name": "travel-414x715: trip facts visible without scrolling",
+      "passed": true,
+      "evidence": {
+        "x": 23,
+        "y": 441.84375,
+        "width": 368,
+        "height": 50.6875,
+        "bottom": 492.53125
+      }
+    },
+    {
+      "name": "travel-414x715: whole van visible",
+      "passed": true,
+      "evidence": {
+        "x": 148.1875,
+        "y": 174.375,
+        "width": 184.234375,
+        "height": 92.109375,
+        "bottom": 266.484375
+      }
+    },
+    {
+      "name": "travel-414x715: useful scene height",
+      "passed": true,
+      "evidence": {
+        "x": 11,
+        "y": 82,
+        "width": 392,
+        "height": 214.5,
+        "bottom": 296.5
+      }
+    },
+    {
+      "name": "travel-414x715: phone image delivered",
+      "passed": true,
+      "evidence": "http://127.0.0.1:4173/assets/mobile/road-forest-640.jpg"
+    },
+    {
+      "name": "travel-414x715: route remains available",
+      "passed": true
+    },
+    {
+      "name": "route-414x715: no horizontal overflow",
+      "passed": true,
+      "evidence": 414
+    },
+    {
+      "name": "route-414x715: images loaded",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "route-414x715: 44px touch targets",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "route-414x715: 16px editable controls",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "route-414x715: readable trip text",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "shop-414x715: no horizontal overflow",
+      "passed": true,
+      "evidence": 414
+    },
+    {
+      "name": "shop-414x715: images loaded",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "shop-414x715: 44px touch targets",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "shop-414x715: 16px editable controls",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "shop-414x715: readable trip text",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "shop-414x715: auto-buy discoverable",
+      "passed": true,
+      "evidence": {
+        "x": 227.71875,
+        "y": 478.328125,
+        "width": 163.28125,
+        "height": 44,
+        "bottom": 522.328125
+      }
+    },
+    {
+      "name": "shop-414x715: auto-buy works",
+      "passed": true
+    },
+    {
+      "name": "event-414x715: no horizontal overflow",
+      "passed": true,
+      "evidence": 414
+    },
+    {
+      "name": "event-414x715: images loaded",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "event-414x715: 44px touch targets",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "event-414x715: 16px editable controls",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "event-414x715: readable trip text",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "event-414x715: all choices visible",
+      "passed": true,
+      "evidence": [
+        {
+          "x": 37,
+          "y": 457.359375,
+          "width": 340,
+          "height": 48,
+          "bottom": 505.359375
+        },
+        {
+          "x": 37,
+          "y": 513.359375,
+          "width": 340,
+          "height": 48,
+          "bottom": 561.359375
+        }
+      ]
+    },
+    {
+      "name": "event-414x715: focus enters dialog",
+      "passed": true
+    },
+    {
+      "name": "event-414x715: Escape preserves pending event",
+      "passed": true
+    },
+    {
+      "name": "event-414x715: choice resolves",
+      "passed": true
+    },
+    {
+      "name": "travel-430x739: no horizontal overflow",
+      "passed": true,
+      "evidence": 430
+    },
+    {
+      "name": "travel-430x739: images loaded",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "travel-430x739: 44px touch targets",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "travel-430x739: 16px editable controls",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "travel-430x739: readable trip text",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "travel-430x739: Drive visible without scrolling",
+      "passed": true,
+      "evidence": {
+        "x": 23,
+        "y": 376.03125,
+        "width": 384,
+        "height": 48,
+        "bottom": 424.03125
+      }
+    },
+    {
+      "name": "travel-430x739: trip facts visible without scrolling",
+      "passed": true,
+      "evidence": {
+        "x": 23,
+        "y": 449.03125,
+        "width": 384,
+        "height": 50.6875,
+        "bottom": 499.71875
+      }
+    },
+    {
+      "name": "travel-430x739: whole van visible",
+      "passed": true,
+      "evidence": {
+        "x": 153.796875,
+        "y": 176.78125,
+        "width": 191.75,
+        "height": 95.875,
+        "bottom": 272.65625
+      }
+    },
+    {
+      "name": "travel-430x739: useful scene height",
+      "passed": true,
+      "evidence": {
+        "x": 11,
+        "y": 82,
+        "width": 408,
+        "height": 221.6875,
+        "bottom": 303.6875
+      }
+    },
+    {
+      "name": "travel-430x739: phone image delivered",
+      "passed": true,
+      "evidence": "http://127.0.0.1:4173/assets/mobile/road-forest-640.jpg"
+    },
+    {
+      "name": "travel-430x739: route remains available",
+      "passed": true
+    },
+    {
+      "name": "route-430x739: no horizontal overflow",
+      "passed": true,
+      "evidence": 430
+    },
+    {
+      "name": "route-430x739: images loaded",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "route-430x739: 44px touch targets",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "route-430x739: 16px editable controls",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "route-430x739: readable trip text",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "shop-430x739: no horizontal overflow",
+      "passed": true,
+      "evidence": 430
+    },
+    {
+      "name": "shop-430x739: images loaded",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "shop-430x739: 44px touch targets",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "shop-430x739: 16px editable controls",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "shop-430x739: readable trip text",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "shop-430x739: auto-buy discoverable",
+      "passed": true,
+      "evidence": {
+        "x": 243.71875,
+        "y": 452.40625,
+        "width": 163.28125,
+        "height": 44,
+        "bottom": 496.40625
+      }
+    },
+    {
+      "name": "shop-430x739: auto-buy works",
+      "passed": true
+    },
+    {
+      "name": "event-430x739: no horizontal overflow",
+      "passed": true,
+      "evidence": 430
+    },
+    {
+      "name": "event-430x739: images loaded",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "event-430x739: 44px touch targets",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "event-430x739: 16px editable controls",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "event-430x739: readable trip text",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "event-430x739: all choices visible",
+      "passed": true,
+      "evidence": [
+        {
+          "x": 37,
+          "y": 472.125,
+          "width": 356,
+          "height": 48,
+          "bottom": 520.125
+        },
+        {
+          "x": 37,
+          "y": 528.125,
+          "width": 356,
+          "height": 48,
+          "bottom": 576.125
+        }
+      ]
+    },
+    {
+      "name": "event-430x739: focus enters dialog",
+      "passed": true
+    },
+    {
+      "name": "event-430x739: Escape preserves pending event",
+      "passed": true
+    },
+    {
+      "name": "event-430x739: choice resolves",
+      "passed": true
+    },
+    {
+      "name": "travel-440x763: no horizontal overflow",
+      "passed": true,
+      "evidence": 440
+    },
+    {
+      "name": "travel-440x763: images loaded",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "travel-440x763: 44px touch targets",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "travel-440x763: 16px editable controls",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "travel-440x763: readable trip text",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "travel-440x763: Drive visible without scrolling",
+      "passed": true,
+      "evidence": {
+        "x": 23,
+        "y": 383.234375,
+        "width": 394,
+        "height": 48,
+        "bottom": 431.234375
+      }
+    },
+    {
+      "name": "travel-440x763: trip facts visible without scrolling",
+      "passed": true,
+      "evidence": {
+        "x": 23,
+        "y": 456.234375,
+        "width": 394,
+        "height": 50.6875,
+        "bottom": 506.921875
+      }
+    },
+    {
+      "name": "travel-440x763: whole van visible",
+      "passed": true,
+      "evidence": {
+        "x": 157.296875,
+        "y": 180.640625,
+        "width": 196.453125,
+        "height": 98.21875,
+        "bottom": 278.859375
+      }
+    },
+    {
+      "name": "travel-440x763: useful scene height",
+      "passed": true,
+      "evidence": {
+        "x": 11,
+        "y": 82,
+        "width": 418,
+        "height": 228.890625,
+        "bottom": 310.890625
+      }
+    },
+    {
+      "name": "travel-440x763: phone image delivered",
+      "passed": true,
+      "evidence": "http://127.0.0.1:4173/assets/mobile/road-forest-640.jpg"
+    },
+    {
+      "name": "travel-440x763: route remains available",
+      "passed": true
+    },
+    {
+      "name": "route-440x763: no horizontal overflow",
+      "passed": true,
+      "evidence": 440
+    },
+    {
+      "name": "route-440x763: images loaded",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "route-440x763: 44px touch targets",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "route-440x763: 16px editable controls",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "route-440x763: readable trip text",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "shop-440x763: no horizontal overflow",
+      "passed": true,
+      "evidence": 440
+    },
+    {
+      "name": "shop-440x763: images loaded",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "shop-440x763: 44px touch targets",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "shop-440x763: 16px editable controls",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "shop-440x763: readable trip text",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "shop-440x763: auto-buy discoverable",
+      "passed": true,
+      "evidence": {
+        "x": 253.71875,
+        "y": 456.484375,
+        "width": 163.28125,
+        "height": 44,
+        "bottom": 500.484375
+      }
+    },
+    {
+      "name": "shop-440x763: auto-buy works",
+      "passed": true
+    },
+    {
+      "name": "event-440x763: no horizontal overflow",
+      "passed": true,
+      "evidence": 440
+    },
+    {
+      "name": "event-440x763: images loaded",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "event-440x763: 44px touch targets",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "event-440x763: 16px editable controls",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "event-440x763: readable trip text",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "event-440x763: all choices visible",
+      "passed": true,
+      "evidence": [
+        {
+          "x": 37,
+          "y": 484.140625,
+          "width": 366,
+          "height": 48,
+          "bottom": 532.140625
+        },
+        {
+          "x": 37,
+          "y": 540.140625,
+          "width": 366,
+          "height": 48,
+          "bottom": 588.140625
+        }
+      ]
+    },
+    {
+      "name": "event-440x763: focus enters dialog",
+      "passed": true
+    },
+    {
+      "name": "event-440x763: Escape preserves pending event",
+      "passed": true
+    },
+    {
+      "name": "event-440x763: choice resolves",
+      "passed": true
+    },
+    {
+      "name": "travel-756x352: no horizontal overflow",
+      "passed": true,
+      "evidence": 756
+    },
+    {
+      "name": "travel-756x352: images loaded",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "travel-756x352: 44px touch targets",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "travel-756x352: 16px editable controls",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "travel-756x352: readable trip text",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "travel-756x352: Drive visible without scrolling",
+      "passed": true,
+      "evidence": {
+        "x": 423.171875,
+        "y": 152.390625,
+        "width": 307.828125,
+        "height": 44,
+        "bottom": 196.390625
+      }
+    },
+    {
+      "name": "travel-756x352: trip facts visible without scrolling",
+      "passed": true,
+      "evidence": {
+        "x": 25,
+        "y": 235,
+        "width": 706,
+        "height": 35.59375,
+        "bottom": 270.59375
+      }
+    },
+    {
+      "name": "travel-756x352: whole van visible",
+      "passed": true,
+      "evidence": {
+        "x": 172.265625,
+        "y": 113.59375,
+        "width": 179.171875,
+        "height": 89.578125,
+        "bottom": 203.171875
+      }
+    },
+    {
+      "name": "travel-756x352: route remains available",
+      "passed": true
+    },
+    {
+      "name": "route-756x352: no horizontal overflow",
+      "passed": true,
+      "evidence": 756
+    },
+    {
+      "name": "route-756x352: images loaded",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "route-756x352: 44px touch targets",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "route-756x352: 16px editable controls",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "route-756x352: readable trip text",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "shop-756x352: no horizontal overflow",
+      "passed": true,
+      "evidence": 756
+    },
+    {
+      "name": "shop-756x352: images loaded",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "shop-756x352: 44px touch targets",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "shop-756x352: 16px editable controls",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "shop-756x352: readable trip text",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "shop-756x352: auto-buy discoverable",
+      "passed": true,
+      "evidence": {
+        "x": 557.71875,
+        "y": 392.78125,
+        "width": 173.28125,
+        "height": 44,
+        "bottom": 436.78125
+      }
+    },
+    {
+      "name": "shop-756x352: auto-buy works",
+      "passed": true
+    },
+    {
+      "name": "event-756x352: no horizontal overflow",
+      "passed": true,
+      "evidence": 756
+    },
+    {
+      "name": "event-756x352: images loaded",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "event-756x352: 44px touch targets",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "event-756x352: 16px editable controls",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "event-756x352: readable trip text",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "event-756x352: all choices visible",
+      "passed": true,
+      "evidence": [
+        {
+          "x": 263.46875,
+          "y": 143.4375,
+          "width": 457.53125,
+          "height": 44,
+          "bottom": 187.4375
+        },
+        {
+          "x": 263.46875,
+          "y": 194.4375,
+          "width": 457.53125,
+          "height": 44,
+          "bottom": 238.4375
+        }
+      ]
+    },
+    {
+      "name": "event-756x352: focus enters dialog",
+      "passed": true
+    },
+    {
+      "name": "event-756x352: Escape preserves pending event",
+      "passed": true
+    },
+    {
+      "name": "event-756x352: choice resolves",
+      "passed": true
+    },
+    {
+      "name": "travel-844x390: no horizontal overflow",
+      "passed": true,
+      "evidence": 844
+    },
+    {
+      "name": "travel-844x390: images loaded",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "travel-844x390: 44px touch targets",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "travel-844x390: 16px editable controls",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "travel-844x390: readable trip text",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "travel-844x390: Drive visible without scrolling",
+      "passed": true,
+      "evidence": {
+        "x": 471.171875,
+        "y": 152.390625,
+        "width": 347.828125,
+        "height": 44,
+        "bottom": 196.390625
+      }
+    },
+    {
+      "name": "travel-844x390: trip facts visible without scrolling",
+      "passed": true,
+      "evidence": {
+        "x": 25,
+        "y": 235,
+        "width": 794,
+        "height": 35.59375,
+        "bottom": 270.59375
+      }
+    },
+    {
+      "name": "travel-844x390: whole van visible",
+      "passed": true,
+      "evidence": {
+        "x": 191.46875,
+        "y": 102.796875,
+        "width": 200.765625,
+        "height": 100.375,
+        "bottom": 203.171875
+      }
+    },
+    {
+      "name": "travel-844x390: route remains available",
+      "passed": true
+    },
+    {
+      "name": "route-844x390: no horizontal overflow",
+      "passed": true,
+      "evidence": 844
+    },
+    {
+      "name": "route-844x390: images loaded",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "route-844x390: 44px touch targets",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "route-844x390: 16px editable controls",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "route-844x390: readable trip text",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "shop-844x390: no horizontal overflow",
+      "passed": true,
+      "evidence": 844
+    },
+    {
+      "name": "shop-844x390: images loaded",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "shop-844x390: 44px touch targets",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "shop-844x390: 16px editable controls",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "shop-844x390: readable trip text",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "shop-844x390: auto-buy discoverable",
+      "passed": true,
+      "evidence": {
+        "x": 645.71875,
+        "y": 390.1875,
+        "width": 173.28125,
+        "height": 44,
+        "bottom": 434.1875
+      }
+    },
+    {
+      "name": "shop-844x390: auto-buy works",
+      "passed": true
+    },
+    {
+      "name": "event-844x390: no horizontal overflow",
+      "passed": true,
+      "evidence": 844
+    },
+    {
+      "name": "event-844x390: images loaded",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "event-844x390: 44px touch targets",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "event-844x390: 16px editable controls",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "event-844x390: readable trip text",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "event-844x390: all choices visible",
+      "passed": true,
+      "evidence": [
+        {
+          "x": 307.109375,
+          "y": 162.4375,
+          "width": 458.890625,
+          "height": 44,
+          "bottom": 206.4375
+        },
+        {
+          "x": 307.109375,
+          "y": 213.4375,
+          "width": 458.890625,
+          "height": 44,
+          "bottom": 257.4375
+        }
+      ]
+    },
+    {
+      "name": "event-844x390: focus enters dialog",
+      "passed": true
+    },
+    {
+      "name": "event-844x390: Escape preserves pending event",
+      "passed": true
+    },
+    {
+      "name": "event-844x390: choice resolves",
+      "passed": true
+    },
+    {
+      "name": "travel-874x402: no horizontal overflow",
+      "passed": true,
+      "evidence": 874
+    },
+    {
+      "name": "travel-874x402: images loaded",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "travel-874x402: 44px touch targets",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "travel-874x402: 16px editable controls",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "travel-874x402: readable trip text",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "travel-874x402: Drive visible without scrolling",
+      "passed": true,
+      "evidence": {
+        "x": 487.53125,
+        "y": 152.390625,
+        "width": 361.453125,
+        "height": 44,
+        "bottom": 196.390625
+      }
+    },
+    {
+      "name": "travel-874x402: trip facts visible without scrolling",
+      "passed": true,
+      "evidence": {
+        "x": 25,
+        "y": 235,
+        "width": 824,
+        "height": 35.59375,
+        "bottom": 270.59375
+      }
+    },
+    {
+      "name": "travel-874x402: whole van visible",
+      "passed": true,
+      "evidence": {
+        "x": 198,
+        "y": 99.109375,
+        "width": 208.125,
+        "height": 104.0625,
+        "bottom": 203.171875
+      }
+    },
+    {
+      "name": "travel-874x402: route remains available",
+      "passed": true
+    },
+    {
+      "name": "route-874x402: no horizontal overflow",
+      "passed": true,
+      "evidence": 874
+    },
+    {
+      "name": "route-874x402: images loaded",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "route-874x402: 44px touch targets",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "route-874x402: 16px editable controls",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "route-874x402: readable trip text",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "shop-874x402: no horizontal overflow",
+      "passed": true,
+      "evidence": 874
+    },
+    {
+      "name": "shop-874x402: images loaded",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "shop-874x402: 44px touch targets",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "shop-874x402: 16px editable controls",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "shop-874x402: readable trip text",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "shop-874x402: auto-buy discoverable",
+      "passed": true,
+      "evidence": {
+        "x": 675.71875,
+        "y": 390.1875,
+        "width": 173.28125,
+        "height": 44,
+        "bottom": 434.1875
+      }
+    },
+    {
+      "name": "shop-874x402: auto-buy works",
+      "passed": true
+    },
+    {
+      "name": "event-874x402: no horizontal overflow",
+      "passed": true,
+      "evidence": 874
+    },
+    {
+      "name": "event-874x402: images loaded",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "event-874x402: 44px touch targets",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "event-874x402: 16px editable controls",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "event-874x402: readable trip text",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "event-874x402: all choices visible",
+      "passed": true,
+      "evidence": [
+        {
+          "x": 322.109375,
+          "y": 168.4375,
+          "width": 458.890625,
+          "height": 44,
+          "bottom": 212.4375
+        },
+        {
+          "x": 322.109375,
+          "y": 219.4375,
+          "width": 458.890625,
+          "height": 44,
+          "bottom": 263.4375
+        }
+      ]
+    },
+    {
+      "name": "event-874x402: focus enters dialog",
+      "passed": true
+    },
+    {
+      "name": "event-874x402: Escape preserves pending event",
+      "passed": true
+    },
+    {
+      "name": "event-874x402: choice resolves",
+      "passed": true
+    },
+    {
+      "name": "travel-1440x900: no horizontal overflow",
+      "passed": true,
+      "evidence": 1440
+    },
+    {
+      "name": "travel-1440x900: images loaded",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "travel-1440x900: Drive visible without scrolling",
+      "passed": true,
+      "evidence": {
+        "x": 708.875,
+        "y": 614.765625,
+        "width": 235,
+        "height": 62.5,
+        "bottom": 677.265625
+      }
+    },
+    {
+      "name": "travel-1440x900: trip facts visible without scrolling",
+      "passed": true,
+      "evidence": {
+        "x": 46,
+        "y": 720.265625,
+        "width": 899.875,
+        "height": 35.796875,
+        "bottom": 756.0625
+      }
+    },
+    {
+      "name": "travel-1440x900: whole van visible",
+      "passed": true,
+      "evidence": {
+        "x": 430,
+        "y": 352.625,
+        "width": 301.390625,
+        "height": 150.6875,
+        "bottom": 503.3125
+      }
+    },
+    {
+      "name": "travel-1440x900: route remains available",
+      "passed": true
+    },
+    {
+      "name": "route-1440x900: no horizontal overflow",
+      "passed": true,
+      "evidence": 1440
+    },
+    {
+      "name": "route-1440x900: images loaded",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "shop-1440x900: no horizontal overflow",
+      "passed": true,
+      "evidence": 1440
+    },
+    {
+      "name": "shop-1440x900: images loaded",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "shop-1440x900: auto-buy discoverable",
+      "passed": true,
+      "evidence": {
+        "x": 777.59375,
+        "y": 910.53125,
+        "width": 173.28125,
+        "height": 44,
+        "bottom": 954.53125
+      }
+    },
+    {
+      "name": "shop-1440x900: auto-buy works",
+      "passed": true
+    },
+    {
+      "name": "event-1440x900: no horizontal overflow",
+      "passed": true,
+      "evidence": 1440
+    },
+    {
+      "name": "event-1440x900: images loaded",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "event-1440x900: all choices visible",
+      "passed": true,
+      "evidence": [
+        {
+          "x": 466,
+          "y": 585.734375,
+          "width": 508,
+          "height": 48,
+          "bottom": 633.734375
+        },
+        {
+          "x": 466,
+          "y": 642.734375,
+          "width": 508,
+          "height": 48,
+          "bottom": 690.734375
+        }
+      ]
+    },
+    {
+      "name": "event-1440x900: focus enters dialog",
+      "passed": true
+    },
+    {
+      "name": "event-1440x900: Escape preserves pending event",
+      "passed": true
+    },
+    {
+      "name": "event-1440x900: choice resolves",
+      "passed": true
+    },
+    {
+      "name": "title-320x568: no horizontal overflow",
+      "passed": true,
+      "evidence": 320
+    },
+    {
+      "name": "title-320x568: images loaded",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "title-320x568: 44px touch targets",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "title-320x568: 16px editable controls",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "title-320x568: readable trip text",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "backgrounds-320x568: no horizontal overflow",
+      "passed": true,
+      "evidence": 320
+    },
+    {
+      "name": "backgrounds-320x568: images loaded",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "backgrounds-320x568: 44px touch targets",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "backgrounds-320x568: 16px editable controls",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "backgrounds-320x568: readable trip text",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "names-320x568: no horizontal overflow",
+      "passed": true,
+      "evidence": 320
+    },
+    {
+      "name": "names-320x568: images loaded",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "names-320x568: 44px touch targets",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "names-320x568: 16px editable controls",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "names-320x568: readable trip text",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "long-name-320x568: no horizontal overflow",
+      "passed": true,
+      "evidence": 320
+    },
+    {
+      "name": "long-name-320x568: images loaded",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "long-name-320x568: 44px touch targets",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "long-name-320x568: 16px editable controls",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "long-name-320x568: readable trip text",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "title-390x664: no horizontal overflow",
+      "passed": true,
+      "evidence": 390
+    },
+    {
+      "name": "title-390x664: images loaded",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "title-390x664: 44px touch targets",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "title-390x664: 16px editable controls",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "title-390x664: readable trip text",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "backgrounds-390x664: no horizontal overflow",
+      "passed": true,
+      "evidence": 390
+    },
+    {
+      "name": "backgrounds-390x664: images loaded",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "backgrounds-390x664: 44px touch targets",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "backgrounds-390x664: 16px editable controls",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "backgrounds-390x664: readable trip text",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "names-390x664: no horizontal overflow",
+      "passed": true,
+      "evidence": 390
+    },
+    {
+      "name": "names-390x664: images loaded",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "names-390x664: 44px touch targets",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "names-390x664: 16px editable controls",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "names-390x664: readable trip text",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "long-name-390x664: no horizontal overflow",
+      "passed": true,
+      "evidence": 390
+    },
+    {
+      "name": "long-name-390x664: images loaded",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "long-name-390x664: 44px touch targets",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "long-name-390x664: 16px editable controls",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "long-name-390x664: readable trip text",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "long-location-390x664: no horizontal overflow",
+      "passed": true,
+      "evidence": 390
+    },
+    {
+      "name": "long-location-390x664: images loaded",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "long-location-390x664: 44px touch targets",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "long-location-390x664: 16px editable controls",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "long-location-390x664: readable trip text",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "iPhone pixel density: 960px image selected",
+      "passed": true
+    },
+    {
+      "name": "motion: driving begins",
+      "passed": true
+    },
+    {
+      "name": "motion: atmosphere responds to Drive",
+      "passed": true,
+      "evidence": [
+        {
+          "name": "road-clouds",
+          "running": true
+        },
+        {
+          "name": "road-dust",
+          "running": true
+        },
+        {
+          "name": "road-speed-lines",
+          "running": true
+        }
+      ]
+    },
+    {
+      "name": "motion: miles saved before playback ends",
+      "passed": true
+    },
+    {
+      "name": "motion: visible receipt follows playback",
+      "passed": true
+    },
+    {
+      "name": "reduced motion: skips travel animation",
+      "passed": true
+    },
+    {
+      "name": "reduced motion: retains mileage feedback",
+      "passed": true
+    },
+    {
+      "name": "reduced motion: no running animations",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "arrival: scene responds to reaching campground",
+      "passed": true,
+      "evidence": [
+        {
+          "running": true,
+          "iteration": "1"
+        },
+        {
+          "running": true,
+          "iteration": "1"
+        },
+        {
+          "running": true,
+          "iteration": "1"
+        },
+        {
+          "running": true,
+          "iteration": "1"
+        },
+        {
+          "running": true,
+          "iteration": "1"
+        },
+        {
+          "running": true,
+          "iteration": "1"
+        }
+      ]
+    },
+    {
+      "name": "arrival: all effects settle within three seconds",
+      "passed": true
+    },
+    {
+      "name": "no browser errors",
+      "passed": true,
+      "evidence": []
+    }
+  ],
+  "failures": [],
+  "errors": []
+}

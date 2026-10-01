@@ -31,6 +31,7 @@ let returnFocus = null;
 let lastEventToken = null;
 let lastLeg = null;
 let playback = null;
+let visualCue = null;
 const shopQuantities = Object.fromEntries(ITEMS.map(item => [item.id, 1]));
 
 function escapeHtml(value) {
@@ -45,7 +46,15 @@ function asset(path) {
 }
 
 function image(path, alt, className = '') {
-  return `<img class="${className}" src="${escapeHtml(asset(path))}" alt="${escapeHtml(alt)}" loading="eager" />`;
+  const source = asset(path);
+  const img = `<img class="${className}" src="${escapeHtml(source)}" alt="${escapeHtml(alt)}" loading="eager" decoding="async" />`;
+  if (!source.endsWith('.jpg')) return img;
+  const mobile = source.replace('/assets/', '/assets/mobile/').replace(/\.jpg$/, '');
+  return `<picture class="responsive-picture"><source media="(max-width: 760px), (max-height: 500px) and (pointer: coarse)" srcset="${escapeHtml(mobile)}-640.jpg 640w, ${escapeHtml(mobile)}-960.jpg 960w" sizes="calc(100vw - 24px)" />${img}</picture>`;
+}
+
+function hasVisualCue() {
+  return visualCue && performance.now() - visualCue.started < 2400;
 }
 
 function button(label, action, className = 'button button-quiet', extra = '') {
@@ -121,6 +130,14 @@ function stateAction(action) {
   }
   flash = '';
   state = result.state;
+  visualCue = {
+    started: performance.now(),
+    resources: resourceIds.filter(id => state.inventory[id] !== before.inventory[id]),
+    party: state.party.filter((member, index) => member.health !== before.party[index].health || member.status !== before.party[index].status).map(member => member.id),
+    // Arrival encounters cover the scene. Restart its brief atmosphere only
+    // after the player closes the encounter, including after a saved resume.
+    atmosphere: state.phase === 'location' && (before.locationId !== state.locationId || ['rest', 'forage', 'talk', 'resolveEvent'].includes(action.type)),
+  };
   if (action.type === 'travel' && (state.day > before.day || state.distance > before.distance)) {
     lastLeg = {
       fromDistance: before.distance, toDistance: state.distance,
@@ -190,7 +207,7 @@ function renderResource(id, compact = false) {
   const value = state.inventory?.[id] ?? 0;
   const label = resourceLabels[id];
   const icon = `<img src="./assets/resource-${id}.png" alt="" class="resource-icon" loading="eager" />`;
-  return `<div class="resource ${compact ? 'resource-compact' : ''}" title="${escapeHtml(label)}: ${escapeHtml(value)}">${icon}<span class="resource-name">${escapeHtml(label)}</span><strong>${formatNumber(value)}</strong></div>`;
+  return `<div class="resource ${compact ? 'resource-compact' : ''} ${!playback && hasVisualCue() && visualCue.resources.includes(id) ? 'resource-changed' : ''}" data-resource="${id}" title="${escapeHtml(label)}: ${escapeHtml(value)}">${icon}<span class="resource-name">${escapeHtml(label)}</span><strong>${formatNumber(value)}</strong></div>`;
 }
 
 function renderResources(compact = false) {
@@ -202,7 +219,7 @@ function renderParty() {
     <div class="section-heading"><h2 id="party-heading">The crew</h2><span>${state.party.filter(member => member.status !== 'Deceased').length} traveling</span></div>
     <div class="party-list">${state.party.map(member => {
       const health = Math.max(0, Math.min(100, Number(member.health) || 0));
-      return `<div class="traveler ${member.status === 'Deceased' ? 'traveler-deceased' : ''}">
+      return `<div class="traveler ${member.status === 'Deceased' ? 'traveler-deceased' : ''} ${!playback && hasVisualCue() && visualCue.party.includes(member.id) ? 'health-changed' : ''}">
         <div class="traveler-top"><strong>${escapeHtml(member.name)}</strong><span>${escapeHtml(member.status)}</span></div>
         <div class="health-track" role="meter" aria-label="${escapeHtml(member.name)} health" aria-valuenow="${health}" aria-valuemin="0" aria-valuemax="100"><span style="width:${health}%"></span></div>
       </div>`;
@@ -214,7 +231,7 @@ function renderMobileParty() {
   const living = state.party.filter(member => member.status !== 'Deceased').length;
   return `<section class="mobile-party" aria-labelledby="crew-glance-heading"><div class="section-heading"><h2 id="crew-glance-heading">The crew</h2><span>${living} traveling</span></div><div class="mobile-party-list">${state.party.map(member => {
     const health = Math.max(0, Math.min(100, Number(member.health) || 0));
-    return `<div class="mobile-traveler ${member.status === 'Deceased' ? 'traveler-deceased' : ''}" title="${escapeHtml(member.name)}: ${escapeHtml(member.status)}, ${health} health"><strong>${escapeHtml(member.name)}</strong><span>${escapeHtml(member.status)}</span><div class="health-track" role="meter" aria-label="${escapeHtml(member.name)} health" aria-valuenow="${health}" aria-valuemin="0" aria-valuemax="100"><span style="width:${health}%"></span></div></div>`;
+    return `<div class="mobile-traveler ${member.status === 'Deceased' ? 'traveler-deceased' : ''} ${!playback && hasVisualCue() && visualCue.party.includes(member.id) ? 'health-changed' : ''}" title="${escapeHtml(member.name)}: ${escapeHtml(member.status)}, ${health} health"><strong>${escapeHtml(member.name)}</strong><span>${escapeHtml(member.status)}</span><div class="health-track" role="meter" aria-label="${escapeHtml(member.name)} health" aria-valuenow="${health}" aria-valuemin="0" aria-valuemax="100"><span style="width:${health}%"></span></div></div>`;
   }).join('')}</div></section>`;
 }
 
@@ -269,11 +286,11 @@ function renderNamesSetup() {
 
 function roadRegion(distance) {
   if (distance < 200) return { name: 'Into the foothills', image: 'assets/road-forest.jpg', theme: 'foothills' };
-  if (distance < 350) return { name: 'Along the river', image: 'assets/river-ferry.jpg', theme: 'river' };
+  if (distance < 350) return { name: 'Along the river', image: 'assets/road-river.jpg', theme: 'river' };
   if (distance < 570) return { name: 'The long way through the pines', image: 'assets/road-forest.jpg', theme: 'pines' };
-  if (distance < 750) return { name: 'Deep in Cascadia', image: 'assets/forest-camp.jpg', theme: 'forest' };
+  if (distance < 750) return { name: 'Deep in Cascadia', image: 'assets/road-forest.jpg', theme: 'forest' };
   if (distance < 870) return { name: 'The outskirts of somewhere', image: 'assets/road-forest.jpg', theme: 'outskirts' };
-  return { name: 'Portland is getting closer', image: 'assets/bookshop.jpg', theme: 'city' };
+  return { name: 'Portland is getting closer', image: 'assets/road-city.jpg', theme: 'city' };
 }
 
 function renderRoadStage() {
@@ -283,11 +300,20 @@ function renderRoadStage() {
   const weather = /drizzle|rain/i.test(state.weather) ? 'rain' : /heat/i.test(state.weather) ? 'heat' : 'clear';
   return `<div class="road-stage region-${region.theme} light-${light} weather-${weather} ${playback ? 'is-driving' : ''}" aria-label="${escapeHtml(region.name)}, ${escapeHtml(state.weather)}" data-region="${region.theme}">
     ${image(region.image, '', 'road-backdrop')}
+    <div class="road-clouds" aria-hidden="true"></div>
     <div class="road-light"></div><div class="road-mist"></div><div class="road-surface"><div class="road-stripes"></div></div>
     <div class="road-verge"></div><div class="road-rain"></div>
+    <div class="road-dust" aria-hidden="true"><span></span><span></span><span></span></div><div class="road-speed-lines" aria-hidden="true"></div>
     <div class="road-van">${image('assets/van.png', 'Your loaded van on the road', 'van-cutout')}<span class="van-shadow"></span></div>
     <div class="road-sign"><span>${escapeHtml(playback ? 'Rolling on' : region.name)}</span><strong data-drive-distance>${playback ? '+0 mi' : escapeHtml(state.weather)}</strong></div>
   </div>`;
+}
+
+function renderAtmosphere(placeId) {
+  const kind = { mushroom_market: 'leaves', river_ferry: 'rain', forest_camp: 'embers', bookshop: 'rain', food_truck_fest: 'steam', first_stop: 'leaves' }[placeId];
+  if (!kind) return '';
+  const active = hasVisualCue() && visualCue.atmosphere;
+  return `<div class="scene-atmosphere atmosphere-${kind} ${active ? 'is-active' : ''}" aria-hidden="true">${Array.from({ length: 6 }, (_, index) => `<span style="--i:${index}"></span>`).join('')}</div>`;
 }
 
 function renderScene() {
@@ -316,7 +342,7 @@ function renderScene() {
     description = isAtStart ? 'Every mile starts with the choices you make in the parking lot.' : 'Spend carefully. The next stop may be farther than it looks.';
   }
   const sceneAlt = isEnded ? 'Illustrated journey ending' : isShop ? 'Illustrated roadside supply stop' : state.phase === 'travel' ? 'A loaded van crossing the Pacific Northwest' : `Illustration of ${heading}`;
-  return `<section class="scene-panel ${onRoad ? 'scene-on-road' : ''}" aria-labelledby="scene-heading"><div class="scene-image-wrap">${onRoad ? renderRoadStage() : image(sceneImage, sceneAlt, 'scene-image')}
+  return `<section class="scene-panel scene-${state.phase} ${onRoad ? 'scene-on-road' : ''}" aria-labelledby="scene-heading"><div class="scene-image-wrap">${onRoad ? renderRoadStage() : image(sceneImage, sceneAlt, 'scene-image')}${atLocation ? renderAtmosphere(place.id) : ''}
       <div class="scene-image-vignette"></div><div class="scene-stamp"><span>THE PORTLAND TRAIL</span><b>${String(state.day).padStart(2, '0')} / ${String(Math.floor(state.distance)).padStart(4, '0')}</b></div></div>
     <div class="scene-body"><div class="scene-text"><p class="scene-overline">${isEnded ? 'Journey complete' : isShop ? 'Supply stop' : atLocation ? 'You have arrived' : 'Day ' + escapeHtml(state.day) + ' on the road'}</p>
       <h1 id="scene-heading">${escapeHtml(heading)}</h1><p>${escapeHtml(description)}</p></div>${renderPrimaryAction()}</div>
@@ -473,9 +499,14 @@ function render() {
     if (!state?.pendingEvent) requestAnimationFrame(() => {
       const match = app.querySelector(target);
       const fallback = match?.dataset.buy ? app.querySelector(`[data-shop-quantity="${CSS.escape(match.dataset.buy)}"]`) : app.querySelector('.primary-action button');
-      (match && !match.disabled ? match : fallback)?.focus();
+      (match && !match.disabled ? match : fallback)?.focus({ preventScroll: Boolean(match && !match.disabled) });
     });
   }
+}
+
+function focusScreen() {
+  window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+  if (!eventDialog.open && !replaceDialog.open) app.focus({ preventScroll: true });
 }
 
 function startNewJourney() {
@@ -486,7 +517,7 @@ function startNewJourney() {
   } else {
     screen = 'profession';
     render();
-    app.focus();
+    focusScreen();
   }
 }
 
@@ -514,10 +545,10 @@ app.addEventListener('click', event => {
   switch (target.dataset.action) {
     case 'new': startNewJourney(); break;
     case 'resume':
-      if (savedState) { state = savedState; screen = 'game'; render(); app.focus(); }
+      if (savedState) { state = savedState; screen = 'game'; render(); focusScreen(); }
       break;
-    case 'names': screen = 'names'; render(); app.querySelector('input')?.focus(); break;
-    case 'back-professions': screen = 'profession'; render(); app.focus(); break;
+    case 'names': screen = 'names'; render(); focusScreen(); app.querySelector('input')?.focus(); break;
+    case 'back-professions': screen = 'profession'; render(); focusScreen(); break;
     default: {
       if (!state) return;
       const actionType = target.dataset.action;
@@ -571,11 +602,12 @@ app.addEventListener('submit', event => {
   try {
     state = createGame({ profession: professionId, names, seed: Date.now() >>> 0 });
     lastLeg = null;
+    visualCue = null;
     screen = 'game';
     flash = '';
     saveGame();
     render();
-    app.focus();
+    focusScreen();
   } catch {
     setNotice('The journey could not start. Check the traveler names and try again.');
   }
@@ -599,11 +631,12 @@ replaceDialog.addEventListener('click', event => {
   if (choice.dataset.confirm === 'replace') {
     state = null;
     lastLeg = null;
+    visualCue = null;
     screen = 'profession';
     selectedProfession = PROFESSIONS[0]?.id ?? null;
     ITEMS.forEach(item => { shopQuantities[item.id] = 1; });
     render();
-    app.focus();
+    focusScreen();
   }
 });
 

@@ -1,0 +1,23 @@
+[
+  {
+    "id": "road-river",
+    "source": "/Users/ama/.codex/generated_images/01a0f7cd-3b81-79d2-b5ed-32bff1d47bb4/exec-b0929ade-96f1-4623-ac19-2de1c6907ac4.png",
+    "prompt": "Use case: stylized-concept. Asset type: side-scrolling road scenery for The Portland Trail green pixel-art driving game. Create 1536x1024 wide landscape, exclusively forest green, moss, olive and pale sage green tones, crisp dithered retro handheld pixel illustration matching an Oregon road-trip game. Scene: a wide winding Columbia-like river in a deep Oregon evergreen gorge, steep fir-covered cliffs, far arched bridge, cascades and drifting mist. LOWER THIRD: one straight horizontal side-view highway runs left to right uninterrupted, road parallel to bottom edge, dashed sage centerline. Highway not receding into distance. Background mountains/river occupy upper two thirds, road for separately layered van occupies bottom third. Strong layered silhouettes, calm luminous sage sky. No vehicles, van, people, buildings in foreground, text, letters, signs, interface, border or watermark.",
+    "tool": "built-in image_gen",
+    "generated": "2026-10-01"
+  },
+  {
+    "id": "road-city",
+    "source": "/Users/ama/.codex/generated_images/01a0f7cd-3b81-79d2-b5ed-32bff1d47bb4/exec-bfc34135-fe7a-429a-9934-e2aa48f2de09.png",
+    "prompt": "Use case: stylized-concept. Asset type: side-scrolling road scenery for The Portland Trail green pixel-art driving game. Create 1536x1024 wide landscape, exclusively dark evergreen, forest green, olive and pale sage palette, crisp dithered retro handheld pixel illustration. Scene: approach to quirky Portland Oregon, recognizable green steel through-truss bridge crossing a river in middle distance, layered small brick warehouses, a distant downtown skyline, fir trees and a volcanic mountain behind city, pale sage overcast sky. LOWER THIRD: straight side-view road runs flat horizontally LEFT TO RIGHT across the entire image, sage dashed centerline, suitable for separately composited van. Keep buildings and bridge ABOVE road, readable silhouetted layers. No vehicles or people anywhere. No words, signs, lettering, logos, interface, border or watermark.",
+    "tool": "built-in image_gen",
+    "generated": "2026-10-01"
+  },
+  {
+    "id": "heatwave",
+    "source": "/Users/ama/.codex/generated_images/01a0f7cd-3b81-79d2-b5ed-32bff1d47bb4/exec-64df6884-ca4d-4ee6-9d1a-e86a1bbeec2f.png",
+    "prompt": "Use case: illustration-story. Asset type: event illustration for The Portland Trail green retro pixel-art Oregon road-trip game. Create1536x1024 landscape: an absurd heatwave on a pine-lined road in the Pacific Northwest. Huge pale sage sun, visible stylized wavy heat ripples above cracked asphalt, drooping ferns, a comically sagging traffic cone, a tiny bird sheltering beneath an abandoned sunhat on a roadside bench, forested mountains in distance. Exclusively dark forest green, moss/olive green and pale warm sage palette, no orange or red. Crisp chunky pixel-art/dithered style, dry gentle comic mood. Clearly readable subject in central area when cropped into a wide game dialog image. No vehicles, no people, no text, writing, signage, UI, border, logos or watermark.",
+    "tool": "built-in image_gen",
+    "generated": "2026-10-01"
+  }
+]

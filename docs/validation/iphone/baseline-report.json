@@ -1,0 +1,8187 @@
+{
+  "engine": "webkit",
+  "baseline": true,
+  "passed": false,
+  "checks": [
+    {
+      "name": "travel-320x568: no horizontal overflow",
+      "passed": true,
+      "evidence": 320
+    },
+    {
+      "name": "travel-320x568: images loaded",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "travel-320x568: 44px touch targets",
+      "passed": false,
+      "evidence": [
+        {
+          "text": "The Portland Trail ✳",
+          "x": 15,
+          "y": 20.328125,
+          "width": 126.625,
+          "height": 13.34375,
+          "bottom": 33.671875
+        },
+        {
+          "text": "New journey",
+          "x": 243.796875,
+          "y": 14,
+          "width": 61.203125,
+          "height": 26,
+          "bottom": 40
+        },
+        {
+          "text": "9 places along the way",
+          "x": 24,
+          "y": 638.484375,
+          "width": 147.046875,
+          "height": 12,
+          "bottom": 650.484375
+        },
+        {
+          "text": "Rest",
+          "x": 34,
+          "y": 953.484375,
+          "width": 113.5,
+          "height": 39,
+          "bottom": 992.484375
+        },
+        {
+          "text": "Forage",
+          "x": 172.5,
+          "y": 953.484375,
+          "width": 113.5,
+          "height": 39,
+          "bottom": 992.484375
+        },
+        {
+          "text": "Salvage parts",
+          "x": 34,
+          "y": 1078.671875,
+          "width": 113.5,
+          "height": 39,
+          "bottom": 1117.671875
+        },
+        {
+          "text": "Scenic · 50 mi / 2 fuelSteady · 80 mi / 4 fuelFloor it · 110",
+          "x": 25,
+          "y": 1296.90625,
+          "width": 270,
+          "height": 18,
+          "bottom": 1314.90625
+        },
+        {
+          "text": "Bare · 0.25 food / travelerMeager · 0.5 food / travelerFilli",
+          "x": 25,
+          "y": 1344.90625,
+          "width": 270,
+          "height": 18,
+          "bottom": 1362.90625
+        }
+      ]
+    },
+    {
+      "name": "travel-320x568: 16px editable controls",
+      "passed": false,
+      "evidence": [
+        {
+          "name": "Driving pace",
+          "font": "11px"
+        },
+        {
+          "name": "Daily rations",
+          "font": "11px"
+        }
+      ]
+    },
+    {
+      "name": "travel-320x568: readable trip text",
+      "passed": false,
+      "evidence": [
+        {
+          "text": "Distance",
+          "font": "10px"
+        },
+        {
+          "text": "/ 1,000 mi",
+          "font": "9px"
+        },
+        {
+          "text": "Day",
+          "font": "10px"
+        },
+        {
+          "text": "Next stop",
+          "font": "10px"
+        },
+        {
+          "text": "Cash",
+          "font": "8px"
+        },
+        {
+          "text": "Food",
+          "font": "8px"
+        },
+        {
+          "text": "Fuel",
+          "font": "8px"
+        },
+        {
+          "text": "Seed bombs",
+          "font": "8px"
+        },
+        {
+          "text": "Repair supplies",
+          "font": "8px"
+        },
+        {
+          "text": "Kombucha",
+          "font": "8px"
+        },
+        {
+          "text": "NFTs",
+          "font": "8px"
+        },
+        {
+          "text": "Kale",
+          "font": "9px"
+        },
+        {
+          "text": "Healthy",
+          "font": "8px"
+        },
+        {
+          "text": "Juniper",
+          "font": "9px"
+        },
+        {
+          "text": "Healthy",
+          "font": "8px"
+        },
+        {
+          "text": "Rowan",
+          "font": "9px"
+        },
+        {
+          "text": "Healthy",
+          "font": "8px"
+        },
+        {
+          "text": "Birch",
+          "font": "9px"
+        },
+        {
+          "text": "Healthy",
+          "font": "8px"
+        },
+        {
+          "text": "Echo",
+          "font": "9px"
+        },
+        {
+          "text": "Healthy",
+          "font": "8px"
+        },
+        {
+          "text": "Take a day to recover. The crew still needs supplies.",
+          "font": "9px"
+        },
+        {
+          "text": "Search nearby. Time and energy are not free.",
+          "font": "9px"
+        },
+        {
+          "text": "Salvage 2 repair parts once every four days. Breakdown repairs cost 1 part instead of 2.",
+          "font": "9px"
+        }
+      ]
+    },
+    {
+      "name": "travel-320x568: Drive visible without scrolling",
+      "passed": true,
+      "evidence": {
+        "x": 27,
+        "y": 429.203125,
+        "width": 266,
+        "height": 62.5,
+        "bottom": 491.703125
+      }
+    },
+    {
+      "name": "travel-320x568: trip facts visible without scrolling",
+      "passed": false,
+      "evidence": {
+        "x": 24,
+        "y": 522.703125,
+        "width": 272,
+        "height": 47.78125,
+        "bottom": 570.484375
+      }
+    },
+    {
+      "name": "travel-320x568: useful scene height",
+      "passed": true,
+      "evidence": {
+        "x": 11,
+        "y": 90,
+        "width": 298,
+        "height": 210,
+        "bottom": 300
+      }
+    },
+    {
+      "name": "travel-320x568: route remains available",
+      "passed": true
+    },
+    {
+      "name": "route-320x568: no horizontal overflow",
+      "passed": true,
+      "evidence": 320
+    },
+    {
+      "name": "route-320x568: images loaded",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "route-320x568: 44px touch targets",
+      "passed": false,
+      "evidence": [
+        {
+          "text": "The Portland Trail ✳",
+          "x": 15,
+          "y": -340.671875,
+          "width": 126.625,
+          "height": 13.34375,
+          "bottom": -327.328125
+        },
+        {
+          "text": "New journey",
+          "x": 243.796875,
+          "y": -347,
+          "width": 61.203125,
+          "height": 26,
+          "bottom": -321
+        },
+        {
+          "text": "9 places along the way",
+          "x": 24,
+          "y": 277.484375,
+          "width": 146.71875,
+          "height": 12,
+          "bottom": 289.484375
+        },
+        {
+          "text": "Rest",
+          "x": 34,
+          "y": 1084.484375,
+          "width": 113.5,
+          "height": 39,
+          "bottom": 1123.484375
+        },
+        {
+          "text": "Forage",
+          "x": 172.5,
+          "y": 1084.484375,
+          "width": 113.5,
+          "height": 39,
+          "bottom": 1123.484375
+        },
+        {
+          "text": "Salvage parts",
+          "x": 34,
+          "y": 1209.671875,
+          "width": 113.5,
+          "height": 39,
+          "bottom": 1248.671875
+        },
+        {
+          "text": "Scenic · 50 mi / 2 fuelSteady · 80 mi / 4 fuelFloor it · 110",
+          "x": 25,
+          "y": 1427.90625,
+          "width": 270,
+          "height": 18,
+          "bottom": 1445.90625
+        },
+        {
+          "text": "Bare · 0.25 food / travelerMeager · 0.5 food / travelerFilli",
+          "x": 25,
+          "y": 1475.90625,
+          "width": 270,
+          "height": 18,
+          "bottom": 1493.90625
+        }
+      ]
+    },
+    {
+      "name": "route-320x568: 16px editable controls",
+      "passed": false,
+      "evidence": [
+        {
+          "name": "Driving pace",
+          "font": "11px"
+        },
+        {
+          "name": "Daily rations",
+          "font": "11px"
+        }
+      ]
+    },
+    {
+      "name": "route-320x568: readable trip text",
+      "passed": false,
+      "evidence": [
+        {
+          "text": "Distance",
+          "font": "10px"
+        },
+        {
+          "text": "/ 1,000 mi",
+          "font": "9px"
+        },
+        {
+          "text": "Day",
+          "font": "10px"
+        },
+        {
+          "text": "Next stop",
+          "font": "10px"
+        },
+        {
+          "text": "Cash",
+          "font": "8px"
+        },
+        {
+          "text": "Food",
+          "font": "8px"
+        },
+        {
+          "text": "Fuel",
+          "font": "8px"
+        },
+        {
+          "text": "Seed bombs",
+          "font": "8px"
+        },
+        {
+          "text": "Repair supplies",
+          "font": "8px"
+        },
+        {
+          "text": "Kombucha",
+          "font": "8px"
+        },
+        {
+          "text": "NFTs",
+          "font": "8px"
+        },
+        {
+          "text": "Kale",
+          "font": "9px"
+        },
+        {
+          "text": "Healthy",
+          "font": "8px"
+        },
+        {
+          "text": "Juniper",
+          "font": "9px"
+        },
+        {
+          "text": "Healthy",
+          "font": "8px"
+        },
+        {
+          "text": "Rowan",
+          "font": "9px"
+        },
+        {
+          "text": "Healthy",
+          "font": "8px"
+        },
+        {
+          "text": "Birch",
+          "font": "9px"
+        },
+        {
+          "text": "Healthy",
+          "font": "8px"
+        },
+        {
+          "text": "Echo",
+          "font": "9px"
+        },
+        {
+          "text": "Healthy",
+          "font": "8px"
+        },
+        {
+          "text": "Take a day to recover. The crew still needs supplies.",
+          "font": "9px"
+        },
+        {
+          "text": "Search nearby. Time and energy are not free.",
+          "font": "9px"
+        },
+        {
+          "text": "Salvage 2 repair parts once every four days. Breakdown repairs cost 1 part instead of 2.",
+          "font": "9px"
+        }
+      ]
+    },
+    {
+      "name": "shop-320x568: no horizontal overflow",
+      "passed": true,
+      "evidence": 320
+    },
+    {
+      "name": "shop-320x568: images loaded",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "shop-320x568: 44px touch targets",
+      "passed": false,
+      "evidence": [
+        {
+          "text": "The Portland Trail ✳",
+          "x": 15,
+          "y": 20.328125,
+          "width": 126.625,
+          "height": 13.34375,
+          "bottom": 33.671875
+        },
+        {
+          "text": "New journey",
+          "x": 243.796875,
+          "y": 14,
+          "width": 61.203125,
+          "height": 26,
+          "bottom": 40
+        },
+        {
+          "text": "Auto-buy essentials",
+          "x": 23,
+          "y": 809.25,
+          "width": 274,
+          "height": 43,
+          "bottom": 852.25
+        },
+        {
+          "text": "9 places along the way",
+          "x": 24,
+          "y": 1005.03125,
+          "width": 147.046875,
+          "height": 12,
+          "bottom": 1017.03125
+        },
+        {
+          "text": "1510",
+          "x": 138,
+          "y": 1435.53125,
+          "width": 55,
+          "height": 20,
+          "bottom": 1455.53125
+        },
+        {
+          "text": "1510",
+          "x": 138,
+          "y": 1599.28125,
+          "width": 55,
+          "height": 20,
+          "bottom": 1619.28125
+        },
+        {
+          "text": "1510",
+          "x": 138,
+          "y": 1754.28125,
+          "width": 55,
+          "height": 20,
+          "bottom": 1774.28125
+        },
+        {
+          "text": "1510",
+          "x": 138,
+          "y": 1910.03125,
+          "width": 55,
+          "height": 20,
+          "bottom": 1930.03125
+        },
+        {
+          "text": "1510",
+          "x": 138,
+          "y": 2081.78125,
+          "width": 55,
+          "height": 20,
+          "bottom": 2101.78125
+        },
+        {
+          "text": "1510",
+          "x": 138,
+          "y": 2260.78125,
+          "width": 55,
+          "height": 20,
+          "bottom": 2280.78125
+        },
+        {
+          "text": "Sell one NFT for $50",
+          "x": 25,
+          "y": 2409.03125,
+          "width": 184.359375,
+          "height": 43,
+          "bottom": 2452.03125
+        }
+      ]
+    },
+    {
+      "name": "shop-320x568: 16px editable controls",
+      "passed": false,
+      "evidence": [
+        {
+          "name": "Quantity of Sustainably Sourced Kale Chips to buy",
+          "font": "12px"
+        },
+        {
+          "name": "Quantity of Bio-Diesel Canister to buy",
+          "font": "12px"
+        },
+        {
+          "name": "Quantity of Seed Bombs to buy",
+          "font": "12px"
+        },
+        {
+          "name": "Quantity of Washi Tape & Vintage Screwdrivers to buy",
+          "font": "12px"
+        },
+        {
+          "name": "Quantity of Locally Brewed Kombucha to buy",
+          "font": "12px"
+        },
+        {
+          "name": "Quantity of Pixelated Sasquatch JPEG to buy",
+          "font": "12px"
+        }
+      ]
+    },
+    {
+      "name": "shop-320x568: readable trip text",
+      "passed": false,
+      "evidence": [
+        {
+          "text": "Distance",
+          "font": "10px"
+        },
+        {
+          "text": "/ 1,000 mi",
+          "font": "9px"
+        },
+        {
+          "text": "Day",
+          "font": "10px"
+        },
+        {
+          "text": "Next stop",
+          "font": "10px"
+        },
+        {
+          "text": "Cash",
+          "font": "8px"
+        },
+        {
+          "text": "Food",
+          "font": "8px"
+        },
+        {
+          "text": "Fuel",
+          "font": "8px"
+        },
+        {
+          "text": "Seed bombs",
+          "font": "8px"
+        },
+        {
+          "text": "Repair supplies",
+          "font": "8px"
+        },
+        {
+          "text": "Kombucha",
+          "font": "8px"
+        },
+        {
+          "text": "NFTs",
+          "font": "8px"
+        },
+        {
+          "text": "Kale",
+          "font": "9px"
+        },
+        {
+          "text": "Healthy",
+          "font": "8px"
+        },
+        {
+          "text": "Juniper",
+          "font": "9px"
+        },
+        {
+          "text": "Healthy",
+          "font": "8px"
+        },
+        {
+          "text": "Rowan",
+          "font": "9px"
+        },
+        {
+          "text": "Healthy",
+          "font": "8px"
+        },
+        {
+          "text": "Birch",
+          "font": "9px"
+        },
+        {
+          "text": "Healthy",
+          "font": "8px"
+        },
+        {
+          "text": "Echo",
+          "font": "9px"
+        },
+        {
+          "text": "Healthy",
+          "font": "8px"
+        }
+      ]
+    },
+    {
+      "name": "shop-320x568: auto-buy discoverable",
+      "passed": false,
+      "evidence": {
+        "x": 23,
+        "y": 809.25,
+        "width": 274,
+        "height": 43,
+        "bottom": 852.25
+      }
+    },
+    {
+      "name": "shop-320x568: auto-buy works",
+      "passed": true
+    },
+    {
+      "name": "event-320x568: no horizontal overflow",
+      "passed": true,
+      "evidence": 320
+    },
+    {
+      "name": "event-320x568: images loaded",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "event-320x568: 44px touch targets",
+      "passed": false,
+      "evidence": [
+        {
+          "text": "The Portland Trail ✳",
+          "x": 15,
+          "y": 20.328125,
+          "width": 126.625,
+          "height": 13.34375,
+          "bottom": 33.671875
+        },
+        {
+          "text": "New journey",
+          "x": 243.796875,
+          "y": 14,
+          "width": 61.203125,
+          "height": 26,
+          "bottom": 40
+        },
+        {
+          "text": "9 places along the way",
+          "x": 24,
+          "y": 638.484375,
+          "width": 147.046875,
+          "height": 12,
+          "bottom": 650.484375
+        },
+        {
+          "text": "Rest",
+          "x": 34,
+          "y": 953.484375,
+          "width": 113.5,
+          "height": 39,
+          "bottom": 992.484375
+        },
+        {
+          "text": "Forage",
+          "x": 172.5,
+          "y": 953.484375,
+          "width": 113.5,
+          "height": 39,
+          "bottom": 992.484375
+        },
+        {
+          "text": "Salvage parts",
+          "x": 34,
+          "y": 1078.671875,
+          "width": 113.5,
+          "height": 39,
+          "bottom": 1117.671875
+        },
+        {
+          "text": "Scenic · 50 mi / 2 fuelSteady · 80 mi / 4 fuelFloor it · 110",
+          "x": 25,
+          "y": 1296.90625,
+          "width": 270,
+          "height": 18,
+          "bottom": 1314.90625
+        },
+        {
+          "text": "Bare · 0.25 food / travelerMeager · 0.5 food / travelerFilli",
+          "x": 25,
+          "y": 1344.90625,
+          "width": 270,
+          "height": 18,
+          "bottom": 1362.90625
+        }
+      ]
+    },
+    {
+      "name": "event-320x568: 16px editable controls",
+      "passed": false,
+      "evidence": [
+        {
+          "name": "Driving pace",
+          "font": "11px"
+        },
+        {
+          "name": "Daily rations",
+          "font": "11px"
+        }
+      ]
+    },
+    {
+      "name": "event-320x568: readable trip text",
+      "passed": false,
+      "evidence": [
+        {
+          "text": "Distance",
+          "font": "10px"
+        },
+        {
+          "text": "/ 1,000 mi",
+          "font": "9px"
+        },
+        {
+          "text": "Day",
+          "font": "10px"
+        },
+        {
+          "text": "Next stop",
+          "font": "10px"
+        },
+        {
+          "text": "Cash",
+          "font": "8px"
+        },
+        {
+          "text": "Food",
+          "font": "8px"
+        },
+        {
+          "text": "Fuel",
+          "font": "8px"
+        },
+        {
+          "text": "Seed bombs",
+          "font": "8px"
+        },
+        {
+          "text": "Repair supplies",
+          "font": "8px"
+        },
+        {
+          "text": "Kombucha",
+          "font": "8px"
+        },
+        {
+          "text": "NFTs",
+          "font": "8px"
+        },
+        {
+          "text": "Kale",
+          "font": "9px"
+        },
+        {
+          "text": "Healthy",
+          "font": "8px"
+        },
+        {
+          "text": "Juniper",
+          "font": "9px"
+        },
+        {
+          "text": "Healthy",
+          "font": "8px"
+        },
+        {
+          "text": "Rowan",
+          "font": "9px"
+        },
+        {
+          "text": "Healthy",
+          "font": "8px"
+        },
+        {
+          "text": "Birch",
+          "font": "9px"
+        },
+        {
+          "text": "Healthy",
+          "font": "8px"
+        },
+        {
+          "text": "Echo",
+          "font": "9px"
+        },
+        {
+          "text": "Healthy",
+          "font": "8px"
+        },
+        {
+          "text": "Take a day to recover. The crew still needs supplies.",
+          "font": "9px"
+        },
+        {
+          "text": "Search nearby. Time and energy are not free.",
+          "font": "9px"
+        },
+        {
+          "text": "Salvage 2 repair parts once every four days. Breakdown repairs cost 1 part instead of 2.",
+          "font": "9px"
+        }
+      ]
+    },
+    {
+      "name": "event-320x568: all choices visible",
+      "passed": true,
+      "evidence": [
+        {
+          "x": 45,
+          "y": 430.765625,
+          "width": 230,
+          "height": 48,
+          "bottom": 478.765625
+        },
+        {
+          "x": 45,
+          "y": 488.765625,
+          "width": 230,
+          "height": 60,
+          "bottom": 548.765625
+        }
+      ]
+    },
+    {
+      "name": "event-320x568: focus enters dialog",
+      "passed": true
+    },
+    {
+      "name": "event-320x568: Escape preserves pending event",
+      "passed": true
+    },
+    {
+      "name": "event-320x568: choice resolves",
+      "passed": true
+    },
+    {
+      "name": "travel-375x548: no horizontal overflow",
+      "passed": true,
+      "evidence": 375
+    },
+    {
+      "name": "travel-375x548: images loaded",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "travel-375x548: 44px touch targets",
+      "passed": false,
+      "evidence": [
+        {
+          "text": "The Portland Trail ✳",
+          "x": 15,
+          "y": 20.328125,
+          "width": 126.625,
+          "height": 13.34375,
+          "bottom": 33.671875
+        },
+        {
+          "text": "New journey",
+          "x": 298.796875,
+          "y": 14,
+          "width": 61.203125,
+          "height": 26,
+          "bottom": 40
+        },
+        {
+          "text": "9 places along the way",
+          "x": 24,
+          "y": 607.40625,
+          "width": 147.046875,
+          "height": 12,
+          "bottom": 619.40625
+        },
+        {
+          "text": "Rest",
+          "x": 34,
+          "y": 922.40625,
+          "width": 141,
+          "height": 39,
+          "bottom": 961.40625
+        },
+        {
+          "text": "Forage",
+          "x": 200,
+          "y": 922.40625,
+          "width": 141,
+          "height": 39,
+          "bottom": 961.40625
+        },
+        {
+          "text": "Salvage parts",
+          "x": 34,
+          "y": 1034.546875,
+          "width": 141,
+          "height": 39,
+          "bottom": 1073.546875
+        },
+        {
+          "text": "Scenic · 50 mi / 2 fuelSteady · 80 mi / 4 fuelFloor it · 110",
+          "x": 25,
+          "y": 1239.734375,
+          "width": 325,
+          "height": 18,
+          "bottom": 1257.734375
+        },
+        {
+          "text": "Bare · 0.25 food / travelerMeager · 0.5 food / travelerFilli",
+          "x": 25,
+          "y": 1287.734375,
+          "width": 325,
+          "height": 18,
+          "bottom": 1305.734375
+        }
+      ]
+    },
+    {
+      "name": "travel-375x548: 16px editable controls",
+      "passed": false,
+      "evidence": [
+        {
+          "name": "Driving pace",
+          "font": "11px"
+        },
+        {
+          "name": "Daily rations",
+          "font": "11px"
+        }
+      ]
+    },
+    {
+      "name": "travel-375x548: readable trip text",
+      "passed": false,
+      "evidence": [
+        {
+          "text": "Distance",
+          "font": "10px"
+        },
+        {
+          "text": "/ 1,000 mi",
+          "font": "9px"
+        },
+        {
+          "text": "Day",
+          "font": "10px"
+        },
+        {
+          "text": "Next stop",
+          "font": "10px"
+        },
+        {
+          "text": "Cash",
+          "font": "8px"
+        },
+        {
+          "text": "Food",
+          "font": "8px"
+        },
+        {
+          "text": "Fuel",
+          "font": "8px"
+        },
+        {
+          "text": "Seed bombs",
+          "font": "8px"
+        },
+        {
+          "text": "Repair supplies",
+          "font": "8px"
+        },
+        {
+          "text": "Kombucha",
+          "font": "8px"
+        },
+        {
+          "text": "NFTs",
+          "font": "8px"
+        },
+        {
+          "text": "Kale",
+          "font": "9px"
+        },
+        {
+          "text": "Healthy",
+          "font": "8px"
+        },
+        {
+          "text": "Juniper",
+          "font": "9px"
+        },
+        {
+          "text": "Healthy",
+          "font": "8px"
+        },
+        {
+          "text": "Rowan",
+          "font": "9px"
+        },
+        {
+          "text": "Healthy",
+          "font": "8px"
+        },
+        {
+          "text": "Birch",
+          "font": "9px"
+        },
+        {
+          "text": "Healthy",
+          "font": "8px"
+        },
+        {
+          "text": "Echo",
+          "font": "9px"
+        },
+        {
+          "text": "Healthy",
+          "font": "8px"
+        },
+        {
+          "text": "Take a day to recover. The crew still needs supplies.",
+          "font": "9px"
+        },
+        {
+          "text": "Search nearby. Time and energy are not free.",
+          "font": "9px"
+        },
+        {
+          "text": "Salvage 2 repair parts once every four days. Breakdown repairs cost 1 part instead of 2.",
+          "font": "9px"
+        }
+      ]
+    },
+    {
+      "name": "travel-375x548: Drive visible without scrolling",
+      "passed": true,
+      "evidence": {
+        "x": 27,
+        "y": 408.625,
+        "width": 321,
+        "height": 52,
+        "bottom": 460.625
+      }
+    },
+    {
+      "name": "travel-375x548: trip facts visible without scrolling",
+      "passed": true,
+      "evidence": {
+        "x": 24,
+        "y": 491.625,
+        "width": 327,
+        "height": 47.78125,
+        "bottom": 539.40625
+      }
+    },
+    {
+      "name": "travel-375x548: useful scene height",
+      "passed": true,
+      "evidence": {
+        "x": 11,
+        "y": 90,
+        "width": 353,
+        "height": 217.5,
+        "bottom": 307.5
+      }
+    },
+    {
+      "name": "travel-375x548: route remains available",
+      "passed": true
+    },
+    {
+      "name": "route-375x548: no horizontal overflow",
+      "passed": true,
+      "evidence": 375
+    },
+    {
+      "name": "route-375x548: images loaded",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "route-375x548: 44px touch targets",
+      "passed": false,
+      "evidence": [
+        {
+          "text": "The Portland Trail ✳",
+          "x": 15,
+          "y": -319.671875,
+          "width": 126.625,
+          "height": 13.34375,
+          "bottom": -306.328125
+        },
+        {
+          "text": "New journey",
+          "x": 298.796875,
+          "y": -326,
+          "width": 61.203125,
+          "height": 26,
+          "bottom": -300
+        },
+        {
+          "text": "9 places along the way",
+          "x": 24,
+          "y": 267.40625,
+          "width": 146.71875,
+          "height": 12,
+          "bottom": 279.40625
+        },
+        {
+          "text": "Rest",
+          "x": 34,
+          "y": 1074.40625,
+          "width": 141,
+          "height": 39,
+          "bottom": 1113.40625
+        },
+        {
+          "text": "Forage",
+          "x": 200,
+          "y": 1074.40625,
+          "width": 141,
+          "height": 39,
+          "bottom": 1113.40625
+        },
+        {
+          "text": "Salvage parts",
+          "x": 34,
+          "y": 1186.546875,
+          "width": 141,
+          "height": 39,
+          "bottom": 1225.546875
+        },
+        {
+          "text": "Scenic · 50 mi / 2 fuelSteady · 80 mi / 4 fuelFloor it · 110",
+          "x": 25,
+          "y": 1391.734375,
+          "width": 325,
+          "height": 18,
+          "bottom": 1409.734375
+        },
+        {
+          "text": "Bare · 0.25 food / travelerMeager · 0.5 food / travelerFilli",
+          "x": 25,
+          "y": 1439.734375,
+          "width": 325,
+          "height": 18,
+          "bottom": 1457.734375
+        }
+      ]
+    },
+    {
+      "name": "route-375x548: 16px editable controls",
+      "passed": false,
+      "evidence": [
+        {
+          "name": "Driving pace",
+          "font": "11px"
+        },
+        {
+          "name": "Daily rations",
+          "font": "11px"
+        }
+      ]
+    },
+    {
+      "name": "route-375x548: readable trip text",
+      "passed": false,
+      "evidence": [
+        {
+          "text": "Distance",
+          "font": "10px"
+        },
+        {
+          "text": "/ 1,000 mi",
+          "font": "9px"
+        },
+        {
+          "text": "Day",
+          "font": "10px"
+        },
+        {
+          "text": "Next stop",
+          "font": "10px"
+        },
+        {
+          "text": "Cash",
+          "font": "8px"
+        },
+        {
+          "text": "Food",
+          "font": "8px"
+        },
+        {
+          "text": "Fuel",
+          "font": "8px"
+        },
+        {
+          "text": "Seed bombs",
+          "font": "8px"
+        },
+        {
+          "text": "Repair supplies",
+          "font": "8px"
+        },
+        {
+          "text": "Kombucha",
+          "font": "8px"
+        },
+        {
+          "text": "NFTs",
+          "font": "8px"
+        },
+        {
+          "text": "Kale",
+          "font": "9px"
+        },
+        {
+          "text": "Healthy",
+          "font": "8px"
+        },
+        {
+          "text": "Juniper",
+          "font": "9px"
+        },
+        {
+          "text": "Healthy",
+          "font": "8px"
+        },
+        {
+          "text": "Rowan",
+          "font": "9px"
+        },
+        {
+          "text": "Healthy",
+          "font": "8px"
+        },
+        {
+          "text": "Birch",
+          "font": "9px"
+        },
+        {
+          "text": "Healthy",
+          "font": "8px"
+        },
+        {
+          "text": "Echo",
+          "font": "9px"
+        },
+        {
+          "text": "Healthy",
+          "font": "8px"
+        },
+        {
+          "text": "Take a day to recover. The crew still needs supplies.",
+          "font": "9px"
+        },
+        {
+          "text": "Search nearby. Time and energy are not free.",
+          "font": "9px"
+        },
+        {
+          "text": "Salvage 2 repair parts once every four days. Breakdown repairs cost 1 part instead of 2.",
+          "font": "9px"
+        }
+      ]
+    },
+    {
+      "name": "shop-375x548: no horizontal overflow",
+      "passed": true,
+      "evidence": 375
+    },
+    {
+      "name": "shop-375x548: images loaded",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "shop-375x548: 44px touch targets",
+      "passed": false,
+      "evidence": [
+        {
+          "text": "The Portland Trail ✳",
+          "x": 15,
+          "y": 20.328125,
+          "width": 126.625,
+          "height": 13.34375,
+          "bottom": 33.671875
+        },
+        {
+          "text": "New journey",
+          "x": 298.796875,
+          "y": 14,
+          "width": 61.203125,
+          "height": 26,
+          "bottom": 40
+        },
+        {
+          "text": "Auto-buy essentials",
+          "x": 23,
+          "y": 784.75,
+          "width": 329,
+          "height": 43,
+          "bottom": 827.75
+        },
+        {
+          "text": "9 places along the way",
+          "x": 24,
+          "y": 980.53125,
+          "width": 147.046875,
+          "height": 12,
+          "bottom": 992.53125
+        },
+        {
+          "text": "1510",
+          "x": 193,
+          "y": 1386.78125,
+          "width": 55,
+          "height": 20,
+          "bottom": 1406.78125
+        },
+        {
+          "text": "1510",
+          "x": 193,
+          "y": 1510.03125,
+          "width": 55,
+          "height": 20,
+          "bottom": 1530.03125
+        },
+        {
+          "text": "1510",
+          "x": 193,
+          "y": 1625.28125,
+          "width": 55,
+          "height": 20,
+          "bottom": 1645.28125
+        },
+        {
+          "text": "1510",
+          "x": 193,
+          "y": 1750.28125,
+          "width": 55,
+          "height": 20,
+          "bottom": 1770.28125
+        },
+        {
+          "text": "1510",
+          "x": 193,
+          "y": 1883.28125,
+          "width": 55,
+          "height": 20,
+          "bottom": 1903.28125
+        },
+        {
+          "text": "1510",
+          "x": 193,
+          "y": 1999.28125,
+          "width": 55,
+          "height": 20,
+          "bottom": 2019.28125
+        },
+        {
+          "text": "Sell one NFT for $50",
+          "x": 25,
+          "y": 2103.03125,
+          "width": 184.359375,
+          "height": 43,
+          "bottom": 2146.03125
+        }
+      ]
+    },
+    {
+      "name": "shop-375x548: 16px editable controls",
+      "passed": false,
+      "evidence": [
+        {
+          "name": "Quantity of Sustainably Sourced Kale Chips to buy",
+          "font": "12px"
+        },
+        {
+          "name": "Quantity of Bio-Diesel Canister to buy",
+          "font": "12px"
+        },
+        {
+          "name": "Quantity of Seed Bombs to buy",
+          "font": "12px"
+        },
+        {
+          "name": "Quantity of Washi Tape & Vintage Screwdrivers to buy",
+          "font": "12px"
+        },
+        {
+          "name": "Quantity of Locally Brewed Kombucha to buy",
+          "font": "12px"
+        },
+        {
+          "name": "Quantity of Pixelated Sasquatch JPEG to buy",
+          "font": "12px"
+        }
+      ]
+    },
+    {
+      "name": "shop-375x548: readable trip text",
+      "passed": false,
+      "evidence": [
+        {
+          "text": "Distance",
+          "font": "10px"
+        },
+        {
+          "text": "/ 1,000 mi",
+          "font": "9px"
+        },
+        {
+          "text": "Day",
+          "font": "10px"
+        },
+        {
+          "text": "Next stop",
+          "font": "10px"
+        },
+        {
+          "text": "Cash",
+          "font": "8px"
+        },
+        {
+          "text": "Food",
+          "font": "8px"
+        },
+        {
+          "text": "Fuel",
+          "font": "8px"
+        },
+        {
+          "text": "Seed bombs",
+          "font": "8px"
+        },
+        {
+          "text": "Repair supplies",
+          "font": "8px"
+        },
+        {
+          "text": "Kombucha",
+          "font": "8px"
+        },
+        {
+          "text": "NFTs",
+          "font": "8px"
+        },
+        {
+          "text": "Kale",
+          "font": "9px"
+        },
+        {
+          "text": "Healthy",
+          "font": "8px"
+        },
+        {
+          "text": "Juniper",
+          "font": "9px"
+        },
+        {
+          "text": "Healthy",
+          "font": "8px"
+        },
+        {
+          "text": "Rowan",
+          "font": "9px"
+        },
+        {
+          "text": "Healthy",
+          "font": "8px"
+        },
+        {
+          "text": "Birch",
+          "font": "9px"
+        },
+        {
+          "text": "Healthy",
+          "font": "8px"
+        },
+        {
+          "text": "Echo",
+          "font": "9px"
+        },
+        {
+          "text": "Healthy",
+          "font": "8px"
+        }
+      ]
+    },
+    {
+      "name": "shop-375x548: auto-buy discoverable",
+      "passed": false,
+      "evidence": {
+        "x": 23,
+        "y": 784.75,
+        "width": 329,
+        "height": 43,
+        "bottom": 827.75
+      }
+    },
+    {
+      "name": "shop-375x548: auto-buy works",
+      "passed": true
+    },
+    {
+      "name": "event-375x548: no horizontal overflow",
+      "passed": true,
+      "evidence": 375
+    },
+    {
+      "name": "event-375x548: images loaded",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "event-375x548: 44px touch targets",
+      "passed": false,
+      "evidence": [
+        {
+          "text": "The Portland Trail ✳",
+          "x": 15,
+          "y": 20.328125,
+          "width": 126.625,
+          "height": 13.34375,
+          "bottom": 33.671875
+        },
+        {
+          "text": "New journey",
+          "x": 298.796875,
+          "y": 14,
+          "width": 61.203125,
+          "height": 26,
+          "bottom": 40
+        },
+        {
+          "text": "9 places along the way",
+          "x": 24,
+          "y": 607.40625,
+          "width": 147.046875,
+          "height": 12,
+          "bottom": 619.40625
+        },
+        {
+          "text": "Rest",
+          "x": 34,
+          "y": 922.40625,
+          "width": 141,
+          "height": 39,
+          "bottom": 961.40625
+        },
+        {
+          "text": "Forage",
+          "x": 200,
+          "y": 922.40625,
+          "width": 141,
+          "height": 39,
+          "bottom": 961.40625
+        },
+        {
+          "text": "Salvage parts",
+          "x": 34,
+          "y": 1034.546875,
+          "width": 141,
+          "height": 39,
+          "bottom": 1073.546875
+        },
+        {
+          "text": "Scenic · 50 mi / 2 fuelSteady · 80 mi / 4 fuelFloor it · 110",
+          "x": 25,
+          "y": 1239.734375,
+          "width": 325,
+          "height": 18,
+          "bottom": 1257.734375
+        },
+        {
+          "text": "Bare · 0.25 food / travelerMeager · 0.5 food / travelerFilli",
+          "x": 25,
+          "y": 1287.734375,
+          "width": 325,
+          "height": 18,
+          "bottom": 1305.734375
+        }
+      ]
+    },
+    {
+      "name": "event-375x548: 16px editable controls",
+      "passed": false,
+      "evidence": [
+        {
+          "name": "Driving pace",
+          "font": "11px"
+        },
+        {
+          "name": "Daily rations",
+          "font": "11px"
+        }
+      ]
+    },
+    {
+      "name": "event-375x548: readable trip text",
+      "passed": false,
+      "evidence": [
+        {
+          "text": "Distance",
+          "font": "10px"
+        },
+        {
+          "text": "/ 1,000 mi",
+          "font": "9px"
+        },
+        {
+          "text": "Day",
+          "font": "10px"
+        },
+        {
+          "text": "Next stop",
+          "font": "10px"
+        },
+        {
+          "text": "Cash",
+          "font": "8px"
+        },
+        {
+          "text": "Food",
+          "font": "8px"
+        },
+        {
+          "text": "Fuel",
+          "font": "8px"
+        },
+        {
+          "text": "Seed bombs",
+          "font": "8px"
+        },
+        {
+          "text": "Repair supplies",
+          "font": "8px"
+        },
+        {
+          "text": "Kombucha",
+          "font": "8px"
+        },
+        {
+          "text": "NFTs",
+          "font": "8px"
+        },
+        {
+          "text": "Kale",
+          "font": "9px"
+        },
+        {
+          "text": "Healthy",
+          "font": "8px"
+        },
+        {
+          "text": "Juniper",
+          "font": "9px"
+        },
+        {
+          "text": "Healthy",
+          "font": "8px"
+        },
+        {
+          "text": "Rowan",
+          "font": "9px"
+        },
+        {
+          "text": "Healthy",
+          "font": "8px"
+        },
+        {
+          "text": "Birch",
+          "font": "9px"
+        },
+        {
+          "text": "Healthy",
+          "font": "8px"
+        },
+        {
+          "text": "Echo",
+          "font": "9px"
+        },
+        {
+          "text": "Healthy",
+          "font": "8px"
+        },
+        {
+          "text": "Take a day to recover. The crew still needs supplies.",
+          "font": "9px"
+        },
+        {
+          "text": "Search nearby. Time and energy are not free.",
+          "font": "9px"
+        },
+        {
+          "text": "Salvage 2 repair parts once every four days. Breakdown repairs cost 1 part instead of 2.",
+          "font": "9px"
+        }
+      ]
+    },
+    {
+      "name": "event-375x548: all choices visible",
+      "passed": true,
+      "evidence": [
+        {
+          "x": 45,
+          "y": 402.765625,
+          "width": 285,
+          "height": 48,
+          "bottom": 450.765625
+        },
+        {
+          "x": 45,
+          "y": 459.765625,
+          "width": 285,
+          "height": 48,
+          "bottom": 507.765625
+        }
+      ]
+    },
+    {
+      "name": "event-375x548: focus enters dialog",
+      "passed": true
+    },
+    {
+      "name": "event-375x548: Escape preserves pending event",
+      "passed": true
+    },
+    {
+      "name": "event-375x548: choice resolves",
+      "passed": true
+    },
+    {
+      "name": "travel-390x664: no horizontal overflow",
+      "passed": true,
+      "evidence": 390
+    },
+    {
+      "name": "travel-390x664: images loaded",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "travel-390x664: 44px touch targets",
+      "passed": false,
+      "evidence": [
+        {
+          "text": "The Portland Trail ✳",
+          "x": 15,
+          "y": 20.328125,
+          "width": 126.625,
+          "height": 13.34375,
+          "bottom": 33.671875
+        },
+        {
+          "text": "New journey",
+          "x": 313.796875,
+          "y": 14,
+          "width": 61.203125,
+          "height": 26,
+          "bottom": 40
+        },
+        {
+          "text": "9 places along the way",
+          "x": 24,
+          "y": 616.09375,
+          "width": 147.046875,
+          "height": 12,
+          "bottom": 628.09375
+        },
+        {
+          "text": "Rest",
+          "x": 34,
+          "y": 931.09375,
+          "width": 148.5,
+          "height": 39,
+          "bottom": 970.09375
+        },
+        {
+          "text": "Forage",
+          "x": 207.5,
+          "y": 931.09375,
+          "width": 148.5,
+          "height": 39,
+          "bottom": 970.09375
+        },
+        {
+          "text": "Salvage parts",
+          "x": 34,
+          "y": 1030.1875,
+          "width": 148.5,
+          "height": 39,
+          "bottom": 1069.1875
+        },
+        {
+          "text": "Scenic · 50 mi / 2 fuelSteady · 80 mi / 4 fuelFloor it · 110",
+          "x": 25,
+          "y": 1235.375,
+          "width": 340,
+          "height": 18,
+          "bottom": 1253.375
+        },
+        {
+          "text": "Bare · 0.25 food / travelerMeager · 0.5 food / travelerFilli",
+          "x": 25,
+          "y": 1283.375,
+          "width": 340,
+          "height": 18,
+          "bottom": 1301.375
+        }
+      ]
+    },
+    {
+      "name": "travel-390x664: 16px editable controls",
+      "passed": false,
+      "evidence": [
+        {
+          "name": "Driving pace",
+          "font": "11px"
+        },
+        {
+          "name": "Daily rations",
+          "font": "11px"
+        }
+      ]
+    },
+    {
+      "name": "travel-390x664: readable trip text",
+      "passed": false,
+      "evidence": [
+        {
+          "text": "Distance",
+          "font": "10px"
+        },
+        {
+          "text": "/ 1,000 mi",
+          "font": "9px"
+        },
+        {
+          "text": "Day",
+          "font": "10px"
+        },
+        {
+          "text": "Next stop",
+          "font": "10px"
+        },
+        {
+          "text": "Cash",
+          "font": "8px"
+        },
+        {
+          "text": "Food",
+          "font": "8px"
+        },
+        {
+          "text": "Fuel",
+          "font": "8px"
+        },
+        {
+          "text": "Seed bombs",
+          "font": "8px"
+        },
+        {
+          "text": "Repair supplies",
+          "font": "8px"
+        },
+        {
+          "text": "Kombucha",
+          "font": "8px"
+        },
+        {
+          "text": "NFTs",
+          "font": "8px"
+        },
+        {
+          "text": "Kale",
+          "font": "9px"
+        },
+        {
+          "text": "Healthy",
+          "font": "8px"
+        },
+        {
+          "text": "Juniper",
+          "font": "9px"
+        },
+        {
+          "text": "Healthy",
+          "font": "8px"
+        },
+        {
+          "text": "Rowan",
+          "font": "9px"
+        },
+        {
+          "text": "Healthy",
+          "font": "8px"
+        },
+        {
+          "text": "Birch",
+          "font": "9px"
+        },
+        {
+          "text": "Healthy",
+          "font": "8px"
+        },
+        {
+          "text": "Echo",
+          "font": "9px"
+        },
+        {
+          "text": "Healthy",
+          "font": "8px"
+        },
+        {
+          "text": "Take a day to recover. The crew still needs supplies.",
+          "font": "9px"
+        },
+        {
+          "text": "Search nearby. Time and energy are not free.",
+          "font": "9px"
+        },
+        {
+          "text": "Salvage 2 repair parts once every four days. Breakdown repairs cost 1 part instead of 2.",
+          "font": "9px"
+        }
+      ]
+    },
+    {
+      "name": "travel-390x664: Drive visible without scrolling",
+      "passed": true,
+      "evidence": {
+        "x": 27,
+        "y": 417.3125,
+        "width": 336,
+        "height": 52,
+        "bottom": 469.3125
+      }
+    },
+    {
+      "name": "travel-390x664: trip facts visible without scrolling",
+      "passed": true,
+      "evidence": {
+        "x": 24,
+        "y": 500.3125,
+        "width": 342,
+        "height": 47.78125,
+        "bottom": 548.09375
+      }
+    },
+    {
+      "name": "travel-390x664: useful scene height",
+      "passed": true,
+      "evidence": {
+        "x": 11,
+        "y": 90,
+        "width": 368,
+        "height": 226.1875,
+        "bottom": 316.1875
+      }
+    },
+    {
+      "name": "travel-390x664: route remains available",
+      "passed": true
+    },
+    {
+      "name": "route-390x664: no horizontal overflow",
+      "passed": true,
+      "evidence": 390
+    },
+    {
+      "name": "route-390x664: images loaded",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "route-390x664: 44px touch targets",
+      "passed": false,
+      "evidence": [
+        {
+          "text": "The Portland Trail ✳",
+          "x": 15,
+          "y": 20.328125,
+          "width": 126.625,
+          "height": 13.34375,
+          "bottom": 33.671875
+        },
+        {
+          "text": "New journey",
+          "x": 313.796875,
+          "y": 14,
+          "width": 61.203125,
+          "height": 26,
+          "bottom": 40
+        },
+        {
+          "text": "9 places along the way",
+          "x": 24,
+          "y": 616.09375,
+          "width": 146.71875,
+          "height": 12,
+          "bottom": 628.09375
+        },
+        {
+          "text": "Rest",
+          "x": 34,
+          "y": 1423.09375,
+          "width": 148.5,
+          "height": 39,
+          "bottom": 1462.09375
+        },
+        {
+          "text": "Forage",
+          "x": 207.5,
+          "y": 1423.09375,
+          "width": 148.5,
+          "height": 39,
+          "bottom": 1462.09375
+        },
+        {
+          "text": "Salvage parts",
+          "x": 34,
+          "y": 1522.1875,
+          "width": 148.5,
+          "height": 39,
+          "bottom": 1561.1875
+        },
+        {
+          "text": "Scenic · 50 mi / 2 fuelSteady · 80 mi / 4 fuelFloor it · 110",
+          "x": 25,
+          "y": 1727.375,
+          "width": 340,
+          "height": 18,
+          "bottom": 1745.375
+        },
+        {
+          "text": "Bare · 0.25 food / travelerMeager · 0.5 food / travelerFilli",
+          "x": 25,
+          "y": 1775.375,
+          "width": 340,
+          "height": 18,
+          "bottom": 1793.375
+        }
+      ]
+    },
+    {
+      "name": "route-390x664: 16px editable controls",
+      "passed": false,
+      "evidence": [
+        {
+          "name": "Driving pace",
+          "font": "11px"
+        },
+        {
+          "name": "Daily rations",
+          "font": "11px"
+        }
+      ]
+    },
+    {
+      "name": "route-390x664: readable trip text",
+      "passed": false,
+      "evidence": [
+        {
+          "text": "Distance",
+          "font": "10px"
+        },
+        {
+          "text": "/ 1,000 mi",
+          "font": "9px"
+        },
+        {
+          "text": "Day",
+          "font": "10px"
+        },
+        {
+          "text": "Next stop",
+          "font": "10px"
+        },
+        {
+          "text": "Cash",
+          "font": "8px"
+        },
+        {
+          "text": "Food",
+          "font": "8px"
+        },
+        {
+          "text": "Fuel",
+          "font": "8px"
+        },
+        {
+          "text": "Seed bombs",
+          "font": "8px"
+        },
+        {
+          "text": "Repair supplies",
+          "font": "8px"
+        },
+        {
+          "text": "Kombucha",
+          "font": "8px"
+        },
+        {
+          "text": "NFTs",
+          "font": "8px"
+        },
+        {
+          "text": "Kale",
+          "font": "9px"
+        },
+        {
+          "text": "Healthy",
+          "font": "8px"
+        },
+        {
+          "text": "Juniper",
+          "font": "9px"
+        },
+        {
+          "text": "Healthy",
+          "font": "8px"
+        },
+        {
+          "text": "Rowan",
+          "font": "9px"
+        },
+        {
+          "text": "Healthy",
+          "font": "8px"
+        },
+        {
+          "text": "Birch",
+          "font": "9px"
+        },
+        {
+          "text": "Healthy",
+          "font": "8px"
+        },
+        {
+          "text": "Echo",
+          "font": "9px"
+        },
+        {
+          "text": "Healthy",
+          "font": "8px"
+        },
+        {
+          "text": "Take a day to recover. The crew still needs supplies.",
+          "font": "9px"
+        },
+        {
+          "text": "Search nearby. Time and energy are not free.",
+          "font": "9px"
+        },
+        {
+          "text": "Salvage 2 repair parts once every four days. Breakdown repairs cost 1 part instead of 2.",
+          "font": "9px"
+        }
+      ]
+    },
+    {
+      "name": "shop-390x664: no horizontal overflow",
+      "passed": true,
+      "evidence": 390
+    },
+    {
+      "name": "shop-390x664: images loaded",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "shop-390x664: 44px touch targets",
+      "passed": false,
+      "evidence": [
+        {
+          "text": "The Portland Trail ✳",
+          "x": 15,
+          "y": 20.328125,
+          "width": 126.625,
+          "height": 13.34375,
+          "bottom": 33.671875
+        },
+        {
+          "text": "New journey",
+          "x": 313.796875,
+          "y": 14,
+          "width": 61.203125,
+          "height": 26,
+          "bottom": 40
+        },
+        {
+          "text": "Auto-buy essentials",
+          "x": 23,
+          "y": 793.4375,
+          "width": 344,
+          "height": 43,
+          "bottom": 836.4375
+        },
+        {
+          "text": "9 places along the way",
+          "x": 24,
+          "y": 989.21875,
+          "width": 147.046875,
+          "height": 12,
+          "bottom": 1001.21875
+        },
+        {
+          "text": "1510",
+          "x": 208,
+          "y": 1395.46875,
+          "width": 55,
+          "height": 20,
+          "bottom": 1415.46875
+        },
+        {
+          "text": "1510",
+          "x": 208,
+          "y": 1503.46875,
+          "width": 55,
+          "height": 20,
+          "bottom": 1523.46875
+        },
+        {
+          "text": "1510",
+          "x": 208,
+          "y": 1603.46875,
+          "width": 55,
+          "height": 20,
+          "bottom": 1623.46875
+        },
+        {
+          "text": "1510",
+          "x": 208,
+          "y": 1720.46875,
+          "width": 55,
+          "height": 20,
+          "bottom": 1740.46875
+        },
+        {
+          "text": "1510",
+          "x": 208,
+          "y": 1845.46875,
+          "width": 55,
+          "height": 20,
+          "bottom": 1865.46875
+        },
+        {
+          "text": "1510",
+          "x": 208,
+          "y": 1961.46875,
+          "width": 55,
+          "height": 20,
+          "bottom": 1981.46875
+        },
+        {
+          "text": "Sell one NFT for $50",
+          "x": 25,
+          "y": 2065.21875,
+          "width": 184.359375,
+          "height": 43,
+          "bottom": 2108.21875
+        }
+      ]
+    },
+    {
+      "name": "shop-390x664: 16px editable controls",
+      "passed": false,
+      "evidence": [
+        {
+          "name": "Quantity of Sustainably Sourced Kale Chips to buy",
+          "font": "12px"
+        },
+        {
+          "name": "Quantity of Bio-Diesel Canister to buy",
+          "font": "12px"
+        },
+        {
+          "name": "Quantity of Seed Bombs to buy",
+          "font": "12px"
+        },
+        {
+          "name": "Quantity of Washi Tape & Vintage Screwdrivers to buy",
+          "font": "12px"
+        },
+        {
+          "name": "Quantity of Locally Brewed Kombucha to buy",
+          "font": "12px"
+        },
+        {
+          "name": "Quantity of Pixelated Sasquatch JPEG to buy",
+          "font": "12px"
+        }
+      ]
+    },
+    {
+      "name": "shop-390x664: readable trip text",
+      "passed": false,
+      "evidence": [
+        {
+          "text": "Distance",
+          "font": "10px"
+        },
+        {
+          "text": "/ 1,000 mi",
+          "font": "9px"
+        },
+        {
+          "text": "Day",
+          "font": "10px"
+        },
+        {
+          "text": "Next stop",
+          "font": "10px"
+        },
+        {
+          "text": "Cash",
+          "font": "8px"
+        },
+        {
+          "text": "Food",
+          "font": "8px"
+        },
+        {
+          "text": "Fuel",
+          "font": "8px"
+        },
+        {
+          "text": "Seed bombs",
+          "font": "8px"
+        },
+        {
+          "text": "Repair supplies",
+          "font": "8px"
+        },
+        {
+          "text": "Kombucha",
+          "font": "8px"
+        },
+        {
+          "text": "NFTs",
+          "font": "8px"
+        },
+        {
+          "text": "Kale",
+          "font": "9px"
+        },
+        {
+          "text": "Healthy",
+          "font": "8px"
+        },
+        {
+          "text": "Juniper",
+          "font": "9px"
+        },
+        {
+          "text": "Healthy",
+          "font": "8px"
+        },
+        {
+          "text": "Rowan",
+          "font": "9px"
+        },
+        {
+          "text": "Healthy",
+          "font": "8px"
+        },
+        {
+          "text": "Birch",
+          "font": "9px"
+        },
+        {
+          "text": "Healthy",
+          "font": "8px"
+        },
+        {
+          "text": "Echo",
+          "font": "9px"
+        },
+        {
+          "text": "Healthy",
+          "font": "8px"
+        }
+      ]
+    },
+    {
+      "name": "shop-390x664: auto-buy discoverable",
+      "passed": false,
+      "evidence": {
+        "x": 23,
+        "y": 793.4375,
+        "width": 344,
+        "height": 43,
+        "bottom": 836.4375
+      }
+    },
+    {
+      "name": "shop-390x664: auto-buy works",
+      "passed": true
+    },
+    {
+      "name": "event-390x664: no horizontal overflow",
+      "passed": true,
+      "evidence": 390
+    },
+    {
+      "name": "event-390x664: images loaded",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "event-390x664: 44px touch targets",
+      "passed": false,
+      "evidence": [
+        {
+          "text": "The Portland Trail ✳",
+          "x": 15,
+          "y": 20.328125,
+          "width": 126.625,
+          "height": 13.34375,
+          "bottom": 33.671875
+        },
+        {
+          "text": "New journey",
+          "x": 313.796875,
+          "y": 14,
+          "width": 61.203125,
+          "height": 26,
+          "bottom": 40
+        },
+        {
+          "text": "9 places along the way",
+          "x": 24,
+          "y": 616.09375,
+          "width": 147.046875,
+          "height": 12,
+          "bottom": 628.09375
+        },
+        {
+          "text": "Rest",
+          "x": 34,
+          "y": 931.09375,
+          "width": 148.5,
+          "height": 39,
+          "bottom": 970.09375
+        },
+        {
+          "text": "Forage",
+          "x": 207.5,
+          "y": 931.09375,
+          "width": 148.5,
+          "height": 39,
+          "bottom": 970.09375
+        },
+        {
+          "text": "Salvage parts",
+          "x": 34,
+          "y": 1030.1875,
+          "width": 148.5,
+          "height": 39,
+          "bottom": 1069.1875
+        },
+        {
+          "text": "Scenic · 50 mi / 2 fuelSteady · 80 mi / 4 fuelFloor it · 110",
+          "x": 25,
+          "y": 1235.375,
+          "width": 340,
+          "height": 18,
+          "bottom": 1253.375
+        },
+        {
+          "text": "Bare · 0.25 food / travelerMeager · 0.5 food / travelerFilli",
+          "x": 25,
+          "y": 1283.375,
+          "width": 340,
+          "height": 18,
+          "bottom": 1301.375
+        }
+      ]
+    },
+    {
+      "name": "event-390x664: 16px editable controls",
+      "passed": false,
+      "evidence": [
+        {
+          "name": "Driving pace",
+          "font": "11px"
+        },
+        {
+          "name": "Daily rations",
+          "font": "11px"
+        }
+      ]
+    },
+    {
+      "name": "event-390x664: readable trip text",
+      "passed": false,
+      "evidence": [
+        {
+          "text": "Distance",
+          "font": "10px"
+        },
+        {
+          "text": "/ 1,000 mi",
+          "font": "9px"
+        },
+        {
+          "text": "Day",
+          "font": "10px"
+        },
+        {
+          "text": "Next stop",
+          "font": "10px"
+        },
+        {
+          "text": "Cash",
+          "font": "8px"
+        },
+        {
+          "text": "Food",
+          "font": "8px"
+        },
+        {
+          "text": "Fuel",
+          "font": "8px"
+        },
+        {
+          "text": "Seed bombs",
+          "font": "8px"
+        },
+        {
+          "text": "Repair supplies",
+          "font": "8px"
+        },
+        {
+          "text": "Kombucha",
+          "font": "8px"
+        },
+        {
+          "text": "NFTs",
+          "font": "8px"
+        },
+        {
+          "text": "Kale",
+          "font": "9px"
+        },
+        {
+          "text": "Healthy",
+          "font": "8px"
+        },
+        {
+          "text": "Juniper",
+          "font": "9px"
+        },
+        {
+          "text": "Healthy",
+          "font": "8px"
+        },
+        {
+          "text": "Rowan",
+          "font": "9px"
+        },
+        {
+          "text": "Healthy",
+          "font": "8px"
+        },
+        {
+          "text": "Birch",
+          "font": "9px"
+        },
+        {
+          "text": "Healthy",
+          "font": "8px"
+        },
+        {
+          "text": "Echo",
+          "font": "9px"
+        },
+        {
+          "text": "Healthy",
+          "font": "8px"
+        },
+        {
+          "text": "Take a day to recover. The crew still needs supplies.",
+          "font": "9px"
+        },
+        {
+          "text": "Search nearby. Time and energy are not free.",
+          "font": "9px"
+        },
+        {
+          "text": "Salvage 2 repair parts once every four days. Breakdown repairs cost 1 part instead of 2.",
+          "font": "9px"
+        }
+      ]
+    },
+    {
+      "name": "event-390x664: all choices visible",
+      "passed": true,
+      "evidence": [
+        {
+          "x": 45,
+          "y": 465.546875,
+          "width": 300,
+          "height": 48,
+          "bottom": 513.546875
+        },
+        {
+          "x": 45,
+          "y": 522.546875,
+          "width": 300,
+          "height": 48,
+          "bottom": 570.546875
+        }
+      ]
+    },
+    {
+      "name": "event-390x664: focus enters dialog",
+      "passed": true
+    },
+    {
+      "name": "event-390x664: Escape preserves pending event",
+      "passed": true
+    },
+    {
+      "name": "event-390x664: choice resolves",
+      "passed": true
+    },
+    {
+      "name": "travel-402x681: no horizontal overflow",
+      "passed": true,
+      "evidence": 402
+    },
+    {
+      "name": "travel-402x681: images loaded",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "travel-402x681: 44px touch targets",
+      "passed": false,
+      "evidence": [
+        {
+          "text": "The Portland Trail ✳",
+          "x": 15,
+          "y": 20.328125,
+          "width": 126.625,
+          "height": 13.34375,
+          "bottom": 33.671875
+        },
+        {
+          "text": "New journey",
+          "x": 325.796875,
+          "y": 14,
+          "width": 61.203125,
+          "height": 26,
+          "bottom": 40
+        },
+        {
+          "text": "9 places along the way",
+          "x": 24,
+          "y": 617.5625,
+          "width": 147.046875,
+          "height": 12,
+          "bottom": 629.5625
+        },
+        {
+          "text": "Rest",
+          "x": 34,
+          "y": 932.5625,
+          "width": 154.5,
+          "height": 39,
+          "bottom": 971.5625
+        },
+        {
+          "text": "Forage",
+          "x": 213.5,
+          "y": 932.5625,
+          "width": 154.5,
+          "height": 39,
+          "bottom": 971.5625
+        },
+        {
+          "text": "Salvage parts",
+          "x": 34,
+          "y": 1031.65625,
+          "width": 154.5,
+          "height": 39,
+          "bottom": 1070.65625
+        },
+        {
+          "text": "Scenic · 50 mi / 2 fuelSteady · 80 mi / 4 fuelFloor it · 110",
+          "x": 25,
+          "y": 1236.84375,
+          "width": 352,
+          "height": 18,
+          "bottom": 1254.84375
+        },
+        {
+          "text": "Bare · 0.25 food / travelerMeager · 0.5 food / travelerFilli",
+          "x": 25,
+          "y": 1284.84375,
+          "width": 352,
+          "height": 18,
+          "bottom": 1302.84375
+        }
+      ]
+    },
+    {
+      "name": "travel-402x681: 16px editable controls",
+      "passed": false,
+      "evidence": [
+        {
+          "name": "Driving pace",
+          "font": "11px"
+        },
+        {
+          "name": "Daily rations",
+          "font": "11px"
+        }
+      ]
+    },
+    {
+      "name": "travel-402x681: readable trip text",
+      "passed": false,
+      "evidence": [
+        {
+          "text": "Distance",
+          "font": "10px"
+        },
+        {
+          "text": "/ 1,000 mi",
+          "font": "9px"
+        },
+        {
+          "text": "Day",
+          "font": "10px"
+        },
+        {
+          "text": "Next stop",
+          "font": "10px"
+        },
+        {
+          "text": "Cash",
+          "font": "8px"
+        },
+        {
+          "text": "Food",
+          "font": "8px"
+        },
+        {
+          "text": "Fuel",
+          "font": "8px"
+        },
+        {
+          "text": "Seed bombs",
+          "font": "8px"
+        },
+        {
+          "text": "Repair supplies",
+          "font": "8px"
+        },
+        {
+          "text": "Kombucha",
+          "font": "8px"
+        },
+        {
+          "text": "NFTs",
+          "font": "8px"
+        },
+        {
+          "text": "Kale",
+          "font": "9px"
+        },
+        {
+          "text": "Healthy",
+          "font": "8px"
+        },
+        {
+          "text": "Juniper",
+          "font": "9px"
+        },
+        {
+          "text": "Healthy",
+          "font": "8px"
+        },
+        {
+          "text": "Rowan",
+          "font": "9px"
+        },
+        {
+          "text": "Healthy",
+          "font": "8px"
+        },
+        {
+          "text": "Birch",
+          "font": "9px"
+        },
+        {
+          "text": "Healthy",
+          "font": "8px"
+        },
+        {
+          "text": "Echo",
+          "font": "9px"
+        },
+        {
+          "text": "Healthy",
+          "font": "8px"
+        },
+        {
+          "text": "Take a day to recover. The crew still needs supplies.",
+          "font": "9px"
+        },
+        {
+          "text": "Search nearby. Time and energy are not free.",
+          "font": "9px"
+        },
+        {
+          "text": "Salvage 2 repair parts once every four days. Breakdown repairs cost 1 part instead of 2.",
+          "font": "9px"
+        }
+      ]
+    },
+    {
+      "name": "travel-402x681: Drive visible without scrolling",
+      "passed": true,
+      "evidence": {
+        "x": 27,
+        "y": 424.28125,
+        "width": 348,
+        "height": 52,
+        "bottom": 476.28125
+      }
+    },
+    {
+      "name": "travel-402x681: trip facts visible without scrolling",
+      "passed": true,
+      "evidence": {
+        "x": 24,
+        "y": 507.28125,
+        "width": 354,
+        "height": 42.28125,
+        "bottom": 549.5625
+      }
+    },
+    {
+      "name": "travel-402x681: useful scene height",
+      "passed": true,
+      "evidence": {
+        "x": 11,
+        "y": 90,
+        "width": 380,
+        "height": 233.15625,
+        "bottom": 323.15625
+      }
+    },
+    {
+      "name": "travel-402x681: route remains available",
+      "passed": true
+    },
+    {
+      "name": "route-402x681: no horizontal overflow",
+      "passed": true,
+      "evidence": 402
+    },
+    {
+      "name": "route-402x681: images loaded",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "route-402x681: 44px touch targets",
+      "passed": false,
+      "evidence": [
+        {
+          "text": "The Portland Trail ✳",
+          "x": 15,
+          "y": 20.328125,
+          "width": 126.625,
+          "height": 13.34375,
+          "bottom": 33.671875
+        },
+        {
+          "text": "New journey",
+          "x": 325.796875,
+          "y": 14,
+          "width": 61.203125,
+          "height": 26,
+          "bottom": 40
+        },
+        {
+          "text": "9 places along the way",
+          "x": 24,
+          "y": 617.5625,
+          "width": 146.71875,
+          "height": 12,
+          "bottom": 629.5625
+        },
+        {
+          "text": "Rest",
+          "x": 34,
+          "y": 1424.5625,
+          "width": 154.5,
+          "height": 39,
+          "bottom": 1463.5625
+        },
+        {
+          "text": "Forage",
+          "x": 213.5,
+          "y": 1424.5625,
+          "width": 154.5,
+          "height": 39,
+          "bottom": 1463.5625
+        },
+        {
+          "text": "Salvage parts",
+          "x": 34,
+          "y": 1523.65625,
+          "width": 154.5,
+          "height": 39,
+          "bottom": 1562.65625
+        },
+        {
+          "text": "Scenic · 50 mi / 2 fuelSteady · 80 mi / 4 fuelFloor it · 110",
+          "x": 25,
+          "y": 1728.84375,
+          "width": 352,
+          "height": 18,
+          "bottom": 1746.84375
+        },
+        {
+          "text": "Bare · 0.25 food / travelerMeager · 0.5 food / travelerFilli",
+          "x": 25,
+          "y": 1776.84375,
+          "width": 352,
+          "height": 18,
+          "bottom": 1794.84375
+        }
+      ]
+    },
+    {
+      "name": "route-402x681: 16px editable controls",
+      "passed": false,
+      "evidence": [
+        {
+          "name": "Driving pace",
+          "font": "11px"
+        },
+        {
+          "name": "Daily rations",
+          "font": "11px"
+        }
+      ]
+    },
+    {
+      "name": "route-402x681: readable trip text",
+      "passed": false,
+      "evidence": [
+        {
+          "text": "Distance",
+          "font": "10px"
+        },
+        {
+          "text": "/ 1,000 mi",
+          "font": "9px"
+        },
+        {
+          "text": "Day",
+          "font": "10px"
+        },
+        {
+          "text": "Next stop",
+          "font": "10px"
+        },
+        {
+          "text": "Cash",
+          "font": "8px"
+        },
+        {
+          "text": "Food",
+          "font": "8px"
+        },
+        {
+          "text": "Fuel",
+          "font": "8px"
+        },
+        {
+          "text": "Seed bombs",
+          "font": "8px"
+        },
+        {
+          "text": "Repair supplies",
+          "font": "8px"
+        },
+        {
+          "text": "Kombucha",
+          "font": "8px"
+        },
+        {
+          "text": "NFTs",
+          "font": "8px"
+        },
+        {
+          "text": "Kale",
+          "font": "9px"
+        },
+        {
+          "text": "Healthy",
+          "font": "8px"
+        },
+        {
+          "text": "Juniper",
+          "font": "9px"
+        },
+        {
+          "text": "Healthy",
+          "font": "8px"
+        },
+        {
+          "text": "Rowan",
+          "font": "9px"
+        },
+        {
+          "text": "Healthy",
+          "font": "8px"
+        },
+        {
+          "text": "Birch",
+          "font": "9px"
+        },
+        {
+          "text": "Healthy",
+          "font": "8px"
+        },
+        {
+          "text": "Echo",
+          "font": "9px"
+        },
+        {
+          "text": "Healthy",
+          "font": "8px"
+        },
+        {
+          "text": "Take a day to recover. The crew still needs supplies.",
+          "font": "9px"
+        },
+        {
+          "text": "Search nearby. Time and energy are not free.",
+          "font": "9px"
+        },
+        {
+          "text": "Salvage 2 repair parts once every four days. Breakdown repairs cost 1 part instead of 2.",
+          "font": "9px"
+        }
+      ]
+    },
+    {
+      "name": "shop-402x681: no horizontal overflow",
+      "passed": true,
+      "evidence": 402
+    },
+    {
+      "name": "shop-402x681: images loaded",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "shop-402x681: 44px touch targets",
+      "passed": false,
+      "evidence": [
+        {
+          "text": "The Portland Trail ✳",
+          "x": 15,
+          "y": 20.328125,
+          "width": 126.625,
+          "height": 13.34375,
+          "bottom": 33.671875
+        },
+        {
+          "text": "New journey",
+          "x": 325.796875,
+          "y": 14,
+          "width": 61.203125,
+          "height": 26,
+          "bottom": 40
+        },
+        {
+          "text": "Auto-buy essentials",
+          "x": 23,
+          "y": 800.40625,
+          "width": 356,
+          "height": 43,
+          "bottom": 843.40625
+        },
+        {
+          "text": "9 places along the way",
+          "x": 24,
+          "y": 990.6875,
+          "width": 147.046875,
+          "height": 12,
+          "bottom": 1002.6875
+        },
+        {
+          "text": "1510",
+          "x": 220,
+          "y": 1396.9375,
+          "width": 55,
+          "height": 20,
+          "bottom": 1416.9375
+        },
+        {
+          "text": "1510",
+          "x": 220,
+          "y": 1504.9375,
+          "width": 55,
+          "height": 20,
+          "bottom": 1524.9375
+        },
+        {
+          "text": "1510",
+          "x": 220,
+          "y": 1604.9375,
+          "width": 55,
+          "height": 20,
+          "bottom": 1624.9375
+        },
+        {
+          "text": "1510",
+          "x": 220,
+          "y": 1712.9375,
+          "width": 55,
+          "height": 20,
+          "bottom": 1732.9375
+        },
+        {
+          "text": "1510",
+          "x": 220,
+          "y": 1828.9375,
+          "width": 55,
+          "height": 20,
+          "bottom": 1848.9375
+        },
+        {
+          "text": "1510",
+          "x": 220,
+          "y": 1944.9375,
+          "width": 55,
+          "height": 20,
+          "bottom": 1964.9375
+        },
+        {
+          "text": "Sell one NFT for $50",
+          "x": 25,
+          "y": 2048.6875,
+          "width": 184.359375,
+          "height": 43,
+          "bottom": 2091.6875
+        }
+      ]
+    },
+    {
+      "name": "shop-402x681: 16px editable controls",
+      "passed": false,
+      "evidence": [
+        {
+          "name": "Quantity of Sustainably Sourced Kale Chips to buy",
+          "font": "12px"
+        },
+        {
+          "name": "Quantity of Bio-Diesel Canister to buy",
+          "font": "12px"
+        },
+        {
+          "name": "Quantity of Seed Bombs to buy",
+          "font": "12px"
+        },
+        {
+          "name": "Quantity of Washi Tape & Vintage Screwdrivers to buy",
+          "font": "12px"
+        },
+        {
+          "name": "Quantity of Locally Brewed Kombucha to buy",
+          "font": "12px"
+        },
+        {
+          "name": "Quantity of Pixelated Sasquatch JPEG to buy",
+          "font": "12px"
+        }
+      ]
+    },
+    {
+      "name": "shop-402x681: readable trip text",
+      "passed": false,
+      "evidence": [
+        {
+          "text": "Distance",
+          "font": "10px"
+        },
+        {
+          "text": "/ 1,000 mi",
+          "font": "9px"
+        },
+        {
+          "text": "Day",
+          "font": "10px"
+        },
+        {
+          "text": "Next stop",
+          "font": "10px"
+        },
+        {
+          "text": "Cash",
+          "font": "8px"
+        },
+        {
+          "text": "Food",
+          "font": "8px"
+        },
+        {
+          "text": "Fuel",
+          "font": "8px"
+        },
+        {
+          "text": "Seed bombs",
+          "font": "8px"
+        },
+        {
+          "text": "Repair supplies",
+          "font": "8px"
+        },
+        {
+          "text": "Kombucha",
+          "font": "8px"
+        },
+        {
+          "text": "NFTs",
+          "font": "8px"
+        },
+        {
+          "text": "Kale",
+          "font": "9px"
+        },
+        {
+          "text": "Healthy",
+          "font": "8px"
+        },
+        {
+          "text": "Juniper",
+          "font": "9px"
+        },
+        {
+          "text": "Healthy",
+          "font": "8px"
+        },
+        {
+          "text": "Rowan",
+          "font": "9px"
+        },
+        {
+          "text": "Healthy",
+          "font": "8px"
+        },
+        {
+          "text": "Birch",
+          "font": "9px"
+        },
+        {
+          "text": "Healthy",
+          "font": "8px"
+        },
+        {
+          "text": "Echo",
+          "font": "9px"
+        },
+        {
+          "text": "Healthy",
+          "font": "8px"
+        }
+      ]
+    },
+    {
+      "name": "shop-402x681: auto-buy discoverable",
+      "passed": true,
+      "evidence": {
+        "x": 23,
+        "y": 800.40625,
+        "width": 356,
+        "height": 43,
+        "bottom": 843.40625
+      }
+    },
+    {
+      "name": "shop-402x681: auto-buy works",
+      "passed": true
+    },
+    {
+      "name": "event-402x681: no horizontal overflow",
+      "passed": true,
+      "evidence": 402
+    },
+    {
+      "name": "event-402x681: images loaded",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "event-402x681: 44px touch targets",
+      "passed": false,
+      "evidence": [
+        {
+          "text": "The Portland Trail ✳",
+          "x": 15,
+          "y": 20.328125,
+          "width": 126.625,
+          "height": 13.34375,
+          "bottom": 33.671875
+        },
+        {
+          "text": "New journey",
+          "x": 325.796875,
+          "y": 14,
+          "width": 61.203125,
+          "height": 26,
+          "bottom": 40
+        },
+        {
+          "text": "9 places along the way",
+          "x": 24,
+          "y": 617.5625,
+          "width": 147.046875,
+          "height": 12,
+          "bottom": 629.5625
+        },
+        {
+          "text": "Rest",
+          "x": 34,
+          "y": 932.5625,
+          "width": 154.5,
+          "height": 39,
+          "bottom": 971.5625
+        },
+        {
+          "text": "Forage",
+          "x": 213.5,
+          "y": 932.5625,
+          "width": 154.5,
+          "height": 39,
+          "bottom": 971.5625
+        },
+        {
+          "text": "Salvage parts",
+          "x": 34,
+          "y": 1031.65625,
+          "width": 154.5,
+          "height": 39,
+          "bottom": 1070.65625
+        },
+        {
+          "text": "Scenic · 50 mi / 2 fuelSteady · 80 mi / 4 fuelFloor it · 110",
+          "x": 25,
+          "y": 1236.84375,
+          "width": 352,
+          "height": 18,
+          "bottom": 1254.84375
+        },
+        {
+          "text": "Bare · 0.25 food / travelerMeager · 0.5 food / travelerFilli",
+          "x": 25,
+          "y": 1284.84375,
+          "width": 352,
+          "height": 18,
+          "bottom": 1302.84375
+        }
+      ]
+    },
+    {
+      "name": "event-402x681: 16px editable controls",
+      "passed": false,
+      "evidence": [
+        {
+          "name": "Driving pace",
+          "font": "11px"
+        },
+        {
+          "name": "Daily rations",
+          "font": "11px"
+        }
+      ]
+    },
+    {
+      "name": "event-402x681: readable trip text",
+      "passed": false,
+      "evidence": [
+        {
+          "text": "Distance",
+          "font": "10px"
+        },
+        {
+          "text": "/ 1,000 mi",
+          "font": "9px"
+        },
+        {
+          "text": "Day",
+          "font": "10px"
+        },
+        {
+          "text": "Next stop",
+          "font": "10px"
+        },
+        {
+          "text": "Cash",
+          "font": "8px"
+        },
+        {
+          "text": "Food",
+          "font": "8px"
+        },
+        {
+          "text": "Fuel",
+          "font": "8px"
+        },
+        {
+          "text": "Seed bombs",
+          "font": "8px"
+        },
+        {
+          "text": "Repair supplies",
+          "font": "8px"
+        },
+        {
+          "text": "Kombucha",
+          "font": "8px"
+        },
+        {
+          "text": "NFTs",
+          "font": "8px"
+        },
+        {
+          "text": "Kale",
+          "font": "9px"
+        },
+        {
+          "text": "Healthy",
+          "font": "8px"
+        },
+        {
+          "text": "Juniper",
+          "font": "9px"
+        },
+        {
+          "text": "Healthy",
+          "font": "8px"
+        },
+        {
+          "text": "Rowan",
+          "font": "9px"
+        },
+        {
+          "text": "Healthy",
+          "font": "8px"
+        },
+        {
+          "text": "Birch",
+          "font": "9px"
+        },
+        {
+          "text": "Healthy",
+          "font": "8px"
+        },
+        {
+          "text": "Echo",
+          "font": "9px"
+        },
+        {
+          "text": "Healthy",
+          "font": "8px"
+        },
+        {
+          "text": "Take a day to recover. The crew still needs supplies.",
+          "font": "9px"
+        },
+        {
+          "text": "Search nearby. Time and energy are not free.",
+          "font": "9px"
+        },
+        {
+          "text": "Salvage 2 repair parts once every four days. Breakdown repairs cost 1 part instead of 2.",
+          "font": "9px"
+        }
+      ]
+    },
+    {
+      "name": "event-402x681: all choices visible",
+      "passed": true,
+      "evidence": [
+        {
+          "x": 45,
+          "y": 474.046875,
+          "width": 312,
+          "height": 48,
+          "bottom": 522.046875
+        },
+        {
+          "x": 45,
+          "y": 531.046875,
+          "width": 312,
+          "height": 48,
+          "bottom": 579.046875
+        }
+      ]
+    },
+    {
+      "name": "event-402x681: focus enters dialog",
+      "passed": true
+    },
+    {
+      "name": "event-402x681: Escape preserves pending event",
+      "passed": true
+    },
+    {
+      "name": "event-402x681: choice resolves",
+      "passed": true
+    },
+    {
+      "name": "travel-414x715: no horizontal overflow",
+      "passed": true,
+      "evidence": 414
+    },
+    {
+      "name": "travel-414x715: images loaded",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "travel-414x715: 44px touch targets",
+      "passed": false,
+      "evidence": [
+        {
+          "text": "The Portland Trail ✳",
+          "x": 15,
+          "y": 20.328125,
+          "width": 126.625,
+          "height": 13.34375,
+          "bottom": 33.671875
+        },
+        {
+          "text": "New journey",
+          "x": 337.796875,
+          "y": 14,
+          "width": 61.203125,
+          "height": 26,
+          "bottom": 40
+        },
+        {
+          "text": "9 places along the way",
+          "x": 24,
+          "y": 624.515625,
+          "width": 147.046875,
+          "height": 12,
+          "bottom": 636.515625
+        },
+        {
+          "text": "Rest",
+          "x": 34,
+          "y": 939.515625,
+          "width": 160.5,
+          "height": 39,
+          "bottom": 978.515625
+        },
+        {
+          "text": "Forage",
+          "x": 219.5,
+          "y": 939.515625,
+          "width": 160.5,
+          "height": 39,
+          "bottom": 978.515625
+        },
+        {
+          "text": "Salvage parts",
+          "x": 34,
+          "y": 1038.609375,
+          "width": 160.5,
+          "height": 39,
+          "bottom": 1077.609375
+        },
+        {
+          "text": "Scenic · 50 mi / 2 fuelSteady · 80 mi / 4 fuelFloor it · 110",
+          "x": 25,
+          "y": 1243.796875,
+          "width": 364,
+          "height": 18,
+          "bottom": 1261.796875
+        },
+        {
+          "text": "Bare · 0.25 food / travelerMeager · 0.5 food / travelerFilli",
+          "x": 25,
+          "y": 1291.796875,
+          "width": 364,
+          "height": 18,
+          "bottom": 1309.796875
+        }
+      ]
+    },
+    {
+      "name": "travel-414x715: 16px editable controls",
+      "passed": false,
+      "evidence": [
+        {
+          "name": "Driving pace",
+          "font": "11px"
+        },
+        {
+          "name": "Daily rations",
+          "font": "11px"
+        }
+      ]
+    },
+    {
+      "name": "travel-414x715: readable trip text",
+      "passed": false,
+      "evidence": [
+        {
+          "text": "Distance",
+          "font": "10px"
+        },
+        {
+          "text": "/ 1,000 mi",
+          "font": "9px"
+        },
+        {
+          "text": "Day",
+          "font": "10px"
+        },
+        {
+          "text": "Next stop",
+          "font": "10px"
+        },
+        {
+          "text": "Cash",
+          "font": "8px"
+        },
+        {
+          "text": "Food",
+          "font": "8px"
+        },
+        {
+          "text": "Fuel",
+          "font": "8px"
+        },
+        {
+          "text": "Seed bombs",
+          "font": "8px"
+        },
+        {
+          "text": "Repair supplies",
+          "font": "8px"
+        },
+        {
+          "text": "Kombucha",
+          "font": "8px"
+        },
+        {
+          "text": "NFTs",
+          "font": "8px"
+        },
+        {
+          "text": "Kale",
+          "font": "9px"
+        },
+        {
+          "text": "Healthy",
+          "font": "8px"
+        },
+        {
+          "text": "Juniper",
+          "font": "9px"
+        },
+        {
+          "text": "Healthy",
+          "font": "8px"
+        },
+        {
+          "text": "Rowan",
+          "font": "9px"
+        },
+        {
+          "text": "Healthy",
+          "font": "8px"
+        },
+        {
+          "text": "Birch",
+          "font": "9px"
+        },
+        {
+          "text": "Healthy",
+          "font": "8px"
+        },
+        {
+          "text": "Echo",
+          "font": "9px"
+        },
+        {
+          "text": "Healthy",
+          "font": "8px"
+        },
+        {
+          "text": "Take a day to recover. The crew still needs supplies.",
+          "font": "9px"
+        },
+        {
+          "text": "Search nearby. Time and energy are not free.",
+          "font": "9px"
+        },
+        {
+          "text": "Salvage 2 repair parts once every four days. Breakdown repairs cost 1 part instead of 2.",
+          "font": "9px"
+        }
+      ]
+    },
+    {
+      "name": "travel-414x715: Drive visible without scrolling",
+      "passed": true,
+      "evidence": {
+        "x": 27,
+        "y": 431.234375,
+        "width": 360,
+        "height": 52,
+        "bottom": 483.234375
+      }
+    },
+    {
+      "name": "travel-414x715: trip facts visible without scrolling",
+      "passed": true,
+      "evidence": {
+        "x": 24,
+        "y": 514.234375,
+        "width": 366,
+        "height": 42.28125,
+        "bottom": 556.515625
+      }
+    },
+    {
+      "name": "travel-414x715: useful scene height",
+      "passed": false,
+      "evidence": {
+        "x": 11,
+        "y": 90,
+        "width": 392,
+        "height": 240.109375,
+        "bottom": 330.109375
+      }
+    },
+    {
+      "name": "travel-414x715: route remains available",
+      "passed": true
+    },
+    {
+      "name": "route-414x715: no horizontal overflow",
+      "passed": true,
+      "evidence": 414
+    },
+    {
+      "name": "route-414x715: images loaded",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "route-414x715: 44px touch targets",
+      "passed": false,
+      "evidence": [
+        {
+          "text": "The Portland Trail ✳",
+          "x": 15,
+          "y": 20.328125,
+          "width": 126.625,
+          "height": 13.34375,
+          "bottom": 33.671875
+        },
+        {
+          "text": "New journey",
+          "x": 337.796875,
+          "y": 14,
+          "width": 61.203125,
+          "height": 26,
+          "bottom": 40
+        },
+        {
+          "text": "9 places along the way",
+          "x": 24,
+          "y": 624.515625,
+          "width": 146.71875,
+          "height": 12,
+          "bottom": 636.515625
+        },
+        {
+          "text": "Rest",
+          "x": 34,
+          "y": 1431.515625,
+          "width": 160.5,
+          "height": 39,
+          "bottom": 1470.515625
+        },
+        {
+          "text": "Forage",
+          "x": 219.5,
+          "y": 1431.515625,
+          "width": 160.5,
+          "height": 39,
+          "bottom": 1470.515625
+        },
+        {
+          "text": "Salvage parts",
+          "x": 34,
+          "y": 1530.609375,
+          "width": 160.5,
+          "height": 39,
+          "bottom": 1569.609375
+        },
+        {
+          "text": "Scenic · 50 mi / 2 fuelSteady · 80 mi / 4 fuelFloor it · 110",
+          "x": 25,
+          "y": 1735.796875,
+          "width": 364,
+          "height": 18,
+          "bottom": 1753.796875
+        },
+        {
+          "text": "Bare · 0.25 food / travelerMeager · 0.5 food / travelerFilli",
+          "x": 25,
+          "y": 1783.796875,
+          "width": 364,
+          "height": 18,
+          "bottom": 1801.796875
+        }
+      ]
+    },
+    {
+      "name": "route-414x715: 16px editable controls",
+      "passed": false,
+      "evidence": [
+        {
+          "name": "Driving pace",
+          "font": "11px"
+        },
+        {
+          "name": "Daily rations",
+          "font": "11px"
+        }
+      ]
+    },
+    {
+      "name": "route-414x715: readable trip text",
+      "passed": false,
+      "evidence": [
+        {
+          "text": "Distance",
+          "font": "10px"
+        },
+        {
+          "text": "/ 1,000 mi",
+          "font": "9px"
+        },
+        {
+          "text": "Day",
+          "font": "10px"
+        },
+        {
+          "text": "Next stop",
+          "font": "10px"
+        },
+        {
+          "text": "Cash",
+          "font": "8px"
+        },
+        {
+          "text": "Food",
+          "font": "8px"
+        },
+        {
+          "text": "Fuel",
+          "font": "8px"
+        },
+        {
+          "text": "Seed bombs",
+          "font": "8px"
+        },
+        {
+          "text": "Repair supplies",
+          "font": "8px"
+        },
+        {
+          "text": "Kombucha",
+          "font": "8px"
+        },
+        {
+          "text": "NFTs",
+          "font": "8px"
+        },
+        {
+          "text": "Kale",
+          "font": "9px"
+        },
+        {
+          "text": "Healthy",
+          "font": "8px"
+        },
+        {
+          "text": "Juniper",
+          "font": "9px"
+        },
+        {
+          "text": "Healthy",
+          "font": "8px"
+        },
+        {
+          "text": "Rowan",
+          "font": "9px"
+        },
+        {
+          "text": "Healthy",
+          "font": "8px"
+        },
+        {
+          "text": "Birch",
+          "font": "9px"
+        },
+        {
+          "text": "Healthy",
+          "font": "8px"
+        },
+        {
+          "text": "Echo",
+          "font": "9px"
+        },
+        {
+          "text": "Healthy",
+          "font": "8px"
+        },
+        {
+          "text": "Take a day to recover. The crew still needs supplies.",
+          "font": "9px"
+        },
+        {
+          "text": "Search nearby. Time and energy are not free.",
+          "font": "9px"
+        },
+        {
+          "text": "Salvage 2 repair parts once every four days. Breakdown repairs cost 1 part instead of 2.",
+          "font": "9px"
+        }
+      ]
+    },
+    {
+      "name": "shop-414x715: no horizontal overflow",
+      "passed": true,
+      "evidence": 414
+    },
+    {
+      "name": "shop-414x715: images loaded",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "shop-414x715: 44px touch targets",
+      "passed": false,
+      "evidence": [
+        {
+          "text": "The Portland Trail ✳",
+          "x": 15,
+          "y": 20.328125,
+          "width": 126.625,
+          "height": 13.34375,
+          "bottom": 33.671875
+        },
+        {
+          "text": "New journey",
+          "x": 337.796875,
+          "y": 14,
+          "width": 61.203125,
+          "height": 26,
+          "bottom": 40
+        },
+        {
+          "text": "Auto-buy essentials",
+          "x": 23,
+          "y": 807.359375,
+          "width": 368,
+          "height": 43,
+          "bottom": 850.359375
+        },
+        {
+          "text": "9 places along the way",
+          "x": 24,
+          "y": 997.640625,
+          "width": 147.046875,
+          "height": 12,
+          "bottom": 1009.640625
+        },
+        {
+          "text": "1510",
+          "x": 232,
+          "y": 1396.640625,
+          "width": 55,
+          "height": 20,
+          "bottom": 1416.640625
+        },
+        {
+          "text": "1510",
+          "x": 232,
+          "y": 1497.390625,
+          "width": 55,
+          "height": 20,
+          "bottom": 1517.390625
+        },
+        {
+          "text": "1510",
+          "x": 232,
+          "y": 1597.390625,
+          "width": 55,
+          "height": 20,
+          "bottom": 1617.390625
+        },
+        {
+          "text": "1510",
+          "x": 232,
+          "y": 1705.390625,
+          "width": 55,
+          "height": 20,
+          "bottom": 1725.390625
+        },
+        {
+          "text": "1510",
+          "x": 232,
+          "y": 1813.390625,
+          "width": 55,
+          "height": 20,
+          "bottom": 1833.390625
+        },
+        {
+          "text": "1510",
+          "x": 232,
+          "y": 1921.390625,
+          "width": 55,
+          "height": 20,
+          "bottom": 1941.390625
+        },
+        {
+          "text": "Sell one NFT for $50",
+          "x": 25,
+          "y": 2025.140625,
+          "width": 184.359375,
+          "height": 43,
+          "bottom": 2068.140625
+        }
+      ]
+    },
+    {
+      "name": "shop-414x715: 16px editable controls",
+      "passed": false,
+      "evidence": [
+        {
+          "name": "Quantity of Sustainably Sourced Kale Chips to buy",
+          "font": "12px"
+        },
+        {
+          "name": "Quantity of Bio-Diesel Canister to buy",
+          "font": "12px"
+        },
+        {
+          "name": "Quantity of Seed Bombs to buy",
+          "font": "12px"
+        },
+        {
+          "name": "Quantity of Washi Tape & Vintage Screwdrivers to buy",
+          "font": "12px"
+        },
+        {
+          "name": "Quantity of Locally Brewed Kombucha to buy",
+          "font": "12px"
+        },
+        {
+          "name": "Quantity of Pixelated Sasquatch JPEG to buy",
+          "font": "12px"
+        }
+      ]
+    },
+    {
+      "name": "shop-414x715: readable trip text",
+      "passed": false,
+      "evidence": [
+        {
+          "text": "Distance",
+          "font": "10px"
+        },
+        {
+          "text": "/ 1,000 mi",
+          "font": "9px"
+        },
+        {
+          "text": "Day",
+          "font": "10px"
+        },
+        {
+          "text": "Next stop",
+          "font": "10px"
+        },
+        {
+          "text": "Cash",
+          "font": "8px"
+        },
+        {
+          "text": "Food",
+          "font": "8px"
+        },
+        {
+          "text": "Fuel",
+          "font": "8px"
+        },
+        {
+          "text": "Seed bombs",
+          "font": "8px"
+        },
+        {
+          "text": "Repair supplies",
+          "font": "8px"
+        },
+        {
+          "text": "Kombucha",
+          "font": "8px"
+        },
+        {
+          "text": "NFTs",
+          "font": "8px"
+        },
+        {
+          "text": "Kale",
+          "font": "9px"
+        },
+        {
+          "text": "Healthy",
+          "font": "8px"
+        },
+        {
+          "text": "Juniper",
+          "font": "9px"
+        },
+        {
+          "text": "Healthy",
+          "font": "8px"
+        },
+        {
+          "text": "Rowan",
+          "font": "9px"
+        },
+        {
+          "text": "Healthy",
+          "font": "8px"
+        },
+        {
+          "text": "Birch",
+          "font": "9px"
+        },
+        {
+          "text": "Healthy",
+          "font": "8px"
+        },
+        {
+          "text": "Echo",
+          "font": "9px"
+        },
+        {
+          "text": "Healthy",
+          "font": "8px"
+        }
+      ]
+    },
+    {
+      "name": "shop-414x715: auto-buy discoverable",
+      "passed": true,
+      "evidence": {
+        "x": 23,
+        "y": 807.359375,
+        "width": 368,
+        "height": 43,
+        "bottom": 850.359375
+      }
+    },
+    {
+      "name": "shop-414x715: auto-buy works",
+      "passed": true
+    },
+    {
+      "name": "event-414x715: no horizontal overflow",
+      "passed": true,
+      "evidence": 414
+    },
+    {
+      "name": "event-414x715: images loaded",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "event-414x715: 44px touch targets",
+      "passed": false,
+      "evidence": [
+        {
+          "text": "The Portland Trail ✳",
+          "x": 15,
+          "y": 20.328125,
+          "width": 126.625,
+          "height": 13.34375,
+          "bottom": 33.671875
+        },
+        {
+          "text": "New journey",
+          "x": 337.796875,
+          "y": 14,
+          "width": 61.203125,
+          "height": 26,
+          "bottom": 40
+        },
+        {
+          "text": "9 places along the way",
+          "x": 24,
+          "y": 624.515625,
+          "width": 147.046875,
+          "height": 12,
+          "bottom": 636.515625
+        },
+        {
+          "text": "Rest",
+          "x": 34,
+          "y": 939.515625,
+          "width": 160.5,
+          "height": 39,
+          "bottom": 978.515625
+        },
+        {
+          "text": "Forage",
+          "x": 219.5,
+          "y": 939.515625,
+          "width": 160.5,
+          "height": 39,
+          "bottom": 978.515625
+        },
+        {
+          "text": "Salvage parts",
+          "x": 34,
+          "y": 1038.609375,
+          "width": 160.5,
+          "height": 39,
+          "bottom": 1077.609375
+        },
+        {
+          "text": "Scenic · 50 mi / 2 fuelSteady · 80 mi / 4 fuelFloor it · 110",
+          "x": 25,
+          "y": 1243.796875,
+          "width": 364,
+          "height": 18,
+          "bottom": 1261.796875
+        },
+        {
+          "text": "Bare · 0.25 food / travelerMeager · 0.5 food / travelerFilli",
+          "x": 25,
+          "y": 1291.796875,
+          "width": 364,
+          "height": 18,
+          "bottom": 1309.796875
+        }
+      ]
+    },
+    {
+      "name": "event-414x715: 16px editable controls",
+      "passed": false,
+      "evidence": [
+        {
+          "name": "Driving pace",
+          "font": "11px"
+        },
+        {
+          "name": "Daily rations",
+          "font": "11px"
+        }
+      ]
+    },
+    {
+      "name": "event-414x715: readable trip text",
+      "passed": false,
+      "evidence": [
+        {
+          "text": "Distance",
+          "font": "10px"
+        },
+        {
+          "text": "/ 1,000 mi",
+          "font": "9px"
+        },
+        {
+          "text": "Day",
+          "font": "10px"
+        },
+        {
+          "text": "Next stop",
+          "font": "10px"
+        },
+        {
+          "text": "Cash",
+          "font": "8px"
+        },
+        {
+          "text": "Food",
+          "font": "8px"
+        },
+        {
+          "text": "Fuel",
+          "font": "8px"
+        },
+        {
+          "text": "Seed bombs",
+          "font": "8px"
+        },
+        {
+          "text": "Repair supplies",
+          "font": "8px"
+        },
+        {
+          "text": "Kombucha",
+          "font": "8px"
+        },
+        {
+          "text": "NFTs",
+          "font": "8px"
+        },
+        {
+          "text": "Kale",
+          "font": "9px"
+        },
+        {
+          "text": "Healthy",
+          "font": "8px"
+        },
+        {
+          "text": "Juniper",
+          "font": "9px"
+        },
+        {
+          "text": "Healthy",
+          "font": "8px"
+        },
+        {
+          "text": "Rowan",
+          "font": "9px"
+        },
+        {
+          "text": "Healthy",
+          "font": "8px"
+        },
+        {
+          "text": "Birch",
+          "font": "9px"
+        },
+        {
+          "text": "Healthy",
+          "font": "8px"
+        },
+        {
+          "text": "Echo",
+          "font": "9px"
+        },
+        {
+          "text": "Healthy",
+          "font": "8px"
+        },
+        {
+          "text": "Take a day to recover. The crew still needs supplies.",
+          "font": "9px"
+        },
+        {
+          "text": "Search nearby. Time and energy are not free.",
+          "font": "9px"
+        },
+        {
+          "text": "Salvage 2 repair parts once every four days. Breakdown repairs cost 1 part instead of 2.",
+          "font": "9px"
+        }
+      ]
+    },
+    {
+      "name": "event-414x715: all choices visible",
+      "passed": true,
+      "evidence": [
+        {
+          "x": 45,
+          "y": 491.046875,
+          "width": 324,
+          "height": 48,
+          "bottom": 539.046875
+        },
+        {
+          "x": 45,
+          "y": 548.046875,
+          "width": 324,
+          "height": 48,
+          "bottom": 596.046875
+        }
+      ]
+    },
+    {
+      "name": "event-414x715: focus enters dialog",
+      "passed": true
+    },
+    {
+      "name": "event-414x715: Escape preserves pending event",
+      "passed": true
+    },
+    {
+      "name": "event-414x715: choice resolves",
+      "passed": true
+    },
+    {
+      "name": "travel-430x739: no horizontal overflow",
+      "passed": true,
+      "evidence": 430
+    },
+    {
+      "name": "travel-430x739: images loaded",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "travel-430x739: 44px touch targets",
+      "passed": false,
+      "evidence": [
+        {
+          "text": "The Portland Trail ✳",
+          "x": 15,
+          "y": 20.328125,
+          "width": 126.625,
+          "height": 13.34375,
+          "bottom": 33.671875
+        },
+        {
+          "text": "New journey",
+          "x": 353.796875,
+          "y": 14,
+          "width": 61.203125,
+          "height": 26,
+          "bottom": 40
+        },
+        {
+          "text": "9 places along the way",
+          "x": 24,
+          "y": 633.796875,
+          "width": 147.046875,
+          "height": 12,
+          "bottom": 645.796875
+        },
+        {
+          "text": "Rest",
+          "x": 34,
+          "y": 948.796875,
+          "width": 168.5,
+          "height": 39,
+          "bottom": 987.796875
+        },
+        {
+          "text": "Forage",
+          "x": 227.5,
+          "y": 948.796875,
+          "width": 168.5,
+          "height": 39,
+          "bottom": 987.796875
+        },
+        {
+          "text": "Salvage parts",
+          "x": 34,
+          "y": 1047.890625,
+          "width": 168.5,
+          "height": 39,
+          "bottom": 1086.890625
+        },
+        {
+          "text": "Scenic · 50 mi / 2 fuelSteady · 80 mi / 4 fuelFloor it · 110",
+          "x": 25,
+          "y": 1253.078125,
+          "width": 380,
+          "height": 18,
+          "bottom": 1271.078125
+        },
+        {
+          "text": "Bare · 0.25 food / travelerMeager · 0.5 food / travelerFilli",
+          "x": 25,
+          "y": 1301.078125,
+          "width": 380,
+          "height": 18,
+          "bottom": 1319.078125
+        }
+      ]
+    },
+    {
+      "name": "travel-430x739: 16px editable controls",
+      "passed": false,
+      "evidence": [
+        {
+          "name": "Driving pace",
+          "font": "11px"
+        },
+        {
+          "name": "Daily rations",
+          "font": "11px"
+        }
+      ]
+    },
+    {
+      "name": "travel-430x739: readable trip text",
+      "passed": false,
+      "evidence": [
+        {
+          "text": "Distance",
+          "font": "10px"
+        },
+        {
+          "text": "/ 1,000 mi",
+          "font": "9px"
+        },
+        {
+          "text": "Day",
+          "font": "10px"
+        },
+        {
+          "text": "Next stop",
+          "font": "10px"
+        },
+        {
+          "text": "Cash",
+          "font": "8px"
+        },
+        {
+          "text": "Food",
+          "font": "8px"
+        },
+        {
+          "text": "Fuel",
+          "font": "8px"
+        },
+        {
+          "text": "Seed bombs",
+          "font": "8px"
+        },
+        {
+          "text": "Repair supplies",
+          "font": "8px"
+        },
+        {
+          "text": "Kombucha",
+          "font": "8px"
+        },
+        {
+          "text": "NFTs",
+          "font": "8px"
+        },
+        {
+          "text": "Kale",
+          "font": "9px"
+        },
+        {
+          "text": "Healthy",
+          "font": "8px"
+        },
+        {
+          "text": "Juniper",
+          "font": "9px"
+        },
+        {
+          "text": "Healthy",
+          "font": "8px"
+        },
+        {
+          "text": "Rowan",
+          "font": "9px"
+        },
+        {
+          "text": "Healthy",
+          "font": "8px"
+        },
+        {
+          "text": "Birch",
+          "font": "9px"
+        },
+        {
+          "text": "Healthy",
+          "font": "8px"
+        },
+        {
+          "text": "Echo",
+          "font": "9px"
+        },
+        {
+          "text": "Healthy",
+          "font": "8px"
+        },
+        {
+          "text": "Take a day to recover. The crew still needs supplies.",
+          "font": "9px"
+        },
+        {
+          "text": "Search nearby. Time and energy are not free.",
+          "font": "9px"
+        },
+        {
+          "text": "Salvage 2 repair parts once every four days. Breakdown repairs cost 1 part instead of 2.",
+          "font": "9px"
+        }
+      ]
+    },
+    {
+      "name": "travel-430x739: Drive visible without scrolling",
+      "passed": true,
+      "evidence": {
+        "x": 27,
+        "y": 440.515625,
+        "width": 376,
+        "height": 52,
+        "bottom": 492.515625
+      }
+    },
+    {
+      "name": "travel-430x739: trip facts visible without scrolling",
+      "passed": true,
+      "evidence": {
+        "x": 24,
+        "y": 523.515625,
+        "width": 382,
+        "height": 42.28125,
+        "bottom": 565.796875
+      }
+    },
+    {
+      "name": "travel-430x739: useful scene height",
+      "passed": false,
+      "evidence": {
+        "x": 11,
+        "y": 90,
+        "width": 408,
+        "height": 249.390625,
+        "bottom": 339.390625
+      }
+    },
+    {
+      "name": "travel-430x739: route remains available",
+      "passed": true
+    },
+    {
+      "name": "route-430x739: no horizontal overflow",
+      "passed": true,
+      "evidence": 430
+    },
+    {
+      "name": "route-430x739: images loaded",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "route-430x739: 44px touch targets",
+      "passed": false,
+      "evidence": [
+        {
+          "text": "The Portland Trail ✳",
+          "x": 15,
+          "y": 20.328125,
+          "width": 126.625,
+          "height": 13.34375,
+          "bottom": 33.671875
+        },
+        {
+          "text": "New journey",
+          "x": 353.796875,
+          "y": 14,
+          "width": 61.203125,
+          "height": 26,
+          "bottom": 40
+        },
+        {
+          "text": "9 places along the way",
+          "x": 24,
+          "y": 633.796875,
+          "width": 146.71875,
+          "height": 12,
+          "bottom": 645.796875
+        },
+        {
+          "text": "Rest",
+          "x": 34,
+          "y": 1440.796875,
+          "width": 168.5,
+          "height": 39,
+          "bottom": 1479.796875
+        },
+        {
+          "text": "Forage",
+          "x": 227.5,
+          "y": 1440.796875,
+          "width": 168.5,
+          "height": 39,
+          "bottom": 1479.796875
+        },
+        {
+          "text": "Salvage parts",
+          "x": 34,
+          "y": 1539.890625,
+          "width": 168.5,
+          "height": 39,
+          "bottom": 1578.890625
+        },
+        {
+          "text": "Scenic · 50 mi / 2 fuelSteady · 80 mi / 4 fuelFloor it · 110",
+          "x": 25,
+          "y": 1745.078125,
+          "width": 380,
+          "height": 18,
+          "bottom": 1763.078125
+        },
+        {
+          "text": "Bare · 0.25 food / travelerMeager · 0.5 food / travelerFilli",
+          "x": 25,
+          "y": 1793.078125,
+          "width": 380,
+          "height": 18,
+          "bottom": 1811.078125
+        }
+      ]
+    },
+    {
+      "name": "route-430x739: 16px editable controls",
+      "passed": false,
+      "evidence": [
+        {
+          "name": "Driving pace",
+          "font": "11px"
+        },
+        {
+          "name": "Daily rations",
+          "font": "11px"
+        }
+      ]
+    },
+    {
+      "name": "route-430x739: readable trip text",
+      "passed": false,
+      "evidence": [
+        {
+          "text": "Distance",
+          "font": "10px"
+        },
+        {
+          "text": "/ 1,000 mi",
+          "font": "9px"
+        },
+        {
+          "text": "Day",
+          "font": "10px"
+        },
+        {
+          "text": "Next stop",
+          "font": "10px"
+        },
+        {
+          "text": "Cash",
+          "font": "8px"
+        },
+        {
+          "text": "Food",
+          "font": "8px"
+        },
+        {
+          "text": "Fuel",
+          "font": "8px"
+        },
+        {
+          "text": "Seed bombs",
+          "font": "8px"
+        },
+        {
+          "text": "Repair supplies",
+          "font": "8px"
+        },
+        {
+          "text": "Kombucha",
+          "font": "8px"
+        },
+        {
+          "text": "NFTs",
+          "font": "8px"
+        },
+        {
+          "text": "Kale",
+          "font": "9px"
+        },
+        {
+          "text": "Healthy",
+          "font": "8px"
+        },
+        {
+          "text": "Juniper",
+          "font": "9px"
+        },
+        {
+          "text": "Healthy",
+          "font": "8px"
+        },
+        {
+          "text": "Rowan",
+          "font": "9px"
+        },
+        {
+          "text": "Healthy",
+          "font": "8px"
+        },
+        {
+          "text": "Birch",
+          "font": "9px"
+        },
+        {
+          "text": "Healthy",
+          "font": "8px"
+        },
+        {
+          "text": "Echo",
+          "font": "9px"
+        },
+        {
+          "text": "Healthy",
+          "font": "8px"
+        },
+        {
+          "text": "Take a day to recover. The crew still needs supplies.",
+          "font": "9px"
+        },
+        {
+          "text": "Search nearby. Time and energy are not free.",
+          "font": "9px"
+        },
+        {
+          "text": "Salvage 2 repair parts once every four days. Breakdown repairs cost 1 part instead of 2.",
+          "font": "9px"
+        }
+      ]
+    },
+    {
+      "name": "shop-430x739: no horizontal overflow",
+      "passed": true,
+      "evidence": 430
+    },
+    {
+      "name": "shop-430x739: images loaded",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "shop-430x739: 44px touch targets",
+      "passed": false,
+      "evidence": [
+        {
+          "text": "The Portland Trail ✳",
+          "x": 15,
+          "y": 20.328125,
+          "width": 126.625,
+          "height": 13.34375,
+          "bottom": 33.671875
+        },
+        {
+          "text": "New journey",
+          "x": 353.796875,
+          "y": 14,
+          "width": 61.203125,
+          "height": 26,
+          "bottom": 40
+        },
+        {
+          "text": "Auto-buy essentials",
+          "x": 23,
+          "y": 816.640625,
+          "width": 384,
+          "height": 43,
+          "bottom": 859.640625
+        },
+        {
+          "text": "9 places along the way",
+          "x": 24,
+          "y": 1006.921875,
+          "width": 147.046875,
+          "height": 12,
+          "bottom": 1018.921875
+        },
+        {
+          "text": "1510",
+          "x": 248,
+          "y": 1389.421875,
+          "width": 55,
+          "height": 20,
+          "bottom": 1409.421875
+        },
+        {
+          "text": "1510",
+          "x": 248,
+          "y": 1490.171875,
+          "width": 55,
+          "height": 20,
+          "bottom": 1510.171875
+        },
+        {
+          "text": "1510",
+          "x": 248,
+          "y": 1590.171875,
+          "width": 55,
+          "height": 20,
+          "bottom": 1610.171875
+        },
+        {
+          "text": "1510",
+          "x": 248,
+          "y": 1698.171875,
+          "width": 55,
+          "height": 20,
+          "bottom": 1718.171875
+        },
+        {
+          "text": "1510",
+          "x": 248,
+          "y": 1806.171875,
+          "width": 55,
+          "height": 20,
+          "bottom": 1826.171875
+        },
+        {
+          "text": "1510",
+          "x": 248,
+          "y": 1906.171875,
+          "width": 55,
+          "height": 20,
+          "bottom": 1926.171875
+        },
+        {
+          "text": "Sell one NFT for $50",
+          "x": 25,
+          "y": 2001.921875,
+          "width": 184.359375,
+          "height": 43,
+          "bottom": 2044.921875
+        }
+      ]
+    },
+    {
+      "name": "shop-430x739: 16px editable controls",
+      "passed": false,
+      "evidence": [
+        {
+          "name": "Quantity of Sustainably Sourced Kale Chips to buy",
+          "font": "12px"
+        },
+        {
+          "name": "Quantity of Bio-Diesel Canister to buy",
+          "font": "12px"
+        },
+        {
+          "name": "Quantity of Seed Bombs to buy",
+          "font": "12px"
+        },
+        {
+          "name": "Quantity of Washi Tape & Vintage Screwdrivers to buy",
+          "font": "12px"
+        },
+        {
+          "name": "Quantity of Locally Brewed Kombucha to buy",
+          "font": "12px"
+        },
+        {
+          "name": "Quantity of Pixelated Sasquatch JPEG to buy",
+          "font": "12px"
+        }
+      ]
+    },
+    {
+      "name": "shop-430x739: readable trip text",
+      "passed": false,
+      "evidence": [
+        {
+          "text": "Distance",
+          "font": "10px"
+        },
+        {
+          "text": "/ 1,000 mi",
+          "font": "9px"
+        },
+        {
+          "text": "Day",
+          "font": "10px"
+        },
+        {
+          "text": "Next stop",
+          "font": "10px"
+        },
+        {
+          "text": "Cash",
+          "font": "8px"
+        },
+        {
+          "text": "Food",
+          "font": "8px"
+        },
+        {
+          "text": "Fuel",
+          "font": "8px"
+        },
+        {
+          "text": "Seed bombs",
+          "font": "8px"
+        },
+        {
+          "text": "Repair supplies",
+          "font": "8px"
+        },
+        {
+          "text": "Kombucha",
+          "font": "8px"
+        },
+        {
+          "text": "NFTs",
+          "font": "8px"
+        },
+        {
+          "text": "Kale",
+          "font": "9px"
+        },
+        {
+          "text": "Healthy",
+          "font": "8px"
+        },
+        {
+          "text": "Juniper",
+          "font": "9px"
+        },
+        {
+          "text": "Healthy",
+          "font": "8px"
+        },
+        {
+          "text": "Rowan",
+          "font": "9px"
+        },
+        {
+          "text": "Healthy",
+          "font": "8px"
+        },
+        {
+          "text": "Birch",
+          "font": "9px"
+        },
+        {
+          "text": "Healthy",
+          "font": "8px"
+        },
+        {
+          "text": "Echo",
+          "font": "9px"
+        },
+        {
+          "text": "Healthy",
+          "font": "8px"
+        }
+      ]
+    },
+    {
+      "name": "shop-430x739: auto-buy discoverable",
+      "passed": true,
+      "evidence": {
+        "x": 23,
+        "y": 816.640625,
+        "width": 384,
+        "height": 43,
+        "bottom": 859.640625
+      }
+    },
+    {
+      "name": "shop-430x739: auto-buy works",
+      "passed": true
+    },
+    {
+      "name": "event-430x739: no horizontal overflow",
+      "passed": true,
+      "evidence": 430
+    },
+    {
+      "name": "event-430x739: images loaded",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "event-430x739: 44px touch targets",
+      "passed": false,
+      "evidence": [
+        {
+          "text": "The Portland Trail ✳",
+          "x": 15,
+          "y": 20.328125,
+          "width": 126.625,
+          "height": 13.34375,
+          "bottom": 33.671875
+        },
+        {
+          "text": "New journey",
+          "x": 353.796875,
+          "y": 14,
+          "width": 61.203125,
+          "height": 26,
+          "bottom": 40
+        },
+        {
+          "text": "9 places along the way",
+          "x": 24,
+          "y": 633.796875,
+          "width": 147.046875,
+          "height": 12,
+          "bottom": 645.796875
+        },
+        {
+          "text": "Rest",
+          "x": 34,
+          "y": 948.796875,
+          "width": 168.5,
+          "height": 39,
+          "bottom": 987.796875
+        },
+        {
+          "text": "Forage",
+          "x": 227.5,
+          "y": 948.796875,
+          "width": 168.5,
+          "height": 39,
+          "bottom": 987.796875
+        },
+        {
+          "text": "Salvage parts",
+          "x": 34,
+          "y": 1047.890625,
+          "width": 168.5,
+          "height": 39,
+          "bottom": 1086.890625
+        },
+        {
+          "text": "Scenic · 50 mi / 2 fuelSteady · 80 mi / 4 fuelFloor it · 110",
+          "x": 25,
+          "y": 1253.078125,
+          "width": 380,
+          "height": 18,
+          "bottom": 1271.078125
+        },
+        {
+          "text": "Bare · 0.25 food / travelerMeager · 0.5 food / travelerFilli",
+          "x": 25,
+          "y": 1301.078125,
+          "width": 380,
+          "height": 18,
+          "bottom": 1319.078125
+        }
+      ]
+    },
+    {
+      "name": "event-430x739: 16px editable controls",
+      "passed": false,
+      "evidence": [
+        {
+          "name": "Driving pace",
+          "font": "11px"
+        },
+        {
+          "name": "Daily rations",
+          "font": "11px"
+        }
+      ]
+    },
+    {
+      "name": "event-430x739: readable trip text",
+      "passed": false,
+      "evidence": [
+        {
+          "text": "Distance",
+          "font": "10px"
+        },
+        {
+          "text": "/ 1,000 mi",
+          "font": "9px"
+        },
+        {
+          "text": "Day",
+          "font": "10px"
+        },
+        {
+          "text": "Next stop",
+          "font": "10px"
+        },
+        {
+          "text": "Cash",
+          "font": "8px"
+        },
+        {
+          "text": "Food",
+          "font": "8px"
+        },
+        {
+          "text": "Fuel",
+          "font": "8px"
+        },
+        {
+          "text": "Seed bombs",
+          "font": "8px"
+        },
+        {
+          "text": "Repair supplies",
+          "font": "8px"
+        },
+        {
+          "text": "Kombucha",
+          "font": "8px"
+        },
+        {
+          "text": "NFTs",
+          "font": "8px"
+        },
+        {
+          "text": "Kale",
+          "font": "9px"
+        },
+        {
+          "text": "Healthy",
+          "font": "8px"
+        },
+        {
+          "text": "Juniper",
+          "font": "9px"
+        },
+        {
+          "text": "Healthy",
+          "font": "8px"
+        },
+        {
+          "text": "Rowan",
+          "font": "9px"
+        },
+        {
+          "text": "Healthy",
+          "font": "8px"
+        },
+        {
+          "text": "Birch",
+          "font": "9px"
+        },
+        {
+          "text": "Healthy",
+          "font": "8px"
+        },
+        {
+          "text": "Echo",
+          "font": "9px"
+        },
+        {
+          "text": "Healthy",
+          "font": "8px"
+        },
+        {
+          "text": "Take a day to recover. The crew still needs supplies.",
+          "font": "9px"
+        },
+        {
+          "text": "Search nearby. Time and energy are not free.",
+          "font": "9px"
+        },
+        {
+          "text": "Salvage 2 repair parts once every four days. Breakdown repairs cost 1 part instead of 2.",
+          "font": "9px"
+        }
+      ]
+    },
+    {
+      "name": "event-430x739: all choices visible",
+      "passed": true,
+      "evidence": [
+        {
+          "x": 45,
+          "y": 503.046875,
+          "width": 340,
+          "height": 48,
+          "bottom": 551.046875
+        },
+        {
+          "x": 45,
+          "y": 559.046875,
+          "width": 340,
+          "height": 48,
+          "bottom": 607.046875
+        }
+      ]
+    },
+    {
+      "name": "event-430x739: focus enters dialog",
+      "passed": true
+    },
+    {
+      "name": "event-430x739: Escape preserves pending event",
+      "passed": true
+    },
+    {
+      "name": "event-430x739: choice resolves",
+      "passed": true
+    },
+    {
+      "name": "travel-440x763: no horizontal overflow",
+      "passed": true,
+      "evidence": 440
+    },
+    {
+      "name": "travel-440x763: images loaded",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "travel-440x763: 44px touch targets",
+      "passed": false,
+      "evidence": [
+        {
+          "text": "The Portland Trail ✳",
+          "x": 15,
+          "y": 20.328125,
+          "width": 126.625,
+          "height": 13.34375,
+          "bottom": 33.671875
+        },
+        {
+          "text": "New journey",
+          "x": 363.796875,
+          "y": 14,
+          "width": 61.203125,
+          "height": 26,
+          "bottom": 40
+        },
+        {
+          "text": "9 places along the way",
+          "x": 24,
+          "y": 639.59375,
+          "width": 147.046875,
+          "height": 12,
+          "bottom": 651.59375
+        },
+        {
+          "text": "Rest",
+          "x": 34,
+          "y": 954.59375,
+          "width": 173.5,
+          "height": 39,
+          "bottom": 993.59375
+        },
+        {
+          "text": "Forage",
+          "x": 232.5,
+          "y": 954.59375,
+          "width": 173.5,
+          "height": 39,
+          "bottom": 993.59375
+        },
+        {
+          "text": "Salvage parts",
+          "x": 34,
+          "y": 1053.6875,
+          "width": 173.5,
+          "height": 39,
+          "bottom": 1092.6875
+        },
+        {
+          "text": "Scenic · 50 mi / 2 fuelSteady · 80 mi / 4 fuelFloor it · 110",
+          "x": 25,
+          "y": 1258.875,
+          "width": 390,
+          "height": 18,
+          "bottom": 1276.875
+        },
+        {
+          "text": "Bare · 0.25 food / travelerMeager · 0.5 food / travelerFilli",
+          "x": 25,
+          "y": 1306.875,
+          "width": 390,
+          "height": 18,
+          "bottom": 1324.875
+        }
+      ]
+    },
+    {
+      "name": "travel-440x763: 16px editable controls",
+      "passed": false,
+      "evidence": [
+        {
+          "name": "Driving pace",
+          "font": "11px"
+        },
+        {
+          "name": "Daily rations",
+          "font": "11px"
+        }
+      ]
+    },
+    {
+      "name": "travel-440x763: readable trip text",
+      "passed": false,
+      "evidence": [
+        {
+          "text": "Distance",
+          "font": "10px"
+        },
+        {
+          "text": "/ 1,000 mi",
+          "font": "9px"
+        },
+        {
+          "text": "Day",
+          "font": "10px"
+        },
+        {
+          "text": "Next stop",
+          "font": "10px"
+        },
+        {
+          "text": "Cash",
+          "font": "8px"
+        },
+        {
+          "text": "Food",
+          "font": "8px"
+        },
+        {
+          "text": "Fuel",
+          "font": "8px"
+        },
+        {
+          "text": "Seed bombs",
+          "font": "8px"
+        },
+        {
+          "text": "Repair supplies",
+          "font": "8px"
+        },
+        {
+          "text": "Kombucha",
+          "font": "8px"
+        },
+        {
+          "text": "NFTs",
+          "font": "8px"
+        },
+        {
+          "text": "Kale",
+          "font": "9px"
+        },
+        {
+          "text": "Healthy",
+          "font": "8px"
+        },
+        {
+          "text": "Juniper",
+          "font": "9px"
+        },
+        {
+          "text": "Healthy",
+          "font": "8px"
+        },
+        {
+          "text": "Rowan",
+          "font": "9px"
+        },
+        {
+          "text": "Healthy",
+          "font": "8px"
+        },
+        {
+          "text": "Birch",
+          "font": "9px"
+        },
+        {
+          "text": "Healthy",
+          "font": "8px"
+        },
+        {
+          "text": "Echo",
+          "font": "9px"
+        },
+        {
+          "text": "Healthy",
+          "font": "8px"
+        },
+        {
+          "text": "Take a day to recover. The crew still needs supplies.",
+          "font": "9px"
+        },
+        {
+          "text": "Search nearby. Time and energy are not free.",
+          "font": "9px"
+        },
+        {
+          "text": "Salvage 2 repair parts once every four days. Breakdown repairs cost 1 part instead of 2.",
+          "font": "9px"
+        }
+      ]
+    },
+    {
+      "name": "travel-440x763: Drive visible without scrolling",
+      "passed": true,
+      "evidence": {
+        "x": 27,
+        "y": 446.3125,
+        "width": 386,
+        "height": 52,
+        "bottom": 498.3125
+      }
+    },
+    {
+      "name": "travel-440x763: trip facts visible without scrolling",
+      "passed": true,
+      "evidence": {
+        "x": 24,
+        "y": 529.3125,
+        "width": 392,
+        "height": 42.28125,
+        "bottom": 571.59375
+      }
+    },
+    {
+      "name": "travel-440x763: useful scene height",
+      "passed": false,
+      "evidence": {
+        "x": 11,
+        "y": 90,
+        "width": 418,
+        "height": 255.1875,
+        "bottom": 345.1875
+      }
+    },
+    {
+      "name": "travel-440x763: route remains available",
+      "passed": true
+    },
+    {
+      "name": "route-440x763: no horizontal overflow",
+      "passed": true,
+      "evidence": 440
+    },
+    {
+      "name": "route-440x763: images loaded",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "route-440x763: 44px touch targets",
+      "passed": false,
+      "evidence": [
+        {
+          "text": "The Portland Trail ✳",
+          "x": 15,
+          "y": 20.328125,
+          "width": 126.625,
+          "height": 13.34375,
+          "bottom": 33.671875
+        },
+        {
+          "text": "New journey",
+          "x": 363.796875,
+          "y": 14,
+          "width": 61.203125,
+          "height": 26,
+          "bottom": 40
+        },
+        {
+          "text": "9 places along the way",
+          "x": 24,
+          "y": 639.59375,
+          "width": 146.71875,
+          "height": 12,
+          "bottom": 651.59375
+        },
+        {
+          "text": "Rest",
+          "x": 34,
+          "y": 1446.59375,
+          "width": 173.5,
+          "height": 39,
+          "bottom": 1485.59375
+        },
+        {
+          "text": "Forage",
+          "x": 232.5,
+          "y": 1446.59375,
+          "width": 173.5,
+          "height": 39,
+          "bottom": 1485.59375
+        },
+        {
+          "text": "Salvage parts",
+          "x": 34,
+          "y": 1545.6875,
+          "width": 173.5,
+          "height": 39,
+          "bottom": 1584.6875
+        },
+        {
+          "text": "Scenic · 50 mi / 2 fuelSteady · 80 mi / 4 fuelFloor it · 110",
+          "x": 25,
+          "y": 1750.875,
+          "width": 390,
+          "height": 18,
+          "bottom": 1768.875
+        },
+        {
+          "text": "Bare · 0.25 food / travelerMeager · 0.5 food / travelerFilli",
+          "x": 25,
+          "y": 1798.875,
+          "width": 390,
+          "height": 18,
+          "bottom": 1816.875
+        }
+      ]
+    },
+    {
+      "name": "route-440x763: 16px editable controls",
+      "passed": false,
+      "evidence": [
+        {
+          "name": "Driving pace",
+          "font": "11px"
+        },
+        {
+          "name": "Daily rations",
+          "font": "11px"
+        }
+      ]
+    },
+    {
+      "name": "route-440x763: readable trip text",
+      "passed": false,
+      "evidence": [
+        {
+          "text": "Distance",
+          "font": "10px"
+        },
+        {
+          "text": "/ 1,000 mi",
+          "font": "9px"
+        },
+        {
+          "text": "Day",
+          "font": "10px"
+        },
+        {
+          "text": "Next stop",
+          "font": "10px"
+        },
+        {
+          "text": "Cash",
+          "font": "8px"
+        },
+        {
+          "text": "Food",
+          "font": "8px"
+        },
+        {
+          "text": "Fuel",
+          "font": "8px"
+        },
+        {
+          "text": "Seed bombs",
+          "font": "8px"
+        },
+        {
+          "text": "Repair supplies",
+          "font": "8px"
+        },
+        {
+          "text": "Kombucha",
+          "font": "8px"
+        },
+        {
+          "text": "NFTs",
+          "font": "8px"
+        },
+        {
+          "text": "Kale",
+          "font": "9px"
+        },
+        {
+          "text": "Healthy",
+          "font": "8px"
+        },
+        {
+          "text": "Juniper",
+          "font": "9px"
+        },
+        {
+          "text": "Healthy",
+          "font": "8px"
+        },
+        {
+          "text": "Rowan",
+          "font": "9px"
+        },
+        {
+          "text": "Healthy",
+          "font": "8px"
+        },
+        {
+          "text": "Birch",
+          "font": "9px"
+        },
+        {
+          "text": "Healthy",
+          "font": "8px"
+        },
+        {
+          "text": "Echo",
+          "font": "9px"
+        },
+        {
+          "text": "Healthy",
+          "font": "8px"
+        },
+        {
+          "text": "Take a day to recover. The crew still needs supplies.",
+          "font": "9px"
+        },
+        {
+          "text": "Search nearby. Time and energy are not free.",
+          "font": "9px"
+        },
+        {
+          "text": "Salvage 2 repair parts once every four days. Breakdown repairs cost 1 part instead of 2.",
+          "font": "9px"
+        }
+      ]
+    },
+    {
+      "name": "shop-440x763: no horizontal overflow",
+      "passed": true,
+      "evidence": 440
+    },
+    {
+      "name": "shop-440x763: images loaded",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "shop-440x763: 44px touch targets",
+      "passed": false,
+      "evidence": [
+        {
+          "text": "The Portland Trail ✳",
+          "x": 15,
+          "y": 20.328125,
+          "width": 126.625,
+          "height": 13.34375,
+          "bottom": 33.671875
+        },
+        {
+          "text": "New journey",
+          "x": 363.796875,
+          "y": 14,
+          "width": 61.203125,
+          "height": 26,
+          "bottom": 40
+        },
+        {
+          "text": "Auto-buy essentials",
+          "x": 23,
+          "y": 794.359375,
+          "width": 394,
+          "height": 43,
+          "bottom": 837.359375
+        },
+        {
+          "text": "9 places along the way",
+          "x": 24,
+          "y": 984.640625,
+          "width": 147.046875,
+          "height": 12,
+          "bottom": 996.640625
+        },
+        {
+          "text": "1510",
+          "x": 258,
+          "y": 1367.140625,
+          "width": 55,
+          "height": 20,
+          "bottom": 1387.140625
+        },
+        {
+          "text": "1510",
+          "x": 258,
+          "y": 1467.890625,
+          "width": 55,
+          "height": 20,
+          "bottom": 1487.890625
+        },
+        {
+          "text": "1510",
+          "x": 258,
+          "y": 1567.890625,
+          "width": 55,
+          "height": 20,
+          "bottom": 1587.890625
+        },
+        {
+          "text": "1510",
+          "x": 258,
+          "y": 1668.640625,
+          "width": 55,
+          "height": 20,
+          "bottom": 1688.640625
+        },
+        {
+          "text": "1510",
+          "x": 258,
+          "y": 1769.390625,
+          "width": 55,
+          "height": 20,
+          "bottom": 1789.390625
+        },
+        {
+          "text": "1510",
+          "x": 258,
+          "y": 1869.390625,
+          "width": 55,
+          "height": 20,
+          "bottom": 1889.390625
+        },
+        {
+          "text": "Sell one NFT for $50",
+          "x": 25,
+          "y": 1965.140625,
+          "width": 184.359375,
+          "height": 43,
+          "bottom": 2008.140625
+        }
+      ]
+    },
+    {
+      "name": "shop-440x763: 16px editable controls",
+      "passed": false,
+      "evidence": [
+        {
+          "name": "Quantity of Sustainably Sourced Kale Chips to buy",
+          "font": "12px"
+        },
+        {
+          "name": "Quantity of Bio-Diesel Canister to buy",
+          "font": "12px"
+        },
+        {
+          "name": "Quantity of Seed Bombs to buy",
+          "font": "12px"
+        },
+        {
+          "name": "Quantity of Washi Tape & Vintage Screwdrivers to buy",
+          "font": "12px"
+        },
+        {
+          "name": "Quantity of Locally Brewed Kombucha to buy",
+          "font": "12px"
+        },
+        {
+          "name": "Quantity of Pixelated Sasquatch JPEG to buy",
+          "font": "12px"
+        }
+      ]
+    },
+    {
+      "name": "shop-440x763: readable trip text",
+      "passed": false,
+      "evidence": [
+        {
+          "text": "Distance",
+          "font": "10px"
+        },
+        {
+          "text": "/ 1,000 mi",
+          "font": "9px"
+        },
+        {
+          "text": "Day",
+          "font": "10px"
+        },
+        {
+          "text": "Next stop",
+          "font": "10px"
+        },
+        {
+          "text": "Cash",
+          "font": "8px"
+        },
+        {
+          "text": "Food",
+          "font": "8px"
+        },
+        {
+          "text": "Fuel",
+          "font": "8px"
+        },
+        {
+          "text": "Seed bombs",
+          "font": "8px"
+        },
+        {
+          "text": "Repair supplies",
+          "font": "8px"
+        },
+        {
+          "text": "Kombucha",
+          "font": "8px"
+        },
+        {
+          "text": "NFTs",
+          "font": "8px"
+        },
+        {
+          "text": "Kale",
+          "font": "9px"
+        },
+        {
+          "text": "Healthy",
+          "font": "8px"
+        },
+        {
+          "text": "Juniper",
+          "font": "9px"
+        },
+        {
+          "text": "Healthy",
+          "font": "8px"
+        },
+        {
+          "text": "Rowan",
+          "font": "9px"
+        },
+        {
+          "text": "Healthy",
+          "font": "8px"
+        },
+        {
+          "text": "Birch",
+          "font": "9px"
+        },
+        {
+          "text": "Healthy",
+          "font": "8px"
+        },
+        {
+          "text": "Echo",
+          "font": "9px"
+        },
+        {
+          "text": "Healthy",
+          "font": "8px"
+        }
+      ]
+    },
+    {
+      "name": "shop-440x763: auto-buy discoverable",
+      "passed": true,
+      "evidence": {
+        "x": 23,
+        "y": 794.359375,
+        "width": 394,
+        "height": 43,
+        "bottom": 837.359375
+      }
+    },
+    {
+      "name": "shop-440x763: auto-buy works",
+      "passed": true
+    },
+    {
+      "name": "event-440x763: no horizontal overflow",
+      "passed": true,
+      "evidence": 440
+    },
+    {
+      "name": "event-440x763: images loaded",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "event-440x763: 44px touch targets",
+      "passed": false,
+      "evidence": [
+        {
+          "text": "The Portland Trail ✳",
+          "x": 15,
+          "y": 20.328125,
+          "width": 126.625,
+          "height": 13.34375,
+          "bottom": 33.671875
+        },
+        {
+          "text": "New journey",
+          "x": 363.796875,
+          "y": 14,
+          "width": 61.203125,
+          "height": 26,
+          "bottom": 40
+        },
+        {
+          "text": "9 places along the way",
+          "x": 24,
+          "y": 639.59375,
+          "width": 147.046875,
+          "height": 12,
+          "bottom": 651.59375
+        },
+        {
+          "text": "Rest",
+          "x": 34,
+          "y": 954.59375,
+          "width": 173.5,
+          "height": 39,
+          "bottom": 993.59375
+        },
+        {
+          "text": "Forage",
+          "x": 232.5,
+          "y": 954.59375,
+          "width": 173.5,
+          "height": 39,
+          "bottom": 993.59375
+        },
+        {
+          "text": "Salvage parts",
+          "x": 34,
+          "y": 1053.6875,
+          "width": 173.5,
+          "height": 39,
+          "bottom": 1092.6875
+        },
+        {
+          "text": "Scenic · 50 mi / 2 fuelSteady · 80 mi / 4 fuelFloor it · 110",
+          "x": 25,
+          "y": 1258.875,
+          "width": 390,
+          "height": 18,
+          "bottom": 1276.875
+        },
+        {
+          "text": "Bare · 0.25 food / travelerMeager · 0.5 food / travelerFilli",
+          "x": 25,
+          "y": 1306.875,
+          "width": 390,
+          "height": 18,
+          "bottom": 1324.875
+        }
+      ]
+    },
+    {
+      "name": "event-440x763: 16px editable controls",
+      "passed": false,
+      "evidence": [
+        {
+          "name": "Driving pace",
+          "font": "11px"
+        },
+        {
+          "name": "Daily rations",
+          "font": "11px"
+        }
+      ]
+    },
+    {
+      "name": "event-440x763: readable trip text",
+      "passed": false,
+      "evidence": [
+        {
+          "text": "Distance",
+          "font": "10px"
+        },
+        {
+          "text": "/ 1,000 mi",
+          "font": "9px"
+        },
+        {
+          "text": "Day",
+          "font": "10px"
+        },
+        {
+          "text": "Next stop",
+          "font": "10px"
+        },
+        {
+          "text": "Cash",
+          "font": "8px"
+        },
+        {
+          "text": "Food",
+          "font": "8px"
+        },
+        {
+          "text": "Fuel",
+          "font": "8px"
+        },
+        {
+          "text": "Seed bombs",
+          "font": "8px"
+        },
+        {
+          "text": "Repair supplies",
+          "font": "8px"
+        },
+        {
+          "text": "Kombucha",
+          "font": "8px"
+        },
+        {
+          "text": "NFTs",
+          "font": "8px"
+        },
+        {
+          "text": "Kale",
+          "font": "9px"
+        },
+        {
+          "text": "Healthy",
+          "font": "8px"
+        },
+        {
+          "text": "Juniper",
+          "font": "9px"
+        },
+        {
+          "text": "Healthy",
+          "font": "8px"
+        },
+        {
+          "text": "Rowan",
+          "font": "9px"
+        },
+        {
+          "text": "Healthy",
+          "font": "8px"
+        },
+        {
+          "text": "Birch",
+          "font": "9px"
+        },
+        {
+          "text": "Healthy",
+          "font": "8px"
+        },
+        {
+          "text": "Echo",
+          "font": "9px"
+        },
+        {
+          "text": "Healthy",
+          "font": "8px"
+        },
+        {
+          "text": "Take a day to recover. The crew still needs supplies.",
+          "font": "9px"
+        },
+        {
+          "text": "Search nearby. Time and energy are not free.",
+          "font": "9px"
+        },
+        {
+          "text": "Salvage 2 repair parts once every four days. Breakdown repairs cost 1 part instead of 2.",
+          "font": "9px"
+        }
+      ]
+    },
+    {
+      "name": "event-440x763: all choices visible",
+      "passed": true,
+      "evidence": [
+        {
+          "x": 45,
+          "y": 515.046875,
+          "width": 350,
+          "height": 48,
+          "bottom": 563.046875
+        },
+        {
+          "x": 45,
+          "y": 571.046875,
+          "width": 350,
+          "height": 48,
+          "bottom": 619.046875
+        }
+      ]
+    },
+    {
+      "name": "event-440x763: focus enters dialog",
+      "passed": true
+    },
+    {
+      "name": "event-440x763: Escape preserves pending event",
+      "passed": true
+    },
+    {
+      "name": "event-440x763: choice resolves",
+      "passed": true
+    },
+    {
+      "name": "travel-756x352: no horizontal overflow",
+      "passed": true,
+      "evidence": 756
+    },
+    {
+      "name": "travel-756x352: images loaded",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "travel-756x352: 44px touch targets",
+      "passed": false,
+      "evidence": [
+        {
+          "text": "The Portland Trail ✳",
+          "x": 24,
+          "y": -210,
+          "width": 160.0625,
+          "height": 17,
+          "bottom": -193
+        },
+        {
+          "text": "New journey",
+          "x": 657.1875,
+          "y": -215.5,
+          "width": 74.8125,
+          "height": 28,
+          "bottom": -187.5
+        },
+        {
+          "text": "9 places along the way",
+          "x": 46,
+          "y": 520.421875,
+          "width": 147.046875,
+          "height": 12,
+          "bottom": 532.421875
+        },
+        {
+          "text": "Rest",
+          "x": 58,
+          "y": 864.421875,
+          "width": 302,
+          "height": 43,
+          "bottom": 907.421875
+        },
+        {
+          "text": "Forage",
+          "x": 396,
+          "y": 864.421875,
+          "width": 302,
+          "height": 43,
+          "bottom": 907.421875
+        },
+        {
+          "text": "Salvage parts",
+          "x": 58,
+          "y": 981.421875,
+          "width": 302,
+          "height": 43,
+          "bottom": 1024.421875
+        },
+        {
+          "text": "Scenic · 50 mi / 2 fuelSteady · 80 mi / 4 fuelFloor it · 110",
+          "x": 45,
+          "y": 1183.421875,
+          "width": 327,
+          "height": 18,
+          "bottom": 1201.421875
+        },
+        {
+          "text": "Bare · 0.25 food / travelerMeager · 0.5 food / travelerFilli",
+          "x": 384,
+          "y": 1183.421875,
+          "width": 327,
+          "height": 18,
+          "bottom": 1201.421875
+        }
+      ]
+    },
+    {
+      "name": "travel-756x352: 16px editable controls",
+      "passed": false,
+      "evidence": [
+        {
+          "name": "Driving pace",
+          "font": "11px"
+        },
+        {
+          "name": "Daily rations",
+          "font": "11px"
+        }
+      ]
+    },
+    {
+      "name": "travel-756x352: readable trip text",
+      "passed": false,
+      "evidence": [
+        {
+          "text": "Distance",
+          "font": "10px"
+        },
+        {
+          "text": "Day",
+          "font": "10px"
+        },
+        {
+          "text": "Next stop",
+          "font": "10px"
+        },
+        {
+          "text": "Cash",
+          "font": "9px"
+        },
+        {
+          "text": "Food",
+          "font": "9px"
+        },
+        {
+          "text": "Fuel",
+          "font": "9px"
+        },
+        {
+          "text": "Seed bombs",
+          "font": "9px"
+        },
+        {
+          "text": "Repair supplies",
+          "font": "9px"
+        },
+        {
+          "text": "Kombucha",
+          "font": "9px"
+        },
+        {
+          "text": "NFTs",
+          "font": "9px"
+        },
+        {
+          "text": "Kale",
+          "font": "10px"
+        },
+        {
+          "text": "Healthy",
+          "font": "9px"
+        },
+        {
+          "text": "Juniper",
+          "font": "10px"
+        },
+        {
+          "text": "Healthy",
+          "font": "9px"
+        },
+        {
+          "text": "Rowan",
+          "font": "10px"
+        },
+        {
+          "text": "Healthy",
+          "font": "9px"
+        },
+        {
+          "text": "Birch",
+          "font": "10px"
+        },
+        {
+          "text": "Healthy",
+          "font": "9px"
+        },
+        {
+          "text": "Echo",
+          "font": "10px"
+        },
+        {
+          "text": "Healthy",
+          "font": "9px"
+        },
+        {
+          "text": "Take a day to recover. The crew still needs supplies.",
+          "font": "10px"
+        },
+        {
+          "text": "Search nearby. Time and energy are not free.",
+          "font": "10px"
+        },
+        {
+          "text": "Salvage 2 repair parts once every four days. Breakdown repairs cost 1 part instead of 2.",
+          "font": "10px"
+        }
+      ]
+    },
+    {
+      "name": "travel-756x352: Drive visible without scrolling",
+      "passed": false,
+      "evidence": {
+        "x": 48,
+        "y": 320.625,
+        "width": 660,
+        "height": 52,
+        "bottom": 372.625
+      }
+    },
+    {
+      "name": "travel-756x352: trip facts visible without scrolling",
+      "passed": false,
+      "evidence": {
+        "x": 46,
+        "y": 415.625,
+        "width": 664,
+        "height": 36.796875,
+        "bottom": 452.421875
+      }
+    },
+    {
+      "name": "travel-756x352: route remains available",
+      "passed": true
+    },
+    {
+      "name": "route-756x352: no horizontal overflow",
+      "passed": true,
+      "evidence": 756
+    },
+    {
+      "name": "route-756x352: images loaded",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "route-756x352: 44px touch targets",
+      "passed": false,
+      "evidence": [
+        {
+          "text": "The Portland Trail ✳",
+          "x": 24,
+          "y": -561,
+          "width": 160.0625,
+          "height": 17,
+          "bottom": -544
+        },
+        {
+          "text": "New journey",
+          "x": 657.1875,
+          "y": -566.5,
+          "width": 74.8125,
+          "height": 28,
+          "bottom": -538.5
+        },
+        {
+          "text": "9 places along the way",
+          "x": 46,
+          "y": 169.421875,
+          "width": 146.71875,
+          "height": 12,
+          "bottom": 181.421875
+        },
+        {
+          "text": "Rest",
+          "x": 58,
+          "y": 785.421875,
+          "width": 302,
+          "height": 43,
+          "bottom": 828.421875
+        },
+        {
+          "text": "Forage",
+          "x": 396,
+          "y": 785.421875,
+          "width": 302,
+          "height": 43,
+          "bottom": 828.421875
+        },
+        {
+          "text": "Salvage parts",
+          "x": 58,
+          "y": 902.421875,
+          "width": 302,
+          "height": 43,
+          "bottom": 945.421875
+        },
+        {
+          "text": "Scenic · 50 mi / 2 fuelSteady · 80 mi / 4 fuelFloor it · 110",
+          "x": 45,
+          "y": 1104.421875,
+          "width": 327,
+          "height": 18,
+          "bottom": 1122.421875
+        },
+        {
+          "text": "Bare · 0.25 food / travelerMeager · 0.5 food / travelerFilli",
+          "x": 384,
+          "y": 1104.421875,
+          "width": 327,
+          "height": 18,
+          "bottom": 1122.421875
+        }
+      ]
+    },
+    {
+      "name": "route-756x352: 16px editable controls",
+      "passed": false,
+      "evidence": [
+        {
+          "name": "Driving pace",
+          "font": "11px"
+        },
+        {
+          "name": "Daily rations",
+          "font": "11px"
+        }
+      ]
+    },
+    {
+      "name": "route-756x352: readable trip text",
+      "passed": false,
+      "evidence": [
+        {
+          "text": "Distance",
+          "font": "10px"
+        },
+        {
+          "text": "Day",
+          "font": "10px"
+        },
+        {
+          "text": "Next stop",
+          "font": "10px"
+        },
+        {
+          "text": "Cash",
+          "font": "9px"
+        },
+        {
+          "text": "Food",
+          "font": "9px"
+        },
+        {
+          "text": "Fuel",
+          "font": "9px"
+        },
+        {
+          "text": "Seed bombs",
+          "font": "9px"
+        },
+        {
+          "text": "Repair supplies",
+          "font": "9px"
+        },
+        {
+          "text": "Kombucha",
+          "font": "9px"
+        },
+        {
+          "text": "NFTs",
+          "font": "9px"
+        },
+        {
+          "text": "Kale",
+          "font": "10px"
+        },
+        {
+          "text": "Healthy",
+          "font": "9px"
+        },
+        {
+          "text": "Juniper",
+          "font": "10px"
+        },
+        {
+          "text": "Healthy",
+          "font": "9px"
+        },
+        {
+          "text": "Rowan",
+          "font": "10px"
+        },
+        {
+          "text": "Healthy",
+          "font": "9px"
+        },
+        {
+          "text": "Birch",
+          "font": "10px"
+        },
+        {
+          "text": "Healthy",
+          "font": "9px"
+        },
+        {
+          "text": "Echo",
+          "font": "10px"
+        },
+        {
+          "text": "Healthy",
+          "font": "9px"
+        },
+        {
+          "text": "Take a day to recover. The crew still needs supplies.",
+          "font": "10px"
+        },
+        {
+          "text": "Search nearby. Time and energy are not free.",
+          "font": "10px"
+        },
+        {
+          "text": "Salvage 2 repair parts once every four days. Breakdown repairs cost 1 part instead of 2.",
+          "font": "10px"
+        }
+      ]
+    },
+    {
+      "name": "shop-756x352: no horizontal overflow",
+      "passed": true,
+      "evidence": 756
+    },
+    {
+      "name": "shop-756x352: images loaded",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "shop-756x352: 44px touch targets",
+      "passed": false,
+      "evidence": [
+        {
+          "text": "The Portland Trail ✳",
+          "x": 24,
+          "y": -210,
+          "width": 160.0625,
+          "height": 17,
+          "bottom": -193
+        },
+        {
+          "text": "New journey",
+          "x": 657.1875,
+          "y": -215.5,
+          "width": 74.8125,
+          "height": 28,
+          "bottom": -187.5
+        },
+        {
+          "text": "Auto-buy essentials",
+          "x": 538.046875,
+          "y": 562.21875,
+          "width": 176.953125,
+          "height": 43,
+          "bottom": 605.21875
+        },
+        {
+          "text": "9 places along the way",
+          "x": 46,
+          "y": 758.015625,
+          "width": 147.046875,
+          "height": 12,
+          "bottom": 770.015625
+        },
+        {
+          "text": "1510",
+          "x": 526,
+          "y": 1164.515625,
+          "width": 59,
+          "height": 20,
+          "bottom": 1184.515625
+        },
+        {
+          "text": "1510",
+          "x": 526,
+          "y": 1256.015625,
+          "width": 59,
+          "height": 20,
+          "bottom": 1276.015625
+        },
+        {
+          "text": "1510",
+          "x": 526,
+          "y": 1347.515625,
+          "width": 59,
+          "height": 20,
+          "bottom": 1367.515625
+        },
+        {
+          "text": "1510",
+          "x": 526,
+          "y": 1439.015625,
+          "width": 59,
+          "height": 20,
+          "bottom": 1459.015625
+        },
+        {
+          "text": "1510",
+          "x": 526,
+          "y": 1530.515625,
+          "width": 59,
+          "height": 20,
+          "bottom": 1550.515625
+        },
+        {
+          "text": "1510",
+          "x": 526,
+          "y": 1622.015625,
+          "width": 59,
+          "height": 20,
+          "bottom": 1642.015625
+        },
+        {
+          "text": "Sell one NFT for $50",
+          "x": 526.640625,
+          "y": 1686.515625,
+          "width": 184.359375,
+          "height": 43,
+          "bottom": 1729.515625
+        }
+      ]
+    },
+    {
+      "name": "shop-756x352: 16px editable controls",
+      "passed": false,
+      "evidence": [
+        {
+          "name": "Quantity of Sustainably Sourced Kale Chips to buy",
+          "font": "12px"
+        },
+        {
+          "name": "Quantity of Bio-Diesel Canister to buy",
+          "font": "12px"
+        },
+        {
+          "name": "Quantity of Seed Bombs to buy",
+          "font": "12px"
+        },
+        {
+          "name": "Quantity of Washi Tape & Vintage Screwdrivers to buy",
+          "font": "12px"
+        },
+        {
+          "name": "Quantity of Locally Brewed Kombucha to buy",
+          "font": "12px"
+        },
+        {
+          "name": "Quantity of Pixelated Sasquatch JPEG to buy",
+          "font": "12px"
+        }
+      ]
+    },
+    {
+      "name": "shop-756x352: readable trip text",
+      "passed": false,
+      "evidence": [
+        {
+          "text": "Distance",
+          "font": "10px"
+        },
+        {
+          "text": "Day",
+          "font": "10px"
+        },
+        {
+          "text": "Next stop",
+          "font": "10px"
+        },
+        {
+          "text": "Cash",
+          "font": "9px"
+        },
+        {
+          "text": "Food",
+          "font": "9px"
+        },
+        {
+          "text": "Fuel",
+          "font": "9px"
+        },
+        {
+          "text": "Seed bombs",
+          "font": "9px"
+        },
+        {
+          "text": "Repair supplies",
+          "font": "9px"
+        },
+        {
+          "text": "Kombucha",
+          "font": "9px"
+        },
+        {
+          "text": "NFTs",
+          "font": "9px"
+        },
+        {
+          "text": "Kale",
+          "font": "10px"
+        },
+        {
+          "text": "Healthy",
+          "font": "9px"
+        },
+        {
+          "text": "Juniper",
+          "font": "10px"
+        },
+        {
+          "text": "Healthy",
+          "font": "9px"
+        },
+        {
+          "text": "Rowan",
+          "font": "10px"
+        },
+        {
+          "text": "Healthy",
+          "font": "9px"
+        },
+        {
+          "text": "Birch",
+          "font": "10px"
+        },
+        {
+          "text": "Healthy",
+          "font": "9px"
+        },
+        {
+          "text": "Echo",
+          "font": "10px"
+        },
+        {
+          "text": "Healthy",
+          "font": "9px"
+        }
+      ]
+    },
+    {
+      "name": "shop-756x352: auto-buy discoverable",
+      "passed": false,
+      "evidence": {
+        "x": 538.046875,
+        "y": 562.21875,
+        "width": 176.953125,
+        "height": 43,
+        "bottom": 605.21875
+      }
+    },
+    {
+      "name": "shop-756x352: auto-buy works",
+      "passed": true
+    },
+    {
+      "name": "event-756x352: no horizontal overflow",
+      "passed": true,
+      "evidence": 756
+    },
+    {
+      "name": "event-756x352: images loaded",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "event-756x352: 44px touch targets",
+      "passed": false,
+      "evidence": [
+        {
+          "text": "The Portland Trail ✳",
+          "x": 24,
+          "y": -210,
+          "width": 160.0625,
+          "height": 17,
+          "bottom": -193
+        },
+        {
+          "text": "New journey",
+          "x": 657.1875,
+          "y": -215.5,
+          "width": 74.8125,
+          "height": 28,
+          "bottom": -187.5
+        },
+        {
+          "text": "9 places along the way",
+          "x": 46,
+          "y": 520.421875,
+          "width": 147.046875,
+          "height": 12,
+          "bottom": 532.421875
+        },
+        {
+          "text": "Rest",
+          "x": 58,
+          "y": 864.421875,
+          "width": 302,
+          "height": 43,
+          "bottom": 907.421875
+        },
+        {
+          "text": "Forage",
+          "x": 396,
+          "y": 864.421875,
+          "width": 302,
+          "height": 43,
+          "bottom": 907.421875
+        },
+        {
+          "text": "Salvage parts",
+          "x": 58,
+          "y": 981.421875,
+          "width": 302,
+          "height": 43,
+          "bottom": 1024.421875
+        },
+        {
+          "text": "Scenic · 50 mi / 2 fuelSteady · 80 mi / 4 fuelFloor it · 110",
+          "x": 45,
+          "y": 1183.421875,
+          "width": 327,
+          "height": 18,
+          "bottom": 1201.421875
+        },
+        {
+          "text": "Bare · 0.25 food / travelerMeager · 0.5 food / travelerFilli",
+          "x": 384,
+          "y": 1183.421875,
+          "width": 327,
+          "height": 18,
+          "bottom": 1201.421875
+        }
+      ]
+    },
+    {
+      "name": "event-756x352: 16px editable controls",
+      "passed": false,
+      "evidence": [
+        {
+          "name": "Driving pace",
+          "font": "11px"
+        },
+        {
+          "name": "Daily rations",
+          "font": "11px"
+        }
+      ]
+    },
+    {
+      "name": "event-756x352: readable trip text",
+      "passed": false,
+      "evidence": [
+        {
+          "text": "Distance",
+          "font": "10px"
+        },
+        {
+          "text": "Day",
+          "font": "10px"
+        },
+        {
+          "text": "Next stop",
+          "font": "10px"
+        },
+        {
+          "text": "Cash",
+          "font": "9px"
+        },
+        {
+          "text": "Food",
+          "font": "9px"
+        },
+        {
+          "text": "Fuel",
+          "font": "9px"
+        },
+        {
+          "text": "Seed bombs",
+          "font": "9px"
+        },
+        {
+          "text": "Repair supplies",
+          "font": "9px"
+        },
+        {
+          "text": "Kombucha",
+          "font": "9px"
+        },
+        {
+          "text": "NFTs",
+          "font": "9px"
+        },
+        {
+          "text": "Kale",
+          "font": "10px"
+        },
+        {
+          "text": "Healthy",
+          "font": "9px"
+        },
+        {
+          "text": "Juniper",
+          "font": "10px"
+        },
+        {
+          "text": "Healthy",
+          "font": "9px"
+        },
+        {
+          "text": "Rowan",
+          "font": "10px"
+        },
+        {
+          "text": "Healthy",
+          "font": "9px"
+        },
+        {
+          "text": "Birch",
+          "font": "10px"
+        },
+        {
+          "text": "Healthy",
+          "font": "9px"
+        },
+        {
+          "text": "Echo",
+          "font": "10px"
+        },
+        {
+          "text": "Healthy",
+          "font": "9px"
+        },
+        {
+          "text": "Take a day to recover. The crew still needs supplies.",
+          "font": "10px"
+        },
+        {
+          "text": "Search nearby. Time and energy are not free.",
+          "font": "10px"
+        },
+        {
+          "text": "Salvage 2 repair parts once every four days. Breakdown repairs cost 1 part instead of 2.",
+          "font": "10px"
+        }
+      ]
+    },
+    {
+      "name": "event-756x352: all choices visible",
+      "passed": false,
+      "evidence": [
+        {
+          "x": 124,
+          "y": 284.796875,
+          "width": 508,
+          "height": 48,
+          "bottom": 332.796875
+        },
+        {
+          "x": 124,
+          "y": 341.796875,
+          "width": 508,
+          "height": 48,
+          "bottom": 389.796875
+        }
+      ]
+    },
+    {
+      "name": "event-756x352: focus enters dialog",
+      "passed": true
+    },
+    {
+      "name": "event-756x352: Escape preserves pending event",
+      "passed": true
+    },
+    {
+      "name": "event-756x352: choice resolves",
+      "passed": true
+    },
+    {
+      "name": "travel-1440x900: no horizontal overflow",
+      "passed": true,
+      "evidence": 1440
+    },
+    {
+      "name": "travel-1440x900: images loaded",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "travel-1440x900: Drive visible without scrolling",
+      "passed": true,
+      "evidence": {
+        "x": 708.875,
+        "y": 614.765625,
+        "width": 235,
+        "height": 62.5,
+        "bottom": 677.265625
+      }
+    },
+    {
+      "name": "travel-1440x900: trip facts visible without scrolling",
+      "passed": true,
+      "evidence": {
+        "x": 46,
+        "y": 720.265625,
+        "width": 899.875,
+        "height": 36.796875,
+        "bottom": 757.0625
+      }
+    },
+    {
+      "name": "travel-1440x900: route remains available",
+      "passed": true
+    },
+    {
+      "name": "route-1440x900: no horizontal overflow",
+      "passed": true,
+      "evidence": 1440
+    },
+    {
+      "name": "route-1440x900: images loaded",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "shop-1440x900: no horizontal overflow",
+      "passed": true,
+      "evidence": 1440
+    },
+    {
+      "name": "shop-1440x900: images loaded",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "shop-1440x900: auto-buy discoverable",
+      "passed": true,
+      "evidence": {
+        "x": 773.921875,
+        "y": 910.53125,
+        "width": 176.953125,
+        "height": 43,
+        "bottom": 953.53125
+      }
+    },
+    {
+      "name": "shop-1440x900: auto-buy works",
+      "passed": true
+    },
+    {
+      "name": "event-1440x900: no horizontal overflow",
+      "passed": true,
+      "evidence": 1440
+    },
+    {
+      "name": "event-1440x900: images loaded",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "event-1440x900: all choices visible",
+      "passed": true,
+      "evidence": [
+        {
+          "x": 466,
+          "y": 585.734375,
+          "width": 508,
+          "height": 48,
+          "bottom": 633.734375
+        },
+        {
+          "x": 466,
+          "y": 642.734375,
+          "width": 508,
+          "height": 48,
+          "bottom": 690.734375
+        }
+      ]
+    },
+    {
+      "name": "event-1440x900: focus enters dialog",
+      "passed": true
+    },
+    {
+      "name": "event-1440x900: Escape preserves pending event",
+      "passed": true
+    },
+    {
+      "name": "event-1440x900: choice resolves",
+      "passed": true
+    },
+    {
+      "name": "title-320x568: no horizontal overflow",
+      "passed": true,
+      "evidence": 320
+    },
+    {
+      "name": "title-320x568: images loaded",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "title-320x568: 44px touch targets",
+      "passed": false,
+      "evidence": [
+        {
+          "text": "The Portland Trail ✳",
+          "x": 15,
+          "y": 20.328125,
+          "width": 126.625,
+          "height": 13.34375,
+          "bottom": 33.671875
+        }
+      ]
+    },
+    {
+      "name": "title-320x568: 16px editable controls",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "title-320x568: readable trip text",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "backgrounds-320x568: no horizontal overflow",
+      "passed": true,
+      "evidence": 320
+    },
+    {
+      "name": "backgrounds-320x568: images loaded",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "backgrounds-320x568: 44px touch targets",
+      "passed": false,
+      "evidence": [
+        {
+          "text": "The Portland Trail ✳",
+          "x": 15,
+          "y": 20.328125,
+          "width": 126.625,
+          "height": 13.34375,
+          "bottom": 33.671875
+        }
+      ]
+    },
+    {
+      "name": "backgrounds-320x568: 16px editable controls",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "backgrounds-320x568: readable trip text",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "names-320x568: no horizontal overflow",
+      "passed": true,
+      "evidence": 320
+    },
+    {
+      "name": "names-320x568: images loaded",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "names-320x568: 44px touch targets",
+      "passed": false,
+      "evidence": [
+        {
+          "text": "The Portland Trail ✳",
+          "x": 15,
+          "y": -366.671875,
+          "width": 126.625,
+          "height": 13.34375,
+          "bottom": -353.328125
+        },
+        {
+          "text": "Back to backgrounds",
+          "x": 14,
+          "y": 365.5625,
+          "width": 292,
+          "height": 43,
+          "bottom": 408.5625
+        }
+      ]
+    },
+    {
+      "name": "names-320x568: 16px editable controls",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "names-320x568: readable trip text",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "long-name-320x568: no horizontal overflow",
+      "passed": true,
+      "evidence": 320
+    },
+    {
+      "name": "long-name-320x568: images loaded",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "long-name-320x568: 44px touch targets",
+      "passed": false,
+      "evidence": [
+        {
+          "text": "The Portland Trail ✳",
+          "x": 15,
+          "y": -366.671875,
+          "width": 126.625,
+          "height": 13.34375,
+          "bottom": -353.328125
+        },
+        {
+          "text": "New journey",
+          "x": 243.796875,
+          "y": -373,
+          "width": 61.203125,
+          "height": 26,
+          "bottom": -347
+        },
+        {
+          "text": "9 places along the way",
+          "x": 24,
+          "y": 251.484375,
+          "width": 147.046875,
+          "height": 12,
+          "bottom": 263.484375
+        },
+        {
+          "text": "Rest",
+          "x": 34,
+          "y": 566.484375,
+          "width": 113.5,
+          "height": 39,
+          "bottom": 605.484375
+        },
+        {
+          "text": "Forage",
+          "x": 172.5,
+          "y": 566.484375,
+          "width": 113.5,
+          "height": 39,
+          "bottom": 605.484375
+        },
+        {
+          "text": "Run a collab",
+          "x": 34,
+          "y": 691.671875,
+          "width": 113.5,
+          "height": 39,
+          "bottom": 730.671875
+        },
+        {
+          "text": "Scenic · 50 mi / 2 fuelSteady · 80 mi / 4 fuelFloor it · 110",
+          "x": 25,
+          "y": 909.90625,
+          "width": 270,
+          "height": 18,
+          "bottom": 927.90625
+        },
+        {
+          "text": "Bare · 0.25 food / travelerMeager · 0.5 food / travelerFilli",
+          "x": 25,
+          "y": 957.90625,
+          "width": 270,
+          "height": 18,
+          "bottom": 975.90625
+        }
+      ]
+    },
+    {
+      "name": "long-name-320x568: 16px editable controls",
+      "passed": false,
+      "evidence": [
+        {
+          "name": "Driving pace",
+          "font": "11px"
+        },
+        {
+          "name": "Daily rations",
+          "font": "11px"
+        }
+      ]
+    },
+    {
+      "name": "long-name-320x568: readable trip text",
+      "passed": false,
+      "evidence": [
+        {
+          "text": "Distance",
+          "font": "10px"
+        },
+        {
+          "text": "/ 1,000 mi",
+          "font": "9px"
+        },
+        {
+          "text": "Day",
+          "font": "10px"
+        },
+        {
+          "text": "Next stop",
+          "font": "10px"
+        },
+        {
+          "text": "Cash",
+          "font": "8px"
+        },
+        {
+          "text": "Food",
+          "font": "8px"
+        },
+        {
+          "text": "Fuel",
+          "font": "8px"
+        },
+        {
+          "text": "Seed bombs",
+          "font": "8px"
+        },
+        {
+          "text": "Repair supplies",
+          "font": "8px"
+        },
+        {
+          "text": "Kombucha",
+          "font": "8px"
+        },
+        {
+          "text": "NFTs",
+          "font": "8px"
+        },
+        {
+          "text": "AlexandertheTravelerWithLongName",
+          "font": "9px"
+        },
+        {
+          "text": "Healthy",
+          "font": "8px"
+        },
+        {
+          "text": "Juniper",
+          "font": "9px"
+        },
+        {
+          "text": "Healthy",
+          "font": "8px"
+        },
+        {
+          "text": "Rowan",
+          "font": "9px"
+        },
+        {
+          "text": "Healthy",
+          "font": "8px"
+        },
+        {
+          "text": "Birch",
+          "font": "9px"
+        },
+        {
+          "text": "Healthy",
+          "font": "8px"
+        },
+        {
+          "text": "Echo",
+          "font": "9px"
+        },
+        {
+          "text": "Healthy",
+          "font": "8px"
+        },
+        {
+          "text": "Take a day to recover. The crew still needs supplies.",
+          "font": "9px"
+        },
+        {
+          "text": "Search nearby. Time and energy are not free.",
+          "font": "9px"
+        },
+        {
+          "text": "Collab once every four days for $45 and 2 food. A Wi-Fi outage blocks it that day.",
+          "font": "9px"
+        }
+      ]
+    },
+    {
+      "name": "title-390x664: no horizontal overflow",
+      "passed": true,
+      "evidence": 390
+    },
+    {
+      "name": "title-390x664: images loaded",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "title-390x664: 44px touch targets",
+      "passed": false,
+      "evidence": [
+        {
+          "text": "The Portland Trail ✳",
+          "x": 15,
+          "y": 20.328125,
+          "width": 126.625,
+          "height": 13.34375,
+          "bottom": 33.671875
+        }
+      ]
+    },
+    {
+      "name": "title-390x664: 16px editable controls",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "title-390x664: readable trip text",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "backgrounds-390x664: no horizontal overflow",
+      "passed": true,
+      "evidence": 390
+    },
+    {
+      "name": "backgrounds-390x664: images loaded",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "backgrounds-390x664: 44px touch targets",
+      "passed": false,
+      "evidence": [
+        {
+          "text": "The Portland Trail ✳",
+          "x": 15,
+          "y": 20.328125,
+          "width": 126.625,
+          "height": 13.34375,
+          "bottom": 33.671875
+        }
+      ]
+    },
+    {
+      "name": "backgrounds-390x664: 16px editable controls",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "backgrounds-390x664: readable trip text",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "names-390x664: no horizontal overflow",
+      "passed": true,
+      "evidence": 390
+    },
+    {
+      "name": "names-390x664: images loaded",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "names-390x664: 44px touch targets",
+      "passed": false,
+      "evidence": [
+        {
+          "text": "The Portland Trail ✳",
+          "x": 15,
+          "y": -230.671875,
+          "width": 126.625,
+          "height": 13.34375,
+          "bottom": -217.328125
+        },
+        {
+          "text": "Back to backgrounds",
+          "x": 14,
+          "y": 461.96875,
+          "width": 362,
+          "height": 43,
+          "bottom": 504.96875
+        }
+      ]
+    },
+    {
+      "name": "names-390x664: 16px editable controls",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "names-390x664: readable trip text",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "long-name-390x664: no horizontal overflow",
+      "passed": true,
+      "evidence": 390
+    },
+    {
+      "name": "long-name-390x664: images loaded",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "long-name-390x664: 44px touch targets",
+      "passed": false,
+      "evidence": [
+        {
+          "text": "The Portland Trail ✳",
+          "x": 15,
+          "y": -230.671875,
+          "width": 126.625,
+          "height": 13.34375,
+          "bottom": -217.328125
+        },
+        {
+          "text": "New journey",
+          "x": 313.796875,
+          "y": -237,
+          "width": 61.203125,
+          "height": 26,
+          "bottom": -211
+        },
+        {
+          "text": "9 places along the way",
+          "x": 24,
+          "y": 365.09375,
+          "width": 147.046875,
+          "height": 12,
+          "bottom": 377.09375
+        },
+        {
+          "text": "Rest",
+          "x": 34,
+          "y": 680.09375,
+          "width": 148.5,
+          "height": 39,
+          "bottom": 719.09375
+        },
+        {
+          "text": "Forage",
+          "x": 207.5,
+          "y": 680.09375,
+          "width": 148.5,
+          "height": 39,
+          "bottom": 719.09375
+        },
+        {
+          "text": "Run a collab",
+          "x": 34,
+          "y": 779.1875,
+          "width": 148.5,
+          "height": 39,
+          "bottom": 818.1875
+        },
+        {
+          "text": "Scenic · 50 mi / 2 fuelSteady · 80 mi / 4 fuelFloor it · 110",
+          "x": 25,
+          "y": 984.375,
+          "width": 340,
+          "height": 18,
+          "bottom": 1002.375
+        },
+        {
+          "text": "Bare · 0.25 food / travelerMeager · 0.5 food / travelerFilli",
+          "x": 25,
+          "y": 1032.375,
+          "width": 340,
+          "height": 18,
+          "bottom": 1050.375
+        }
+      ]
+    },
+    {
+      "name": "long-name-390x664: 16px editable controls",
+      "passed": false,
+      "evidence": [
+        {
+          "name": "Driving pace",
+          "font": "11px"
+        },
+        {
+          "name": "Daily rations",
+          "font": "11px"
+        }
+      ]
+    },
+    {
+      "name": "long-name-390x664: readable trip text",
+      "passed": false,
+      "evidence": [
+        {
+          "text": "Distance",
+          "font": "10px"
+        },
+        {
+          "text": "/ 1,000 mi",
+          "font": "9px"
+        },
+        {
+          "text": "Day",
+          "font": "10px"
+        },
+        {
+          "text": "Next stop",
+          "font": "10px"
+        },
+        {
+          "text": "Cash",
+          "font": "8px"
+        },
+        {
+          "text": "Food",
+          "font": "8px"
+        },
+        {
+          "text": "Fuel",
+          "font": "8px"
+        },
+        {
+          "text": "Seed bombs",
+          "font": "8px"
+        },
+        {
+          "text": "Repair supplies",
+          "font": "8px"
+        },
+        {
+          "text": "Kombucha",
+          "font": "8px"
+        },
+        {
+          "text": "NFTs",
+          "font": "8px"
+        },
+        {
+          "text": "AlexandertheTravelerWithLongName",
+          "font": "9px"
+        },
+        {
+          "text": "Healthy",
+          "font": "8px"
+        },
+        {
+          "text": "Juniper",
+          "font": "9px"
+        },
+        {
+          "text": "Healthy",
+          "font": "8px"
+        },
+        {
+          "text": "Rowan",
+          "font": "9px"
+        },
+        {
+          "text": "Healthy",
+          "font": "8px"
+        },
+        {
+          "text": "Birch",
+          "font": "9px"
+        },
+        {
+          "text": "Healthy",
+          "font": "8px"
+        },
+        {
+          "text": "Echo",
+          "font": "9px"
+        },
+        {
+          "text": "Healthy",
+          "font": "8px"
+        },
+        {
+          "text": "Take a day to recover. The crew still needs supplies.",
+          "font": "9px"
+        },
+        {
+          "text": "Search nearby. Time and energy are not free.",
+          "font": "9px"
+        },
+        {
+          "text": "Collab once every four days for $45 and 2 food. A Wi-Fi outage blocks it that day.",
+          "font": "9px"
+        }
+      ]
+    },
+    {
+      "name": "long-location-390x664: no horizontal overflow",
+      "passed": true,
+      "evidence": 390
+    },
+    {
+      "name": "long-location-390x664: images loaded",
+      "passed": true,
+      "evidence": []
+    },
+    {
+      "name": "long-location-390x664: 44px touch targets",
+      "passed": false,
+      "evidence": [
+        {
+          "text": "The Portland Trail ✳",
+          "x": 15,
+          "y": 20.328125,
+          "width": 126.625,
+          "height": 13.34375,
+          "bottom": 33.671875
+        },
+        {
+          "text": "New journey",
+          "x": 313.796875,
+          "y": 14,
+          "width": 61.203125,
+          "height": 26,
+          "bottom": 40
+        },
+        {
+          "text": "9 places along the way",
+          "x": 24,
+          "y": 655.71875,
+          "width": 147.046875,
+          "height": 12,
+          "bottom": 667.71875
+        },
+        {
+          "text": "Forage",
+          "x": 34,
+          "y": 970.71875,
+          "width": 148.5,
+          "height": 39,
+          "bottom": 1009.71875
+        },
+        {
+          "text": "Talk to locals",
+          "x": 207.5,
+          "y": 970.71875,
+          "width": 148.5,
+          "height": 39,
+          "bottom": 1009.71875
+        },
+        {
+          "text": "Scenic · 50 mi / 2 fuelSteady · 80 mi / 4 fuelFloor it · 110",
+          "x": 25,
+          "y": 1162.859375,
+          "width": 340,
+          "height": 18,
+          "bottom": 1180.859375
+        },
+        {
+          "text": "Bare · 0.25 food / travelerMeager · 0.5 food / travelerFilli",
+          "x": 25,
+          "y": 1210.859375,
+          "width": 340,
+          "height": 18,
+          "bottom": 1228.859375
+        }
+      ]
+    },
+    {
+      "name": "long-location-390x664: 16px editable controls",
+      "passed": false,
+      "evidence": [
+        {
+          "name": "Driving pace",
+          "font": "11px"
+        },
+        {
+          "name": "Daily rations",
+          "font": "11px"
+        }
+      ]
+    },
+    {
+      "name": "long-location-390x664: readable trip text",
+      "passed": false,
+      "evidence": [
+        {
+          "text": "Distance",
+          "font": "10px"
+        },
+        {
+          "text": "/ 1,000 mi",
+          "font": "9px"
+        },
+        {
+          "text": "Day",
+          "font": "10px"
+        },
+        {
+          "text": "Next stop",
+          "font": "10px"
+        },
+        {
+          "text": "Cash",
+          "font": "8px"
+        },
+        {
+          "text": "Food",
+          "font": "8px"
+        },
+        {
+          "text": "Fuel",
+          "font": "8px"
+        },
+        {
+          "text": "Seed bombs",
+          "font": "8px"
+        },
+        {
+          "text": "Repair supplies",
+          "font": "8px"
+        },
+        {
+          "text": "Kombucha",
+          "font": "8px"
+        },
+        {
+          "text": "NFTs",
+          "font": "8px"
+        },
+        {
+          "text": "Kale",
+          "font": "9px"
+        },
+        {
+          "text": "Healthy",
+          "font": "8px"
+        },
+        {
+          "text": "Juniper",
+          "font": "9px"
+        },
+        {
+          "text": "Healthy",
+          "font": "8px"
+        },
+        {
+          "text": "Rowan",
+          "font": "9px"
+        },
+        {
+          "text": "Healthy",
+          "font": "8px"
+        },
+        {
+          "text": "Birch",
+          "font": "9px"
+        },
+        {
+          "text": "Healthy",
+          "font": "8px"
+        },
+        {
+          "text": "Echo",
+          "font": "9px"
+        },
+        {
+          "text": "Healthy",
+          "font": "8px"
+        },
+        {
+          "text": "Search nearby. Time and energy are not free.",
+          "font": "9px"
+        },
+        {
+          "text": "Hear what this place offers. One conversation per stop.",
+          "font": "9px"
+        }
+      ]
+    },
+    {
+      "name": "no browser errors",
+      "passed": true,
+      "evidence": []
+    }
+  ],
+  "failures": [
+    "travel-320x568: 44px touch targets",
+    "travel-320x568: 16px editable controls",
+    "travel-320x568: readable trip text",
+    "travel-320x568: trip facts visible without scrolling",
+    "route-320x568: 44px touch targets",
+    "route-320x568: 16px editable controls",
+    "route-320x568: readable trip text",
+    "shop-320x568: 44px touch targets",
+    "shop-320x568: 16px editable controls",
+    "shop-320x568: readable trip text",
+    "shop-320x568: auto-buy discoverable",
+    "event-320x568: 44px touch targets",
+    "event-320x568: 16px editable controls",
+    "event-320x568: readable trip text",
+    "travel-375x548: 44px touch targets",
+    "travel-375x548: 16px editable controls",
+    "travel-375x548: readable trip text",
+    "route-375x548: 44px touch targets",
+    "route-375x548: 16px editable controls",
+    "route-375x548: readable trip text",
+    "shop-375x548: 44px touch targets",
+    "shop-375x548: 16px editable controls",
+    "shop-375x548: readable trip text",
+    "shop-375x548: auto-buy discoverable",
+    "event-375x548: 44px touch targets",
+    "event-375x548: 16px editable controls",
+    "event-375x548: readable trip text",
+    "travel-390x664: 44px touch targets",
+    "travel-390x664: 16px editable controls",
+    "travel-390x664: readable trip text",
+    "route-390x664: 44px touch targets",
+    "route-390x664: 16px editable controls",
+    "route-390x664: readable trip text",
+    "shop-390x664: 44px touch targets",
+    "shop-390x664: 16px editable controls",
+    "shop-390x664: readable trip text",
+    "shop-390x664: auto-buy discoverable",
+    "event-390x664: 44px touch targets",
+    "event-390x664: 16px editable controls",
+    "event-390x664: readable trip text",
+    "travel-402x681: 44px touch targets",
+    "travel-402x681: 16px editable controls",
+    "travel-402x681: readable trip text",
+    "route-402x681: 44px touch targets",
+    "route-402x681: 16px editable controls",
+    "route-402x681: readable trip text",
+    "shop-402x681: 44px touch targets",
+    "shop-402x681: 16px editable controls",
+    "shop-402x681: readable trip text",
+    "event-402x681: 44px touch targets",
+    "event-402x681: 16px editable controls",
+    "event-402x681: readable trip text",
+    "travel-414x715: 44px touch targets",
+    "travel-414x715: 16px editable controls",
+    "travel-414x715: readable trip text",
+    "travel-414x715: useful scene height",
+    "route-414x715: 44px touch targets",
+    "route-414x715: 16px editable controls",
+    "route-414x715: readable trip text",
+    "shop-414x715: 44px touch targets",
+    "shop-414x715: 16px editable controls",
+    "shop-414x715: readable trip text",
+    "event-414x715: 44px touch targets",
+    "event-414x715: 16px editable controls",
+    "event-414x715: readable trip text",
+    "travel-430x739: 44px touch targets",
+    "travel-430x739: 16px editable controls",
+    "travel-430x739: readable trip text",
+    "travel-430x739: useful scene height",
+    "route-430x739: 44px touch targets",
+    "route-430x739: 16px editable controls",
+    "route-430x739: readable trip text",
+    "shop-430x739: 44px touch targets",
+    "shop-430x739: 16px editable controls",
+    "shop-430x739: readable trip text",
+    "event-430x739: 44px touch targets",
+    "event-430x739: 16px editable controls",
+    "event-430x739: readable trip text",
+    "travel-440x763: 44px touch targets",
+    "travel-440x763: 16px editable controls",
+    "travel-440x763: readable trip text",
+    "travel-440x763: useful scene height",
+    "route-440x763: 44px touch targets",
+    "route-440x763: 16px editable controls",
+    "route-440x763: readable trip text",
+    "shop-440x763: 44px touch targets",
+    "shop-440x763: 16px editable controls",
+    "shop-440x763: readable trip text",
+    "event-440x763: 44px touch targets",
+    "event-440x763: 16px editable controls",
+    "event-440x763: readable trip text",
+    "travel-756x352: 44px touch targets",
+    "travel-756x352: 16px editable controls",
+    "travel-756x352: readable trip text",
+    "travel-756x352: Drive visible without scrolling",
+    "travel-756x352: trip facts visible without scrolling",
+    "route-756x352: 44px touch targets",
+    "route-756x352: 16px editable controls",
+    "route-756x352: readable trip text",
+    "shop-756x352: 44px touch targets",
+    "shop-756x352: 16px editable controls",
+    "shop-756x352: readable trip text",
+    "shop-756x352: auto-buy discoverable",
+    "event-756x352: 44px touch targets",
+    "event-756x352: 16px editable controls",
+    "event-756x352: readable trip text",
+    "event-756x352: all choices visible",
+    "title-320x568: 44px touch targets",
+    "backgrounds-320x568: 44px touch targets",
+    "names-320x568: 44px touch targets",
+    "long-name-320x568: 44px touch targets",
+    "long-name-320x568: 16px editable controls",
+    "long-name-320x568: readable trip text",
+    "title-390x664: 44px touch targets",
+    "backgrounds-390x664: 44px touch targets",
+    "names-390x664: 44px touch targets",
+    "long-name-390x664: 44px touch targets",
+    "long-name-390x664: 16px editable controls",
+    "long-name-390x664: readable trip text",
+    "long-location-390x664: 44px touch targets",
+    "long-location-390x664: 16px editable controls",
+    "long-location-390x664: readable trip text"
+  ],
+  "errors": []
+}

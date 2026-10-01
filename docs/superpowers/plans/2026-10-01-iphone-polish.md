@@ -1,0 +1,13 @@
+# iPhone playback and motion pass
+
+**Goal:** Make the game comfortable in the actual iPhone browser viewport and improve visual feedback without changing rules or saves.
+
+**Approach:** Measure the current source in WebKit and Chrome. Cover small portrait viewports, Safari toolbar-reduced heights, landscape and desktop. Keep the illustrated scene readable while exposing the main action and essential trip information. Use 44px touch targets and 16px editable controls; preserve zoom. Use safe-area padding where useful, readable dialogs, and no horizontal scroll. Make small-screen dialogs use space efficiently. Reduce repeated scenery with new river-road and city-road art; add heatwave artwork. Animate scene atmosphere on arrival and changed resources after actions, respecting reduced motion and keeping feedback available without animation.
+
+## Tasks and ownership
+
+- [x] Responsive layout and mobile verification: worker owns `app/src/styles.css`, `app/tests/browser-iphone.mjs`, and its screenshots/report only. Measure baseline before changing CSS; use actual browser viewports including 375x548, 390x664, 402x681, 414x715, 430x739, 440x763, 756x352 landscape and 1440x900 desktop. Verify tap targets, 16px form/select fonts, Drive visibility, event choices, long text, no image clipping/overflow, reduced motion. New root markup classes may be styled here: `.road-clouds`, `.road-dust`, `.road-speed-lines`, `.scene-atmosphere` with `.atmosphere-rain`, `.atmosphere-embers`, `.atmosphere-steam`, `.atmosphere-leaves`; `.resource-changed` and `.health-changed`. Any effect must be finite and respect reduced motion. Keep budget to transforms/opacity.
+- [x] Root owns main rendering, data artwork mappings, optional native simulator read-only check, generated art, index safe-area metadata if required, documents and integration. No engine changes. Generate road-river, road-city and heatwave; use only new art paths. Add decor markup for driving and stops and trigger resource/health pulses on actual changes, without blocking input, replaying effects on arbitrary renders, or altering transactions.
+- [x] Review with independent worker. Run meaningful iPhone/browser checks and existing enhancement suite, build, inspect screenshots, record device/browser limits and measured scene sizes, preserve originals/checksums, save local checkpoint.
+
+The current clean feature checkout is reused. The user's project instructions authorize routine design decisions and execution without another approval gate. Root and layout worker edit disjoint files; root supplies the decor class contract above. New UI-only feedback does not enter the game save schema.

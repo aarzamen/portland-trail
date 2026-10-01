@@ -10,6 +10,8 @@ A local Git repository now tracks the project on `feat/playable-rebuild`. There 
 
 The roadtrip update adds Auto-buy essentials, animated travel and daily summaries, four new illustrated stops (11 locations total), and desktop/home-screen icons. Save version 2 imports the original version 1 journeys without resetting progress. See the [update validation](docs/validation/2026-10-01-roadtrip-update.md).
 
+The [iPhone polish pass](docs/validation/2026-10-01-iphone-polish.md) adds compact portrait and landscape playback, 44px touch controls, 16px editable text, three new scenes, brief atmosphere effects, and smaller phone images. Safari in the iPhone 17 Pro simulator was checked alongside WebKit and Chrome at 11 viewports. Physical iPhone performance remains untested.
+
 ## Run and verify
 
 Node 22 or newer is required. No npm install is needed.
@@ -43,9 +45,10 @@ cd "/Users/ama/The Portland Trail"
 PLAYWRIGHT_MODULE="/Users/ama/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright" node app/tests/browser-smoke.mjs
 PLAYWRIGHT_MODULE="/Users/ama/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright" node app/tests/browser-enhancements.mjs
 PLAYWRIGHT_MODULE="/Users/ama/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright" node app/tests/browser-icons.mjs
+PLAYWRIGHT_MODULE="/Users/ama/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright" BROWSER=chromium node app/tests/browser-iphone.mjs
 ```
 
-Start the local server first. Other machines can supply their own Playwright module through PLAYWRIGHT_MODULE. Browser screenshots and the report are written to `app/test-results/browser/`; this generated directory is excluded from Git.
+Start the local server first. Other machines can supply their own Playwright module through PLAYWRIGHT_MODULE. Browser evidence is written beneath `app/test-results/`; this generated directory is excluded from Git. The iPhone validation record includes the WebKit command and saved reports.
 
 ## Development map
 
@@ -55,7 +58,7 @@ Start the local server first. Other machines can supply their own Playwright mod
 - [Asset manifest](app/assets/manifest.json): source paths, hashes, extraction rectangles, and output sizes.
 - [Validation record](docs/validation/2026-10-01.md): checks, outcomes, and limits.
 
-The travel screen animates the existing van over illustrated scenery. The [new artwork and exact generation prompts](docs/handoff/graphics-v2/README.md) are preserved beside the original masters. A strict pixel palette, real-device Safari validation, and hosting remain future work.
+The travel screen animates the existing van over illustrated scenery. The [location artwork](docs/handoff/graphics-v2/README.md) and [river, city and heatwave artwork](docs/handoff/graphics-v3/README.md) preserve the generated masters and exact prompts. A strict pixel palette, physical-device Safari validation, and hosting remain future work. Phone scene variants can be regenerated on macOS with `node app/scripts/prepare-mobile-art.mjs` from the project root; they are already included in the app and do not require regeneration to build.
 
 ## Desktop and home-screen icon
 

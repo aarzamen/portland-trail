@@ -4,11 +4,11 @@ Updated October 1, 2026. The first playable replacement is implemented in [app/]
 
 ## Read next
 
-1. [Root instructions](../../AGENTS.md) and [latest roadtrip update validation](../validation/2026-10-01-roadtrip-update.md).
+1. [Root instructions](../../AGENTS.md), [latest iPhone validation](../validation/2026-10-01-iphone-polish.md), and [roadtrip update validation](../validation/2026-10-01-roadtrip-update.md).
 2. [Implementation design](../superpowers/specs/2026-10-01-playable-rebuild-design.md) and [completed plan](../superpowers/plans/2026-10-01-playable-rebuild.md).
 3. [Illustrated original audit](Portland_Trail_Audit.pdf), [rebuild brief](HANDOFF_TO_CODEX.txt), and [18 original findings](findings.json).
 4. [Local image review](LOCAL_IMAGE_REVIEW.md), [deployed inventory](asset_inventory.json), [export inventory](provided_export_asset_inventory.json), and [current app asset manifest](../../app/assets/manifest.json).
-5. [Asset brief](ASSET_BRIEF.txt), [graphics notes](graphics-v1/README.txt), [concept manifest](graphics-v1/manifest.json), and [new locations and app icon](graphics-v2/README.md).
+5. [Asset brief](ASSET_BRIEF.txt), [graphics notes](graphics-v1/README.txt), [concept manifest](graphics-v1/manifest.json), [new locations and app icon](graphics-v2/README.md), and [new road scenes and phone image variants](graphics-v3/README.md).
 
 ## Preservation and placement
 
@@ -30,11 +30,13 @@ The current Git branch is `feat/playable-rebuild`, with local commits and no rem
 - Responsive green illustrated interface, real portrait/icon exports, quantity purchases, keyboard background selection, and native event dialogs.
 - Travel animates the van, road and mileage for 950ms, then shows the latest leg's distance, supplies and arrival. Reduced motion skips playback. Game state saves before animation; pending encounters appear afterward and survive reload.
 - Desktop/home-screen manifest icons, Apple touch icon and favicons are included in both the preview and static build. Root and nested hosting paths were checked.
+- iPhone portrait scenes are 180–229px high in tested viewports, leaving Drive and trip facts visible. Landscape places the action beside a shallow scene. Controls are at least 44px, editable controls use 16px text, and screen focus no longer scrolls past the top on Resume.
+- River-gorge and Portland-approach road art, a heatwave encounter image, and finite clouds/dust/arrival effects add visual variety. Actual supply and health changes briefly highlight. Reduced motion disables animations and transitions. All 24 scene JPEGs have 640px and 960px phone variants; desktop retains larger images.
 
 Balance intentionally differs from the original: prices and travel distances make resupply workable. The original starting cash/food/fuel values are retained. Current exact rules and ability descriptions live in [data.js](../../app/src/data.js). A good-weather event on the open road grants 20 miles; at an arrived stop it grants 2 fuel and preserves the opportunity to resupply. The critical encounter remains a rare losing event. The small seeded simulation is regression evidence, not a measured human-player difficulty study.
 
 ## Remaining work
 
-The local build is ready for playtesting. Real-device Safari and native OS installation, user feedback on difficulty and humor, removal of remaining decorative generated lettering in older scenes, and stricter visual consistency between scene vehicles remain. Sites tooling was discoverable, but its local building/hosting skills were unavailable during initial development; no Site was created or published. The static build is portable for a subsequent hosting task. There is no offline cache or audio.
+The local build is ready for playtesting. Safari setup, auto-buy, travel and arrival were checked in an iPhone 17 Pro simulator running iOS 26.5, including portrait and landscape. Physical iPhone performance and native OS installation remain untested. User feedback on difficulty and humor, removal of remaining decorative generated lettering in older scenes, and stricter visual consistency between scene vehicles remain. Sites tooling was discoverable, but its local building/hosting skills were unavailable during initial development; no Site was created or published. The static build is portable for a subsequent hosting task. There is no offline cache or audio.
 
 Do not mistake the original audit findings for current test failures. See the validation record for the rebuild's tested behavior and actual limits.

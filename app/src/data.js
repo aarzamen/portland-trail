@@ -48,7 +48,7 @@ export const EVENTS = [
   { id: 'food_poisoning', title: 'Food Poisoning from Foraged Berries', description: 'Someone was very confident about the berries. They should not have been.', type: 'auto', image: 'assets/illness.jpg', choices: [] },
   { id: 'van_breakdown', title: 'Vehicle “Quirk” (Breakdown)', description: 'A charming new noise becomes silence. The van needs repair.', type: 'choice', image: 'assets/breakdown.jpg', choices: [{ id: 'repair', label: 'Use repair supplies' }, { id: 'kick', label: 'Try percussive encouragement' }] },
   { id: 'good_weather', title: 'Perfect Portland-esque Drizzle', description: 'The roads clear and your contemplative mood improves.', type: 'auto', image: 'assets/travel.jpg', choices: [] },
-  { id: 'bad_weather', title: 'Unexpected Heatwave', description: 'The heat slows every traveler and tests everyone’s patience.', type: 'auto', image: null, choices: [] },
+  { id: 'bad_weather', title: 'Unexpected Heatwave', description: 'The heat slows every traveler and tests everyone’s patience.', type: 'auto', image: 'assets/heatwave.jpg', choices: [] },
   { id: 'found_supplies', title: 'Abandoned Free Box!', description: 'Useful supplies sit beside a handwritten “please take” sign.', type: 'auto', image: 'assets/free-box.jpg', choices: [] },
   { id: 'wifi_outage', title: 'Local ISP Outage!', description: 'The one coffee shop with Wi-Fi for miles goes dark.', type: 'auto', image: 'assets/wifi.jpg', choices: [] },
   { id: 'pandemic_death', title: 'Sudden Pandemic Relapse', description: 'A devastating outbreak ends the journey.', type: 'critical', image: 'assets/illness.jpg', choices: [] },
