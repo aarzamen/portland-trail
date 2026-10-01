@@ -121,6 +121,68 @@ main { flex: 1; min-width: 0; }
 .route-track span { display: block; height: 100%; background: linear-gradient(90deg, #6b9a4d, var(--phosphor)); }
 .route-endpoints { display: flex; justify-content: space-between; color: #7e957b; margin-top: 6px; font-size: 9px; }
 
+/* The road is a tiny theater: scenery recedes, the van stays with the crew,
+   and motion is triggered only by a driving choice. */
+.road-stage { position: absolute; inset: 0; overflow: hidden; isolation: isolate; background: #24432b; }
+.road-backdrop { position: absolute; inset: -5%; width: 110%; max-width: none; height: 110%; object-fit: cover; object-position: center 52%; filter: saturate(.68) brightness(.86); }
+.road-light, .road-mist, .road-rain { position: absolute; inset: 0; pointer-events: none; }
+.road-light { background: linear-gradient(180deg, #c6d89912 0%, transparent 55%, #14261955); }
+.light-morning .road-light { background: linear-gradient(120deg, #e1dc9c25, transparent 65%); }
+.light-dusk .road-light { background: linear-gradient(180deg, #3c28524d, #db9c5426 50%, #09180a30); }
+.light-dusk .road-backdrop { filter: saturate(.75) brightness(.72); }
+.region-pines .road-backdrop { object-position: 34% 45%; transform: scale(1.14); }
+.region-outskirts .road-backdrop { object-position: 65% 58%; transform: scale(1.06); }
+.region-river .road-backdrop { object-position: center 45%; }
+.region-forest .road-backdrop { object-position: center 56%; }
+.region-city .road-backdrop { object-position: center 50%; }
+.road-mist { background: linear-gradient(0deg, #cedba729 17%, transparent 53%); }
+.road-surface { position: absolute; z-index: 1; left: -10%; right: -10%; top: 72%; bottom: -7%; background: linear-gradient(#365039 0 9%, #74815b 9% 13%, #283d2b 13% 91%, #586b42 91%); transform: rotate(-2deg); border-top: 2px solid #94a174; }
+.road-stripes { position: absolute; left: -30%; width: 160%; height: 4%; top: 52%; background: repeating-linear-gradient(90deg, #c1c595 0 9%, transparent 9% 18%); opacity: .75; }
+.road-verge { position: absolute; z-index: 3; height: 8%; left: -30%; right: -30%; bottom: -3%; transform: rotate(-2deg); background: repeating-linear-gradient(105deg, #274727 0 4%, #4e6734 4% 7%, #244327 7% 12%); }
+.road-van { position: absolute; z-index: 2; width: clamp(170px, 32%, 320px); bottom: 14%; left: 43%; filter: drop-shadow(0 5px 0 #08120975); }
+.van-cutout { position: relative; display: block; width: 100%; image-rendering: auto; z-index: 1; }
+.van-shadow { position: absolute; left: 10%; right: 5%; bottom: -2%; height: 12%; background: #0a130bc4; filter: blur(3px); border-radius: 50%; }
+.road-sign { position: absolute; left: 22px; top: 22px; display: grid; gap: 6px; border-left: 3px solid var(--amber); padding: 9px 13px; color: var(--paper); background: #0b1b10d9; max-width: calc(100% - 44px); }
+.road-sign > span { color: #c4d1ad; font-size: 11px; }
+.road-sign > strong { color: var(--amber); font-size: 22px; line-height: 1; letter-spacing: -.04em; }
+.weather-rain .road-rain { z-index: 4; background: repeating-linear-gradient(110deg, transparent 0 29px, #d8edc719 30px 31px, transparent 32px 57px); opacity: .6; }
+.weather-rain .road-mist { background: linear-gradient(0deg, #b6c9b540, transparent 72%); }
+.weather-heat .road-light { background: #cfa3452b; }
+.is-driving .road-backdrop { animation: passing-scenery .95s linear both; }
+.is-driving .road-stripes { animation: passing-road .24s linear infinite; }
+.is-driving .road-verge { animation: passing-verge .4s linear infinite; }
+.is-driving .road-van { animation: rolling-van .19s steps(2, end) infinite; }
+.is-driving .road-rain { animation: passing-rain .3s linear infinite; }
+.is-driving .road-sign strong { min-width: 6ch; }
+@keyframes passing-scenery { from { transform: translateX(2.5%) scale(1.07); } to { transform: translateX(-2.5%) scale(1.07); } }
+@keyframes passing-road { to { background-position-x: -18vw; } }
+@keyframes passing-verge { to { background-position-x: -25vw; } }
+@keyframes rolling-van { 0%, 100% { transform: translateY(0) rotate(-.4deg); } 50% { transform: translateY(-3px) rotate(.3deg); } }
+@keyframes passing-rain { to { transform: translate(-8px, 8px); } }
+.scene-on-road .scene-image-vignette { z-index: 4; }
+.scene-stamp { z-index: 5; }
+.trip-numbers [data-trip-distance] { font-weight: inherit; }
+.route-map { position: relative; }
+.route-markers { position: absolute; inset: 0; pointer-events: none; }
+.route-marker { position: absolute; top: -2px; width: 5px; height: 12px; background: #354c34; border: 1px solid #83a265; transform: translateX(-50%); }
+.route-marker.is-passed { background: var(--phosphor); border-color: #d6e8b0; }
+.route-details { margin-top: 12px; border-top: 1px solid #344d33; padding-top: 10px; font-size: 10px; color: var(--quiet); }
+.route-details summary { cursor: pointer; width: fit-content; color: #b6c99e; }
+.route-details ol { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 20px; list-style: none; padding: 8px 0 0; margin: 0; }
+.route-stop { display: grid; grid-template-columns: 50px minmax(0, 1fr); align-items: baseline; gap: 2px 8px; padding: 9px 0; border-bottom: 1px solid #29452f; }
+.route-stop > span { font-size: 9px; }
+.route-stop > strong { color: #c1d2b5; font-size: 10px; }
+.route-stop > small { grid-column: 2; font-size: 9px; }
+.route-stop.is-passed { opacity: .55; }
+.route-stop.is-current > strong { color: var(--amber); }
+.last-leg { border: 1px solid #5f7747; border-left: 3px solid var(--phosphor); margin-top: 10px; padding: 12px 15px; background: #203420; }
+.last-leg-heading { display: flex; justify-content: space-between; gap: 10px; align-items: baseline; }
+.last-leg h2 { margin: 0; font-size: 12px; letter-spacing: -.02em; line-height: 1.4; }
+.last-leg-heading > span { color: #a7bd97; font-size: 10px; white-space: nowrap; }
+.leg-receipt { display: flex; flex-wrap: wrap; gap: 9px 15px; margin-top: 8px; font-size: 11px; color: #c9d5b8; }
+.leg-receipt > strong { color: var(--amber); }
+.leg-receipt > span:last-child { margin-left: auto; color: var(--quiet); }
+
 .resources { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px 7px; }
 .resource { display: flex; align-items: center; min-width: 0; gap: 7px; padding: 8px 9px; background: #152619; border: 1px solid #334f36; font-size: 10px; }
 .resource-icon { width: 25px; height: 25px; flex: 0 0 25px; object-fit: contain; }
@@ -166,6 +228,21 @@ main { flex: 1; min-width: 0; }
 .setting-fields select { width: 100%; min-height: 42px; border: 1px solid #4e714d; border-radius: 0; padding: 7px 8px; color: var(--paper); background: #1b301e; font-size: 11px; }
 .setting-fields + .panel-intro { margin: 10px 0 0; }
 .shop-list { display: grid; gap: 7px; }
+.auto-buy-preview { margin: 0 0 20px; padding: 16px; border: 1px solid #819663; background: #243b23; }
+.main-column > .auto-buy-preview { margin: 10px 0; }
+.auto-buy-preview + .trip-strip { border-top: 1px solid #355039; }
+.auto-buy-heading { display: flex; align-items: flex-start; gap: 10px; }
+.auto-buy-heading > img { width: 35px; height: 35px; flex: 0 0 35px; }
+.auto-buy-heading h2 { margin: 0 0 6px; color: #e1ecc9; font-size: 17px; letter-spacing: -.05em; }
+.auto-buy-heading p { margin: 0; color: #c3d3b3; font-size: 11px; line-height: 1.6; }
+.auto-buy-cart { display: flex; flex-wrap: wrap; gap: 6px; list-style: none; padding: 0; margin: 14px 0 10px; }
+.auto-buy-cart li { padding: 7px 9px; color: #c6d8b3; border: 1px solid #587745; background: #182f1c; font-size: 11px; }
+.auto-buy-cart strong { color: var(--amber); }
+.auto-buy-note { margin: 10px 0 13px; color: #afc49b; font-size: 10px; line-height: 1.6; }
+.auto-buy-footer { display: flex; align-items: center; justify-content: space-between; gap: 10px; border-top: 1px solid #536e43; padding-top: 13px; }
+.auto-buy-cost { display: grid; gap: 4px; }
+.auto-buy-cost > strong { font-size: 23px; line-height: 1; letter-spacing: -.05em; color: var(--amber); }
+.auto-buy-cost > span { color: #c3d3b3; font-size: 9px; }
 .shop-item { min-width: 0; display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 14px; align-items: center; border: 1px solid #3a553c; background: #192b1c; padding: 12px 13px; }
 .shop-item-copy { min-width: 0; }
 .shop-item-copy strong { display: block; font-size: 13px; margin-bottom: 5px; }
@@ -273,6 +350,22 @@ main { flex: 1; min-width: 0; }
   .scene-text h1 { font-size: 27px; }
   .scene-text > p:last-child { font-size: 11px; }
   .scene-stamp { left: 10px; bottom: 10px; font-size: 8px; }
+  .road-sign { top: 14px; left: 14px; padding: 7px 10px; max-width: calc(100% - 28px); }
+  .road-sign > span { font-size: 9px; }
+  .road-sign > strong { font-size: 18px; }
+  .road-van { width: 47%; left: 35%; bottom: 14%; }
+  .route-details ol { grid-template-columns: 1fr; }
+  .last-leg { padding: 10px 12px; }
+  .last-leg-heading { display: block; }
+  .last-leg h2 { font-size: 11px; margin-bottom: 3px; }
+  .last-leg-heading > span { font-size: 9px; }
+  .leg-receipt { gap: 8px 13px; font-size: 10px; }
+  .auto-buy-preview { padding: 12px; }
+  .auto-buy-heading { gap: 8px; }
+  .auto-buy-heading h2 { font-size: 16px; }
+  .auto-buy-heading p { font-size: 10px; }
+  .auto-buy-footer { align-items: stretch; flex-direction: column; gap: 12px; }
+  .auto-buy-cost { display: flex; gap: 10px; align-items: baseline; }
   .trip-strip { padding: 13px 13px 11px; }
   .trip-numbers { gap: 7px; grid-template-columns: 1fr .55fr 1fr; }
   .trip-numbers strong { font-size: 14px; }

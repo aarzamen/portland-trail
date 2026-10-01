@@ -8,6 +8,8 @@ The first playable rebuild lives in [app/](app/). It is a static browser game wi
 
 A local Git repository now tracks the project on `feat/playable-rebuild`. There is no remote or publication configured. The original staging README and local-image status are preserved as `docs/handoff/README.archive-v2.md` and `docs/handoff/LOCAL_IMAGE_REVIEW.archive-v2.md`. The original setup document remains inside the handoff ZIP.
 
+The roadtrip update adds Auto-buy essentials, animated travel and daily summaries, four new illustrated stops (11 locations total), and desktop/home-screen icons. Save version 2 imports the original version 1 journeys without resetting progress. See the [update validation](docs/validation/2026-10-01-roadtrip-update.md).
+
 ## Run and verify
 
 Node 22 or newer is required. No npm install is needed.
@@ -39,6 +41,8 @@ Browser checks use Playwright with installed Chrome. On this Mac, the bundled ru
 ```bash
 cd "/Users/ama/The Portland Trail"
 PLAYWRIGHT_MODULE="/Users/ama/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright" node app/tests/browser-smoke.mjs
+PLAYWRIGHT_MODULE="/Users/ama/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright" node app/tests/browser-enhancements.mjs
+PLAYWRIGHT_MODULE="/Users/ama/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright" node app/tests/browser-icons.mjs
 ```
 
 Start the local server first. Other machines can supply their own Playwright module through PLAYWRIGHT_MODULE. Browser screenshots and the report are written to `app/test-results/browser/`; this generated directory is excluded from Git.
@@ -51,4 +55,8 @@ Start the local server first. Other machines can supply their own Playwright mod
 - [Asset manifest](app/assets/manifest.json): source paths, hashes, extraction rectangles, and output sizes.
 - [Validation record](docs/validation/2026-10-01.md): checks, outcomes, and limits.
 
-This version uses static illustrations. Animated van frames, a strict pixel palette, real-device Safari validation, and hosting remain future work. The broad original art inventory remains preserved; only selected reviewed copies are used by the app.
+The travel screen animates the existing van over illustrated scenery. The [new artwork and exact generation prompts](docs/handoff/graphics-v2/README.md) are preserved beside the original masters. A strict pixel palette, real-device Safari validation, and hosting remain future work.
+
+## Desktop and home-screen icon
+
+The game supplies browser icons, a 180px Apple touch icon, and 192/512px app icons through a web manifest. Launch paths are relative, including when hosted in a subdirectory. The app still needs its server running; there is no offline cache. A shortcut saved before this update may need to be removed and added again to refresh its cached icon. Native OS installation has not been tested.

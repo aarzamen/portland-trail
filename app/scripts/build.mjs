@@ -7,7 +7,7 @@ const dist = join(root, 'dist');
 await readFile(join(root, 'index.html'));
 await rm(dist, { recursive: true, force: true });
 await mkdir(dist, { recursive: true });
-for (const item of ['index.html', 'src', 'assets']) {
+for (const item of ['index.html', 'manifest.webmanifest', 'src', 'assets']) {
   await cp(join(root, item), join(dist, item), { recursive: true });
 }
 const assets = await readdir(join(dist, 'assets'));

@@ -30,11 +30,15 @@ export const RATIONS = {
 
 export const LOCATIONS = [
   { id: 'start_city', name: "Your Shared Artist Co-op (Parents' Guest Room)", shortName: 'Artist Co-op', miles: 0, description: 'Leave the communal kombucha SCOBY behind. The van may be held together by stickers.', activities: ['shop'], image: 'assets/departure.jpg' },
+  { id: 'mushroom_market', name: 'Mosswood Mushroom Market', shortName: 'Mushroom Market', miles: 100, description: 'Locally foraged mushrooms, hand-whittled spoons, and one extremely credentialed raccoon.', activities: ['shop', 'talk'], image: 'assets/mushroom-market.jpg' },
   { id: 'first_stop', name: 'Forgotten Highway Rest Stop', shortName: 'Rest Stop', miles: 200, description: 'Lukewarm coffee and a map whose best road is a dotted line.', activities: ['rest', 'forage'], image: 'assets/rest-stop.jpg' },
+  { id: 'river_ferry', name: 'Last Cast River Ferry', shortName: 'River Ferry', miles: 280, description: 'The ferry runs on river time. The captain calls every delay a mindfulness exercise.', activities: ['rest', 'talk'], image: 'assets/river-ferry.jpg' },
   { id: 'sketchy_motel', name: 'Irony-Laden Roadside Motel', shortName: 'Roadside Motel', miles: 350, description: 'The Wi-Fi is vintage. So are the stains.', activities: ['rest', 'shop'], image: 'assets/motel.jpg' },
   { id: 'viral_landmark', name: 'Obscure Roadside Attraction (Now Viral)', shortName: 'Viral Landmark', miles: 470, description: 'Everyone is taking an authentic selfie at exactly the same angle.', activities: ['talk', 'forage'], image: 'assets/landmark.jpg' },
+  { id: 'forest_camp', name: 'Rainy Cedar Campground', shortName: 'Forest Camp', miles: 570, description: 'A quiet grove, a smoky fire, and a communal tarp with a surprisingly elaborate governance structure.', activities: ['rest', 'forage', 'talk'], image: 'assets/forest-camp.jpg' },
   { id: 'crypto_meetup', name: 'DeFi Community Node (Gas Station Backroom)', shortName: 'Crypto Meetup', miles: 670, description: 'They promise avocado-toast futures and refuse to explain where the money comes from.', activities: ['talk', 'shop'], image: 'assets/crypto.jpg' },
   { id: 'food_truck_fest', name: 'Artisanal Food Cart Pod', shortName: 'Food Carts', miles: 750, description: 'An oasis of excellent tacos and alarming prices.', activities: ['shop', 'rest'], image: 'assets/food-carts.jpg' },
+  { id: 'bookshop', name: 'Last Chapter Roadside Bookshop', shortName: 'Bookshop', miles: 870, description: 'Used books, emergency snacks, and a resident cat who has rejected your manuscript.', activities: ['shop', 'talk'], image: 'assets/bookshop.jpg' },
   { id: 'portland', name: 'Portland (The Dream of the 90s is Alive)', shortName: 'Portland', miles: 1000, description: 'You made it. The rent is high, but the story is yours.', activities: [], image: 'assets/victory.jpg' },
 ];
 

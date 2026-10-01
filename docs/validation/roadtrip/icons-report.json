@@ -1,0 +1,142 @@
+[
+  {
+    "url": "http://127.0.0.1:4173",
+    "status": 200,
+    "type": "application/manifest+json",
+    "manifest": {
+      "id": "./",
+      "name": "The Portland Trail",
+      "short_name": "Portland Trail",
+      "description": "Five travelers, one unreliable van, and a thousand miles to Portland.",
+      "lang": "en",
+      "start_url": "./",
+      "scope": "./",
+      "display": "standalone",
+      "background_color": "#07110a",
+      "theme_color": "#07110a",
+      "icons": [
+        {
+          "src": "./assets/icons/icon-192.png",
+          "sizes": "192x192",
+          "type": "image/png",
+          "purpose": "any"
+        },
+        {
+          "src": "./assets/icons/icon-512.png",
+          "sizes": "512x512",
+          "type": "image/png",
+          "purpose": "any maskable"
+        }
+      ]
+    },
+    "images": [
+      {
+        "src": "http://127.0.0.1:4173/assets/icons/icon-192.png",
+        "sizes": "192x192",
+        "type": "image/png",
+        "purpose": "any",
+        "width": 192,
+        "height": 192
+      },
+      {
+        "src": "http://127.0.0.1:4173/assets/icons/icon-512.png",
+        "sizes": "512x512",
+        "type": "image/png",
+        "purpose": "any maskable",
+        "width": 512,
+        "height": 512
+      },
+      {
+        "src": "http://127.0.0.1:4173/assets/icons/favicon-32.png",
+        "sizes": "32x32",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "src": "http://127.0.0.1:4173/assets/icons/favicon-16.png",
+        "sizes": "16x16",
+        "width": 16,
+        "height": 16
+      },
+      {
+        "src": "http://127.0.0.1:4173/assets/icons/apple-touch-icon.png",
+        "sizes": "180x180",
+        "width": 180,
+        "height": 180
+      }
+    ],
+    "start": "http://127.0.0.1:4173/",
+    "scope": "http://127.0.0.1:4173/",
+    "browserManifestErrors": []
+  },
+  {
+    "url": "http://127.0.0.1:52791/games/portland/",
+    "status": 200,
+    "type": "application/manifest+json",
+    "manifest": {
+      "id": "./",
+      "name": "The Portland Trail",
+      "short_name": "Portland Trail",
+      "description": "Five travelers, one unreliable van, and a thousand miles to Portland.",
+      "lang": "en",
+      "start_url": "./",
+      "scope": "./",
+      "display": "standalone",
+      "background_color": "#07110a",
+      "theme_color": "#07110a",
+      "icons": [
+        {
+          "src": "./assets/icons/icon-192.png",
+          "sizes": "192x192",
+          "type": "image/png",
+          "purpose": "any"
+        },
+        {
+          "src": "./assets/icons/icon-512.png",
+          "sizes": "512x512",
+          "type": "image/png",
+          "purpose": "any maskable"
+        }
+      ]
+    },
+    "images": [
+      {
+        "src": "http://127.0.0.1:52791/games/portland/assets/icons/icon-192.png",
+        "sizes": "192x192",
+        "type": "image/png",
+        "purpose": "any",
+        "width": 192,
+        "height": 192
+      },
+      {
+        "src": "http://127.0.0.1:52791/games/portland/assets/icons/icon-512.png",
+        "sizes": "512x512",
+        "type": "image/png",
+        "purpose": "any maskable",
+        "width": 512,
+        "height": 512
+      },
+      {
+        "src": "http://127.0.0.1:52791/games/portland/assets/icons/favicon-32.png",
+        "sizes": "32x32",
+        "width": 32,
+        "height": 32
+      },
+      {
+        "src": "http://127.0.0.1:52791/games/portland/assets/icons/favicon-16.png",
+        "sizes": "16x16",
+        "width": 16,
+        "height": 16
+      },
+      {
+        "src": "http://127.0.0.1:52791/games/portland/assets/icons/apple-touch-icon.png",
+        "sizes": "180x180",
+        "width": 180,
+        "height": 180
+      }
+    ],
+    "start": "http://127.0.0.1:52791/games/portland/",
+    "scope": "http://127.0.0.1:52791/games/portland/",
+    "browserManifestErrors": []
+  }
+]

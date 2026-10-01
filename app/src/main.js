@@ -1,7 +1,9 @@
 import { PROFESSIONS, ITEMS, LOCATIONS, EVENTS, PACES, RATIONS, DEFAULT_NAMES } from './data.js';
-import { createGame, transition, serializeGame, deserializeGame } from './engine.js';
+import { createGame, transition, serializeGame, deserializeGame, recommendSupplies } from './engine.js';
 
 const SAVE_KEY = 'the-portland-trail:v1';
+const LEG_KEY = 'the-portland-trail:last-leg:v1';
+const DRIVE_DURATION = 950;
 const app = document.querySelector('#app');
 const notice = document.querySelector('#notice');
 const saveStatus = document.querySelector('#save-status');
@@ -27,6 +29,8 @@ let flash = '';
 let storageWarning = '';
 let returnFocus = null;
 let lastEventToken = null;
+let lastLeg = null;
+let playback = null;
 const shopQuantities = Object.fromEntries(ITEMS.map(item => [item.id, 1]));
 
 function escapeHtml(value) {
@@ -70,6 +74,16 @@ function readSavedGame() {
       setNotice('This browser has an unreadable saved journey. You can start a new one; the old data has not been changed.', true);
       return null;
     }
+    // This optional UI receipt is bound to the exact game save. It never alters
+    // the rules state, and an old or malformed receipt is safe to ignore.
+    try {
+      const receipt = JSON.parse(localStorage.getItem(LEG_KEY));
+      const leg = receipt?.leg;
+      if (receipt?.savedGame === raw && leg &&
+        ['fromDistance', 'toDistance', 'fromDay', 'toDay', 'fuelUsed', 'foodUsed'].every(key => Number.isFinite(leg[key]) && leg[key] >= 0) &&
+        leg.toDistance >= leg.fromDistance && leg.toDistance <= restored.distance && leg.toDay >= leg.fromDay && leg.toDay <= restored.day &&
+        typeof leg.arrived === 'string' && leg.arrived.length <= 150) lastLeg = leg;
+    } catch { /* A receipt is optional; the journey itself is valid. */ }
     return restored;
   } catch {
     setNotice('Browser storage is unavailable. You can still play, but this journey may not resume after you leave.', true);
@@ -80,10 +94,15 @@ function readSavedGame() {
 function saveGame() {
   if (!state) return;
   try {
-    localStorage.setItem(SAVE_KEY, serializeGame(state));
+    const raw = serializeGame(state);
+    localStorage.setItem(SAVE_KEY, raw);
     savedState = state;
     storageWarning = '';
     saveStatus.textContent = 'Journey saved';
+    try {
+      if (lastLeg) localStorage.setItem(LEG_KEY, JSON.stringify({ savedGame: raw, leg: lastLeg }));
+      else localStorage.removeItem(LEG_KEY);
+    } catch { /* Optional visual history must not disable a working game save. */ }
   } catch {
     saveStatus.textContent = 'Playing without a save';
     setNotice('Your browser could not save this journey. You can keep playing here, but progress may be lost when you close the tab.', true);
@@ -91,7 +110,9 @@ function saveGame() {
 }
 
 function stateAction(action) {
-  if (!state) return;
+  if (!state || playback) return;
+  const before = state;
+  const order = action.type === 'autoPurchase' ? recommendSupplies(state) : null;
   const result = transition(state, action);
   if (result.error) {
     returnFocus = null;
@@ -100,8 +121,49 @@ function stateAction(action) {
   }
   flash = '';
   state = result.state;
+  if (action.type === 'travel' && (state.day > before.day || state.distance > before.distance)) {
+    lastLeg = {
+      fromDistance: before.distance, toDistance: state.distance,
+      fromDay: before.day, toDay: state.day,
+      fuelUsed: Math.max(0, before.inventory.fuel - state.inventory.fuel),
+      foodUsed: Math.max(0, before.inventory.food - state.inventory.food),
+      arrived: state.phase === 'location' || state.outcome === 'won' ? location().shortName || location().name : '',
+    };
+  } else if (action.type === 'resolveEvent' && lastLeg && state.distance > before.distance) {
+    // A clear-road encounter can add miles to the same leg or reach a stop.
+    lastLeg = { ...lastLeg, toDistance: state.distance, arrived: state.phase === 'location' || state.outcome === 'won' ? location().shortName || location().name : '' };
+  }
   saveGame();
+  if (action.type === 'autoPurchase' && order?.cost > 0) {
+    const packed = `Packed ${Object.entries(order.cart).filter(([, count]) => count > 0).map(([id, count]) => `${count} ${resourceLabels[id].toLowerCase()}`).join(', ')} for $${formatNumber(order.cost)}. $${formatNumber(state.inventory.money)} left for the road.`;
+    setNotice(storageWarning ? `${packed} ${storageWarning}` : packed);
+  }
+  if (action.type === 'travel' && state.distance > before.distance && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    playback = { fromDistance: before.distance, fromDay: before.day, started: performance.now() };
+    render();
+    requestAnimationFrame(animateDrive);
+    return;
+  }
   render();
+}
+
+function animateDrive(now) {
+  if (!playback) return;
+  const elapsed = Math.min(1, (now - playback.started) / DRIVE_DURATION);
+  const progress = 1 - (1 - elapsed) ** 2;
+  const distance = Math.round(playback.fromDistance + (state.distance - playback.fromDistance) * progress);
+  const distanceLabel = app.querySelector('[data-trip-distance]');
+  if (distanceLabel) distanceLabel.textContent = formatNumber(distance);
+  const marker = app.querySelector('[data-trip-progress]');
+  if (marker) marker.style.width = `${distance / 10}%`;
+  app.querySelector('.route-track')?.setAttribute('aria-valuenow', String(distance));
+  const drivingCounter = app.querySelector('[data-drive-distance]');
+  if (drivingCounter) drivingCounter.textContent = `+${distance - playback.fromDistance} mi`;
+  if (elapsed < 1) requestAnimationFrame(animateDrive);
+  else {
+    playback = null;
+    render();
+  }
 }
 
 function profession() {
@@ -205,20 +267,46 @@ function renderNamesSetup() {
   </section>`;
 }
 
+function roadRegion(distance) {
+  if (distance < 200) return { name: 'Into the foothills', image: 'assets/road-forest.jpg', theme: 'foothills' };
+  if (distance < 350) return { name: 'Along the river', image: 'assets/river-ferry.jpg', theme: 'river' };
+  if (distance < 570) return { name: 'The long way through the pines', image: 'assets/road-forest.jpg', theme: 'pines' };
+  if (distance < 750) return { name: 'Deep in Cascadia', image: 'assets/forest-camp.jpg', theme: 'forest' };
+  if (distance < 870) return { name: 'The outskirts of somewhere', image: 'assets/road-forest.jpg', theme: 'outskirts' };
+  return { name: 'Portland is getting closer', image: 'assets/bookshop.jpg', theme: 'city' };
+}
+
+function renderRoadStage() {
+  const distance = playback?.fromDistance ?? state.distance;
+  const region = roadRegion(distance);
+  const light = state.day % 3 === 0 ? 'dusk' : state.day % 3 === 1 ? 'morning' : 'daylight';
+  const weather = /drizzle|rain/i.test(state.weather) ? 'rain' : /heat/i.test(state.weather) ? 'heat' : 'clear';
+  return `<div class="road-stage region-${region.theme} light-${light} weather-${weather} ${playback ? 'is-driving' : ''}" aria-label="${escapeHtml(region.name)}, ${escapeHtml(state.weather)}" data-region="${region.theme}">
+    ${image(region.image, '', 'road-backdrop')}
+    <div class="road-light"></div><div class="road-mist"></div><div class="road-surface"><div class="road-stripes"></div></div>
+    <div class="road-verge"></div><div class="road-rain"></div>
+    <div class="road-van">${image('assets/van.png', 'Your loaded van on the road', 'van-cutout')}<span class="van-shadow"></span></div>
+    <div class="road-sign"><span>${escapeHtml(playback ? 'Rolling on' : region.name)}</span><strong data-drive-distance>${playback ? '+0 mi' : escapeHtml(state.weather)}</strong></div>
+  </div>`;
+}
+
 function renderScene() {
   const place = location();
   const upcoming = nextLocation();
-  const isEnded = state.phase === 'ended';
-  const isShop = state.phase === 'shop';
+  const isEnded = !playback && state.phase === 'ended';
+  const isShop = !playback && state.phase === 'shop';
+  const atLocation = !playback && state.phase === 'location';
+  const onRoad = Boolean(playback) || state.phase === 'travel';
   const isAtStart = isShop && place?.id === 'start_city' && state.distance === 0;
   let sceneImage = 'assets/travel.jpg';
-  let heading = 'The open road';
+  let heading = playback ? 'Making a little progress.' : roadRegion(state.distance).name;
   let description = upcoming ? `${formatNumber(Math.max(0, upcoming.miles - state.distance))} miles to ${upcoming.name}.` : 'Portland is on the horizon.';
+  if (playback) description = 'The scenery changes. The snack situation deteriorates.';
   if (isEnded) {
     sceneImage = state.outcome === 'won' ? 'assets/victory.jpg' : 'assets/loss.jpg';
     heading = state.outcome === 'won' ? 'You made it to Portland.' : 'The road won this round.';
     description = state.outcome === 'won' ? 'Against the odds, the van and at least some of its passengers made the city.' : 'The journey ends here, but the story deserves one more telling.';
-  } else if (state.phase === 'location') {
+  } else if (atLocation) {
     sceneImage = place?.image || 'assets/landmark.jpg';
     heading = place?.name || 'A stop along the way';
     description = place?.description || '';
@@ -228,14 +316,15 @@ function renderScene() {
     description = isAtStart ? 'Every mile starts with the choices you make in the parking lot.' : 'Spend carefully. The next stop may be farther than it looks.';
   }
   const sceneAlt = isEnded ? 'Illustrated journey ending' : isShop ? 'Illustrated roadside supply stop' : state.phase === 'travel' ? 'A loaded van crossing the Pacific Northwest' : `Illustration of ${heading}`;
-  return `<section class="scene-panel" aria-labelledby="scene-heading"><div class="scene-image-wrap">${image(sceneImage, sceneAlt, 'scene-image')}
+  return `<section class="scene-panel ${onRoad ? 'scene-on-road' : ''}" aria-labelledby="scene-heading"><div class="scene-image-wrap">${onRoad ? renderRoadStage() : image(sceneImage, sceneAlt, 'scene-image')}
       <div class="scene-image-vignette"></div><div class="scene-stamp"><span>THE PORTLAND TRAIL</span><b>${String(state.day).padStart(2, '0')} / ${String(Math.floor(state.distance)).padStart(4, '0')}</b></div></div>
-    <div class="scene-body"><div class="scene-text"><p class="scene-overline">${isEnded ? 'Journey complete' : isShop ? 'Supply stop' : state.phase === 'location' ? 'You have arrived' : 'Day ' + escapeHtml(state.day) + ' on the road'}</p>
+    <div class="scene-body"><div class="scene-text"><p class="scene-overline">${isEnded ? 'Journey complete' : isShop ? 'Supply stop' : atLocation ? 'You have arrived' : 'Day ' + escapeHtml(state.day) + ' on the road'}</p>
       <h1 id="scene-heading">${escapeHtml(heading)}</h1><p>${escapeHtml(description)}</p></div>${renderPrimaryAction()}</div>
   </section>`;
 }
 
 function renderPrimaryAction() {
+  if (playback) return `<div class="primary-action">${button('On the road…', 'travel', 'button button-primary button-large', 'disabled')}</div>`;
   if (state.phase === 'ended') return `<div class="primary-action">${button('Start another journey', 'new', 'button button-primary button-large')}</div>`;
   if (state.phase === 'shop') {
     const start = location()?.id === 'start_city' && state.distance === 0;
@@ -247,11 +336,33 @@ function renderPrimaryAction() {
 }
 
 function renderTripStrip() {
-  const next = nextLocation();
-  const percent = Math.max(0, Math.min(100, state.distance / 10));
-  return `<section class="trip-strip" aria-label="Trip progress"><div class="trip-numbers"><div><span>Distance</span><strong>${formatNumber(state.distance)} <small>/ 1,000 mi</small></strong></div><div><span>Day</span><strong>${formatNumber(state.day)}</strong></div><div><span>Next stop</span><strong>${escapeHtml(next?.shortName || next?.name || 'Portland')}</strong></div></div>
-    <div class="route-track" role="progressbar" aria-valuemin="0" aria-valuemax="1000" aria-valuenow="${Math.floor(state.distance)}" aria-label="Miles traveled"><span style="width:${percent}%"></span></div>
-    <div class="route-endpoints"><span>Departure</span><span>Portland</span></div></section>`;
+  const next = playback ? LOCATIONS.find(stop => stop.miles > playback.fromDistance) : nextLocation();
+  const distance = playback?.fromDistance ?? state.distance;
+  const percent = Math.max(0, Math.min(100, distance / 10));
+  return `<section class="trip-strip" aria-label="Trip progress"><div class="trip-numbers"><div><span>Distance</span><strong><b data-trip-distance>${formatNumber(distance)}</b> <small>/ 1,000 mi</small></strong></div><div><span>Day</span><strong>${formatNumber(state.day)}</strong></div><div><span>Next stop</span><strong>${escapeHtml(next?.shortName || next?.name || 'Portland')}</strong></div></div>
+    <div class="route-map"><div class="route-track" role="progressbar" aria-valuemin="0" aria-valuemax="1000" aria-valuenow="${Math.floor(distance)}" aria-label="Miles traveled"><span data-trip-progress style="width:${percent}%"></span></div>
+      <div class="route-markers" aria-hidden="true">${LOCATIONS.map(stop => `<i class="route-marker ${stop.miles <= distance ? 'is-passed' : ''}" style="left:${stop.miles / 10}%" title="${escapeHtml(stop.shortName || stop.name)} · ${stop.miles} mi"></i>`).join('')}</div></div>
+    <div class="route-endpoints"><span>Departure</span><span>Portland</span></div>
+    <details class="route-details"><summary>${LOCATIONS.length - 2} places along the way</summary><ol>${LOCATIONS.map(stop => `<li class="route-stop ${stop.miles < state.distance ? 'is-passed' : stop.id === state.locationId ? 'is-current' : ''}"><span>${stop.miles} mi</span><strong>${escapeHtml(stop.shortName || stop.name)}</strong><small>${stop.activities.includes('shop') ? 'Supplies' : stop.activities.includes('rest') ? 'Rest stop' : stop.id === 'portland' ? 'Destination' : 'Explore'}</small></li>`).join('')}</ol></details>
+    </section>`;
+}
+
+function renderLastLeg() {
+  if (!lastLeg || playback) return '';
+  const miles = lastLeg.toDistance - lastLeg.fromDistance;
+  return `<section class="last-leg" aria-labelledby="last-leg-heading" role="status"><div class="last-leg-heading"><h2 id="last-leg-heading">${lastLeg.arrived ? `Arrived at ${escapeHtml(lastLeg.arrived)}` : 'Another stretch behind you.'}</h2><span>Day ${lastLeg.fromDay} → ${lastLeg.toDay}</span></div>
+    <div class="leg-receipt"><strong>+${formatNumber(miles)} mi</strong><span>−${formatNumber(lastLeg.fuelUsed)} fuel</span><span>−${formatNumber(lastLeg.foodUsed)} food</span><span>Mile ${formatNumber(lastLeg.toDistance)}</span></div></section>`;
+}
+
+function renderAutoBuy() {
+  const plan = recommendSupplies(state);
+  const entries = Object.entries(plan.cart).filter(([, quantity]) => quantity > 0);
+  const hasOrder = entries.length > 0;
+  const heading = !hasOrder && plan.complete ? 'The essentials are packed.' : 'Let the van do the math.';
+  return `<section class="auto-buy-preview" aria-labelledby="auto-buy-heading"><div class="auto-buy-heading"><img src="./assets/resource-parts.png" alt="" /><div><h2 id="auto-buy-heading">${heading}</h2><p>Food and fuel to ${escapeHtml(plan.nextShopName)}, plus a buffer, repairs and kombucha when cash allows.</p></div></div>
+    ${hasOrder ? `<ul class="auto-buy-cart">${entries.map(([id, quantity]) => `<li><strong>+${formatNumber(quantity)}</strong> ${escapeHtml(resourceLabels[id].toLowerCase())}</li>`).join('')}</ul>` : ''}
+    <p class="auto-buy-note">${plan.complete ? `Your current supplies ${hasOrder ? 'plus this top-up cover' : 'cover'} the recommended loadout. ${plan.travelDays} driving ${plan.travelDays === 1 ? 'day' : 'days'} to the next shop.` : hasOrder ? 'Cash is tight. This buys what you can afford, starting with fuel and food. You may still need more supplies.' : 'There is not enough cash for a useful top-up. Sell an NFT if you have one, or review your pace and supplies.'}</p>
+    <div class="auto-buy-footer"><div class="auto-buy-cost" data-auto-buy-cost="${plan.cost}"><strong>$${formatNumber(plan.cost)}</strong><span>$${formatNumber(plan.remainingCash)} left after buying</span></div>${button(hasOrder ? 'Auto-buy essentials' : plan.complete ? 'Essentials packed' : 'Not enough cash', 'autoPurchase', 'button button-outline', hasOrder ? '' : 'disabled')}</div></section>`;
 }
 
 function renderShop() {
@@ -304,7 +415,7 @@ function renderActions() {
 function renderTrip() {
   const ending = state.phase === 'ended';
   return `<div class="game-screen" id="top"><div class="game-topline"><span>${escapeHtml(profession()?.name || 'The crew')} expedition</span><span>${ending ? 'Final record' : `${escapeHtml(state.weather || 'Road weather')} / Day ${formatNumber(state.day)}`}</span></div>
-    <div class="game-layout"><div class="main-column">${renderScene()}${renderTripStrip()}${renderResources(true)}${renderMobileParty()}${state.phase === 'shop' ? renderShop() : ending ? renderEnding() : `${renderActions()}${renderRouteControls()}`}</div>
+    <div class="game-layout"><div class="main-column">${renderScene()}${state.phase === 'shop' ? renderAutoBuy() : ''}${renderTripStrip()}${state.phase !== 'shop' ? renderLastLeg() : ''}${renderResources(true)}${renderMobileParty()}${state.phase === 'shop' ? renderShop() : ending ? renderEnding() : `${renderActions()}${renderRouteControls()}`}</div>
     <aside class="field-journal" aria-label="Field journal"><div class="journal-cover"><span class="journal-mark">✳</span><span>Field journal<br />No. ${String(state.day).padStart(3, '0')}</span></div>${renderResources()}${renderParty()}${renderJournal()}</aside></div></div>`;
 }
 
@@ -316,6 +427,7 @@ function renderEnding() {
 }
 
 function renderEventDialog() {
+  if (playback) return;
   const current = pendingEvent();
   if (!current || !state.pendingEvent) {
     if (eventDialog.open) eventDialog.close();
@@ -347,12 +459,15 @@ function renderEventDialog() {
 
 function render() {
   app.innerHTML = screen === 'title' ? renderTitle() : screen === 'profession' ? renderProfessionSetup() : screen === 'names' ? renderNamesSetup() : state ? renderTrip() : renderTitle();
+  app.inert = Boolean(playback);
+  app.setAttribute('aria-busy', String(Boolean(playback)));
   newJourneyHeader.hidden = !state || screen !== 'game';
+  newJourneyHeader.disabled = Boolean(playback);
   if (!state) saveStatus.textContent = savedState ? 'Journey on file' : 'Local game';
   if (!flash && !storageWarning) setNotice('');
   if (screen === 'game') renderEventDialog();
   else if (eventDialog.open) eventDialog.close();
-  if (returnFocus) {
+  if (returnFocus && !playback) {
     const target = returnFocus;
     returnFocus = null;
     if (!state?.pendingEvent) requestAnimationFrame(() => {
@@ -364,6 +479,7 @@ function render() {
 }
 
 function startNewJourney() {
+  if (playback) return;
   if (state || savedState) {
     replaceDialog.showModal();
     replaceDialog.querySelector('[data-confirm="cancel"]')?.focus();
@@ -375,6 +491,7 @@ function startNewJourney() {
 }
 
 app.addEventListener('click', event => {
+  if (playback) return;
   const professionTarget = event.target.closest('[data-profession]');
   if (professionTarget) {
     selectedProfession = professionTarget.dataset.profession;
@@ -422,6 +539,7 @@ app.addEventListener('keydown', event => {
 });
 
 app.addEventListener('change', event => {
+  if (playback) return;
   if (event.target.matches('[data-shop-quantity]')) {
     const id = event.target.dataset.shopQuantity;
     const quantity = Number(event.target.value);
@@ -452,6 +570,7 @@ app.addEventListener('submit', event => {
   const professionId = selectedProfession || PROFESSIONS[0].id;
   try {
     state = createGame({ profession: professionId, names, seed: Date.now() >>> 0 });
+    lastLeg = null;
     screen = 'game';
     flash = '';
     saveGame();
@@ -463,6 +582,7 @@ app.addEventListener('submit', event => {
 });
 
 eventDialog.addEventListener('click', event => {
+  if (playback) return;
   const choice = event.target.closest('[data-event-choice]');
   if (!choice || !state?.pendingEvent) return;
   const action = { type: 'resolveEvent', token: state.pendingEvent.token };
@@ -478,6 +598,7 @@ replaceDialog.addEventListener('click', event => {
   replaceDialog.close();
   if (choice.dataset.confirm === 'replace') {
     state = null;
+    lastLeg = null;
     screen = 'profession';
     selectedProfession = PROFESSIONS[0]?.id ?? null;
     ITEMS.forEach(item => { shopQuantities[item.id] = 1; });

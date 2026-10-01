@@ -89,10 +89,12 @@ test('seed bombs and kombucha change resources, while death remains permanent', 
   assert.equal(state.party[1].health, 70);
 });
 
-function play(seed, profession, prudent) {
+function play(seed, profession, prudent, autoBuy = false) {
   let state = createGame({ profession, names, seed });
   const visitedShops = new Set();
-  if (prudent) {
+  if (autoBuy) {
+    state = act(state, { type: 'autoPurchase' });
+  } else if (prudent) {
     const cart = {
       fuel: Math.max(0, 27 - state.inventory.fuel),
       food: Math.max(0, 55 - state.inventory.food),
@@ -121,9 +123,15 @@ function play(seed, profession, prudent) {
       continue;
     }
     if (prudent && state.phase === 'location' && location.activities.includes('shop') && !visitedShops.has(location.id) &&
-      (state.inventory.fuel < 20 || state.inventory.food < 18 || state.inventory.parts < 2)) {
+      (autoBuy || state.inventory.fuel < 20 || state.inventory.food < 18 || state.inventory.parts < 2)) {
       visitedShops.add(location.id);
       state = act(state, { type: 'openShop' });
+      if (autoBuy) {
+        const bought = transition(state, { type: 'autoPurchase' });
+        state = bought.state;
+        state = act(state, { type: 'leaveShop' });
+        continue;
+      }
       const cart = {
         fuel: Math.max(0, 35 - state.inventory.fuel),
         food: Math.max(0, Math.ceil(35 - state.inventory.food)),
@@ -168,6 +176,16 @@ test('a seeded unstocked route can run dry and lose', () => {
   const state = play(21, 'dev', false);
   assert.equal(state.outcome, 'lost');
   assert.ok(state.distance < 1000);
+});
+
+test('auto-buy alone stocks a successful full route for all four backgrounds', () => {
+  for (const profession of ['influencer', 'dev', 'prepper', 'barista']) {
+    const state = play(21, profession, true, true);
+    assert.equal(state.outcome, 'won', `${profession}: ${state.journal.at(-1)?.text}`);
+    assert.equal(state.distance, 1000);
+    assert.ok(state.inventory.money >= 0);
+    assert.deepEqual(deserializeGame(serializeGame(state)), state);
+  }
 });
 
 test('stocked travel has a high success rate across a small seed sample', t => {

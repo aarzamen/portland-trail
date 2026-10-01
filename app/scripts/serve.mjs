@@ -7,7 +7,7 @@ const appRoot = fileURLToPath(new URL('../', import.meta.url));
 const root = await realpath(process.argv.includes('--dist') ? join(appRoot, 'dist') : appRoot);
 const port = Number(process.env.PORT || 4173);
 if (!Number.isInteger(port) || port < 1 || port > 65535) throw new Error('PORT must be 1–65535.');
-const types = { '.html': 'text/html; charset=utf-8', '.js': 'text/javascript; charset=utf-8', '.css': 'text/css; charset=utf-8', '.json': 'application/json', '.png': 'image/png', '.jpg': 'image/jpeg', '.webp': 'image/webp', '.svg': 'image/svg+xml' };
+const types = { '.html': 'text/html; charset=utf-8', '.js': 'text/javascript; charset=utf-8', '.css': 'text/css; charset=utf-8', '.json': 'application/json', '.webmanifest': 'application/manifest+json', '.png': 'image/png', '.jpg': 'image/jpeg', '.webp': 'image/webp', '.svg': 'image/svg+xml' };
 const server = createServer(async (request, response) => {
   try {
     if (!['GET', 'HEAD'].includes(request.method)) {
@@ -15,7 +15,7 @@ const server = createServer(async (request, response) => {
     }
     const pathname = decodeURIComponent(new URL(request.url, 'http://localhost').pathname);
     const relative = pathname === '/' ? 'index.html' : pathname.replace(/^\/+/, '');
-    if (!(relative === 'index.html' || relative.startsWith('src/') || relative.startsWith('assets/'))) {
+    if (!(relative === 'index.html' || relative === 'manifest.webmanifest' || relative.startsWith('src/') || relative.startsWith('assets/'))) {
       response.writeHead(404); response.end('Not found'); return;
     }
     const file = await realpath(join(root, relative));

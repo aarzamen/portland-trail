@@ -5,6 +5,11 @@ const STATUSES = ['Healthy', 'Sick', 'Injured', 'Deceased'];
 const EVENT_BY_ID = new Map(EVENTS.map(event => [event.id, event]));
 const LOCATION_BY_ID = new Map(LOCATIONS.map(location => [location.id, location]));
 const ITEM_BY_ID = new Map(ITEMS.map(item => [item.id, item]));
+const SAVE_VERSION = 2;
+// Version 1 used this shorter route. Validate against it before migrating;
+// otherwise a malformed old location could be silently accepted as progress.
+const LEGACY_LOCATION_IDS = ['start_city', 'first_stop', 'sketchy_motel', 'viral_landmark', 'crypto_meetup', 'food_truck_fest', 'portland'];
+const LEGACY_LOCATIONS = LOCATIONS.filter(location => LEGACY_LOCATION_IDS.includes(location.id));
 const fail = (state, error) => ({ state, error });
 const done = state => ({ state, error: null });
 const finite = value => typeof value === 'number' && Number.isFinite(value);
@@ -108,7 +113,7 @@ export function createGame({ profession, names = DEFAULT_NAMES, seed = Date.now(
   }
   if (!integer(seed)) throw new Error('The journey seed must be an integer.');
   const state = {
-    version: 1, phase: 'shop', profession,
+    version: SAVE_VERSION, phase: 'shop', profession,
     party: names.map((name, index) => ({ id: `traveler_${index + 1}`, name: name.trim(), health: 100, status: 'Healthy' })),
     inventory: { ...background.inventory }, locationId: 'start_city', distance: 0, day: 1,
     weather: 'Clear', pace: 'normal', rations: 'meager', pendingEvent: null,
@@ -121,6 +126,49 @@ export function createGame({ profession, names = DEFAULT_NAMES, seed = Date.now(
 
 function locationAllows(state, activity) {
   return state.phase === 'location' && LOCATION_BY_ID.get(state.locationId)?.activities.includes(activity);
+}
+
+export function recommendSupplies(state) {
+  const empty = { cart: {}, cost: 0, remainingCash: state?.inventory?.money ?? 0, complete: false, nextShopName: null, travelDays: 0 };
+  if (!state || state.phase !== 'shop' || state.outcome || state.pendingEvent) return empty;
+
+  const pace = PACES[state.pace];
+  const foodPerDay = RATIONS[state.rations].food * living(state).length;
+  let distance = state.distance;
+  let travelDays = 0;
+  let destination;
+  for (const stop of LOCATIONS.filter(location => location.miles > distance)) {
+    // A travel action stops at each destination, so round each leg separately.
+    travelDays += Math.ceil((stop.miles - distance) / pace.miles);
+    distance = stop.miles;
+    destination = stop;
+    if (stop.activities.includes('shop') || stop.id === 'portland') break;
+  }
+
+  const minimum = { fuel: travelDays * pace.fuel, food: Math.ceil(travelDays * foodPerDay) };
+  const targets = {
+    fuel: Math.max(24, (travelDays + 2) * pace.fuel),
+    food: Math.max(40, Math.ceil((travelDays + 2) * foodPerDay)),
+    parts: 2,
+    kombucha: 1,
+  };
+  const cart = {};
+  let remainingCash = state.inventory.money;
+  const topUp = (id, target, reserve) => {
+    const wanted = Math.max(0, Math.ceil(target - state.inventory[id] - (cart[id] ?? 0)));
+    const affordable = Math.floor(Math.max(0, remainingCash - reserve) / ITEM_BY_ID.get(id).price);
+    const quantity = Math.min(wanted, affordable);
+    if (quantity > 0) {
+      cart[id] = (cart[id] ?? 0) + quantity;
+      remainingCash -= quantity * ITEM_BY_ID.get(id).price;
+    }
+  };
+  // Reaching the next shop comes first. Spend the reserve only for these
+  // essentials; extra supplies and repair/health insurance use the remainder.
+  for (const id of ['fuel', 'food']) topUp(id, minimum[id], 0);
+  for (const id of ['fuel', 'food', 'parts', 'kombucha']) topUp(id, targets[id], 100);
+  const complete = Object.entries(targets).every(([id, target]) => state.inventory[id] + (cart[id] ?? 0) >= target);
+  return { cart, cost: state.inventory.money - remainingCash, remainingCash, complete, nextShopName: destination?.shortName ?? 'Portland', travelDays };
 }
 
 function resolveEvent(state, action) {
@@ -272,6 +320,15 @@ export function transition(state, action) {
       log(next, `Bought supplies for $${cost}.`);
       break;
     }
+    case 'autoPurchase': {
+      if (next.phase !== 'shop') return fail(state, 'Auto-buy is available at the supply shop.');
+      const plan = recommendSupplies(next);
+      if (plan.cost === 0) return fail(state, plan.complete ? 'The van already has the recommended supplies.' : 'There is not enough cash to add recommended supplies while keeping your reserve.');
+      next.inventory.money = plan.remainingCash;
+      for (const [id, quantity] of Object.entries(plan.cart)) next.inventory[id] += quantity;
+      log(next, `Auto-bought road supplies for $${plan.cost}. ${plan.complete ? 'The van is stocked.' : 'Cash is tight; essentials came first.'}`);
+      break;
+    }
     case 'rest':
       if (next.phase !== 'travel' && !locationAllows(next, 'rest')) return fail(state, 'You cannot rest here.');
       consumeDay(next);
@@ -293,12 +350,31 @@ export function transition(state, action) {
       if (!locationAllows(next, 'talk')) return fail(state, 'No one here has a story to tell.');
       if (next.flags.talked.includes(next.locationId)) return fail(state, 'You have already spoken to everyone here.');
       next.flags.talked.push(next.locationId);
-      if (next.locationId === 'viral_landmark') {
-        next.inventory.money += 65;
-        log(next, 'A tourist buys your authentic road photos for $65.');
-      } else {
-        next.inventory.fuel += 3;
-        log(next, 'A crypto founder pays you 3 fuel to listen to a pitch.');
+      switch (next.locationId) {
+        case 'mushroom_market':
+          next.inventory.food += 8;
+          log(next, 'A mushroom grower trades a recipe for 8 food. These ones have actual labels.');
+          break;
+        case 'river_ferry':
+          next.inventory.parts += 1;
+          log(next, 'The ferry captain gives you 1 repair part and an unsolicited knot lesson.');
+          break;
+        case 'forest_camp':
+          next.party.forEach(member => heal(member, 8));
+          log(next, 'Campfire stories restore 8 health to each survivor. Nobody checks their phone.');
+          break;
+        case 'bookshop':
+          next.inventory.money += 45;
+          log(next, 'The bookseller pays $45 for your road journal. The cat remains unconvinced.');
+          break;
+        case 'viral_landmark':
+          next.inventory.money += 65;
+          log(next, 'A tourist buys your authentic road photos for $65.');
+          break;
+        case 'crypto_meetup':
+          next.inventory.fuel += 3;
+          log(next, 'A crypto founder pays you 3 fuel to listen to a pitch.');
+          break;
       }
       break;
     case 'useItem':
@@ -358,22 +434,23 @@ export function transition(state, action) {
   return done(next);
 }
 
-function validState(state) {
-  if (!state || typeof state !== 'object' || Array.isArray(state) || state.version !== 1) return false;
+function validState(state, version = SAVE_VERSION, locations = LOCATIONS) {
+  const locationById = new Map(locations.map(location => [location.id, location]));
+  if (!state || typeof state !== 'object' || Array.isArray(state) || state.version !== version) return false;
   if (!exactKeys(state, ['version', 'phase', 'profession', 'party', 'inventory', 'locationId', 'distance', 'day', 'weather', 'pace', 'rations', 'pendingEvent', 'rng', 'journal', 'outcome', 'shopReturn', 'flags'])) return false;
   if (!['shop', 'travel', 'location', 'ended'].includes(state.phase) || !PROFESSIONS.some(p => p.id === state.profession)) return false;
   if (!Array.isArray(state.party) || state.party.length !== 5 || state.party.some((member, index) => !exactKeys(member, ['id', 'name', 'health', 'status']) || member.id !== `traveler_${index + 1}` || typeof member.name !== 'string' || !member.name.trim() || member.name.length > 32 || !integer(member.health) || member.health < 0 || member.health > 100 || !STATUSES.includes(member.status) || ((member.health === 0) !== (member.status === 'Deceased')))) return false;
   if (state.outcome !== 'lost' && state.party.every(member => member.status === 'Deceased')) return false;
   if (!exactKeys(state.inventory, RESOURCE_IDS) || RESOURCE_IDS.some(id => !nonnegative(state.inventory[id]) || (id !== 'food' && !integer(state.inventory[id])))) return false;
-  if (!LOCATION_BY_ID.has(state.locationId) || !integer(state.distance) || state.distance < 0 || state.distance > 1000 || !integer(state.day) || state.day < 1 || typeof state.weather !== 'string' || state.weather.length > 50) return false;
+  if (!locationById.has(state.locationId) || !integer(state.distance) || state.distance < 0 || state.distance > 1000 || !integer(state.day) || state.day < 1 || typeof state.weather !== 'string' || state.weather.length > 50) return false;
   if (!has(PACES, state.pace) || !has(RATIONS, state.rations) || !integer(state.rng) || state.rng < 0 || state.rng > 0xffffffff) return false;
   if (state.pendingEvent !== null && (!exactKeys(state.pendingEvent, ['id', 'token']) || !EVENT_BY_ID.has(state.pendingEvent.id) || !integer(state.pendingEvent.token) || state.pendingEvent.token < 1 || state.pendingEvent.token !== state.flags?.nextToken || state.phase === 'shop')) return false;
   if (!Array.isArray(state.journal) || state.journal.length > 120 || state.journal.some(entry => !exactKeys(entry, ['day', 'text']) || !integer(entry.day) || entry.day < 1 || entry.day > state.day || typeof entry.text !== 'string' || entry.text.length > 300)) return false;
   if (![null, 'won', 'lost'].includes(state.outcome) || (state.phase === 'ended') !== (state.outcome !== null) || (state.outcome === 'won' && state.distance !== 1000) || (state.outcome && state.pendingEvent)) return false;
-  if (!LOCATION_BY_ID.has(state.shopReturn) || !exactKeys(state.flags, ['nextToken', 'lastAbilityDay', 'talked', 'wifiDownDay']) || !integer(state.flags.nextToken) || state.flags.nextToken < 0 || !integer(state.flags.lastAbilityDay) || !integer(state.flags.wifiDownDay) || !Array.isArray(state.flags.talked) || state.flags.talked.some(id => !LOCATION_BY_ID.has(id))) return false;
-  const location = LOCATION_BY_ID.get(state.locationId);
+  if (!locationById.has(state.shopReturn) || !exactKeys(state.flags, ['nextToken', 'lastAbilityDay', 'talked', 'wifiDownDay']) || !integer(state.flags.nextToken) || state.flags.nextToken < 0 || !integer(state.flags.lastAbilityDay) || !integer(state.flags.wifiDownDay) || !Array.isArray(state.flags.talked) || state.flags.talked.some(id => !locationById.has(id))) return false;
+  const location = locationById.get(state.locationId);
   if (state.distance < location.miles || (state.phase === 'location' && state.distance !== location.miles)) return false;
-  if (state.locationId !== [...LOCATIONS].reverse().find(stop => stop.miles <= state.distance)?.id) return false;
+  if (state.locationId !== [...locations].reverse().find(stop => stop.miles <= state.distance)?.id) return false;
   if (state.phase === 'shop' && (state.locationId !== state.shopReturn || !location.activities.includes('shop') || state.distance !== location.miles)) return false;
   if (state.distance === 1000 && state.outcome !== 'won') return false;
   if (state.locationId === 'portland' && state.outcome !== 'won') return false;
@@ -387,7 +464,11 @@ export function serializeGame(state) {
 
 export function deserializeGame(raw) {
   try {
-    const state = JSON.parse(raw);
+    let state = JSON.parse(raw);
+    if (state?.version === 1) {
+      if (!validState(state, 1, LEGACY_LOCATIONS)) return null;
+      state = { ...state, version: SAVE_VERSION, locationId: [...LOCATIONS].reverse().find(stop => stop.miles <= state.distance).id };
+    }
     return validState(state) ? state : null;
   } catch {
     return null;

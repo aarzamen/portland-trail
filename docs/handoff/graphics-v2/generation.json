@@ -1,0 +1,44 @@
+[
+  {
+    "id": "mushroom-market",
+    "source": "/Users/ama/.codex/generated_images/01a0f7cd-3b81-79d2-b5ed-32bff1d47bb4/exec-4b374ad1-b8b6-4224-9543-6770e97a29b2.png",
+    "prompt": "Use case: illustration-story. Asset type: wide game location illustration for The Portland Trail, a funny Oregon Trail inspired trip in a loaded van. Create a 1536x1024 landscape illustration of a Pacific Northwest roadside mushroom farmers market under enormous Douglas fir trees: little wooden produce stalls, baskets of absurdly elaborate mushrooms, 4 small scruffy travelers examining produce, a tiny espresso stand and bicycle. Crisp retro pixel-art aesthetic, dithered shading, exclusively muted monochrome forest green and sage palette, dark evergreen outlines, luminous pale sage highlights, warm humorous cozy mood. Detailed scene, clear readable silhouettes. Wide composition suited for a game scene cropped modestly at top and bottom; put all key subjects centrally. No text, lettering, words, signage lettering, logos, UI, border or watermark. No vehicles. Entire scene in the same green palette, no other hues.",
+    "tool": "built-in image_gen",
+    "generated": "2026-10-01"
+  },
+  {
+    "id": "river-ferry",
+    "source": "/Users/ama/.codex/generated_images/01a0f7cd-3b81-79d2-b5ed-32bff1d47bb4/exec-706b0c66-93b7-4bab-8771-7a08494f2536.png",
+    "prompt": "Use case: illustration-story. Asset type: wide location art for The Portland Trail retro Pacific Northwest road-trip game. Create 1536x1024 landscape pixel-art illustration of a charming tiny river ferry landing in a misty Oregon gorge: a wooden ferry with a small operator's cabin moored at a timber dock, a scruffy traveler in a beanie holds a paper map, friendly raincoat-wearing ferryman, huge evergreen slopes, calm reflective green river, a distant arched bridge and mountain mist. Humorous cozy travel adventure. Crisp dithered retro pixel aesthetic and strictly monochrome dark forest green, moss green and pale sage highlights. Strong readable silhouettes. Key subjects centered for modest top/bottom cropping. No text, letters, signage lettering, logos, interface, border or watermark. No van or cars.",
+    "tool": "built-in image_gen",
+    "generated": "2026-10-01"
+  },
+  {
+    "id": "forest-camp",
+    "source": "/Users/ama/.codex/generated_images/01a0f7cd-3b81-79d2-b5ed-32bff1d47bb4/exec-a1e8f208-ade7-4382-acf5-09824b84a4ca.png",
+    "prompt": "Use case: illustration-story. Asset type: wide location art for The Portland Trail retro Pacific Northwest road-trip game. Create 1536x1024 landscape pixel-art illustration of a secluded Oregon fir forest campground at dusk. Two patched canvas tents, five tiny diverse scruffy travelers sit around a small contained stone-ring campfire sipping mugs; a hammock, hanging lantern, piled boots and a guitar, giant tall evergreen trunks and mountains through the clearing. Cozy gently absurd road-trip atmosphere. All fire and lamps glow PALE SAGE GREEN, never orange. Crisp detailed dithered retro pixel aesthetic, exclusively monochrome dark evergreen/moss/sage green palette. Readable central subjects and spacious layered forest backdrop. No text, letters, signs, logos, interface, borders or watermark. No van or cars.",
+    "tool": "built-in image_gen",
+    "generated": "2026-10-01"
+  },
+  {
+    "id": "bookshop",
+    "source": "/Users/ama/.codex/generated_images/01a0f7cd-3b81-79d2-b5ed-32bff1d47bb4/exec-1cb2b016-477b-4680-a59e-1774e7bdd96a.png",
+    "prompt": "Use case: illustration-story. Asset type: wide location art for The Portland Trail retro Pacific Northwest road-trip game. Create 1536x1024 landscape pixel-art illustration of a whimsical independent used-bookstore and tiny coffee kiosk in an Oregon mill town in gentle rain: mossy timber storefront with overflowing shelves spilling onto covered sidewalk, book piles, a sleepy shop cat, bicycle leaned against porch, beanie-wearing bookseller and two scruffy backpackers choosing books. Timber street, pine-clad hills and cozy window glow. All colors strictly monochrome forest green, moss and sage, pale sage highlights, dithered crisp retro pixel-art, humorous Oregon Trail adventure mood. No legible or illegible writing: book spines blank, signs plain shapes, no text or lettering at all. No logos, UI, border, watermark or vehicles. Key subjects centered for modest top/bottom crop.",
+    "tool": "built-in image_gen",
+    "generated": "2026-10-01"
+  },
+  {
+    "id": "road-forest",
+    "source": "/Users/ama/.codex/generated_images/01a0f7cd-3b81-79d2-b5ed-32bff1d47bb4/exec-152d722f-aaf3-457a-a89d-65c0af542538.png",
+    "prompt": "Use case: stylized-concept. Asset type: scrolling background layer for a retro pixel-art Pacific Northwest driving game called The Portland Trail. Draw a 1536x1024 landscape, completely empty of vehicles and people. View from the side of a straight horizontal highway crossing lush Oregon forest. Composition: upper half layers of mountains, fir forests and gentle mist with pale sage sky; middle distance clearing with rocks ferns and evergreen tree trunks; lower third broad straight HORIZONTAL road with a pale dashed center stripe runs uninterrupted LEFT TO RIGHT flat across frame, no perspective road receding to horizon. Foreground grassy verge along bottom. Scene can be panned horizontally behind a separately composited van sprite. Crisp nostalgic dithered pixel-art, exclusively monochrome dark forest green to sage green palette, deep evergreen shadows and bright pale sage sky. No text, signs, lettering, vehicles, van, people, interface, border or watermark.",
+    "tool": "built-in image_gen",
+    "generated": "2026-10-01"
+  },
+  {
+    "id": "app-icon",
+    "source": "/Users/ama/.codex/generated_images/01a0f7cd-3b81-79d2-b5ed-32bff1d47bb4/exec-6ddda4e7-16d8-4541-98d6-3dd2669eb024.png",
+    "prompt": "Use case: logo-brand. Asset type: square desktop and mobile game app icon for The Portland Trail. Create 1024x1024 square image, full bleed opaque deep evergreen background, no rounded outer corners (OS handles mask). Bold memorable pixel-art symbol: a scruffy vintage camper van in pale sage green, three quarter front view, roof rack piled with a rolled sleeping bag and a small suitcase, two large dark tires, rectangular windshield, friendly slightly lopsided face. One simple evergreen tree silhouette behind van. Exclusively dark evergreen, forest green and pale sage color palette. High contrast, chunky shapes that remain legible at 32 pixels. Van centered occupying middle60% of canvas, silhouette entirely inside a central safe circle of radius38% of canvas so maskable icons preserve it. Keep large surrounding dark-green margin, no frame. Crisp retro handheld-game pixel edges. No words, letters, tiny details, badges, logos, interface, watermark or gradients.",
+    "tool": "built-in image_gen",
+    "generated": "2026-10-01"
+  }
+]
