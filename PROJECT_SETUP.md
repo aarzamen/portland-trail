@@ -57,6 +57,7 @@ Start the local server first. Other machines can supply their own Playwright mod
 - [Browser interface](app/src/main.js) and [styles](app/src/styles.css): setup, shops, travel, dialogs, endings, local saves.
 - [Asset manifest](app/assets/manifest.json): source paths, hashes, extraction rectangles, and output sizes.
 - [Validation record](docs/validation/2026-10-01.md): checks, outcomes, and limits.
+- [Code and architecture review](docs/reviews/2026-10-01-code-and-architecture-review.md): open defects, balance measurements, and recommended order of work, with [runnable evidence](docs/reviews/evidence/).
 
 The travel screen animates the existing van over illustrated scenery. The [location artwork](docs/handoff/graphics-v2/README.md) and [river, city and heatwave artwork](docs/handoff/graphics-v3/README.md) preserve the generated masters and exact prompts. A strict pixel palette, physical-device Safari validation, and hosting remain future work. Phone scene variants can be regenerated on macOS with `node app/scripts/prepare-mobile-art.mjs` from the project root; they are already included in the app and do not require regeneration to build.
 
