@@ -1,0 +1,74 @@
+THE PORTLAND TRAIL - CONTEXT FOR A FUTURE SITES REBUILD
+Inspection date: 1 October 2026
+Reference app: https://heuxnwuv.gensparkspace.com/
+
+PROJECT LOCATION
+Use /Users/ama/The Portland Trail on ama's MacBook Pro as the project root.
+This document and its sibling references belong under docs/handoff/ in that
+project. All unqualified document/evidence paths below are relative to that
+handoff directory. Read the project-root AGENTS.md for autonomous working
+instructions and PROJECT_SETUP.md for placement status. Existing local files
+could not be updated while that Mac was offline. The separate folder called
+the Portland Trail images also awaits access; see LOCAL_IMAGE_REVIEW.md.
+
+Mike made this GenSpark app previously. He likes its premise and wants a do-over using Sites on OpenAI hosting. This session produced an evaluation and graphic-production handoff; it did not implement or deploy the replacement. Treat the design direction below as a proposal to refine with him when rebuilding.
+
+INTENT TO PRESERVE
+A funny, readable, playable Oregon Trail-inspired road trip to Portland: a loaded, scruffy eco-van; five named travelers; four satirical backgrounds; scarcity; roadside encounters; and an increasingly absurd Pacific Northwest destination. Keep the green terminal / handheld-game visual identity and affectionate cynicism about tech, status, food, and lifestyle. Maintain the dry specificity of the current premise rather than replacing it with generic product copy. Review the current NFT, crypto and pandemic jokes with Mike before rewriting their tone.
+
+READ FIRST
+Portland_Trail_Audit.pdf, findings.json, asset_inventory.json, provided_export_asset_inventory.json, ASSET_BRIEF.txt, and both evidence folders. Mike supplied code_sandbox_light_db8de4e3_1790840601.zip during the audit. It has 39 files; every shared deployed file matches byte for byte. It is a vanilla HTML/CSS/JS project. React/TypeScript filenames visible in two wrongly assigned screenshot-images belong to the image content, not to the exported architecture. The README makes claims that contradict the code; see F18 and audit page 9.
+
+CURRENT SCOPE
+Seven screen states: menu, background selection, companion naming, shop, travel, location, and ending; plus an event modal and HUD. Four backgrounds: influencer, developer, prepper, barista. Party size five. Route milestones: 0, 200, 350, 470, 670, 750, 1000 miles. Six shop categories: food, fuel, seed bombs, repair parts, kombucha, NFT. Nine configured random encounters, six auto, two choice, one critical. Save storage is localStorage. No server API, live model calls, multiplayer, audio, or actual sprite animation was found in the delivered files.
+
+FIRST IMPLEMENTATION TARGET
+Use the current Sites building and hosting skills available in the rebuild session. A browser game can initially be a static frontend with local, versioned saves. Choose a small, conventional app structure informed by the supplied vanilla export. A lightweight React/TypeScript implementation is one option, not an audit requirement. Complete one playable route and a dependable event loop before adding optional services or elaborate presentation.
+
+Separate rules from rendering. Use serializable state with stable profession, location, item, and event ids. Event definitions can live in code; saved state must contain ids, pending choice, and RNG state where useful, not executable functions. Use one action transition to apply consequences, consume resources, update the journal, resolve arrivals and terminal conditions, and persist. Seeded randomness or injected RNG should support targeted tests. A modal pauses further turn advancement until it resolves exactly once. Terminal states cannot be changed by resting or another action.
+
+Must address F01-F07 before cosmetic polish. New Game must not merge the previous save. Loss must stop turn processing. Death is permanent. Pace costs must be affordable before travel. Automatic and critical outcomes must update state, display and save together. Loading must restore a pending encounter and the correct location. Shops should return to their originating location. Render activities from the location data.
+
+Balance the route deliberately. Every baseline pace consumes one fuel canister per ten miles, so a 1000-mile trip needs 100 canisters before event bonuses. At $60 per canister, no background can buy enough fuel solely from its initial fuel and cash, even before buying food. This is a budget check, not a measured impossibility result: random supplies, extra-distance events and NFT sales can change the run. Choose reliable resupply / income / route costs and simulate a small number of seeded runs. Rest and forage need a clear cost. Implement profession abilities that are advertised, or revise the descriptions. Seed bombs and kombucha need usable actions if they remain in the store.
+
+VISUAL DIRECTION
+Keep green illustration, dark backgrounds, pixel-like silhouettes, monospaced interface type, and restrained phosphor accents. Use the existing title image as an anchor. Build editable titles and readable labels in the UI rather than baking them into generated images. Keep the same van, traveler proportions, outlines, palette, and camera conventions throughout the art.
+
+Replace incorrect image bindings first. Two images are file-browser screenshots. A routine rest stop displays virus game-over art. A van breakdown displays doomscrolling art. Heatwave, NFT, crypto and food-cart illustrations are weakly or incorrectly matched. asset_inventory.json gives the exact review. The supplied export adds four useful originals: 00010 crypto room, 00003 rest/vending stop, 00018 departure bedroom, and 00016 victory. Their full filenames are in provided_export_asset_inventory.json. Reuse these before commissioning replacements. The unused static_game_over_loss.jpeg duplicates the Wi-Fi/heatwave image and is not referenced by game.js; its filename does not prove a usable loss screen. Distinguish a nonterminal setback from an ending illustration. Verify scene content visually rather than by filename alone.
+
+On desktop, present a compact play area with scene, route progress, resource counts, party status, journal and clear actions. On phone, prioritize current scene, essential status, next stop, and a reachable Continue action. Shorten visible location labels while retaining full names in narrative text. Fix companion-name rows at 430 px; prevent horizontal clipping. Avoid the current 50vh bottom-padding workaround. Use responsive status layout rather than an oversized HUD covering the scene. Give small quantity controls useful touch targets. Background choices and event dialogs must be keyboard-accessible, with visible focus and appropriate focus management.
+
+ASSET DELIVERY
+Use ASSET_BRIEF.txt. Produce the highest-priority asset batches first, visually review them at actual UI size, and then export individual files. Any sprite sheet needs a manifest specifying cell dimensions, state names, row/column positions, and animation timing. Images must be matched to event/location ids. Keep text outside generated artwork. Do not describe ungenerated assets as complete.
+
+GRAPHICS BATCH NOW INCLUDED (PACKAGE VERSION 2)
+graphics-v1 contains seven resource-icon concepts in one transparent PNG, four
+profession portraits in one transparent PNG, and a single right-facing parked
+van master. Read graphics-v1/README.txt and manifest.json before integrating.
+The manifest uses the actual existing ids: money, food, fuel, ammo, parts,
+kombucha, nft; and influencer, dev, prepper, barista. In particular, the existing
+developer id is dev, seed bombs use ammo, and repair supplies use parts.
+Do not treat conceptual row/column placement as exact sprite rectangles.
+Crop/separate and clean final assets using an appropriate graphics workflow,
+align fixed-size cells, inspect at 1x and integer-scaled sizes, and derive later
+van frames from this one silhouette. The images have true alpha, but they have
+not been validated as strict four-color, fixed-pixel-grid production sprites.
+No generated image has been wired into the original app. No new scene, status
+symbol, van animation or replacement app is included in this continuation.
+
+MINIMUM ACCEPTANCE CHECKS
+1. New Game resets distance, day, party, inventory, flags, pending events and journal.
+2. All four backgrounds start with their declared resources and any advertised ability works.
+3. Purchases cannot overspend; resource costs cannot produce negative inventory.
+4. Auto, choice and critical encounters resolve exactly once; a pending encounter survives reload.
+5. HUD, scene, progress, log and saved state agree after every action.
+6. Dead travelers remain dead. Rest and forage obey their defined costs.
+7. Arrival and event bonuses can trigger an immediate win or loss appropriately.
+8. Location activities follow location data; leaving a location shop restores that location.
+9. Win and loss have distinct correct art and a functioning replay action.
+10. All essential controls remain visible / reachable at 390, 414, 430, 768 and 1440 px. Check Safari on a real phone when available.
+11. Keyboard-only background selection and event choices work; dialog focus is handled.
+12. One complete route is playable with deliberate, validated balance; preserve at least one seeded successful and one seeded losing run as evidence.
+
+WORKING STYLE
+Keep the work bounded and resource-conscious. Reuse the recovered material and the original export when available. Use targeted tests for the broken rules, a few route simulations, and visual checks at phone and desktop sizes. Report observed limitations honestly. Deployment should follow the user's rebuild request and the Sites workflow in that session.

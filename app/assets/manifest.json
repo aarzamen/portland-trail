@@ -1,0 +1,348 @@
+{
+  "version": 1,
+  "note": "Reviewed static scene copies and extracted concepts. Not animation or strict fixed-grid pixel art. Originals unchanged.",
+  "assets": [
+    {
+      "file": "title.jpg",
+      "source": "images/the_portland_trail_00017.jpg",
+      "source_sha256": "75afc04e73755c5c401cfe1aea5156bb07049a3ce6e54160c4fc1c1a37901cff",
+      "crop": [
+        0,
+        235,
+        1024,
+        965
+      ],
+      "width": 1024,
+      "height": 730,
+      "sha256": "7d026d60d46d4ece7b466b080653ba6460ea2fb0150d15a9cfd348bdc9cdca83"
+    },
+    {
+      "file": "travel.jpg",
+      "source": "images/the_portland_trail_00008.jpg",
+      "source_sha256": "0be1eacf70dbf377b73141e0959c1983ff6ab4d66b5b4504d7a6b2345ca47edc",
+      "crop": null,
+      "width": 1024,
+      "height": 1024,
+      "sha256": "522d4108eeb79dadf9a6b00da160560d19ae90afe5499a4eb1634f5d98f8bb61"
+    },
+    {
+      "file": "departure.jpg",
+      "source": "images/the_portland_trail_00005.jpg",
+      "source_sha256": "63ed9716f4336a87b0c4e17dfe9b8bd1aea5bfe380fe8c3ec2cb3f4b3624f999",
+      "crop": null,
+      "width": 1024,
+      "height": 1024,
+      "sha256": "3628ce68243611ef25ad08ac444880143f65ee1b05e484975c84b35897ada118"
+    },
+    {
+      "file": "rest-stop.jpg",
+      "source": "images/the_portland_trail_00011.jpg",
+      "source_sha256": "83a1116ed5933a5d9ff1eb3e9b635cfab6e5c81ba9b8ea9af6c47b6d429d4b57",
+      "crop": null,
+      "width": 1024,
+      "height": 1024,
+      "sha256": "1f2c8ec4adcbf2277063ee8e10f5b0a49b36bbfdf4fc3019fdb7bc144542bbe8"
+    },
+    {
+      "file": "motel.jpg",
+      "source": "images/the_portland_trail_00012.jpg",
+      "source_sha256": "1e6389c31ffec315e0dafb42e80a612e97d351e1bcb455bee9e13913f4bacada",
+      "crop": null,
+      "width": 1024,
+      "height": 1024,
+      "sha256": "b3bd73091cf123ddecbdc4bfd9625b07cacfe0cb7d80e9d9018da7bf68e4f249"
+    },
+    {
+      "file": "landmark.jpg",
+      "source": "images/the_portland_trail_00018.jpg",
+      "source_sha256": "48657a3cae16d8041a42bd1ecd110b92963545c5bb1603af59d26c15be87c0d2",
+      "crop": null,
+      "width": 1024,
+      "height": 1024,
+      "sha256": "483983372c91336394f2cdcf56ee22a61b77f117a9a3a4a9d2f1786771e55424"
+    },
+    {
+      "file": "crypto.jpg",
+      "source": "images/the_portland_trail_00010.jpg",
+      "source_sha256": "a4ae1681005d58f7fc24bdfe43c576ec7e0415e4944e911d350b7aa57e59b648",
+      "crop": null,
+      "width": 1024,
+      "height": 1024,
+      "sha256": "d8adfe55d711441c9d7046240dcf295c9ab612930278a1ecc5452234c587e3f2"
+    },
+    {
+      "file": "food-carts.jpg",
+      "source": "images/the_portland_trail_00001.jpg",
+      "source_sha256": "59078b64182766f573710e05279a6241d5308a6583c40d042e63877d460061a2",
+      "crop": null,
+      "width": 1024,
+      "height": 1024,
+      "sha256": "c985509c91cd998c7163418966ff22e8d37294d2ec005457b43a59949631eb4e"
+    },
+    {
+      "file": "victory.jpg",
+      "source": "images/the_portland_trail_00016.jpg",
+      "source_sha256": "ab339586dabf5de43f52bc83a8ce77d74b70bf59afd16a89e1a6ec383b9e1cc0",
+      "crop": [
+        0,
+        175,
+        1024,
+        1024
+      ],
+      "width": 1024,
+      "height": 849,
+      "sha256": "769e6a5ee02ec86c6a434f0d138442dc33a2430909fa84cef2b37918413c9015"
+    },
+    {
+      "file": "loss.jpg",
+      "source": "images/the_portland_trail_00004.jpg",
+      "source_sha256": "e407207bb3e8513eef0099ecbbe3abc609fe267106af9c6a7094f47c44f9df83",
+      "crop": [
+        0,
+        180,
+        1024,
+        865
+      ],
+      "width": 1024,
+      "height": 685,
+      "sha256": "69e484c2ed1681c828521e5d935ba19907c898709da8dd38d53149d6a44efb26"
+    },
+    {
+      "file": "breakdown.jpg",
+      "source": "images/the_portland_trail_00000.jpg",
+      "source_sha256": "e99b5681811c7fa3a61538a0db71698f163e2c604f356754280c42cc405cf96a",
+      "crop": [
+        0,
+        340,
+        1024,
+        1024
+      ],
+      "width": 1024,
+      "height": 684,
+      "sha256": "9e65ad9f8c2fc0edd002d1f0a497c630ddd7a1c127499b922c359e01a8d785ca"
+    },
+    {
+      "file": "doomscrolling.jpg",
+      "source": "images/the_portland_trail_00013.jpg",
+      "source_sha256": "ff38d39f324ad43e26ba9fa6ce451368d03e0750dd897a8baa2a005bd42a114a",
+      "crop": [
+        0,
+        160,
+        1024,
+        1024
+      ],
+      "width": 1024,
+      "height": 864,
+      "sha256": "af9993f553b28a327907393441741ab6cb2a47b60d1a8f3625abcc49a1dc749a"
+    },
+    {
+      "file": "illness.jpg",
+      "source": "images/the_portland_trail_00003.jpg",
+      "source_sha256": "af278a337b29c0032ba9e2e1ec95a8e134c0652a65641262f7997833f047ee04",
+      "crop": null,
+      "width": 1024,
+      "height": 1024,
+      "sha256": "aac8516b97061ec42d6b86a7e8010d8d17b1d11bc04f2d6c5f84262eb2d4412e"
+    },
+    {
+      "file": "free-box.jpg",
+      "source": "images/the_portland_trail_00015.jpg",
+      "source_sha256": "501685adc27d60c8631738aa4261ad9c8a4cd1a1ed64b7e5d8527ab30cf18481",
+      "crop": [
+        0,
+        125,
+        1024,
+        1024
+      ],
+      "width": 1024,
+      "height": 899,
+      "sha256": "e65891413352f5a69b3b65a6b1cd62be0983eba9eeb1e1733f36e6d97ef9eabc"
+    },
+    {
+      "file": "wifi.jpg",
+      "source": "images/the_portland_trail_00002.jpg",
+      "source_sha256": "68000b695e1ab670b9b18b2897f1b1640e7f0804cd7447b71c332aae7e8161d2",
+      "crop": [
+        0,
+        105,
+        1024,
+        930
+      ],
+      "width": 1024,
+      "height": 825,
+      "sha256": "0b6687b21bf60fb17dc1ba0b1afbe50111f9bacd69b395c56f88e8de187ccb40"
+    },
+    {
+      "file": "nft.jpg",
+      "source": "images/the_portland_trail_00014.jpg",
+      "source_sha256": "7277c70c3447496d856804cbac26ed7dd95d5be431355cc94a630290949af4fd",
+      "crop": null,
+      "width": 1024,
+      "height": 1024,
+      "sha256": "0ba4fbf00847fb6f01738cfb879907006fbb18fd9d8913236681185ce6856353"
+    },
+    {
+      "file": "portrait-influencer.png",
+      "source": "docs/handoff/graphics-v1/background-portraits-master.png",
+      "source_sha256": "b8c885198fcbba2a56846db6cb5018d6e12f9905699596fda1b5c4b3a11728a9",
+      "crop": [
+        20,
+        0,
+        731,
+        577
+      ],
+      "width": 128,
+      "height": 128,
+      "sha256": "c82ae210bcc25201f8e2dad09c9f24273aaf14a54e4666a5413eb297c567467b"
+    },
+    {
+      "file": "portrait-dev.png",
+      "source": "docs/handoff/graphics-v1/background-portraits-master.png",
+      "source_sha256": "b8c885198fcbba2a56846db6cb5018d6e12f9905699596fda1b5c4b3a11728a9",
+      "crop": [
+        732,
+        0,
+        1374,
+        577
+      ],
+      "width": 128,
+      "height": 128,
+      "sha256": "93094689e103330fa4fce94e3c4d074e5eddfde7d7dd8bf58f2ebf61592b8c5d"
+    },
+    {
+      "file": "portrait-prepper.png",
+      "source": "docs/handoff/graphics-v1/background-portraits-master.png",
+      "source_sha256": "b8c885198fcbba2a56846db6cb5018d6e12f9905699596fda1b5c4b3a11728a9",
+      "crop": [
+        25,
+        580,
+        682,
+        1145
+      ],
+      "width": 128,
+      "height": 128,
+      "sha256": "1527b04f0b10d9b04e60b847ec776568e019f91e0f108e485a9c3e3399333b76"
+    },
+    {
+      "file": "portrait-barista.png",
+      "source": "docs/handoff/graphics-v1/background-portraits-master.png",
+      "source_sha256": "b8c885198fcbba2a56846db6cb5018d6e12f9905699596fda1b5c4b3a11728a9",
+      "crop": [
+        704,
+        580,
+        1374,
+        1145
+      ],
+      "width": 128,
+      "height": 128,
+      "sha256": "5225ee8a15587bdf6dfedf7d3aa8bfbb289c09e64ecf3f2209087e756f8a6069"
+    },
+    {
+      "file": "resource-money.png",
+      "source": "docs/handoff/graphics-v1/resource-icons-master.png",
+      "source_sha256": "be40314ec1e2ecf67320807309699d06e0a88ba5c1dbe5f0073be64b2f74b64b",
+      "crop": [
+        25,
+        85,
+        453,
+        462
+      ],
+      "width": 64,
+      "height": 64,
+      "sha256": "6b466476317239914d9b077981ed4f612e69cd68379e964a83395ac1fbae17c5"
+    },
+    {
+      "file": "resource-food.png",
+      "source": "docs/handoff/graphics-v1/resource-icons-master.png",
+      "source_sha256": "be40314ec1e2ecf67320807309699d06e0a88ba5c1dbe5f0073be64b2f74b64b",
+      "crop": [
+        470,
+        30,
+        870,
+        460
+      ],
+      "width": 64,
+      "height": 64,
+      "sha256": "1ab26953e3512fd9c0e42e27ae29df6653c31de4d777cb0d04a83068df05a1db"
+    },
+    {
+      "file": "resource-fuel.png",
+      "source": "docs/handoff/graphics-v1/resource-icons-master.png",
+      "source_sha256": "be40314ec1e2ecf67320807309699d06e0a88ba5c1dbe5f0073be64b2f74b64b",
+      "crop": [
+        908,
+        35,
+        1307,
+        463
+      ],
+      "width": 64,
+      "height": 64,
+      "sha256": "15c227cf7d321bf9ac3d6393fb7f20c014727a0f3b28950539a8b2188254dd76"
+    },
+    {
+      "file": "resource-ammo.png",
+      "source": "docs/handoff/graphics-v1/resource-icons-master.png",
+      "source_sha256": "be40314ec1e2ecf67320807309699d06e0a88ba5c1dbe5f0073be64b2f74b64b",
+      "crop": [
+        1320,
+        94,
+        1774,
+        464
+      ],
+      "width": 64,
+      "height": 64,
+      "sha256": "0d241b7514e17560f627d23ffebddeeb289b84a8b499a273226aa4c585e8f067"
+    },
+    {
+      "file": "resource-parts.png",
+      "source": "docs/handoff/graphics-v1/resource-icons-master.png",
+      "source_sha256": "be40314ec1e2ecf67320807309699d06e0a88ba5c1dbe5f0073be64b2f74b64b",
+      "crop": [
+        24,
+        470,
+        474,
+        880
+      ],
+      "width": 64,
+      "height": 64,
+      "sha256": "fbc362b0806c2f7667c7c8b7be9089f323e2ed58a722c69057de51a2bb38aefb"
+    },
+    {
+      "file": "resource-kombucha.png",
+      "source": "docs/handoff/graphics-v1/resource-icons-master.png",
+      "source_sha256": "be40314ec1e2ecf67320807309699d06e0a88ba5c1dbe5f0073be64b2f74b64b",
+      "crop": [
+        542,
+        460,
+        791,
+        887
+      ],
+      "width": 64,
+      "height": 64,
+      "sha256": "2cfabf1c8eefaed2b55b2f269ac91b25b73f6e4b3e334b4c5cdd2feae8649608"
+    },
+    {
+      "file": "resource-nft.png",
+      "source": "docs/handoff/graphics-v1/resource-icons-master.png",
+      "source_sha256": "be40314ec1e2ecf67320807309699d06e0a88ba5c1dbe5f0073be64b2f74b64b",
+      "crop": [
+        869,
+        513,
+        1306,
+        887
+      ],
+      "width": 64,
+      "height": 64,
+      "sha256": "45658ef8f98947f77e432b9fd28030d7f1cd77682b54a96ddeb8e39a89be54a8"
+    },
+    {
+      "file": "van.png",
+      "source": "docs/handoff/graphics-v1/van-side-master.png",
+      "source_sha256": "c2ce683138ad471a28a9af56ce4474ab6d800e0c127e8a05634a4394e2e52b03",
+      "crop": null,
+      "width": 256,
+      "height": 128,
+      "sha256": "6860f45cae815cd93e266b0e9abe9a4f2de049599ef9f01f0e1f5061cf85f47a"
+    }
+  ]
+}

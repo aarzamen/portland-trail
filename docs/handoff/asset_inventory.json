@@ -1,0 +1,216 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-01",
+  "total_asset_files": 18,
+  "unique_image_contents": 16,
+  "duplicate_groups": [
+    [
+      "evidence/public-snapshot/images/event_starlink_disruption.jpeg",
+      "evidence/public-snapshot/images/location_sketchy_motel.jpeg"
+    ],
+    [
+      "evidence/public-snapshot/images/location_start_city.jpeg",
+      "evidence/public-snapshot/images/static_start_screen.jpeg"
+    ]
+  ],
+  "assets": [
+    {
+      "path": "evidence/public-snapshot/images/event_bad_weather.jpeg",
+      "source_url": "https://heuxnwuv.gensparkspace.com/images/event_bad_weather.jpeg",
+      "bytes": 163152,
+      "width": 1024,
+      "height": 1024,
+      "sha256": "3b821a0373cbfeb3682bc20cfb6825e8e106d7f52564784c78817a7542a42745",
+      "current_role": "Heatwave encounter",
+      "observed_content": "Cafe / Wi-Fi outage scene. Contradicts heatwave.",
+      "recommendation": "Replace with overheated van and exhausted party."
+    },
+    {
+      "path": "evidence/public-snapshot/images/event_covid_death.jpeg",
+      "source_url": "https://heuxnwuv.gensparkspace.com/images/event_covid_death.jpeg",
+      "bytes": 121051,
+      "width": 1024,
+      "height": 1024,
+      "sha256": "dcd8dfe2e6b48061ad00485dcf998a112009f471c236e63cd6638a930cbf25cc",
+      "current_role": "Pandemic critical encounter",
+      "observed_content": "Rainy van drive; no clear illness or terminal consequence.",
+      "recommendation": "Replace with distinct pandemic outcome art, if this encounter is retained."
+    },
+    {
+      "path": "evidence/public-snapshot/images/event_found_supplies.jpeg",
+      "source_url": "https://heuxnwuv.gensparkspace.com/images/event_found_supplies.jpeg",
+      "bytes": 108992,
+      "width": 1024,
+      "height": 1024,
+      "sha256": "109ee9b453f88a75f86fb2e13c9b90424482f58fe8498e30423af6623fb2ca9e",
+      "current_role": "Free Box and food-poisoning encounters",
+      "observed_content": "Free box fits supplies. Reusing it for food poisoning gives the wrong visual cue.",
+      "recommendation": "Keep for Free Box; create a separate poisoning scene."
+    },
+    {
+      "path": "evidence/public-snapshot/images/event_good_weather.jpeg",
+      "source_url": "https://heuxnwuv.gensparkspace.com/images/event_good_weather.jpeg",
+      "bytes": 102575,
+      "width": 1024,
+      "height": 1024,
+      "sha256": "01307711f3b64686e56951ad6256d293b1a572b3e66c2e96c10c9506d8d1fb32",
+      "current_role": "Good-weather encounter",
+      "observed_content": "Forest road and a departing van; suitable travel atmosphere.",
+      "recommendation": "Useful style reference; ensure the mood matches the event."
+    },
+    {
+      "path": "evidence/public-snapshot/images/event_nft_auction.jpeg",
+      "source_url": "https://heuxnwuv.gensparkspace.com/images/event_nft_auction.jpeg",
+      "bytes": 83841,
+      "width": 1024,
+      "height": 1024,
+      "sha256": "ca80889e7bc3ee6dca1c01c0a8c4fa1759f747d8c849919afda685e151fe3460",
+      "current_role": "NFT fair encounter",
+      "observed_content": "Cafe / antenna scene; weak match for an art auction.",
+      "recommendation": "Replace with a visibly absurd roadside digital-art fair."
+    },
+    {
+      "path": "evidence/public-snapshot/images/event_starlink_disruption.jpeg",
+      "source_url": "https://heuxnwuv.gensparkspace.com/images/event_starlink_disruption.jpeg",
+      "bytes": 98610,
+      "width": 1024,
+      "height": 1024,
+      "sha256": "f1883038e1b5599223b214c5411b88d4a3b171eaff0709257b9a0bf2d6df666e",
+      "current_role": "ISP outage encounter",
+      "observed_content": "No-signal and game-over art; duplicates motel exactly.",
+      "recommendation": "Use a distinct nonterminal outage vignette."
+    },
+    {
+      "path": "evidence/public-snapshot/images/event_tiktok_distraction.jpeg",
+      "source_url": "https://heuxnwuv.gensparkspace.com/images/event_tiktok_distraction.jpeg",
+      "bytes": 122737,
+      "width": 1024,
+      "height": 1024,
+      "sha256": "6e72b8d7209e18bd72f74508b9dddd3f3ae46306e3a971582d9ecc2013a2b3ae",
+      "current_role": "Doomscrolling encounter",
+      "observed_content": "Group procession, drones and a large sign-holder; weak phone-spiral match.",
+      "recommendation": "Replace with doomscrolling vignette; phone art in breakdown is a better starting concept."
+    },
+    {
+      "path": "evidence/public-snapshot/images/event_van_breakdown.jpeg",
+      "source_url": "https://heuxnwuv.gensparkspace.com/images/event_van_breakdown.jpeg",
+      "bytes": 86706,
+      "width": 1024,
+      "height": 1024,
+      "sha256": "4941c0005aeda108067233ccacc61bef4e8783d584d6927f200b5a0f835ec992",
+      "current_role": "Van-breakdown encounter",
+      "observed_content": "Character holding phone with spiral eyes and floating icons.",
+      "recommendation": "Replace with repair / hood-open van scene."
+    },
+    {
+      "path": "evidence/public-snapshot/images/location_crypto_bro_meetup.jpeg",
+      "source_url": "https://heuxnwuv.gensparkspace.com/images/location_crypto_bro_meetup.jpeg",
+      "bytes": 192425,
+      "width": 1024,
+      "height": 1024,
+      "sha256": "92c356ee4b1cd34d2546d4057f9baafed39156869eb1e2d918d2ac50e18dbee3",
+      "current_role": "DeFi gas-station backroom",
+      "observed_content": "Illustrated food-cart streetscape; poor backroom match.",
+      "recommendation": "Potential food-cart reference; create a distinct crypto meetup."
+    },
+    {
+      "path": "evidence/public-snapshot/images/location_final_destination.jpeg",
+      "source_url": "https://heuxnwuv.gensparkspace.com/images/location_final_destination.jpeg",
+      "bytes": 122401,
+      "width": 1024,
+      "height": 1024,
+      "sha256": "c8454beafc29dc7c24fe8fd47e1780f1ce7b09951d3dad36c7511f8467ff8b2d",
+      "current_role": "Portland destination",
+      "observed_content": "Smoking van in a forest; does not communicate arrival.",
+      "recommendation": "Create a Portland arrival / city approach scene."
+    },
+    {
+      "path": "evidence/public-snapshot/images/location_first_stop.jpeg",
+      "source_url": "https://heuxnwuv.gensparkspace.com/images/location_first_stop.jpeg",
+      "bytes": 74587,
+      "width": 1024,
+      "height": 1024,
+      "sha256": "d7ea74ce817c394147601717851a21a8e2ea3e2fbbd258beb59427d5efed4629",
+      "current_role": "Highway rest stop at 200 miles",
+      "observed_content": "City casualty / terminal virus image with explicit game-over text.",
+      "recommendation": "Replace with a nonterminal roadside stop."
+    },
+    {
+      "path": "evidence/public-snapshot/images/location_food_truck_fest.jpeg",
+      "source_url": "https://heuxnwuv.gensparkspace.com/images/location_food_truck_fest.jpeg",
+      "bytes": 132969,
+      "width": 1024,
+      "height": 1024,
+      "sha256": "29caac5a665ef62ea70047ccaa681bdc675b099c129a0d5308659f37cc15b8a4",
+      "current_role": "Food Cart Pod",
+      "observed_content": "Loaded van in a forest; weak food-cart match.",
+      "recommendation": "Create a food-cart scene; crypto-meetup image is a better reference."
+    },
+    {
+      "path": "evidence/public-snapshot/images/location_sketchy_motel.jpeg",
+      "source_url": "https://heuxnwuv.gensparkspace.com/images/location_sketchy_motel.jpeg",
+      "bytes": 98610,
+      "width": 1024,
+      "height": 1024,
+      "sha256": "f1883038e1b5599223b214c5411b88d4a3b171eaff0709257b9a0bf2d6df666e",
+      "current_role": "Roadside motel",
+      "observed_content": "No-signal / game-over van art; duplicates ISP event exactly.",
+      "recommendation": "Create a motel establishing scene, without terminal text."
+    },
+    {
+      "path": "evidence/public-snapshot/images/location_start_city.jpeg",
+      "source_url": "https://heuxnwuv.gensparkspace.com/images/location_start_city.jpeg",
+      "bytes": 144495,
+      "width": 1024,
+      "height": 1024,
+      "sha256": "9b8951dd12e75f94c6dd3c5066811f245a2ac6bc3043a971c974f726f0776dce",
+      "current_role": "Starting artist co-op / guest room",
+      "observed_content": "Title-screen van art; exact duplicate of static start.",
+      "recommendation": "Keep as reference; optional distinct guest-room departure scene."
+    },
+    {
+      "path": "evidence/public-snapshot/images/location_viral_landmark.jpeg",
+      "source_url": "https://heuxnwuv.gensparkspace.com/images/location_viral_landmark.jpeg",
+      "bytes": 76556,
+      "width": 409,
+      "height": 1024,
+      "sha256": "e78bf274e1681510c0e0ddc4bdd10e24f6acab0614b7d8bd28e9a1af4b89ab5f",
+      "current_role": "Viral roadside attraction",
+      "observed_content": "Source-file browser screenshot, 409x1024.",
+      "recommendation": "Replace immediately with roadside attraction art."
+    },
+    {
+      "path": "evidence/public-snapshot/images/static_game_over_win.jpeg",
+      "source_url": "https://heuxnwuv.gensparkspace.com/images/static_game_over_win.jpeg",
+      "bytes": 73524,
+      "width": 409,
+      "height": 1024,
+      "sha256": "3da694b61c41da79eb373bd4834b040e90d83e8d99115c570c512dd4528c82de",
+      "current_role": "Victory screen",
+      "observed_content": "Source-file browser screenshot, 409x1024.",
+      "recommendation": "Replace immediately with victory art."
+    },
+    {
+      "path": "evidence/public-snapshot/images/static_start_screen.jpeg",
+      "source_url": "https://heuxnwuv.gensparkspace.com/images/static_start_screen.jpeg",
+      "bytes": 144495,
+      "width": 1024,
+      "height": 1024,
+      "sha256": "9b8951dd12e75f94c6dd3c5066811f245a2ac6bc3043a971c974f726f0776dce",
+      "current_role": "Main menu",
+      "observed_content": "Coherent loaded-van title art with baked lettering.",
+      "recommendation": "Preserve as the main visual reference; rebuild title lettering as UI."
+    },
+    {
+      "path": "evidence/public-snapshot/images/static_travel_screen.jpeg",
+      "source_url": "https://heuxnwuv.gensparkspace.com/images/static_travel_screen.jpeg",
+      "bytes": 158389,
+      "width": 1024,
+      "height": 1024,
+      "sha256": "f210c6643246c9937adace2da47676f96ba6cd325b99352cc38c227b06f8e3f1",
+      "current_role": "Every travel day",
+      "observed_content": "Van already in a dense city; repeats regardless of journey stage.",
+      "recommendation": "Use region-appropriate travel art, with a separate van sprite if animated."
+    }
+  ]
+}

@@ -1,0 +1,325 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-01",
+  "url": "https://heuxnwuv.gensparkspace.com/",
+  "priority_meanings": {
+    "P0": "Fix before a credible playable demo",
+    "P1": "Fix for dependable rules and usability",
+    "P2": "Complete or improve after the core loop"
+  },
+  "findings": [
+    {
+      "id": "F01",
+      "priority": "P0",
+      "title": "Critical encounters do not execute their outcome",
+      "method": "runtime_probe",
+      "evidence": "pandemic_death + Continue left all five health values at 100, gameOver=false, phase=travel.",
+      "cause": "closeEvent only executes outcomes for type auto; critical has no resolving path.",
+      "source": "js/game.js",
+      "function": "closeEvent",
+      "expected": "Every event type resolves exactly once; critical effects can end a run.",
+      "source_root": "evidence/public-snapshot",
+      "source_lines_matching_function": [
+        505,
+        515,
+        737,
+        738
+      ]
+    },
+    {
+      "id": "F02",
+      "priority": "P0",
+      "title": "New Game carries progress from the saved run",
+      "method": "runtime_probe",
+      "evidence": "A save at 400 miles / day 21 produced a new setup state still at 400 miles / day 21 with five party members.",
+      "cause": "startNewGame constructs a game whose init immediately merges the previous save.",
+      "source": "js/game.js",
+      "function": "startNewGame",
+      "expected": "New Game starts from clean state. Loading is an explicit separate action.",
+      "source_root": "evidence/public-snapshot",
+      "source_lines_matching_function": [
+        637
+      ]
+    },
+    {
+      "id": "F03",
+      "priority": "P1",
+      "title": "Automatic outcomes leave the display and save stale",
+      "method": "runtime_probe",
+      "evidence": "good_weather changed distance to 15 while the display and saved distance remained 0.",
+      "cause": "closeEvent applies auto outcome without updating travel, HUD, persistence, arrival, or terminal conditions.",
+      "source": "js/game.js",
+      "function": "closeEvent",
+      "expected": "Event effect, screen, log, save, arrivals, and terminal checks commit together.",
+      "source_root": "evidence/public-snapshot",
+      "source_lines_matching_function": [
+        505,
+        515,
+        737,
+        738
+      ]
+    },
+    {
+      "id": "F04",
+      "priority": "P1",
+      "title": "Pending encounters are lost on load",
+      "method": "runtime_probe",
+      "evidence": "Loaded van_breakdown kept its event id, lost its outcome function, and reopened travel with no modal.",
+      "cause": "JSON drops functions from currentEvent; loadGame does not reconstruct or reopen encounters.",
+      "source": "js/game.js",
+      "function": "saveGameState",
+      "expected": "Save serializable event ids and pending choice state; restore the same encounter.",
+      "source_root": "evidence/public-snapshot",
+      "source_lines_matching_function": [
+        94,
+        230,
+        337,
+        374,
+        391,
+        512
+      ]
+    },
+    {
+      "id": "F05",
+      "priority": "P1",
+      "title": "Rest resurrects dead companions and requires no food",
+      "method": "runtime_probe",
+      "evidence": "Rest with food=0 and a Deceased companion at health=0 changed that health to 15 while status remained Deceased.",
+      "cause": "rest adds health to every member and skips the food deduction when food is insufficient.",
+      "source": "js/game.js",
+      "function": "rest",
+      "expected": "Death is terminal; resting has an explicit resource rule and affects living members only.",
+      "source_root": "evidence/public-snapshot",
+      "source_lines_matching_function": [
+        354,
+        357,
+        431,
+        432,
+        709,
+        710,
+        721,
+        722
+      ]
+    },
+    {
+      "id": "F06",
+      "priority": "P1",
+      "title": "Travel can consume more fuel than exists",
+      "method": "runtime_probe",
+      "evidence": "Aggressive pace with one canister traveled 30 miles and left fuel=-2.",
+      "cause": "travelDay tests fuel < 1 before reading pace and its 1/2/3-canister cost.",
+      "source": "js/game.js",
+      "function": "travelDay",
+      "expected": "Validate the selected action cost; inventories stay nonnegative.",
+      "source_root": "evidence/public-snapshot",
+      "source_lines_matching_function": [
+        267,
+        705,
+        706
+      ]
+    },
+    {
+      "id": "F07",
+      "priority": "P1",
+      "title": "A losing run recreates its cleared save",
+      "method": "runtime_probe",
+      "evidence": "A travel-day party death showed game-over, then left a saved phase=game-over.",
+      "cause": "gameOver removes storage, but travelDay subsequently saves state again.",
+      "source": "js/game.js",
+      "function": "travelDay",
+      "expected": "Terminal transitions stop subsequent turn processing and use an explicit replay/save policy.",
+      "source_root": "evidence/public-snapshot",
+      "source_lines_matching_function": [
+        267,
+        705,
+        706
+      ]
+    },
+    {
+      "id": "F08",
+      "priority": "P1",
+      "title": "Location actions ignore the declared activity list",
+      "method": "runtime_probe",
+      "evidence": "The first stop declares rest/hunt but offers all five location actions. Leaving its shop changes phase to travel.",
+      "cause": "Location controls are unconditional; leaveShop and completePurchase always route to travel.",
+      "source": "js/game.js",
+      "function": "leaveShop",
+      "expected": "Render permitted activities and return from the shop to its originating location.",
+      "source_root": "evidence/public-snapshot",
+      "source_lines_matching_function": [
+        235,
+        701,
+        702
+      ]
+    },
+    {
+      "id": "F09",
+      "priority": "P2",
+      "title": "Talk to Locals has no immediate visible response",
+      "method": "runtime_probe",
+      "evidence": "The dialogue was added to eventLog while travel-screen, the only log host, was hidden.",
+      "cause": "talkToLocals writes to the journey log without showing dialogue on the active location screen.",
+      "source": "js/game.js",
+      "function": "talkToLocals",
+      "expected": "Display the conversation where the action occurs.",
+      "source_root": "evidence/public-snapshot",
+      "source_lines_matching_function": [
+        444,
+        733,
+        734
+      ]
+    },
+    {
+      "id": "F10",
+      "priority": "P0",
+      "title": "Companion controls are clipped at a common phone width",
+      "method": "viewport_probe",
+      "evidence": "At 430 px, character-screen scrollWidth=516 and Random buttons occupy x=442..516 outside the viewport.",
+      "cause": "Input rows only stack at <=414 px; the wider phone layout retains a 150 px label, input minimum width, gaps, and a button.",
+      "source": "css/style.css",
+      "function": ".input-group",
+      "expected": "All inputs and buttons fit at 390, 414, 430, and 768 px.",
+      "source_root": "evidence/public-snapshot",
+      "source_lines_matching_function": [
+        282,
+        289,
+        294,
+        308,
+        314,
+        323,
+        934,
+        941
+      ]
+    },
+    {
+      "id": "F11",
+      "priority": "P1",
+      "title": "Keyboard and modal semantics are incomplete",
+      "method": "DOM_inspection",
+      "evidence": "All four profession cards have tabIndex=-1. Event modal has neither role nor aria-modal and does not move focus into the encounter.",
+      "cause": "Clickable div cards and a plain div modal lack interactive semantics and focus handling.",
+      "source": "index.html",
+      "function": "profession-card / event-modal",
+      "expected": "Selectable backgrounds are keyboard-operable; dialogs manage focus and expose their role.",
+      "source_root": "evidence/public-snapshot",
+      "source_lines_matching_function": [
+        53,
+        64,
+        75,
+        86
+      ]
+    },
+    {
+      "id": "F12",
+      "priority": "P1",
+      "title": "Advertised profession powers are mostly descriptive text",
+      "method": "source_review",
+      "evidence": "The developer receives one starting NFT. Collabs, developer repair discounts, prepper forage advantage, and barista daily coffee are not implemented.",
+      "cause": "Profession specialAbility strings are displayed, but the related action logic does not branch on profession.",
+      "source": "js/game.js",
+      "function": "startAdventure",
+      "expected": "Either implement the advertised differences or write descriptions that match the actual mechanics.",
+      "source_root": "evidence/public-snapshot",
+      "source_lines_matching_function": [
+        139,
+        689,
+        690
+      ]
+    },
+    {
+      "id": "F13",
+      "priority": "P2",
+      "title": "Several inventory items lack a usable game action",
+      "method": "source_review",
+      "evidence": "Seed bombs and kombucha can be bought but have no consumer in the published code. Parts and NFTs are used by two choice events; the HUD only shows money, food, fuel, days, and health.",
+      "cause": "Inventory, shop descriptions, and usable actions are not aligned.",
+      "source": "js/game.js",
+      "function": "updateHud",
+      "expected": "Every purchasable item has a clear use and a visible count, or is removed from the shop.",
+      "source_root": "evidence/public-snapshot",
+      "source_lines_matching_function": [
+        58,
+        65,
+        336,
+        373,
+        390,
+        511
+      ]
+    },
+    {
+      "id": "F14",
+      "priority": "P1",
+      "title": "Foraging is repeatable without resource or health cost",
+      "method": "source_review",
+      "evidence": "hunt has a 40% chance to add 5..24 food, advances 0.5 days, and consumes no food, fuel, seed bombs, or health.",
+      "cause": "Time alone has no recurring cost in this action; seed bombs do not participate.",
+      "source": "js/game.js",
+      "function": "hunt",
+      "expected": "Define a meaningful forage tradeoff and verify route balance; do not accidentally make infinite food the optimal loop.",
+      "source_root": "evidence/public-snapshot",
+      "source_lines_matching_function": [
+        377,
+        435,
+        436,
+        713,
+        714,
+        725,
+        726
+      ]
+    },
+    {
+      "id": "F15",
+      "priority": "P0",
+      "title": "Victory and landmark artwork are file-browser screenshots",
+      "method": "visual_and_file_inspection",
+      "evidence": "static_game_over_win.jpeg and location_viral_landmark.jpeg are 409x1024 source-file browser screenshots, not scenes.",
+      "cause": "Incorrect image files were assigned to live content slots.",
+      "source": "images/static_game_over_win.jpeg",
+      "function": "asset mapping",
+      "expected": "A distinct Portland victory scene and an actual roadside attraction scene.",
+      "source_root": "evidence/public-snapshot"
+    },
+    {
+      "id": "F16",
+      "priority": "P0",
+      "title": "Encounter and location artwork contradict their content",
+      "method": "visual_and_source_inspection",
+      "evidence": "First-stop art says GAME OVER - THE VIRUS WINS. Breakdown art depicts a phone spiral. Heatwave art depicts a Wi-Fi outage. The pandemic image depicts rainy driving.",
+      "cause": "Several files have mismatched content; names and bindings were trusted without semantic inspection.",
+      "source": "js/constants.js",
+      "function": "LOCATIONS / RANDOM_EVENTS",
+      "expected": "Verify every image against the location or event it illustrates.",
+      "source_root": "evidence/public-snapshot",
+      "source_lines_matching_function": [
+        76
+      ]
+    },
+    {
+      "id": "F17",
+      "priority": "P2",
+      "title": "Desktop and phone play screens devote too much space to framing",
+      "method": "visual_and_CSS_inspection",
+      "evidence": "screen.active adds 50vh bottom padding. A 390 px travel viewport is dominated by square art, a long route heading, and a fixed HUD; action buttons are below the initial viewport.",
+      "cause": "Poster-first composition, long headings, fixed HUD, and oversized spacing were combined without a compact play layout.",
+      "source": "css/style.css",
+      "function": ".screen.active / .travel-header / .hud",
+      "expected": "Keep the current scene, essential status, next-stop distance, and primary action easy to reach.",
+      "source_root": "evidence/public-snapshot",
+      "source_lines_matching_function": [
+        82
+      ]
+    },
+    {
+      "id": "F18",
+      "priority": "P1",
+      "title": "The exported README overstates and contradicts implementation",
+      "method": "export_source_comparison",
+      "evidence": "README claims 10 events, a 10% daily event chance, dynamic prices and pace-dependent event frequency. Code has 9 events, a 30% chance, fixed base prices and no pace effect on event chance.",
+      "cause": "Documentation describes intended or invented behavior as implemented.",
+      "source": "README.md",
+      "source_root": "evidence/provided-export",
+      "function": "Currently Implemented Features",
+      "expected": "Rewrite feature and mechanics documentation from verified code and runtime behavior."
+    }
+  ]
+}

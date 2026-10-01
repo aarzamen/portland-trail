@@ -1,0 +1,240 @@
+{
+  "archive_name": "code_sandbox_light_db8de4e3_1790840601.zip",
+  "archive_sha256": "396ae1591a7880e92da47c0848192b18e2daa00cbab627f121ae166242defc40",
+  "files": [
+    {
+      "path": "README.md",
+      "bytes": 9828,
+      "sha256": "786815f0de64fee02bd2bf038baac45d27e2413d22406fa15a708f6516c31845",
+      "published_status": "export_only"
+    },
+    {
+      "path": "index.html",
+      "bytes": 19778,
+      "sha256": "d5e574ff84bd1017ad70ff539a82e1ae36d8c19d583dd5d846f8fb8a5bd3980e",
+      "published_status": "identical"
+    },
+    {
+      "path": "css/style.css",
+      "bytes": 18315,
+      "sha256": "96b26b3a8032b22101f3700fb0394136e10599f013f1834d0574c6e920fd6cc7",
+      "published_status": "identical"
+    },
+    {
+      "path": "js/game.js",
+      "bytes": 26553,
+      "sha256": "a4dd0265996eb94ff61c1341e264959349801c224fb988b38b7f5cb1ae971293",
+      "published_status": "identical"
+    },
+    {
+      "path": "js/constants.js",
+      "bytes": 12605,
+      "sha256": "6332e6b9163b26379c9e9a3b0e43cc08ad0e9a006f9a19adab90db2b8d2cf70c",
+      "published_status": "identical"
+    },
+    {
+      "path": "images/location_crypto_bro_meetup.jpeg",
+      "bytes": 192425,
+      "sha256": "92c356ee4b1cd34d2546d4057f9baafed39156869eb1e2d918d2ac50e18dbee3",
+      "published_status": "identical"
+    },
+    {
+      "path": "images/event_nft_auction.jpeg",
+      "bytes": 83841,
+      "sha256": "ca80889e7bc3ee6dca1c01c0a8c4fa1759f747d8c849919afda685e151fe3460",
+      "published_status": "identical"
+    },
+    {
+      "path": "images/the_portland_trail_00013.jpg",
+      "bytes": 122737,
+      "sha256": "6e72b8d7209e18bd72f74508b9dddd3f3ae46306e3a971582d9ecc2013a2b3ae",
+      "published_status": "export_only"
+    },
+    {
+      "path": "images/the_portland_trail_00000.jpg",
+      "bytes": 86706,
+      "sha256": "4941c0005aeda108067233ccacc61bef4e8783d584d6927f200b5a0f835ec992",
+      "published_status": "export_only"
+    },
+    {
+      "path": "images/the_portland_trail_00017.jpg",
+      "bytes": 74587,
+      "sha256": "d7ea74ce817c394147601717851a21a8e2ea3e2fbbd258beb59427d5efed4629",
+      "published_status": "export_only"
+    },
+    {
+      "path": "images/the_portland_trail_00015.jpg",
+      "bytes": 108992,
+      "sha256": "109ee9b453f88a75f86fb2e13c9b90424482f58fe8498e30423af6623fb2ca9e",
+      "published_status": "export_only"
+    },
+    {
+      "path": "images/the_portland_trail_00007.jpg",
+      "bytes": 122401,
+      "sha256": "c8454beafc29dc7c24fe8fd47e1780f1ce7b09951d3dad36c7511f8467ff8b2d",
+      "published_status": "export_only"
+    },
+    {
+      "path": "images/event_good_weather.jpeg",
+      "bytes": 102575,
+      "sha256": "01307711f3b64686e56951ad6256d293b1a572b3e66c2e96c10c9506d8d1fb32",
+      "published_status": "identical"
+    },
+    {
+      "path": "images/event_starlink_disruption.jpeg",
+      "bytes": 98610,
+      "sha256": "f1883038e1b5599223b214c5411b88d4a3b171eaff0709257b9a0bf2d6df666e",
+      "published_status": "identical"
+    },
+    {
+      "path": "images/the_portland_trail_00010.jpg",
+      "bytes": 89423,
+      "sha256": "fc63f98e8ceba1e089719bd121be799d288da36ab6760a9bdc67cf8bbd86a98c",
+      "published_status": "export_only"
+    },
+    {
+      "path": "images/location_start_city.jpeg",
+      "bytes": 144495,
+      "sha256": "9b8951dd12e75f94c6dd3c5066811f245a2ac6bc3043a971c974f726f0776dce",
+      "published_status": "identical"
+    },
+    {
+      "path": "images/location_viral_landmark.jpeg",
+      "bytes": 76556,
+      "sha256": "e78bf274e1681510c0e0ddc4bdd10e24f6acab0614b7d8bd28e9a1af4b89ab5f",
+      "published_status": "identical"
+    },
+    {
+      "path": "images/location_final_destination.jpeg",
+      "bytes": 122401,
+      "sha256": "c8454beafc29dc7c24fe8fd47e1780f1ce7b09951d3dad36c7511f8467ff8b2d",
+      "published_status": "identical"
+    },
+    {
+      "path": "images/static_game_over_win.jpeg",
+      "bytes": 73524,
+      "sha256": "3da694b61c41da79eb373bd4834b040e90d83e8d99115c570c512dd4528c82de",
+      "published_status": "identical"
+    },
+    {
+      "path": "images/the_portland_trail_00003.jpg",
+      "bytes": 85192,
+      "sha256": "8e141839a2979bed2043ca31f9574105b904e0302ab1a2ee088daeda5184d92c",
+      "published_status": "export_only"
+    },
+    {
+      "path": "images/location_sketchy_motel.jpeg",
+      "bytes": 98610,
+      "sha256": "f1883038e1b5599223b214c5411b88d4a3b171eaff0709257b9a0bf2d6df666e",
+      "published_status": "identical"
+    },
+    {
+      "path": "images/static_travel_screen.jpeg",
+      "bytes": 158389,
+      "sha256": "f210c6643246c9937adace2da47676f96ba6cd325b99352cc38c227b06f8e3f1",
+      "published_status": "identical"
+    },
+    {
+      "path": "images/the_portland_trail_00008.jpg",
+      "bytes": 102575,
+      "sha256": "01307711f3b64686e56951ad6256d293b1a572b3e66c2e96c10c9506d8d1fb32",
+      "published_status": "export_only"
+    },
+    {
+      "path": "images/the_portland_trail_00002.jpg",
+      "bytes": 98610,
+      "sha256": "f1883038e1b5599223b214c5411b88d4a3b171eaff0709257b9a0bf2d6df666e",
+      "published_status": "export_only"
+    },
+    {
+      "path": "images/the_portland_trail_00018.jpg",
+      "bytes": 135787,
+      "sha256": "ef3a403a6e1930f4f4f094a34bea11048a2c6431e9038cac971dc9c2cef5c4e9",
+      "published_status": "export_only"
+    },
+    {
+      "path": "images/location_food_truck_fest.jpeg",
+      "bytes": 132969,
+      "sha256": "29caac5a665ef62ea70047ccaa681bdc675b099c129a0d5308659f37cc15b8a4",
+      "published_status": "identical"
+    },
+    {
+      "path": "images/the_portland_trail_00016.jpg",
+      "bytes": 135519,
+      "sha256": "18271e8a06a9efd169d650d57902cb32b8a45105caae69640211fa44046b75ec",
+      "published_status": "export_only"
+    },
+    {
+      "path": "images/the_portland_trail_00006.jpg",
+      "bytes": 144495,
+      "sha256": "9b8951dd12e75f94c6dd3c5066811f245a2ac6bc3043a971c974f726f0776dce",
+      "published_status": "export_only"
+    },
+    {
+      "path": "images/event_found_supplies.jpeg",
+      "bytes": 108992,
+      "sha256": "109ee9b453f88a75f86fb2e13c9b90424482f58fe8498e30423af6623fb2ca9e",
+      "published_status": "identical"
+    },
+    {
+      "path": "images/the_portland_trail_00009.jpg",
+      "bytes": 121051,
+      "sha256": "dcd8dfe2e6b48061ad00485dcf998a112009f471c236e63cd6638a930cbf25cc",
+      "published_status": "export_only"
+    },
+    {
+      "path": "images/static_game_over_loss.jpeg",
+      "bytes": 163152,
+      "sha256": "3b821a0373cbfeb3682bc20cfb6825e8e106d7f52564784c78817a7542a42745",
+      "published_status": "export_only"
+    },
+    {
+      "path": "images/event_tiktok_distraction.jpeg",
+      "bytes": 122737,
+      "sha256": "6e72b8d7209e18bd72f74508b9dddd3f3ae46306e3a971582d9ecc2013a2b3ae",
+      "published_status": "identical"
+    },
+    {
+      "path": "images/event_van_breakdown.jpeg",
+      "bytes": 86706,
+      "sha256": "4941c0005aeda108067233ccacc61bef4e8783d584d6927f200b5a0f835ec992",
+      "published_status": "identical"
+    },
+    {
+      "path": "images/event_covid_death.jpeg",
+      "bytes": 121051,
+      "sha256": "dcd8dfe2e6b48061ad00485dcf998a112009f471c236e63cd6638a930cbf25cc",
+      "published_status": "identical"
+    },
+    {
+      "path": "images/the_portland_trail_00001.jpg",
+      "bytes": 132969,
+      "sha256": "29caac5a665ef62ea70047ccaa681bdc675b099c129a0d5308659f37cc15b8a4",
+      "published_status": "export_only"
+    },
+    {
+      "path": "images/event_bad_weather.jpeg",
+      "bytes": 163152,
+      "sha256": "3b821a0373cbfeb3682bc20cfb6825e8e106d7f52564784c78817a7542a42745",
+      "published_status": "identical"
+    },
+    {
+      "path": "images/location_first_stop.jpeg",
+      "bytes": 74587,
+      "sha256": "d7ea74ce817c394147601717851a21a8e2ea3e2fbbd258beb59427d5efed4629",
+      "published_status": "identical"
+    },
+    {
+      "path": "images/static_start_screen.jpeg",
+      "bytes": 144495,
+      "sha256": "9b8951dd12e75f94c6dd3c5066811f245a2ac6bc3043a971c974f726f0776dce",
+      "published_status": "identical"
+    },
+    {
+      "path": "images/the_portland_trail_00014.jpg",
+      "bytes": 83841,
+      "sha256": "ca80889e7bc3ee6dca1c01c0a8c4fa1759f747d8c849919afda685e151fe3460",
+      "published_status": "export_only"
+    }
+  ]
+}

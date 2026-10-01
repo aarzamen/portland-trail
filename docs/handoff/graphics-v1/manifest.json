@@ -1,0 +1,175 @@
+{
+  "schema_version": 1,
+  "created": "2026-10-01",
+  "intended_project_root": "/Users/ama/The Portland Trail",
+  "project_relative_directory": "docs/handoff/graphics-v1",
+  "path_base": "this manifest directory",
+  "status": "transparent high-resolution concept masters; not production sprites",
+  "generator": "OpenAI image generation",
+  "style_reference": "../evidence/provided-export/images/static_start_screen.jpeg",
+  "original_data_definitions": "../evidence/provided-export/js/constants.js",
+  "prompt_file": "prompts.json",
+  "individual_exports_delivered": false,
+  "strict_pixel_grid_validated": false,
+  "exact_four_color_palette_validated": false,
+  "fixed_cell_rectangles_delivered": false,
+  "assets": [
+    {
+      "id": "resource_icons",
+      "file": "resource-icons-master.png",
+      "kind": "concept_sheet",
+      "intended_individual_cell_px": [
+        32,
+        32
+      ],
+      "items": [
+        {
+          "original_id": "money",
+          "subject": "Banded banknotes",
+          "conceptual_row": 1,
+          "conceptual_column": 1,
+          "proposed_export": "resource-money.png"
+        },
+        {
+          "original_id": "food",
+          "subject": "Kale-chip bag",
+          "conceptual_row": 1,
+          "conceptual_column": 2,
+          "proposed_export": "resource-food.png"
+        },
+        {
+          "original_id": "fuel",
+          "subject": "Bio-diesel jerrycan",
+          "conceptual_row": 1,
+          "conceptual_column": 3,
+          "proposed_export": "resource-fuel.png"
+        },
+        {
+          "original_id": "ammo",
+          "subject": "Seed-bomb pouch",
+          "conceptual_row": 1,
+          "conceptual_column": 4,
+          "proposed_export": "resource-ammo.png"
+        },
+        {
+          "original_id": "parts",
+          "subject": "Washi tape and screwdriver",
+          "conceptual_row": 2,
+          "conceptual_column": 1,
+          "proposed_export": "resource-parts.png"
+        },
+        {
+          "original_id": "kombucha",
+          "subject": "Kombucha bottle",
+          "conceptual_row": 2,
+          "conceptual_column": 2,
+          "proposed_export": "resource-kombucha.png"
+        },
+        {
+          "original_id": "nft",
+          "subject": "Sasquatch collectible with USB",
+          "conceptual_row": 2,
+          "conceptual_column": 3,
+          "proposed_export": "resource-nft.png"
+        }
+      ],
+      "layout_note": "4 columns x 2 rows; bottom-right empty. Positions are descriptive, not fixed crop rectangles.",
+      "width": 1774,
+      "height": 887,
+      "mode": "RGBA",
+      "bytes": 971303,
+      "sha256": "be40314ec1e2ecf67320807309699d06e0a88ba5c1dbe5f0073be64b2f74b64b",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "fully_transparent_pixels": 942732,
+      "partially_transparent_pixels": 629001,
+      "total_pixels": 1573538
+    },
+    {
+      "id": "background_portraits",
+      "file": "background-portraits-master.png",
+      "kind": "concept_sheet",
+      "intended_individual_cell_px": [
+        64,
+        64
+      ],
+      "items": [
+        {
+          "original_id": "influencer",
+          "subject": "Social Media Influencer",
+          "conceptual_row": 1,
+          "conceptual_column": 1,
+          "proposed_export": "portrait-influencer.png"
+        },
+        {
+          "original_id": "dev",
+          "subject": "Gig Economy Developer",
+          "conceptual_row": 1,
+          "conceptual_column": 2,
+          "proposed_export": "portrait-dev.png"
+        },
+        {
+          "original_id": "prepper",
+          "subject": "Doomsday Prepper (Portland Edition)",
+          "conceptual_row": 2,
+          "conceptual_column": 1,
+          "proposed_export": "portrait-prepper.png"
+        },
+        {
+          "original_id": "barista",
+          "subject": "Artisanal Barista",
+          "conceptual_row": 2,
+          "conceptual_column": 2,
+          "proposed_export": "portrait-barista.png"
+        }
+      ],
+      "layout_note": "2 columns x 2 rows. Crop and align each portrait deliberately; no pixel rectangles asserted.",
+      "width": 1374,
+      "height": 1145,
+      "mode": "RGBA",
+      "bytes": 1472843,
+      "sha256": "b8c885198fcbba2a56846db6cb5018d6e12f9905699596fda1b5c4b3a11728a9",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "fully_transparent_pixels": 613090,
+      "partially_transparent_pixels": 958605,
+      "total_pixels": 1573230
+    },
+    {
+      "id": "van_master",
+      "file": "van-side-master.png",
+      "kind": "single_vehicle_concept",
+      "intended_individual_cell_px": [
+        128,
+        64
+      ],
+      "state": "parked",
+      "facing": "right",
+      "camera": "side profile",
+      "animation_frames_delivered": 0,
+      "proposed_future_states": [
+        "parked",
+        "rolling_a",
+        "rolling_b",
+        "breakdown_hood_open",
+        "arrival"
+      ],
+      "width": 1774,
+      "height": 887,
+      "mode": "RGBA",
+      "bytes": 1047097,
+      "sha256": "c2ce683138ad471a28a9af56ce4474ab6d800e0c127e8a05634a4394e2e52b03",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "fully_transparent_pixels": 663694,
+      "partially_transparent_pixels": 909102,
+      "total_pixels": 1573538
+    }
+  ]
+}

@@ -1,0 +1,550 @@
+{
+  "source_url": "https://heuxnwuv.gensparkspace.com/",
+  "inspection_date": "2026-10-01",
+  "timezone": "America/Los_Angeles",
+  "method": "Ordinary UI clicks plus deterministic state and event setup in a separate browser session; original site source was not changed.",
+  "desktop": {
+    "width": 1440,
+    "height": 1000
+  },
+  "mobile": [
+    {
+      "width": 390,
+      "height": 844
+    },
+    {
+      "width": 430,
+      "height": 932
+    }
+  ],
+  "journey": {
+    "state": {
+      "phase": "travel",
+      "profession": {
+        "id": "prepper",
+        "name": "Doomsday Prepper (Portland Edition)",
+        "description": "Starts with more food and artisanal \"survival\" gear.",
+        "startingMoney": 800,
+        "startingFood": 100,
+        "startingFuel": 25,
+        "specialAbility": "Better odds at \"foraging\". Complains if rations are not \"filling\"."
+      },
+      "party": [
+        {
+          "id": "member_0",
+          "name": "Mike",
+          "health": 100,
+          "status": "Healthy"
+        },
+        {
+          "id": "member_1",
+          "name": "Kale",
+          "health": 100,
+          "status": "Healthy"
+        },
+        {
+          "id": "member_2",
+          "name": "Juniper",
+          "health": 100,
+          "status": "Healthy"
+        },
+        {
+          "id": "member_3",
+          "name": "Echo",
+          "health": 100,
+          "status": "Healthy"
+        },
+        {
+          "id": "member_4",
+          "name": "Sage",
+          "health": 100,
+          "status": "Healthy"
+        }
+      ],
+      "inventory": {
+        "money": 775,
+        "food": 101,
+        "fuel": 25,
+        "ammo": 0,
+        "parts": 0,
+        "kombucha": 0,
+        "nft": 0
+      },
+      "currentLocationIndex": 0,
+      "distanceTraveled": 0,
+      "daysElapsed": 0,
+      "weather": "Clear",
+      "pace": "normal",
+      "rations": "meager",
+      "eventLog": [
+        {
+          "day": 0,
+          "message": "The journey to Portland begins!",
+          "type": "normal"
+        },
+        {
+          "day": 0,
+          "message": "Purchased supplies for $25",
+          "type": "normal"
+        }
+      ],
+      "gameOver": false,
+      "gameWon": false,
+      "currentEvent": null
+    },
+    "saved": {
+      "phase": "shop",
+      "profession": {
+        "id": "prepper",
+        "name": "Doomsday Prepper (Portland Edition)",
+        "description": "Starts with more food and artisanal \"survival\" gear.",
+        "startingMoney": 800,
+        "startingFood": 100,
+        "startingFuel": 25,
+        "specialAbility": "Better odds at \"foraging\". Complains if rations are not \"filling\"."
+      },
+      "party": [
+        {
+          "id": "member_0",
+          "name": "Mike",
+          "health": 100,
+          "status": "Healthy"
+        },
+        {
+          "id": "member_1",
+          "name": "Kale",
+          "health": 100,
+          "status": "Healthy"
+        },
+        {
+          "id": "member_2",
+          "name": "Juniper",
+          "health": 100,
+          "status": "Healthy"
+        },
+        {
+          "id": "member_3",
+          "name": "Echo",
+          "health": 100,
+          "status": "Healthy"
+        },
+        {
+          "id": "member_4",
+          "name": "Sage",
+          "health": 100,
+          "status": "Healthy"
+        }
+      ],
+      "inventory": {
+        "money": 775,
+        "food": 101,
+        "fuel": 25,
+        "ammo": 0,
+        "parts": 0,
+        "kombucha": 0,
+        "nft": 0
+      },
+      "currentLocationIndex": 0,
+      "distanceTraveled": 0,
+      "daysElapsed": 0,
+      "weather": "Clear",
+      "pace": "normal",
+      "rations": "meager",
+      "eventLog": [
+        {
+          "day": 0,
+          "message": "The journey to Portland begins!",
+          "type": "normal"
+        },
+        {
+          "day": 0,
+          "message": "Purchased supplies for $25",
+          "type": "normal"
+        }
+      ],
+      "gameOver": false,
+      "gameWon": false,
+      "currentEvent": null
+    }
+  },
+  "probes": [
+    {
+      "id": "critical_event_ignored",
+      "data": {
+        "phase": "travel",
+        "health": [
+          100,
+          100,
+          100,
+          100,
+          100
+        ],
+        "gameOver": false,
+        "modal": "modal"
+      }
+    },
+    {
+      "id": "auto_event_stale_ui",
+      "data": {
+        "distance": 15,
+        "display": "Distance: 0/1000 miles",
+        "savedDistance": 0
+      }
+    },
+    {
+      "id": "rest_resurrection_no_food",
+      "data": {
+        "health": 15,
+        "status": "Deceased",
+        "food": 0,
+        "days": 1
+      }
+    },
+    {
+      "id": "fuel_negative",
+      "data": {
+        "fuel": -2,
+        "distance": 30,
+        "phase": "travel"
+      }
+    },
+    {
+      "id": "locals_hidden_feedback",
+      "data": {
+        "phase": "location",
+        "lastLog": [
+          {
+            "day": 0,
+            "message": "Local: \"You learn about seventeen different coffee brewing methods.\"",
+            "type": "normal"
+          }
+        ],
+        "logVisible": "none",
+        "offeredActivities": [
+          "► CONTINUE ON TRAIL",
+          "► REST",
+          "► FORAGE",
+          "► VISIT SHOP",
+          "► TALK TO LOCALS"
+        ],
+        "configuredActivities": [
+          "rest",
+          "hunt"
+        ]
+      }
+    },
+    {
+      "id": "shop_loses_location",
+      "data": {
+        "phase": "travel",
+        "index": 1
+      }
+    },
+    {
+      "id": "new_game_inherits_save",
+      "data": {
+        "phase": "setup",
+        "distance": 400,
+        "days": 21,
+        "partyCount": 5
+      }
+    },
+    {
+      "id": "choice_event_works",
+      "data": {
+        "phase": "travel",
+        "days": 1,
+        "lastLog": [
+          {
+            "day": 1,
+            "message": "No spare parts! Wasted a day trying to manifest repairs.",
+            "type": "normal"
+          }
+        ],
+        "modal": "modal"
+      }
+    },
+    {
+      "id": "arrival_works",
+      "data": {
+        "phase": "location",
+        "index": 1,
+        "distance": 200,
+        "name": "Forgotten Highway Rest Stop"
+      }
+    },
+    {
+      "id": "event_lost_on_load",
+      "data": {
+        "phase": "travel",
+        "event": "van_breakdown",
+        "outcome": "undefined",
+        "modal": "modal"
+      }
+    },
+    {
+      "id": "loss_save_recreated",
+      "data": {
+        "phase": "game-over",
+        "gameOver": true,
+        "health": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "saveExists": true,
+        "savedPhase": "game-over"
+      }
+    },
+    {
+      "id": "win_render_works",
+      "data": {
+        "phase": "game-over",
+        "gameWon": true,
+        "distance": 1000,
+        "saveExists": false
+      }
+    },
+    {
+      "id": "random_name_works",
+      "value": "Lyra"
+    },
+    {
+      "id": "mobile_character_overflow",
+      "data": {
+        "viewport": 430,
+        "screenScrollWidth": 516,
+        "elements": [
+          {
+            "tag": "INPUT",
+            "rect": {
+              "left": 180,
+              "right": 427,
+              "width": 247
+            }
+          },
+          {
+            "tag": "BUTTON",
+            "rect": {
+              "left": 442,
+              "right": 515.953125,
+              "width": 73.953125
+            }
+          },
+          {
+            "tag": "INPUT",
+            "rect": {
+              "left": 180,
+              "right": 427,
+              "width": 247
+            }
+          },
+          {
+            "tag": "BUTTON",
+            "rect": {
+              "left": 442,
+              "right": 515.953125,
+              "width": 73.953125
+            }
+          },
+          {
+            "tag": "INPUT",
+            "rect": {
+              "left": 180,
+              "right": 427,
+              "width": 247
+            }
+          },
+          {
+            "tag": "BUTTON",
+            "rect": {
+              "left": 442,
+              "right": 515.953125,
+              "width": 73.953125
+            }
+          },
+          {
+            "tag": "INPUT",
+            "rect": {
+              "left": 180,
+              "right": 427,
+              "width": 247
+            }
+          },
+          {
+            "tag": "BUTTON",
+            "rect": {
+              "left": 442,
+              "right": 515.953125,
+              "width": 73.953125
+            }
+          },
+          {
+            "tag": "INPUT",
+            "rect": {
+              "left": 180,
+              "right": 427,
+              "width": 247
+            }
+          },
+          {
+            "tag": "BUTTON",
+            "rect": {
+              "left": 442,
+              "right": 515.953125,
+              "width": 73.953125
+            }
+          },
+          {
+            "tag": "BUTTON",
+            "rect": {
+              "left": 15,
+              "right": 268.375,
+              "width": 253.375
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "mobile_travel_layout",
+      "data": {
+        "viewport": 390,
+        "hudHeight": 182.03125,
+        "headerWidth": 370,
+        "screenWidth": 390
+      }
+    },
+    {
+      "id": "event_accessibility",
+      "data": {
+        "modalRole": null,
+        "ariaModal": null,
+        "focused": "<body>\n    <!-- Game Container -->\n    <div id=\"game-container\">\n        <!-- Start Screen -->\n        <div id=\"start-screen\" class=\"screen\">\n            <div class=\"title-image\">\n                <img src=\"images/static_start_screen.jpeg\" alt=\"The Po",
+        "professionFocusable": [
+          -1,
+          -1,
+          -1,
+          -1
+        ]
+      }
+    }
+  ],
+  "asset_http_inventory": {
+    "assets": [
+      {
+        "path": "images/event_bad_weather.jpeg",
+        "status": 200,
+        "bytes": 163152
+      },
+      {
+        "path": "images/event_covid_death.jpeg",
+        "status": 200,
+        "bytes": 121051
+      },
+      {
+        "path": "images/event_found_supplies.jpeg",
+        "status": 200,
+        "bytes": 108992
+      },
+      {
+        "path": "images/event_good_weather.jpeg",
+        "status": 200,
+        "bytes": 102575
+      },
+      {
+        "path": "images/event_nft_auction.jpeg",
+        "status": 200,
+        "bytes": 83841
+      },
+      {
+        "path": "images/event_starlink_disruption.jpeg",
+        "status": 200,
+        "bytes": 98610
+      },
+      {
+        "path": "images/event_tiktok_distraction.jpeg",
+        "status": 200,
+        "bytes": 122737
+      },
+      {
+        "path": "images/event_van_breakdown.jpeg",
+        "status": 200,
+        "bytes": 86706
+      },
+      {
+        "path": "images/location_crypto_bro_meetup.jpeg",
+        "status": 200,
+        "bytes": 192425
+      },
+      {
+        "path": "images/location_final_destination.jpeg",
+        "status": 200,
+        "bytes": 122401
+      },
+      {
+        "path": "images/location_first_stop.jpeg",
+        "status": 200,
+        "bytes": 74587
+      },
+      {
+        "path": "images/location_food_truck_fest.jpeg",
+        "status": 200,
+        "bytes": 132969
+      },
+      {
+        "path": "images/location_sketchy_motel.jpeg",
+        "status": 200,
+        "bytes": 98610
+      },
+      {
+        "path": "images/location_start_city.jpeg",
+        "status": 200,
+        "bytes": 144495
+      },
+      {
+        "path": "images/location_viral_landmark.jpeg",
+        "status": 200,
+        "bytes": 76556
+      },
+      {
+        "path": "images/static_game_over_win.jpeg",
+        "status": 200,
+        "bytes": 73524
+      },
+      {
+        "path": "images/static_start_screen.jpeg",
+        "status": 200,
+        "bytes": 144495
+      },
+      {
+        "path": "images/static_travel_screen.jpeg",
+        "status": 200,
+        "bytes": 158389
+      }
+    ],
+    "zip_bytes": 2050483
+  },
+  "asset_hashes": {
+    "event_bad_weather.jpeg": "3b821a0373cbfeb3682bc20cfb6825e8e106d7f52564784c78817a7542a42745",
+    "event_covid_death.jpeg": "dcd8dfe2e6b48061ad00485dcf998a112009f471c236e63cd6638a930cbf25cc",
+    "event_found_supplies.jpeg": "109ee9b453f88a75f86fb2e13c9b90424482f58fe8498e30423af6623fb2ca9e",
+    "event_good_weather.jpeg": "01307711f3b64686e56951ad6256d293b1a572b3e66c2e96c10c9506d8d1fb32",
+    "event_nft_auction.jpeg": "ca80889e7bc3ee6dca1c01c0a8c4fa1759f747d8c849919afda685e151fe3460",
+    "event_starlink_disruption.jpeg": "f1883038e1b5599223b214c5411b88d4a3b171eaff0709257b9a0bf2d6df666e",
+    "event_tiktok_distraction.jpeg": "6e72b8d7209e18bd72f74508b9dddd3f3ae46306e3a971582d9ecc2013a2b3ae",
+    "event_van_breakdown.jpeg": "4941c0005aeda108067233ccacc61bef4e8783d584d6927f200b5a0f835ec992",
+    "location_crypto_bro_meetup.jpeg": "92c356ee4b1cd34d2546d4057f9baafed39156869eb1e2d918d2ac50e18dbee3",
+    "location_final_destination.jpeg": "c8454beafc29dc7c24fe8fd47e1780f1ce7b09951d3dad36c7511f8467ff8b2d",
+    "location_first_stop.jpeg": "d7ea74ce817c394147601717851a21a8e2ea3e2fbbd258beb59427d5efed4629",
+    "location_food_truck_fest.jpeg": "29caac5a665ef62ea70047ccaa681bdc675b099c129a0d5308659f37cc15b8a4",
+    "location_sketchy_motel.jpeg": "f1883038e1b5599223b214c5411b88d4a3b171eaff0709257b9a0bf2d6df666e",
+    "location_start_city.jpeg": "9b8951dd12e75f94c6dd3c5066811f245a2ac6bc3043a971c974f726f0776dce",
+    "location_viral_landmark.jpeg": "e78bf274e1681510c0e0ddc4bdd10e24f6acab0614b7d8bd28e9a1af4b89ab5f",
+    "static_game_over_win.jpeg": "3da694b61c41da79eb373bd4834b040e90d83e8d99115c570c512dd4528c82de",
+    "static_start_screen.jpeg": "9b8951dd12e75f94c6dd3c5066811f245a2ac6bc3043a971c974f726f0776dce",
+    "static_travel_screen.jpeg": "f210c6643246c9937adace2da47676f96ba6cd325b99352cc38c227b06f8e3f1"
+  }
+}

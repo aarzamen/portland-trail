@@ -1,0 +1,62 @@
+THE PORTLAND TRAIL - GRAPHIC PRODUCTION BRIEF
+Project root: /Users/ama/The Portland Trail on ama's MacBook Pro.
+This file lives at docs/handoff/ASSET_BRIEF.txt. Unqualified file and folder
+references in this brief are relative to docs/handoff/.
+Proposed direction, based on the live app inspected 1 October 2026.
+The audit preceded new artwork. Package version 2 now includes the first generated
+graphics batch in graphics-v1: seven resource icons, four background portraits,
+and a parked van master. These are transparent high-resolution concept masters,
+not final 32/64/128px exports or animation sheets. See graphics-v1/README.txt and
+manifest.json for current completion status and exact original-code id mappings.
+
+IDENTITY
+Early-computer road-trip satire with green handheld-game illustration and a phosphor terminal frame. The loaded, slightly ridiculous van is the visual anchor. Preserve Pacific Northwest conifers, wet roads, cramped cafes, sticker-covered equipment, earnest travelers and absurd roadside commerce. Let the humor come from props and situations. Small interface assets need stronger silhouettes and less noise than full scenes.
+
+CURRENT UI COLORS (observed CSS)
+Background #000000; main green #00FF00; secondary green #00AA00; body text #00CC00; cyan information #00DDDD; warning #FFAA00; danger #FF6666; success #00FF66; dead/disabled gray around #666666/#555555. Font is Courier Prime with Courier fallbacks. Existing JPEGs contain many green shades, not a strict four-color sprite palette.
+
+PROPOSED ART PALETTE (recommendation, not extracted exact colors)
+Near-black #07110A, dark green #18331B, middle green #426E35, highlight #A4C96A. Keep bright phosphor accents in the interface, separate from the illustration. Use one outline weight and a controlled highlight direction. Optional amber/red/cyan in the UI must be paired with a shape or label, so meaning does not depend solely on color.
+
+SALVAGE BEFORE GENERATION
+The supplied export is included unchanged in evidence/provided-export. It adds four useful numbered originals: the_portland_trail_00016.jpg (Portland victory), the_portland_trail_00010.jpg (crypto room), the_portland_trail_00003.jpg (rest/vending stop), and the_portland_trail_00018.jpg (departure bedroom). They are not assigned to any current screen. Reuse these if their style is accepted; clean or omit baked lettering. The numbered phone-spiral original 00000 matches the incorrectly assigned breakdown art and can instead serve doomscrolling. The numbered smoking-van original 00007 can serve breakdown. Review the other existing images for sensible remapping before paying to regenerate all scenes.
+
+FIRST PRODUCTION BATCHES
+1. Correct endings and the viral-landmark scene. Reuse the exported victory original where suitable. The live victory and landmark slots currently point to file-browser screenshots; create an actual roadside-attraction scene and a distinct loss scene as needed.
+2. Seven resource icons: money (crumpled bills), kale chips (recognizable bag/leaves), fuel (bio-diesel canister), seed bombs (clustered seed balls), repairs (washi tape and screwdriver), kombucha (capped bottle), NFT (small framed pixel ape/sasquatch on USB). Base cell 32x32; optional 64x64 detailed masters. Transparent PNG, uniform optical size and padding. All labels and quantities are live UI text.
+3. Four background portraits: influencer with phone/ring-light cue; exhausted developer with laptop/coffee cue; prepper with eccentric practical kit; barista with apron/pour-over cue. Same bust crop, head proportions, eye line, outline and lighting. Base 64x64, transparent PNG. Use them for background cards and the selected player's identity; do not imply that five companions are these four professions.
+4. Five van frames/states: parked, rolling A, rolling B, broken/hood-open, arrival celebration. Base cell 128x64, same side-view silhouette, ground baseline and roof load. Side-view sprite is a new motion convention; do not mix it with front three-quarter frames. Sheet 640x64 with five cells and a JSON frame manifest; also export individual frames. Optional 4x nearest-neighbor preview. Start with two rolling frames, not a large animation library.
+5. Five party/status symbols: healthy, sick, injured, deceased and selected. Base 24x24 or 32x32. Pair each icon with readable name/health/status text; deceased must remain visually distinct after any later action.
+6. One reusable travel environment, ideally a 640x360 illustrated master with a safe central 4:3 crop. Separate the van if using animation. Keep route/date/weather overlays in the interface. Optional sky/forest/road layers only when they serve the chosen implementation.
+
+SECOND PRODUCTION PASS
+Seven route establishing scenes: guest-room/co-op departure, highway rest stop, irony-laden motel, viral roadside attraction, DeFi gas-station backroom, food-cart pod, Portland arrival. Nine encounter vignettes matching actual events: doomscrolling, NFT fair, food poisoning, breakdown, good drizzle, heatwave, Free Box, ISP outage, and pandemic critical encounter if retained. Reuse coherent scenery and character designs. Create a distinct loss illustration as well as victory. Start with the faulty slots; do not blindly regenerate every existing JPEG.
+
+SCENE FILE CONTRACT
+Use 640x360 (16:9) PNG/WebP masters or 1024x576 illustrations with controlled downsampling. Keep important faces/props in the central 75% width and 80% height; provide a 4:3-safe crop. The size is a proposed delivery specification, not the current app's format. Existing files are mainly 1024x1024 JPEGs and two erroneous 409x1024 screenshots. Background scenes are opaque. Portraits, inventory icons and van sprites have true alpha transparency, with no fake checkerboard and no colored matte. Flat icons must read at 24-32 displayed pixels.
+
+SPRITE CONTRACT
+Fixed cells and transparent gutters are required. Each exported icon is its own file with a stable id. Animation frames share silhouette scale and baseline. Provide frame names and pixel rectangles in JSON. True pixel-art assets use a fixed base grid and nearest-neighbor integer scaling; conceptual AI pixel-art output should be inspected and cleaned before being treated as a production sprite sheet. Do not rely on a generative model to place an exact animation grid or render exact text.
+
+REUSABLE STYLE PROMPT
+"Original satirical road-trip game illustration for The Portland Trail. A battered eco-van overloaded with mismatched luggage, earnest eccentric travelers, Pacific Northwest conifers and damp roadside atmosphere. Early handheld-computer pixel-art aesthetic, controlled green palette on near-black, crisp silhouette, consistent heavy outline, restrained dithering, readable focal subject, dry humor from small props. [SCENE]. Maintain the same van body, roof load and character proportions as the approved reference. No titles, captions, UI, menus, borders, watermarks, file trees, or generated lettering. Opaque scene background; compose for 16:9 with a safe central 4:3 crop."
+
+RESOURCE ICON CONCEPT PROMPT
+"Seven separate game inventory icon concepts: crumpled money, kale-chip bag, bio-diesel canister, seed-ball cluster, washi-tape roll with screwdriver, kombucha bottle, and framed pixel collectible with USB. Uniform early handheld-game style, four green shades, strong recognizable silhouettes, consistent top-left lighting and outline weight. Center each object with generous spacing, no labels or numbers, true transparent background. This is a concept sheet to review; final delivery is seven individual fixed-cell PNGs."
+
+PORTRAIT CONCEPT PROMPT
+"Four distinct original bust portraits for a satirical road-trip game: earnest influencer, sleep-deprived freelance developer, Portland doomsday prepper, and artisanal barista. Human, funny and specific rather than caricatures of protected traits. Same straight-on crop, head size, eye line, pixel grid and four-green palette. One or two legible profession props each. No words, logos, card frames or captions. Transparent background. Concept sheet with separated portraits; final portraits will be exported individually at 64x64."
+
+VAN DESIGN PROMPT
+"Design one original battered compact eco-van for a green pixel-art road-trip game. Perfect side view facing right, four-green palette, thick consistent outline, roof rack with an unmistakable fixed arrangement of luggage, readable wheels and windows. No driver faces required, no text or logos. True transparent background. Establish a single approved silhouette before deriving parked, two rolling frames, hood-open breakdown and celebratory-arrival states. Each final frame must share the same 128x64 cell and ground baseline."
+
+HIGH-PRIORITY SCENE INSERTS
+Victory: five surviving travelers (or flexible composition that does not assert a survivor count), relieved arrival at a quirky Portland streetscape, wet pavement and distant bridge; optimistic but ridiculous.
+Viral landmark: an obscure roadside sculpture surrounded by travelers performing authenticity for phones; clearly roadside, not a file browser.
+Rest stop: tired van beside a modest roadside shelter, lukewarm coffee, damp conifers; safe pause, no game-over language.
+Breakdown: same van with hood open, an improvised screwdriver/washi-tape repair and frustrated travelers; no phone spiral.
+Heatwave: oppressive sunlight, overheated van, exhausted travelers and wilting kale chips; not a Wi-Fi-outage cafe.
+Doomscrolling: one traveler hypnotized by a phone while others wait; the existing misassigned breakdown picture is a useful conceptual reference.
+
+FINAL VISUAL CHECK
+Review each image beside the event/location text it serves. Check exact id mapping; no duplicate placeholder slips; no terminal message in a routine scene; no title or source-file screenshot embedded in art. Inspect icons at real display size, transparent edges, portrait consistency and van-frame alignment. The contact sheet and asset_inventory.json preserve the original mistakes for comparison.

@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>The Portland Trail</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Game Container -->
+    <div id="game-container">
+        <!-- Start Screen -->
+        <div id="start-screen" class="screen active">
+            <div class="title-image">
+                <img src="images/static_start_screen.jpeg" alt="The Portland Trail" />
+            </div>
+            <div class="ascii-art">
+                <pre>
+████████╗██╗  ██╗███████╗    ██████╗  ██████╗ ██████╗ ████████╗██╗      █████╗ ███╗   ██╗██████╗ 
+╚══██╔══╝██║  ██║██╔════╝    ██╔══██╗██╔═══██╗██╔══██╗╚══██╔══╝██║     ██╔══██╗████╗  ██║██╔══██╗
+   ██║   ███████║█████╗      ██████╔╝██║   ██║██████╔╝   ██║   ██║     ███████║██╔██╗ ██║██║  ██║
+   ██║   ██╔══██║██╔══╝      ██╔═══╝ ██║   ██║██╔══██╗   ██║   ██║     ██╔══██║██║╚██╗██║██║  ██║
+   ██║   ██║  ██║███████╗    ██║     ╚██████╔╝██║  ██║   ██║   ███████╗██║  ██║██║ ╚████║██████╔╝
+   ╚═╝   ╚═╝  ╚═╝╚══════╝    ╚═╝      ╚═════╝ ╚═╝  ╚═╝   ╚═╝   ╚══════╝╚═╝  ╚═╝╚═╝  ╚═══╝╚═════╝ 
+                                        ████████╗██████╗  █████╗ ██╗██╗     
+                                        ╚══██╔══╝██╔══██╗██╔══██╗██║██║     
+                                           ██║   ██████╔╝███████║██║██║     
+                                           ██║   ██╔══██╗██╔══██║██║██║     
+                                           ██║   ██║  ██║██║  ██║██║███████╗
+                                           ╚═╝   ╚═╝  ╚═╝╚═╝  ╚═╝╚═╝╚══════╝
+                </pre>
+            </div>
+            <div class="subtitle">A Satirical Journey Through Modern Hipster Hell</div>
+            
+            <div class="menu-options">
+                <button class="menu-btn" onclick="startNewGame()">► NEW GAME</button>
+                <button class="menu-btn" onclick="loadGame()">► LOAD GAME</button>
+                <button class="menu-btn" onclick="showCredits()">► CREDITS</button>
+            </div>
+
+            <div class="intro-text">
+                <p>The dream of the 90s is alive in Portland... but getting there is the real challenge.</p>
+                <p>Navigate the treacherous path from your parents' guest room to artisanal paradise.</p>
+                <p>Survive crypto bros, NFT auctions, food poisoning, and the ever-present threat of Wi-Fi outages.</p>
+            </div>
+        </div>
+
+        <!-- Setup Screen -->
+        <div id="setup-screen" class="screen">
+            <h2>► Choose Your Background</h2>
+            <div class="profession-grid">
+                <div class="profession-card" data-profession="influencer">
+                    <h3>Social Media Influencer</h3>
+                    <div class="profession-stats">
+                        <div>Money: $2000</div>
+                        <div>Food: 20 kale chips</div>
+                        <div>Fuel: 15 canisters</div>
+                    </div>
+                    <p>Starts with more "connections" (money) but less practical skills. Prone to existential dread from lack of likes.</p>
+                    <div class="special-ability">Special: Can occasionally get free supplies by "collabing". Loses health without Wi-Fi.</div>
+                </div>
+
+                <div class="profession-card" data-profession="dev">
+                    <h3>Gig Economy Developer</h3>
+                    <div class="profession-stats">
+                        <div>Money: $1200</div>
+                        <div>Food: 30 kale chips</div>
+                        <div>Fuel: 20 canisters</div>
+                    </div>
+                    <p>Good at fixing things (spare parts), but needs constant third-wave coffee (food). Burned out.</p>
+                    <div class="special-ability">Special: Uses less spare parts for repairs. Starts with 1 "Pixelated Ape JPEG".</div>
+                </div>
+
+                <div class="profession-card" data-profession="prepper">
+                    <h3>Doomsday Prepper (Portland Edition)</h3>
+                    <div class="profession-stats">
+                        <div>Money: $800</div>
+                        <div>Food: 100 kale chips</div>
+                        <div>Fuel: 25 canisters</div>
+                    </div>
+                    <p>Starts with more food and artisanal "survival" gear, but deeply suspicious of non-organic gluten.</p>
+                    <div class="special-ability">Special: Better odds at "foraging" (hunting). Complains if rations are not "filling".</div>
+                </div>
+
+                <div class="profession-card" data-profession="barista">
+                    <h3>Artisanal Barista</h3>
+                    <div class="profession-stats">
+                        <div>Money: $1000</div>
+                        <div>Food: 50 kale chips</div>
+                        <div>Fuel: 20 canisters</div>
+                    </div>
+                    <p>Knows how to make a mean pour-over, which boosts morale (slightly). Average starting resources.</p>
+                    <div class="special-ability">Special: Can brew "morale boosting" coffee once a day (small health boost).</div>
+                </div>
+            </div>
+            <button id="select-profession" class="game-btn" onclick="confirmProfession()" disabled>► CONFIRM SELECTION</button>
+        </div>
+
+        <!-- Character Creation Screen -->
+        <div id="character-screen" class="screen">
+            <h2>► Name Your Travel Companions</h2>
+            <p>Enter names for your fellow travelers (or use the random Gen-Z names):</p>
+            
+            <div class="character-inputs">
+                <div class="input-group">
+                    <label>Party Member 1:</label>
+                    <input type="text" id="char1" maxlength="15" placeholder="Your name">
+                    <button onclick="randomizeName('char1')">Random</button>
+                </div>
+                <div class="input-group">
+                    <label>Party Member 2:</label>
+                    <input type="text" id="char2" maxlength="15" placeholder="Travel buddy">
+                    <button onclick="randomizeName('char2')">Random</button>
+                </div>
+                <div class="input-group">
+                    <label>Party Member 3:</label>
+                    <input type="text" id="char3" maxlength="15" placeholder="That one friend">
+                    <button onclick="randomizeName('char3')">Random</button>
+                </div>
+                <div class="input-group">
+                    <label>Party Member 4:</label>
+                    <input type="text" id="char4" maxlength="15" placeholder="Questionable choice">
+                    <button onclick="randomizeName('char4')">Random</button>
+                </div>
+                <div class="input-group">
+                    <label>Party Member 5:</label>
+                    <input type="text" id="char5" maxlength="15" placeholder="Tag-along">
+                    <button onclick="randomizeName('char5')">Random</button>
+                </div>
+            </div>
+            
+            <button class="game-btn" onclick="startAdventure()">► BEGIN THE PORTLAND JOURNEY</button>
+        </div>
+
+        <!-- Shop Screen -->
+        <div id="shop-screen" class="screen">
+            <h2 id="shop-title">► Artisanal Supply Emporium</h2>
+            <div id="shop-money" class="money-display">Money: $0</div>
+            
+            <div class="shop-grid">
+                <div class="shop-item" data-item="food">
+                    <h3>Sustainably Sourced Kale Chips</h3>
+                    <div class="item-price">$25 per bag</div>
+                    <p>Barely edible sustenance for the modern pioneer.</p>
+                    <div class="quantity-controls">
+                        <button onclick="changeQuantity('food', -1)">-</button>
+                        <span class="quantity" id="food-quantity">0</span>
+                        <button onclick="changeQuantity('food', 1)">+</button>
+                    </div>
+                </div>
+
+                <div class="shop-item" data-item="fuel">
+                    <h3>Bio-Diesel Canister</h3>
+                    <div class="item-price">$60 per canister</div>
+                    <p>Keeps your salvaged, eco-friendly-ish van running.</p>
+                    <div class="quantity-controls">
+                        <button onclick="changeQuantity('fuel', -1)">-</button>
+                        <span class="quantity" id="fuel-quantity">0</span>
+                        <button onclick="changeQuantity('fuel', 1)">+</button>
+                    </div>
+                </div>
+
+                <div class="shop-item" data-item="ammo">
+                    <h3>Seed Bombs</h3>
+                    <div class="item-price">$15 per pack of 5</div>
+                    <p>For "guerrilla gardening" or fending off aggressive pigeons.</p>
+                    <div class="quantity-controls">
+                        <button onclick="changeQuantity('ammo', -1)">-</button>
+                        <span class="quantity" id="ammo-quantity">0</span>
+                        <button onclick="changeQuantity('ammo', 1)">+</button>
+                    </div>
+                </div>
+
+                <div class="shop-item" data-item="parts">
+                    <h3>Washi Tape & Vintage Screwdrivers</h3>
+                    <div class="item-price">$35 per set</div>
+                    <p>Aesthetically pleasing, occasionally useful repair kit.</p>
+                    <div class="quantity-controls">
+                        <button onclick="changeQuantity('parts', -1)">-</button>
+                        <span class="quantity" id="parts-quantity">0</span>
+                        <button onclick="changeQuantity('parts', 1)">+</button>
+                    </div>
+                </div>
+
+                <div class="shop-item" data-item="kombucha">
+                    <h3>Locally Brewed Artisanal Kombucha</h3>
+                    <div class="item-price">$20 per bottle</div>
+                    <p>Might cure what ails you, or just be really vinegary.</p>
+                    <div class="quantity-controls">
+                        <button onclick="changeQuantity('kombucha', -1)">-</button>
+                        <span class="quantity" id="kombucha-quantity">0</span>
+                        <button onclick="changeQuantity('kombucha', 1)">+</button>
+                    </div>
+                </div>
+
+                <div class="shop-item" data-item="nft">
+                    <h3>Pixelated Sasquatch JPEG</h3>
+                    <div class="item-price">$400 per JPEG (on reclaimed wood USB)</div>
+                    <p>A "unique" digital collectible. Hodl to the moon... or dump it at the next stop?</p>
+                    <div class="quantity-controls">
+                        <button onclick="changeQuantity('nft', -1)">-</button>
+                        <span class="quantity" id="nft-quantity">0</span>
+                        <button onclick="changeQuantity('nft', 1)">+</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="shop-summary">
+                <div id="total-cost">Total: $0</div>
+                <button class="game-btn" onclick="completePurchase()">► COMPLETE PURCHASE</button>
+                <button class="game-btn secondary" onclick="leaveShop()">► LEAVE SHOP</button>
+            </div>
+        </div>
+
+        <!-- Travel Screen -->
+        <div id="travel-screen" class="screen">
+            <div class="travel-background">
+                <img src="images/static_travel_screen.jpeg" alt="On the Trail" />
+            </div>
+            <div class="travel-header">
+                <h2 id="current-location">En Route to Portland</h2>
+                <div id="weather-display" class="weather">Weather: Clear</div>
+            </div>
+
+            <div class="progress-container">
+                <div class="progress-bar">
+                    <div id="progress-fill" class="progress-fill"></div>
+                    <div id="progress-marker" class="progress-marker">🚙</div>
+                </div>
+                <div class="progress-labels">
+                    <span>Start</span>
+                    <span>Portland</span>
+                </div>
+                <div id="distance-info" class="distance-info">Distance: 0/1000 miles</div>
+            </div>
+
+            <div class="travel-controls">
+                <div class="control-section">
+                    <h3>Pace</h3>
+                    <div class="radio-group">
+                        <label><input type="radio" name="pace" value="slow" checked> Leisurely (10 miles/day)</label>
+                        <label><input type="radio" name="pace" value="normal"> Steady (20 miles/day)</label>
+                        <label><input type="radio" name="pace" value="fast"> Aggressive (30 miles/day)</label>
+                    </div>
+                </div>
+
+                <div class="control-section">
+                    <h3>Food Rations</h3>
+                    <div class="radio-group">
+                        <label><input type="radio" name="rations" value="bare"> Bare bones (0.5 bags/person/day)</label>
+                        <label><input type="radio" name="rations" value="meager" checked> Meager (1 bag/person/day)</label>
+                        <label><input type="radio" name="rations" value="filling"> Filling (2 bags/person/day)</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="travel-actions">
+                <button class="game-btn" onclick="travelDay()">► CONTINUE ON TRAIL</button>
+                <button class="game-btn secondary" onclick="rest()">► REST</button>
+                <button class="game-btn secondary" onclick="hunt()">► FORAGE FOR SUPPLIES</button>
+            </div>
+
+            <div class="event-log">
+                <h3>Journey Log</h3>
+                <div id="log-entries"></div>
+            </div>
+        </div>
+
+        <!-- Location Screen -->
+        <div id="location-screen" class="screen">
+            <div id="location-image" class="location-image"></div>
+            <h2 id="location-name">Location Name</h2>
+            <div id="location-description" class="location-description"></div>
+            
+            <div class="location-actions">
+                <button class="game-btn" onclick="departLocation()">► CONTINUE ON TRAIL</button>
+                <button class="game-btn secondary" onclick="restAtLocation()">► REST</button>
+                <button class="game-btn secondary" onclick="huntAtLocation()">► FORAGE</button>
+                <button class="game-btn secondary" onclick="visitShop()">► VISIT SHOP</button>
+                <button class="game-btn secondary" onclick="talkToLocals()">► TALK TO LOCALS</button>
+            </div>
+        </div>
+
+        <!-- Game Over Screen -->
+        <div id="game-over-screen" class="screen">
+            <div id="game-over-image" class="game-over-image"></div>
+            <div class="ascii-art">
+                <pre id="game-over-ascii">
+ ██████╗  █████╗ ███╗   ███╗███████╗     ██████╗ ██╗   ██╗███████╗██████╗ 
+██╔════╝ ██╔══██╗████╗ ████║██╔════╝    ██╔═══██╗██║   ██║██╔════╝██╔══██╗
+██║  ███╗███████║██╔████╔██║█████╗      ██║   ██║██║   ██║█████╗  ██████╔╝
+██║   ██║██╔══██║██║╚██╔╝██║██╔══╝      ██║   ██║╚██╗ ██╔╝██╔══╝  ██╔══██╗
+╚██████╔╝██║  ██║██║ ╚═╝ ██║███████╗    ╚██████╔╝ ╚████╔╝ ███████╗██║  ██║
+ ╚═════╝ ╚═╝  ╚═╝╚═╝     ╚═╝╚══════╝     ╚═════╝   ╚═══╝  ╚══════╝╚═╝  ╚═╝
+                </pre>
+            </div>
+            <div id="game-over-message" class="game-over-message"></div>
+            <div id="final-stats" class="final-stats"></div>
+            <button class="game-btn" onclick="startNewGame()">► PLAY AGAIN</button>
+        </div>
+
+        <!-- Event Modal -->
+        <div id="event-modal" class="modal">
+            <div class="modal-content">
+                <div id="event-image" class="event-image"></div>
+                <h3 id="event-title">Event Title</h3>
+                <div id="event-description">Event description</div>
+                <div id="event-choices" class="event-choices"></div>
+                <button id="event-continue" class="game-btn" onclick="closeEvent()" style="display: none;">► CONTINUE</button>
+            </div>
+        </div>
+
+        <!-- HUD -->
+        <div id="hud" class="hud">
+            <div class="hud-section">
+                <div class="hud-item">
+                    <span class="hud-label">Money:</span>
+                    <span id="hud-money" class="hud-value">$0</span>
+                </div>
+                <div class="hud-item">
+                    <span class="hud-label">Food:</span>
+                    <span id="hud-food" class="hud-value">0 bags</span>
+                </div>
+                <div class="hud-item">
+                    <span class="hud-label">Fuel:</span>
+                    <span id="hud-fuel" class="hud-value">0 canisters</span>
+                </div>
+                <div class="hud-item">
+                    <span class="hud-label">Days:</span>
+                    <span id="hud-days" class="hud-value">0</span>
+                </div>
+            </div>
+            <div class="hud-section">
+                <div class="party-health">
+                    <div class="hud-label">Party Health:</div>
+                    <div id="party-status" class="party-status"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/constants.js"></script>
+    <script src="js/game.js"></script>
+</body>
+</html>
