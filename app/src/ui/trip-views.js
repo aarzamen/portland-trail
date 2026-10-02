@@ -26,6 +26,9 @@ import { SUPPLY_IDS, escapeHtml, formatNumber, idFor, optionButton, picture, sig
  * @property {{ id: string, name: string, health: number, status: object, band: string, epitaph: string }[]} crew
  * @property {{ id: string, name: string, shortName: string, miles: number, kind: string }[]} stops
  * @property {number} goal                  the miles to Portland
+ * @property {{ score: number, rank: string, professionName: string, day: number, survivors: number,
+ *   current: boolean }[]} records         the best journeys to show at the end, best first
+ * @property {boolean} canShare             whether the browser offers to share
  */
 
 /** The shell. The latest-notes region is a polite live region; the regions themselves never move. */
@@ -467,11 +470,54 @@ function shopActions(model) {
     ${others.length ? `<div class="shop-trade">${others.map(activity).join('')}</div>` : ''}</section>`;
 }
 
+const plural = (count, one, many) => `${formatNumber(count)} ${count === 1 ? one : many}`;
+
+/** A headstone for a fallen traveler: the name, how and where, the epitaph and an Edit control. */
+function headstone(member) {
+  const id = escapeHtml(member.id);
+  const name = escapeHtml(member.name);
+  return `<li class="headstone" data-headstone="${id}">
+    <strong class="headstone-name">${name}</strong>
+    <span class="headstone-when">Day ${formatNumber(member.day)} · mile ${formatNumber(member.mile)}</span>
+    <p class="headstone-line">${escapeHtml(member.line)}</p>
+    <p class="headstone-epitaph">“${escapeHtml(member.epitaph)}”</p>
+    <button type="button" class="button button-quiet headstone-edit" data-key="epitaph:${id}"
+      aria-label="Edit ${name}’s epitaph">Edit epitaph</button>
+  </li>`;
+}
+
+/** The best journeys on this device, top five: rank, score, background, day and survivors. */
+function bestJourneys(records) {
+  if (!records.length) return '';
+  const rows = records
+    .map(
+      (entry, index) => `<li${entry.current ? ' class="is-current" aria-current="true"' : ''}>
+        <span class="best-place">${index + 1}</span>
+        <span class="best-score"><b>${formatNumber(entry.score)}</b> ${escapeHtml(entry.rank)}</span>
+        <small>${escapeHtml(entry.professionName)} · day ${formatNumber(entry.day)} ·
+          ${plural(entry.survivors, 'survivor', 'survivors')}</small></li>`,
+    )
+    .join('');
+  return `<section class="best-journeys" aria-labelledby="best-heading"><h3 id="best-heading">Best journeys</h3>
+    <ol data-list="records">${rows}</ol></section>`;
+}
+
 function ending(model) {
   const { summary } = model;
   const survivors = summary.survivors.map(member => escapeHtml(member.name)).join(', ');
   const stat = (value, label) => `<div><strong>${value}</strong><span>${label}</span></div>`;
-  return `<section class="ending-panel" aria-labelledby="ending-heading"><p class="overline">The final record</p>
+  const stones = summary.fallen.length
+    ? `<section class="headstones" aria-labelledby="headstones-heading">
+        <h3 id="headstones-heading">Fallen along the way</h3>
+        <ul>${summary.fallen.map(headstone).join('')}</ul></section>`
+    : '';
+  const rentDays = plural(summary.rentDays, 'day', 'days');
+  const rent = `Your $${formatNumber(summary.money)} covers ${rentDays} of Portland rent.`;
+  const share = model.canShare
+    ? '<button type="button" class="button button-outline" data-key="share">Share</button>'
+    : '';
+  return `<section class="ending-panel" aria-labelledby="ending-heading" data-outcome="${escapeHtml(summary.outcome)}">
+    <p class="overline">The final record</p>
     <h2 id="ending-heading">${escapeHtml(summary.heading)}</h2>
     ${summary.cause ? `<p class="ending-cause">${escapeHtml(summary.cause)}</p>` : ''}
     <div class="ending-stats">${stat(formatNumber(summary.distance), 'miles traveled')}${stat(
@@ -479,6 +525,20 @@ function ending(model) {
       'days on the road',
     )}${stat(summary.survivors.length, 'survivors')}</div>
     <p>${summary.survivors.length ? `Still standing: ${survivors}.` : 'No one survived the trip.'}</p>
+    <div class="ending-score" data-score="${summary.score}">
+      <div class="ending-points"><strong>${formatNumber(summary.score)}</strong><span>points</span></div>
+      <div class="ending-rank"><b data-rank>${escapeHtml(summary.rank.title)}</b>
+        <p>${escapeHtml(summary.rank.line)}</p></div>
+    </div>
+    <p class="ending-rent" data-rent>${rent}</p>
+    ${stones}
+    <div class="ending-tools">
+      <button type="button" class="button button-outline" data-key="ending-journal">Read the whole journal</button>
+      <button type="button" class="button button-outline" data-key="copy-result">Copy result</button>${share}
+    </div>
+    ${bestJourneys(model.records)}
+    <div class="ending-seed"><span data-seed>Seed <b>${escapeHtml(summary.seed)}</b> · the same road again</span>
+      <button type="button" class="button button-quiet" data-key="replay">Replay this seed</button></div>
     <div class="ending-actions">
       <button type="button" class="button button-primary button-large" data-key="new">Start another journey</button>
     </div></section>`;
@@ -520,5 +580,7 @@ function journal(model) {
         .join('')
     : '<li><p>The journal is still clean. Give it a day.</p></li>';
   return `<section class="journal" aria-labelledby="journal-heading">
-    ${heading('journal-heading', 'Field journal', 'Latest first')}<ol>${items}</ol></section>`;
+    ${heading('journal-heading', 'Field journal', 'Latest first')}<ol>${items}</ol>
+    <button type="button" class="button button-quiet journal-all" data-key="journal">Read the whole journal</button>
+  </section>`;
 }

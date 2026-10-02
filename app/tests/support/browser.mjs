@@ -12,6 +12,7 @@ const require = createRequire(import.meta.url);
 const { chromium } = require('playwright');
 
 export const SAVE_KEY = 'the-portland-trail:save';
+export const RECORDS_KEY = 'the-portland-trail:records';
 export const LEGACY_KEY = 'the-portland-trail:v1';
 export const LEGACY_LEG_KEY = 'the-portland-trail:last-leg:v1';
 export const SOURCE_URL = process.env.TEST_URL || 'http://127.0.0.1:4387/';
@@ -75,18 +76,27 @@ export function suite(name) {
 
 /**
  * Opens the game in a new context. `storage` (key → text) is written into localStorage before the first load
- * only, so later reloads see what the game itself saved. Page errors, console errors and failed responses are
- * collected in `errors`.
+ * only, so later reloads see what the game itself saved. `permissions` are granted to the context (for example
+ * the clipboard's). Page errors, console errors and failed responses are collected in `errors`.
  */
 export async function openPage(
   browser,
-  { url = SOURCE_URL, width = 390, height = 664, storage = null, motion = 'reduce', mobile = width < 1000 } = {},
+  {
+    url = SOURCE_URL,
+    width = 390,
+    height = 664,
+    storage = null,
+    motion = 'reduce',
+    mobile = width < 1000,
+    permissions = [],
+  } = {},
 ) {
   const context = await browser.newContext({
     viewport: { width, height },
     reducedMotion: motion,
     isMobile: mobile,
     hasTouch: mobile,
+    permissions,
   });
   if (storage) {
     await context.addInitScript(entries => {
@@ -124,6 +134,11 @@ export async function openJourney(browser, game, options = {}) {
 /** The whole save record, parsed; null when there is none. */
 export function readRecord(page) {
   return page.evaluate(key => JSON.parse(localStorage.getItem(key) ?? 'null'), SAVE_KEY);
+}
+
+/** The stored best journeys; [] when there are none. */
+export function readRecords(page) {
+  return page.evaluate(key => JSON.parse(localStorage.getItem(key) ?? '[]'), RECORDS_KEY);
 }
 
 /** The saved journey; null when there is none. */

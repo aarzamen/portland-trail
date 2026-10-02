@@ -76,13 +76,18 @@ const TITLE_ALT = 'A scruffy van stacked high for the long drive to Portland';
 // --- Title -----------------------------------------------------------------------------------------------
 
 /**
- * @param {{ saved: null | { ended: boolean }, stamp: string }} view
+ * @param {{ saved: null | { ended: boolean }, stamp: string, best: null | { score: number, rank: string } }} view
+ *   best: the best stored journey, when there is one
  */
-export function titleView({ saved, stamp }) {
+export function titleView({ saved, stamp, best }) {
   const resume = saved
     ? `<button type="button" class="button button-outline button-large" data-key="resume">${
         saved.ended ? 'View saved ending' : 'Resume journey'
       }</button>`
+    : '';
+  const record = best
+    ? `<p class="title-best" data-best><span>Best journey</span> <b>${formatNumber(best.score)}</b> points ·
+        ${escapeHtml(best.rank)}</p>`
     : '';
   return `<section class="title-screen" id="top">
     <div class="title-art">${picture('title', TITLE_ALT, 'title-image')}</div>
@@ -94,6 +99,9 @@ export function titleView({ saved, stamp }) {
         <button type="button" class="button button-primary button-large" data-key="start">Start a new journey</button>
         ${resume}
       </div>
+      ${record}
+      <button type="button" class="button button-quiet title-transfer" data-key="transfer">
+        Move a journey between devices</button>
       <p class="title-footnote">Every choice sticks. The road rarely does.</p>
       <p class="title-stamp">${escapeHtml(stamp)}</p>
     </div>

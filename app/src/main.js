@@ -18,16 +18,29 @@ import {
   regionAt,
   routeStops,
   seedFromText,
+  shareText,
   shopItems,
   statusOf,
   summarize,
   transition,
   weatherName,
 } from './engine.js';
-import { confirmDialog, encounterDialog, memorialDialog } from './ui/dialogs.js';
+import { confirmDialog, encounterDialog, journalDialog, memorialDialog, transferDialog } from './ui/dialogs.js';
 import { drawScreen, forget, patchRegions } from './ui/render.js';
 import * as sound from './ui/sound.js';
-import { PROBLEMS, SAVE_KEY, loadJourney, readSettings, saveJourney } from './ui/storage.js';
+import {
+  PROBLEMS,
+  RECORDS_KEY,
+  SAVE_KEY,
+  addRecord,
+  exportCode,
+  importCode,
+  loadJourney,
+  readRecords,
+  readSettings,
+  saveFileText,
+  saveJourney,
+} from './ui/storage.js';
 import { TRIP_SHELL, sceneIdOf, tripRegions } from './ui/trip-views.js';
 import {
   SUPPLY_IDS,
@@ -56,6 +69,11 @@ const headerNew = /** @type {HTMLButtonElement} */ (document.querySelector('#new
 const eventDialog = /** @type {HTMLDialogElement} */ (document.querySelector('#event-dialog'));
 const memorialElement = /** @type {HTMLDialogElement} */ (document.querySelector('#memorial-dialog'));
 const confirmElement = /** @type {HTMLDialogElement} */ (document.querySelector('#confirm-dialog'));
+const journalElement = /** @type {HTMLDialogElement} */ (document.querySelector('#journal-dialog'));
+const transferElement = /** @type {HTMLDialogElement} */ (document.querySelector('#transfer-dialog'));
+const DIALOGS = [eventDialog, memorialElement, confirmElement, journalElement, transferElement];
+journalElement.setAttribute('aria-labelledby', 'journal-title');
+transferElement.setAttribute('aria-labelledby', 'transfer-title');
 
 // --- What the interface remembers ------------------------------------------------------------------------
 
@@ -82,8 +100,12 @@ let playback = null;
  *   error: string, typed: string }}
  */
 let encounter = null;
-/** @type {{ memberId: string, name: string, line: string, epitaph: string, error: string }[]} */
+/** @type {{ memberId: string, name: string, line: string, epitaph: string, error: string, editing?: boolean }[]} */
 let memorials = [];
+/** @type {null | (() => void)} what the open confirmation does when it is confirmed */
+let confirmed = null;
+/** what is typed in the transfer dialog's paste field */
+let transferText = '';
 const problems = new Set();
 let toastTimer = 0;
 let typingTimer = 0;
@@ -99,9 +121,20 @@ function clearToast() {
   toastRegion.replaceChildren();
 }
 
+/**
+ * Where toasts are shown: inside the open dialog, so that they are seen above its backdrop and read out from
+ * inside the modal, or else in the page. A confirmation stacked on another dialog is the one on top.
+ */
+function toastHost() {
+  const open = DIALOGS.filter(dialog => dialog.open);
+  return (confirmElement.open ? confirmElement : open.at(-1)) ?? document.body;
+}
+
 /** A transient message near the bottom: 'ok' in the phosphor style, 'error' in amber. */
 function toast(message, tone = 'ok') {
   clearToast();
+  const host = toastHost();
+  if (toastRegion.parentElement !== host) host.append(toastRegion);
   const element = document.createElement('div');
   element.className = 'toast';
   element.dataset.tone = tone;
@@ -161,16 +194,62 @@ function shopModel(state) {
   return { items, plan: recommendSupplies(state), autoBuy: { enabled: !probe.error, reason: probe.error ?? '' } };
 }
 
+// --- Best journeys ----------------------------------------------------------------------------------------
+
+/** The stored record's key for an ending: seed, day, distance and score. */
+const recordKey = summary => [summary.seed, summary.day, summary.distance, summary.score].join(':');
+
+/** The best journeys on this device that can be shown, best first. */
+function bestRecords() {
+  return readRecords()
+    .filter(entry => typeof entry.key === 'string' && Number.isFinite(entry.score))
+    .sort((first, second) => second.score - first.score);
+}
+
+/** Store an ended journey among the best journeys; once, however often it is ended, reloaded or loaded. */
+function recordEnding(state) {
+  const summary = summarize(state);
+  addRecord({
+    key: recordKey(summary),
+    seed: summary.seed,
+    day: summary.day,
+    distance: summary.distance,
+    score: summary.score,
+    outcome: summary.outcome,
+    rank: summary.rank.title,
+    professionName: summary.professionName,
+    survivors: summary.survivors.length,
+  });
+}
+
+/** The top five, as the ending lists them, marking this journey's own. */
+function endingRecords(summary) {
+  const key = recordKey(summary);
+  return bestRecords()
+    .slice(0, 5)
+    .map(entry => ({
+      score: entry.score,
+      rank: String(entry.rank ?? ''),
+      professionName: String(entry.professionName ?? ''),
+      day: Number(entry.day) || 0,
+      survivors: Number(entry.survivors) || 0,
+      current: entry.key === key,
+    }));
+}
+
 function tripModel() {
   const playing = Boolean(playback);
   const state = playing ? playback.before : game;
   const ended = state.phase === 'ended';
+  const summary = ended ? summarize(state) : null;
   return {
     state,
     playing,
     options: availableActions(state),
     forecast: ended ? null : forecast(state),
-    summary: ended ? summarize(state) : null,
+    summary,
+    records: summary ? endingRecords(summary) : [],
+    canShare: typeof navigator.share === 'function',
     shop: state.phase === 'shop' ? shopModel(state) : null,
     paces: paceOptions(state),
     rations: rationOptions(state),
@@ -208,7 +287,12 @@ function screenHtml() {
       dailySeed: dailySeed(),
     });
   }
-  return titleView({ saved: game ? { ended: game.phase === 'ended' } : null, stamp: stampText(BUILD) });
+  const best = bestRecords()[0];
+  return titleView({
+    saved: game ? { ended: game.phase === 'ended' } : null,
+    stamp: stampText(BUILD),
+    best: best ? { score: best.score, rank: String(best.rank ?? '') } : null,
+  });
 }
 
 /** Draw the current screen, then open whatever dialog the journey is waiting on. */
@@ -231,7 +315,7 @@ function show(next) {
   screen = next;
   clearToast();
   if (next !== 'game') {
-    for (const dialog of [eventDialog, memorialElement, confirmElement]) if (dialog.open) dialog.close();
+    for (const dialog of DIALOGS) if (dialog.open) dialog.close();
   }
   draw();
   window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
@@ -334,9 +418,16 @@ function keepGoing() {
   if (!document.querySelector('dialog[open]')) focusPrimary();
 }
 
-function memorialFor(member) {
+function memorialFor(member, editing = false) {
   const record = summarize(game).fallen.find(entry => entry.id === member.id);
-  return { memberId: member.id, name: member.name, line: record?.line ?? '', epitaph: member.epitaph, error: '' };
+  return {
+    memberId: member.id,
+    name: member.name,
+    line: record?.line ?? '',
+    epitaph: member.epitaph,
+    error: '',
+    editing,
+  };
 }
 
 function drawMemorial() {
@@ -344,7 +435,7 @@ function drawMemorial() {
   drawScreen(memorialElement, memorialDialog({ ...current, max: LIMITS.epitaph }), '[data-key="epitaph"]');
   if (!memorialElement.open) {
     memorialElement.showModal();
-    sound.play('death');
+    if (!current.editing) sound.play('death');
     const field = memorialElement.querySelector('[data-key="epitaph"]');
     if (field instanceof HTMLInputElement) field.focus();
   }
@@ -359,17 +450,22 @@ function carve() {
   if (dispatch({ type: 'setEpitaph', memberId: current.memberId, text })) memorialElement.close();
 }
 
-function openConfirm() {
-  drawScreen(
-    confirmElement,
-    confirmDialog({
-      overline: 'Saved journey',
-      title: 'Start over?',
-      text: 'Your current journey will be replaced when the new crew leaves the city.',
-      confirm: 'Start a new journey',
-      cancel: 'Keep playing',
-    }),
-  );
+/** Reopen the memorial from a headstone on the ending, to change the epitaph. */
+function editEpitaph(memberId) {
+  const member = game?.party.find(entry => entry.id === memberId);
+  if (!member || !isDead(member)) return;
+  memorials.push(memorialFor(member, true));
+  openDialogs();
+}
+
+/**
+ * Ask before something replaces the journey; `onConfirm` runs only when the player confirms.
+ * @param {{ overline: string, title: string, text: string, confirm: string, cancel: string }} view
+ * @param {() => void} onConfirm
+ */
+function openConfirm(view, onConfirm) {
+  confirmed = onConfirm;
+  drawScreen(confirmElement, confirmDialog(view));
   confirmElement.showModal();
   const cancel = confirmElement.querySelector('[data-key="cancel"]');
   if (cancel instanceof HTMLElement) cancel.focus();
@@ -458,6 +554,7 @@ function dispatch(action) {
       (before.distance !== game.distance || ['rest', 'forage', 'talk', 'meal', 'resolveEvent'].includes(action.type)),
   };
   persist();
+  if (game.outcome && !before.outcome) recordEnding(game);
   const fallen = game.party.filter((member, index) => isDead(member) && !isDead(before.party[index]));
   soundsFor(before, game, action, fallen);
   if (action.type === 'resolveEvent') {
@@ -525,8 +622,36 @@ function stepDrive(now) {
 
 function startNewJourney() {
   if (playback) return;
-  if (game && !game.outcome) openConfirm();
-  else show('background');
+  if (game && !game.outcome) {
+    const view = {
+      overline: 'Saved journey',
+      title: 'Start over?',
+      text: 'Your current journey will be replaced when the new crew leaves the city.',
+      confirm: 'Start a new journey',
+      cancel: 'Keep playing',
+    };
+    openConfirm(view, () => show('background'));
+  } else show('background');
+}
+
+/** Step 1 again, with this journey's background, crew and seed chosen, so the same road can be driven again. */
+function replaySeed() {
+  if (!game?.outcome || playback) return;
+  setup.profession = game.profession;
+  setup.names = game.party.map(member => member.name);
+  setup.road = 'own';
+  setup.seedText = String(game.seed);
+  show('background');
+}
+
+/** Forget what the screen remembered about the journey before this one. */
+function resetJourneyView() {
+  cue = null;
+  routeOpen = false;
+  encounter = null;
+  memorials = [];
+  quantityDraft = null;
+  for (const id of Object.keys(shopQuantity)) delete shopQuantity[id];
 }
 
 function shuffleNames() {
@@ -564,11 +689,7 @@ function packVan() {
   }
   lastLeg = null;
   notes = [game.journal.at(-1).text];
-  cue = null;
-  routeOpen = false;
-  encounter = null;
-  memorials = [];
-  for (const id of Object.keys(shopQuantity)) delete shopQuantity[id];
+  resetJourneyView();
   persist();
   show('game');
 }
@@ -614,6 +735,122 @@ function buy(id) {
   }
 }
 
+// --- The ending's tools, the whole journal and moving a journey (F4, E4, F13) -----------------------------
+
+/** Put text on the clipboard and say so; a browser that refuses gets the fallback sentence. */
+async function copy(text, done, refused) {
+  try {
+    await navigator.clipboard.writeText(text);
+    toast(done);
+  } catch {
+    toast(refused, 'error');
+  }
+}
+
+async function shareResult() {
+  if (!game?.outcome || typeof navigator.share !== 'function') return;
+  try {
+    await navigator.share({ title: document.title, text: shareText(game) });
+  } catch (error) {
+    if (error?.name !== 'AbortError') toast('Sharing did not work here. Copy the result instead.', 'error');
+  }
+}
+
+function openJournal() {
+  if (!game) return;
+  drawScreen(journalElement, journalDialog({ journal: game.journal, logged: game.logged }));
+  if (!journalElement.open) journalElement.showModal();
+}
+
+/** A few words about the journey on this device, for the transfer dialog. */
+function journeyLine(state) {
+  const background = PROFESSIONS.find(item => item.id === state.profession)?.name ?? '';
+  const where = state.outcome
+    ? `ended on day ${formatNumber(state.day)} at mile ${formatNumber(state.distance)}`
+    : `day ${formatNumber(state.day)}, mile ${formatNumber(state.distance)}`;
+  return `the ${background} expedition, ${where}`;
+}
+
+function openTransfer() {
+  drawScreen(transferElement, transferDialog({ journey: game ? journeyLine(game) : '', text: transferText }));
+  if (!transferElement.open) transferElement.showModal();
+}
+
+function copySaveCode() {
+  let code;
+  try {
+    code = exportCode(game, lastLeg);
+  } catch {
+    toast('This journey could not be turned into a code.', 'error');
+    return;
+  }
+  copy(code, 'Save code copied. Paste it on the other device.', 'This browser would not copy. Download the file.');
+}
+
+function downloadSave() {
+  let text;
+  try {
+    text = saveFileText(game, lastLeg);
+  } catch {
+    toast('This journey could not be written to a file.', 'error');
+    return;
+  }
+  const url = URL.createObjectURL(new Blob([text], { type: 'application/json' }));
+  const link = document.createElement('a');
+  link.href = url;
+  link.download = `portland-trail-day-${game.day}-mile-${game.distance}.json`;
+  link.hidden = true;
+  // Inside the dialog, because everything outside an open modal dialog is inert.
+  transferElement.append(link);
+  link.click();
+  link.remove();
+  setTimeout(() => URL.revokeObjectURL(url), 10_000);
+  toast('Save file downloaded.');
+}
+
+/** Load the pasted journey; one that cannot be read changes nothing. */
+function importJourney() {
+  const field = transferElement.querySelector('[data-key="import-text"]');
+  transferText = field instanceof HTMLTextAreaElement ? field.value : transferText;
+  if (!transferText.trim()) {
+    toast('Paste a save code or the contents of a save file first.', 'error');
+    return;
+  }
+  const loaded = importCode(transferText);
+  if (!loaded) {
+    toast('That is not a journey this game can read. Nothing was changed.', 'error');
+    return;
+  }
+  if (!game) {
+    adoptImport(loaded);
+    return;
+  }
+  const view = {
+    overline: 'Saved journey',
+    title: 'Replace this journey?',
+    text: 'The journey on this device will be replaced by the one you pasted.',
+    confirm: 'Load the pasted journey',
+    cancel: 'Keep this one',
+  };
+  openConfirm(view, () => adoptImport(loaded));
+}
+
+function adoptImport(loaded) {
+  game = loaded.game;
+  lastLeg = loaded.lastLeg;
+  notes = game.journal.length ? [game.journal.at(-1).text] : [];
+  resetJourneyView();
+  persist();
+  if (game.outcome) recordEnding(game);
+  transferText = '';
+  show('title');
+  toast(
+    game.outcome ? 'Journey loaded. Its ending is ready to view.' : 'Journey loaded. Resume it when you are ready.',
+  );
+  const resume = app.querySelector('[data-key="resume"]');
+  if (resume instanceof HTMLElement) resume.focus();
+}
+
 // --- Events ----------------------------------------------------------------------------------------------
 
 function onClick(event) {
@@ -626,8 +863,24 @@ function onClick(event) {
   if (key === 'home') event.preventDefault();
   if (playback) return;
   if (control.closest('#confirm-dialog')) {
+    const action = confirmed;
+    confirmed = null;
     confirmElement.close();
-    if (key === 'confirm') show('background');
+    if (key === 'confirm') action?.();
+    return;
+  }
+  if (control.closest('#journal-dialog')) {
+    if (key === 'close-journal') journalElement.close();
+    return;
+  }
+  if (control.closest('#transfer-dialog')) {
+    if (key === 'close-transfer') transferElement.close();
+    else if (key === 'copy-code') copySaveCode();
+    else if (key === 'download-save') downloadSave();
+    else if (key === 'import') {
+      event.preventDefault();
+      importJourney();
+    }
     return;
   }
   if (control.closest('#memorial-dialog')) {
@@ -666,12 +919,29 @@ function onClick(event) {
     case 'event:done':
       keepGoing();
       return;
+    case 'journal':
+    case 'ending-journal':
+      openJournal();
+      return;
+    case 'copy-result':
+      if (game?.outcome) copy(shareText(game), 'Result copied.', 'This browser would not copy the result.');
+      return;
+    case 'share':
+      shareResult();
+      return;
+    case 'replay':
+      replaySeed();
+      return;
+    case 'transfer':
+      openTransfer();
+      return;
     case 'autoPurchase':
       dispatch({ type: 'autoPurchase' });
       return;
     default:
   }
   const [kind, id] = key.split(':');
+  if (kind === 'epitaph' && id) return editEpitaph(id);
   if (kind === 'less') return step(id, -1);
   if (kind === 'more') return step(id, 1);
   if (kind === 'max') return step(id, 'max');
@@ -683,6 +953,10 @@ function onClick(event) {
 
 function onInput(event) {
   const field = event.target;
+  if (field instanceof HTMLTextAreaElement && field.getAttribute('data-key') === 'import-text') {
+    transferText = field.value;
+    return;
+  }
   if (!(field instanceof HTMLInputElement)) return;
   const key = field.getAttribute('data-key') ?? '';
   if (key.startsWith('name:')) setup.names[Number(key.slice(5))] = field.value;
@@ -759,6 +1033,7 @@ function onSubmit(event) {
   event.preventDefault();
   if (form.id === 'names-form') packVan();
   else if (form.closest('#memorial-dialog')) carve();
+  else if (form.closest('#transfer-dialog')) importJourney();
 }
 
 function onToggle(event) {
@@ -788,16 +1063,28 @@ eventDialog.addEventListener('close', () => {
 // A memorial closes any way the player likes; the default epitaph stays unless one was carved.
 memorialElement.addEventListener('close', () => {
   forget(memorialElement);
-  memorials.shift();
+  const closed = memorials.shift();
   if (screen !== 'game') return;
   openDialogs();
-  if (!document.querySelector('dialog[open]')) focusPrimary();
+  if (document.querySelector('dialog[open]')) return;
+  // An epitaph edited from the ending returns focus to its headstone.
+  const edit = closed?.editing && app.querySelector(`[data-key="epitaph:${CSS.escape(closed.memberId)}"]`);
+  if (edit instanceof HTMLElement) edit.focus();
+  else focusPrimary();
 });
+// A toast shown inside a dialog goes back to the page when the dialog closes.
+for (const dialog of DIALOGS) {
+  dialog.addEventListener('close', () => {
+    if (dialog.contains(toastRegion)) document.body.append(toastRegion);
+  });
+}
+for (const dialog of [journalElement, transferElement]) dialog.addEventListener('close', () => forget(dialog));
 
-// Another tab changed the save: the title's Resume follows it.
+// Another tab changed the save or the best journeys: the title follows it.
 window.addEventListener('storage', event => {
-  if (event.key !== SAVE_KEY || screen !== 'title') return;
-  adopt(loadJourney());
+  if (screen !== 'title') return;
+  if (event.key === null || event.key === SAVE_KEY) adopt(loadJourney());
+  else if (event.key !== RECORDS_KEY) return;
   draw();
 });
 
@@ -854,6 +1141,8 @@ function adopt(loaded) {
   problems.delete(PROBLEMS.unreadable);
   problems.delete(PROBLEMS.unavailable);
   if (loaded.problem) problems.add(loaded.problem);
+  // An ending saved before it could be recorded (or in an older version) is recorded now, once.
+  if (game?.outcome) recordEnding(game);
 }
 
 adopt(loadJourney());

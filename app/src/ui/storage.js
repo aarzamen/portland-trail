@@ -10,7 +10,8 @@ const FORMAT = 2;
 export const SAVE_KEY = `${APP}:save`;
 export const LEGACY_SAVE_KEY = `${APP}:v1`;
 export const LEGACY_LEG_KEY = `${APP}:last-leg:v1`;
-const RECORDS_KEY = `${APP}:records`;
+export const RECORDS_KEY = `${APP}:records`;
+const RECORDS_LIMIT = 10;
 const SETTINGS_KEY = `${APP}:settings`;
 const DEFAULT_SETTINGS = { sound: false };
 const CODE_PREFIX = 'PT2.';
@@ -155,6 +156,20 @@ export function writeRecords(list) {
   return write(RECORDS_KEY, JSON.stringify(Array.isArray(list) ? list : []));
 }
 
+/**
+ * Add one ended journey to the best journeys, once: an entry whose key is already stored is not added again.
+ * The list keeps the ten best by score, best first; among equal scores the older entry stays first.
+ * @param {{ key: string, score: number } & Record<string, unknown>} entry
+ * @returns {object[]} the best journeys after the change
+ */
+export function addRecord(entry) {
+  const list = readRecords().filter(item => typeof item.key === 'string' && Number.isFinite(item.score));
+  if (list.some(item => item.key === entry.key)) return list;
+  const next = [...list, entry].sort((first, second) => second.score - first.score).slice(0, RECORDS_LIMIT);
+  writeRecords(next);
+  return next;
+}
+
 /** The settings, with defaults for anything missing. */
 export function readSettings() {
   try {
@@ -194,6 +209,14 @@ function fromBase64Url(code) {
  */
 export function exportCode(game, lastLeg) {
   return CODE_PREFIX + toBase64Url(recordText(game, lastLeg));
+}
+
+/**
+ * The contents of a save file: the save record as indented JSON, which importCode reads back.
+ * Throws when the journey cannot be saved.
+ */
+export function saveFileText(game, lastLeg) {
+  return `${JSON.stringify(JSON.parse(recordText(game, lastLeg)), null, 2)}\n`;
 }
 
 /**
