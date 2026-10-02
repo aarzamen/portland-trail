@@ -1443,8 +1443,8 @@ const NOT_A_NUMBER = [
   'One unit of food',
   'One canister covers',
   // The shortest name or epitaph is one character, on one line.
-  'of 1–{max} characters',
-  'of 1 to {max} characters',
+  'of 1–{max}',
+  'of 1 to {max}',
   'on one line',
   // "One" as a pronoun.
   'Start a new one',
@@ -1502,6 +1502,36 @@ test('no sentence spells out a number: every number in a sentence comes from a s
     assert.ok(
       all.some(({ text }) => text.includes(phrase)),
       `"${phrase}" is no longer in data.js`,
+    );
+  }
+});
+
+// The counted nouns that follow a number slot, as [one, many].
+const COUNTED = [
+  ['mile', 'miles'],
+  ['day', 'days'],
+  ['bottle', 'bottles'],
+  ['kit', 'kits'],
+  ['character', 'characters'],
+];
+
+test('a noun after a number agrees with it, whatever the number is', () => {
+  const fillAll = (text, number) => {
+    const slots = [...text.matchAll(/\{([^{}|]+)\}/g)].map(match => match[1]);
+    return fill(text, Object.fromEntries(slots.map(slot => [slot, number])));
+  };
+  const all = sentences();
+  for (const [one, many] of COUNTED) {
+    const wrongForOne = new RegExp(`\\b1 (repair )?${many}\\b`);
+    const wrongForTwo = new RegExp(`\\b2 (repair )?${one}\\b`);
+    for (const { path, text } of all) {
+      assert.ok(!wrongForOne.test(fillAll(text, 1)), `${path}: ${fillAll(text, 1)}`);
+      assert.ok(!wrongForTwo.test(fillAll(text, 2)), `${path}: ${fillAll(text, 2)}`);
+    }
+    // Each noun is counted somewhere, so the list above stays honest.
+    assert.ok(
+      all.some(({ text }) => text.includes(`{${one}|${many}}`)),
+      `no sentence counts ${many}`,
     );
   }
 });

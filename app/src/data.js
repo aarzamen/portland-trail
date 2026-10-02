@@ -87,7 +87,7 @@ export const PROFESSIONS = [
       cooldown: 4,
       money: 45,
       food: 2,
-      text: 'Collab once every {cooldown} days for ${money} and {food} food. A Wi-Fi outage blocks it that day.',
+      text: 'Collab once every {cooldown} {day|days} for ${money} and {food} food. A Wi-Fi outage blocks it that day.',
       result: 'A brand collab paid ${money} and {food} food.',
       offline: 'The Wi-Fi outage blocks your collab today.',
     },
@@ -104,8 +104,8 @@ export const PROFESSIONS = [
       repairCost: 1,
       // {standardCost} is what the breakdown's repair needs from everyone else.
       text:
-        'Salvage {parts} repair kits once every {cooldown} days. ' +
-        'Breakdown repairs cost {repairCost} kit instead of {standardCost}.',
+        'Salvage {parts} repair {kit|kits} once every {cooldown} {day|days}. ' +
+        'Breakdown repairs cost {repairCost} {kit|kits} instead of {standardCost}.',
       result: 'Salvaged {parts} repair {kit|kits} from discarded gadgets.',
     },
     inventory: { money: 1200, food: 30, fuel: 20, ammo: 0, parts: 0, kombucha: 0, nft: 1 },
@@ -121,7 +121,7 @@ export const PROFESSIONS = [
       damage: 3,
       text:
         'Foraging finds {forageBonus} extra food. ' +
-        'Scout for {food} food once every {cooldown} days, costing {damage} health per survivor.',
+        'Scout for {food} food once every {cooldown} {day|days}, costing {damage} health per survivor.',
       result: 'Scouted {food} food; each survivor lost {damage} health.',
     },
     inventory: { money: 800, food: 100, fuel: 25, ammo: 2, parts: 2, kombucha: 0, nft: 0 },
@@ -161,7 +161,7 @@ export const ITEMS = [
     price: 12,
     max: 40,
     unit: 'canister',
-    text: 'One canister covers {milesPerFuel} miles at a Steady pace.',
+    text: 'One canister covers {milesPerFuel} {mile|miles} at a Steady pace.',
   },
   {
     id: 'ammo',
@@ -499,7 +499,7 @@ export const EVENTS = [
     weight: 9,
     choices: [],
     atStop: 'Arriving early saved {fuel} fuel before the next stretch.',
-    onRoad: 'Clear roads add {miles} miles.',
+    onRoad: 'Clear roads add {miles} {mile|miles}.',
   },
   {
     // How long the heat lasts and what it does each day are RULES.heat.
@@ -511,7 +511,7 @@ export const EVENTS = [
     weight: 10,
     damage: 6,
     choices: [],
-    result: 'The heatwave costs every survivor {damage} health and will last {days} more days.',
+    result: 'The heatwave costs every survivor {damage} health and will last {days} more {day|days}.',
   },
   {
     id: 'found_supplies',
@@ -557,7 +557,8 @@ export const EVENTS = [
         needs: { kombucha: 'kombuchaCost' },
         lacking: 'Dosing everyone takes {need} {bottle|bottles} of kombucha; you have {have}.',
         result:
-          'It took {bottles} bottles of kombucha and a lot of confidence to hold the outbreak to {damage} health each.',
+          'It took {bottles} {bottle|bottles} of kombucha and a lot of confidence ' +
+          'to hold the outbreak to {damage} health each.',
       },
       {
         id: 'quarantine',
@@ -798,7 +799,7 @@ export const ACTION_TEXT = {
   travel: {
     label: 'Drive toward {stop}',
     startLabel: 'Leave for Portland',
-    detail: '{miles} miles today for {fuel} fuel.',
+    detail: '{miles} {mile|miles} today for {fuel} fuel.',
   },
   rest: {
     road: { label: 'Rest by the road', detail: '+{heal} health each. Costs a day of food.' },
@@ -818,7 +819,7 @@ export const ACTION_TEXT = {
     kombucha: { label: 'Share the kombucha', detail: '+{heal} health each and cures sickness.' },
   },
   sellNft: { label: 'Sell one NFT for ${resale}', detail: '' },
-  push: { label: 'Push the van', detail: '{miles} miles for a day and {damage} health each.' },
+  push: { label: 'Push the van', detail: '{miles} {mile|miles} for a day and {damage} health each.' },
   hitchhike: {
     label: 'Send someone for fuel',
     detail: "A day's walk. Sometimes they come back with {fuel} fuel.",
@@ -832,7 +833,7 @@ export const JOURNAL = {
   won: 'Portland at last. The van and its survivors roll into town.',
   lost: 'The last traveler fell. The road to Portland ends here.',
   arrived: 'Arrived at {stop}.',
-  drove: 'Drove {miles} miles to mile {distance}.',
+  drove: 'Drove {miles} {mile|miles} to mile {distance}.',
   tankDry: 'The tank is dry.',
   weatherClears: 'The weather clears.',
   shortFood: 'The party ran short of food. Everyone living loses {damage} health.',
@@ -847,7 +848,7 @@ export const JOURNAL = {
   soldNft: 'Sold a {name} for ${resale}.',
   seedBombs: 'Seed bombs produced {food} food from a roadside patch.',
   kombucha: 'Kombucha restored {heal} health to every survivor.',
-  pushed: 'The crew pushed the van {miles} miles to mile {distance}.',
+  pushed: 'The crew pushed the van {miles} {mile|miles} to mile {distance}.',
   hitchhiked: '{name} walked for fuel and came back with {fuel}.',
   hitchhikeFailed: '{name} walked all day and came back with blisters.',
   luggage: 'A passing collector traded {fuel} fuel for the roof luggage. The van looks naked.',
@@ -893,9 +894,9 @@ export const REFUSALS = {
   luggageGone: 'The roof luggage is already gone.',
   epitaphWho: 'Choose one of the travelers.',
   epitaphAlive: '{name} is still alive and needs no epitaph.',
-  epitaphText: 'Write an epitaph of 1 to {max} characters, on one line.',
+  epitaphText: 'Write an epitaph of 1 to {max} {character|characters}, on one line.',
   background: 'Choose one of the four backgrounds.',
-  names: 'Enter five names of 1–{max} characters.',
+  names: 'Enter five names of 1–{max} {character|characters}.',
   seed: 'The journey seed must be an integer.',
   save: 'Cannot save an invalid journey.',
 };
