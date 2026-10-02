@@ -38,7 +38,7 @@ export const NAME_POOL = [
 export const RULES = {
   goalMiles: 1000,
   journalLimit: 200,
-  eventChance: 0.3, // (T) per driving day
+  eventChance: 0.55, // (T) per driving day
   starvationDamage: 9, // (T)
   sickDamage: 3, // (T) per day while sick
   roadRest: { heal: 6 }, // (T)
@@ -509,7 +509,7 @@ export const EVENTS = [
     type: 'auto',
     scene: 'heatwave',
     weight: 10,
-    damage: 6,
+    damage: 14,
     choices: [],
     result: 'The heatwave costs every survivor {damage} health and will last {days} more {day|days}.',
   },
@@ -533,7 +533,7 @@ export const EVENTS = [
     scene: 'wifi',
     weight: 9,
     damage: 3,
-    influencerDamage: 8,
+    influencerDamage: 5,
     choices: [],
     result: 'The Wi-Fi outage drained the party’s spirit.',
   },
