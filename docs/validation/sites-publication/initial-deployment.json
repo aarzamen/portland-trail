@@ -1,0 +1,19 @@
+{
+  "date": "2026-10-02",
+  "project_id": "appgprj_6abfa0acc9b88191953f926f6aa70b63",
+  "access_mode": "public",
+  "url": "https://the-portland-trail.annonable.chatgpt.site",
+  "source_sha": "efe815317234349b7229dc47bbc3ca224660a5c0",
+  "version_id": "appgprj_6abfa0acc9b88191953f926f6aa70b63~appgver_8313dd4079908191855395b5c3fac0d1",
+  "version_number": 1,
+  "deployment_id": "appgdep_6abfa22825208191952ba71636bfc8d0",
+  "status": "succeeded",
+  "updated_at": "2026-10-02T12:23:13.408848+00:00",
+  "archive_storage": {
+    "archive_format": "tar",
+    "sediment_file_id": "file_0000000002a082309466f5efcb7b5aef",
+    "content_hash": "sha256:03b3eae20c9393b4be294b0f8b76ded125916ad21cc4759d5b8611b63f08edaf",
+    "size_bytes": 8632320,
+    "file_count": 103
+  }
+}

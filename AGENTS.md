@@ -10,6 +10,16 @@ Preserve the premise: a funny Oregon Trail-inspired road trip to Portland, five 
 
 The game is a working static browser game in `app/` (version 0.2.0). A request to build, fix, continue an approved implementation, or publish authorizes the work necessary to complete that request. Do not infer a deployment request from the mere presence of this file.
 
+## Public hosting and session handoff
+
+The game is public at [The Portland Trail](https://the-portland-trail.annonable.chatgpt.site). Sites registration is persisted in [.openai/hosting.json](.openai/hosting.json); always reuse its exact `project_id`. GitHub `origin/main` is the canonical source. The local `sites` remote is the Sites source repository, with short-lived credentials supplied by the connector; never persist credentials in files or remote URLs.
+
+For a publication, push the exact clean source commit to both repositories before saving a Sites version. Build with `npm run build` from `app/`, then package `.openai/hosting.json` at the archive root and the contents of `app/dist/` under top-level `dist/`, matching `static.directory`. Save that archive and commit SHA through Sites, deploy the returned version ID, and confirm deployment success and the public URL. Preserve public access unless the user requests a change. Do not create a second Site for this checkout.
+
+The home-screen icon comes from the preserved v2 icon master through the asset pipeline: `index.html` links the 180px Apple touch icon, and `manifest.webmanifest` lists the 192/512px app icons. Verify their public URLs, MIME types and dimensions after publishing. Do not claim a physical phone installation from browser or manifest checks.
+
+Current publication evidence and remaining limits are in [docs/validation/2026-10-02-sites-publication.md](docs/validation/2026-10-02-sites-publication.md). Start the next session with [docs/handoff/SESSION_CLOSEOUT.md](docs/handoff/SESSION_CLOSEOUT.md). No new deployment or device work is implied by the handoff.
+
 ## Work autonomously within the user's task
 
 - Carry an authorized task through inspection, implementation, relevant verification, documentation and a usable result. Do not stop after a plan or ask whether to continue routine work.

@@ -1,0 +1,61 @@
+{
+  "origin": "https://the-portland-trail.annonable.chatgpt.site/",
+  "authenticated": false,
+  "manifest": {
+    "id": "./",
+    "name": "The Portland Trail",
+    "short_name": "Portland Trail",
+    "description": "Five travelers, one unreliable van, and a thousand miles to Portland.",
+    "lang": "en",
+    "start_url": "./",
+    "scope": "./",
+    "display": "standalone",
+    "background_color": "#07110a",
+    "theme_color": "#07110a",
+    "icons": [
+      {
+        "src": "./assets/icons/icon-192.png",
+        "sizes": "192x192",
+        "type": "image/png",
+        "purpose": "any"
+      },
+      {
+        "src": "./assets/icons/icon-512.png",
+        "sizes": "512x512",
+        "type": "image/png",
+        "purpose": "any"
+      }
+    ]
+  },
+  "appleTouchLink": true,
+  "icons": [
+    {
+      "path": "assets/icons/icon-192.png",
+      "sizes": "192x192",
+      "status": 200,
+      "type": "image/png",
+      "decodedSize": "192x192",
+      "sha256": "962fbb8e8b3bce56ca50e9eabcdac5afe619a88799cf33b1ba8554568045d36a",
+      "matchesLocal": true
+    },
+    {
+      "path": "assets/icons/icon-512.png",
+      "sizes": "512x512",
+      "status": 200,
+      "type": "image/png",
+      "decodedSize": "512x512",
+      "sha256": "9774667602affcd39a4e92268858a57826848e61e1accf79c6eefd2e305e9348",
+      "matchesLocal": true
+    },
+    {
+      "path": "assets/icons/apple-touch-icon.png",
+      "sizes": "180x180",
+      "status": 200,
+      "type": "image/png",
+      "decodedSize": "180x180",
+      "sha256": "33fa118625a40c59e7626b8086dc62e3e67fe0bf02c6e04eddaa0ffdd9d9fed8",
+      "matchesLocal": true
+    }
+  ],
+  "passed": true
+}

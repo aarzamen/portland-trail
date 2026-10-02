@@ -4,6 +4,12 @@ Five travelers, one unreliable van, and a thousand miles to Portland.
 
 An Oregon Trail-style road trip in the browser, with a green handheld-console look. Pick a background (influencer, gig-economy developer, doomsday prepper or artisanal barista), name your crew, stock the van and drive. Eleven stops, fourteen roadside encounters, sickness, weather, permanent death and a scored ending with headstones. Saves stay in your browser; a built copy plays offline.
 
+## Play
+
+Open [The Portland Trail](https://the-portland-trail.annonable.chatgpt.site) — public, no sign-in required. The game includes a phone home-screen icon and standalone web-app manifest. A completed first load caches the game for offline play; saves stay in that browser and origin.
+
+The selected Road Ahead splash and five dedicated region/encounter scenes are integrated. All three splash alternatives and their prompts are preserved in [graphics-v5](docs/handoff/graphics-v5/README.md).
+
 ## Play it locally
 
 Node 22 or newer. No install is needed to play.
@@ -32,4 +38,4 @@ Instructions for coding agents, including how to add new scenes, are in [AGENTS.
 
 ## Status
 
-Version 0.2.0 is complete: it implements the October 1 code review, item by item (see the status table at the top of the review). The rules engine, art pipeline, typeface, offline build, interface, endings and records, the visual pass with sound, and the documentation are done; the [validation record](docs/validation/2026-10-01-review-implementation.md) lists what was checked. Physical-iPhone testing, a WebKit run and public hosting have not been done.
+Version 0.2.0 implements the October 1 code review, item by item (see the status table at the top of the review). The [implementation validation](docs/validation/2026-10-01-review-implementation.md), [scene validation](docs/validation/2026-10-02-scene-art-v4.md), [splash validation](docs/validation/2026-10-02-splash-v5.md), and [public hosting validation](docs/validation/2026-10-02-sites-publication.md) list the checks and their limits. GitHub CI passes. Physical-iPhone installation/play and a WebKit run remain unverified.

@@ -1,0 +1,16 @@
+{
+  "url": "https://the-portland-trail.annonable.chatgpt.site/",
+  "phase": "travel",
+  "distance": 80,
+  "day": 2,
+  "brokenImages": 0,
+  "passed": true,
+  "steps": [
+    "Start a new journey",
+    "Continue to the crew",
+    "Pack the van",
+    "Leave for Portland",
+    "Continue after first encounter"
+  ],
+  "consoleErrors": 0
+}

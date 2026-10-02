@@ -1,0 +1,146 @@
+{
+  "url": "https://the-portland-trail.annonable.chatgpt.site/",
+  "browser": "installed Chrome",
+  "freshSession": true,
+  "realDevice": false,
+  "viewports": [
+    {
+      "width": 390,
+      "height": 844,
+      "scrollWidth": 390,
+      "heading": "The Portland\nTrail.",
+      "currentSrc": "https://the-portland-trail.annonable.chatgpt.site/assets/scenes/title-960.webp",
+      "naturalWidth": 960,
+      "naturalHeight": 640,
+      "brokenImages": 0,
+      "start": {
+        "width": 350,
+        "height": 52,
+        "bottom": 598.671875,
+        "disabled": false
+      },
+      "build": {
+        "version": "0.2.0",
+        "sha": "efe8153",
+        "branch": "main",
+        "date": "2026-10-02",
+        "dirty": false,
+        "mode": "build"
+      },
+      "serviceWorker": {
+        "active": "https://the-portland-trail.annonable.chatgpt.site/sw.js",
+        "controlled": true
+      },
+      "caches": [
+        "portland-trail-efe8153-4be433ce6d"
+      ],
+      "offlineReady": false,
+      "passed": true,
+      "screenshot": "/Users/ama/The Portland Trail/docs/validation/sites-publication/public-title-390x844.png"
+    },
+    {
+      "width": 414,
+      "height": 896,
+      "scrollWidth": 414,
+      "heading": "The Portland\nTrail.",
+      "currentSrc": "https://the-portland-trail.annonable.chatgpt.site/assets/scenes/title-960.webp",
+      "naturalWidth": 960,
+      "naturalHeight": 640,
+      "brokenImages": 0,
+      "start": {
+        "width": 374,
+        "height": 52,
+        "bottom": 634.671875,
+        "disabled": false
+      },
+      "build": {
+        "version": "0.2.0",
+        "sha": "efe8153",
+        "branch": "main",
+        "date": "2026-10-02",
+        "dirty": false,
+        "mode": "build"
+      },
+      "serviceWorker": {
+        "active": "https://the-portland-trail.annonable.chatgpt.site/sw.js",
+        "controlled": true
+      },
+      "caches": [
+        "portland-trail-efe8153-4be433ce6d"
+      ],
+      "offlineReady": false,
+      "passed": true,
+      "screenshot": "/Users/ama/The Portland Trail/docs/validation/sites-publication/public-title-414x896.png"
+    },
+    {
+      "width": 430,
+      "height": 932,
+      "scrollWidth": 430,
+      "heading": "The Portland\nTrail.",
+      "currentSrc": "https://the-portland-trail.annonable.chatgpt.site/assets/scenes/title-960.webp",
+      "naturalWidth": 960,
+      "naturalHeight": 640,
+      "brokenImages": 0,
+      "start": {
+        "width": 390,
+        "height": 52,
+        "bottom": 645.328125,
+        "disabled": false
+      },
+      "build": {
+        "version": "0.2.0",
+        "sha": "efe8153",
+        "branch": "main",
+        "date": "2026-10-02",
+        "dirty": false,
+        "mode": "build"
+      },
+      "serviceWorker": {
+        "active": "https://the-portland-trail.annonable.chatgpt.site/sw.js",
+        "controlled": true
+      },
+      "caches": [
+        "portland-trail-efe8153-4be433ce6d"
+      ],
+      "offlineReady": false,
+      "passed": true,
+      "screenshot": "/Users/ama/The Portland Trail/docs/validation/sites-publication/public-title-430x932.png"
+    },
+    {
+      "width": 1440,
+      "height": 900,
+      "scrollWidth": 1440,
+      "heading": "The Portland\nTrail.",
+      "currentSrc": "https://the-portland-trail.annonable.chatgpt.site/assets/scenes/title.webp",
+      "naturalWidth": 1536,
+      "naturalHeight": 1024,
+      "brokenImages": 0,
+      "start": {
+        "width": 233.03125,
+        "height": 52,
+        "bottom": 583.390625,
+        "disabled": false
+      },
+      "build": {
+        "version": "0.2.0",
+        "sha": "efe8153",
+        "branch": "main",
+        "date": "2026-10-02",
+        "dirty": false,
+        "mode": "build"
+      },
+      "serviceWorker": {
+        "active": "https://the-portland-trail.annonable.chatgpt.site/sw.js",
+        "controlled": true
+      },
+      "caches": [
+        "portland-trail-efe8153-4be433ce6d"
+      ],
+      "offlineReady": false,
+      "passed": true,
+      "screenshot": "/Users/ama/The Portland Trail/docs/validation/sites-publication/public-title-1440x900.png"
+    }
+  ],
+  "passed": true,
+  "consoleErrors": 0
+}
