@@ -38,7 +38,7 @@ Not done, with reasons:
 /**
  * @typedef {Object} Traveler
  * @property {string} id         'traveler_1' … 'traveler_5'
- * @property {string} name       1–32 characters, trimmed
+ * @property {string} name       1–32 characters, control characters stripped, trimmed
  * @property {number} health     integer 0–100; 0 means dead
  * @property {boolean} sick
  * @property {null | { day: number, mile: number, cause: string }} death
@@ -475,7 +475,7 @@ SAVE_VERSION                   // 3
 
 - It rebuilds the state field by field. Unknown fields are dropped. Fields added after 3.0 take defaults when missing.
 - It rejects (returns `null`): text that is not JSON, an unknown version, a party that is not five travelers with valid names and health, an unknown profession, pace or rations, inventory values that are negative or not numbers, a distance outside 0–1000, a day below 1.
-- It repairs instead of rejecting: a `shop` or `location` phase whose distance is not a stop becomes `travel`; a pending encounter whose id no longer exists is dropped; unknown stop ids in `talked` and `meals` are dropped; a non-`ended` phase with nobody alive becomes a lost ending; an `ended` phase without an outcome becomes `lost`; a won journey is at mile 1000; a journal longer than the limit keeps its newest lines.
+- It repairs instead of rejecting: a `shop` or `location` phase whose distance is not a stop becomes `travel`; a pending encounter whose id no longer exists is dropped; unknown stop ids in `talked` and `meals` are dropped; a non-`ended` phase with nobody alive becomes a lost ending; an `ended` phase without an outcome becomes `lost`; a won journey is at mile 1000; a journal longer than the limit keeps its newest lines; a `shop` phase with a pending encounter becomes `location`; a death day later than the journey's day is clamped to it; journal lines are capped at 300 characters and their day clamped to the journey's day; control characters are stripped from names.
 - Versions 1 and 2: `status === 'Sick'` becomes `sick: true`; health 0 or `Deceased` becomes a death with cause `unknown` at the saved day and mile; the weather text becomes `{ id, until: day }`; `locationId` and `shopReturn` are dropped; `seed` is the saved `rng`; `logged` is the journal length; new flags take defaults. Version 1 and 2 validation of the route is not repeated: the repairs above cover it.
 - Inventory above an item's `max` is kept.
 
