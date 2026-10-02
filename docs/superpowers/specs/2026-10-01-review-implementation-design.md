@@ -124,7 +124,7 @@ Professions keep their names, descriptions and starting inventories from the cur
 | id | ability label | numbers | text template |
 |---|---|---|---|
 | `influencer` | Run a collab | `cooldown: 4, money: 45, food: 2` | Collab once every {cooldown} days for ${money} and {food} food. A Wi-Fi outage blocks it that day. |
-| `dev` | Salvage parts | `cooldown: 4, parts: 2, repairCost: 1` | Salvage {parts} repair kits once every {cooldown} days. Breakdown repairs cost {repairCost} kit instead of {standardCost}. |
+| `dev` | Salvage parts | `cooldown: 4, parts: 2, repairCost: 1` | Salvage {parts} repair kits once every {cooldown} days. Breakdown repairs cost {repairCost} {kit|kits} instead of {standardCost}. |
 | `prepper` | Scout for food | `cooldown: 4, food: 6, damage: 3` | Foraging finds {forageBonus} extra food. Scout for {food} food once every {cooldown} days, costing {damage} health per survivor. |
 | `barista` | Brew coffee | `cooldown: 1, foodCost: 1, heal: 5` | Brew once a day: spend {foodCost} food to restore {heal} health to every living traveler. |
 
@@ -289,7 +289,7 @@ Effects. Numbers (T) live on the encounter's data object under the names in brac
 - `found_supplies`: gain {food: 8} food and {fuel: 2} fuel. "The free box held {food} food and {fuel} fuel."
 - `wifi_outage`: every living traveler loses {damage: 3}, or {influencerDamage: 8} when the profession is `influencer` (cause `wifi`); `flags.wifiDownDay = day`. "The Wi-Fi outage drained the party’s spirit."
 - `pandemic_death` (D2: answerable; nobody dies of a roll the player could not influence):
-  - `kombucha` "Dose everyone with kombucha" (needs kombucha {kombuchaCost: 2}): every living traveler loses {dosedDamage: 6} (cause `pandemic`). "It took {bottles} bottles of kombucha and a lot of confidence to hold the outbreak to {damage} health each."
+  - `kombucha` "Dose everyone with kombucha" (needs kombucha {kombuchaCost: 2}): every living traveler loses {dosedDamage: 6} (cause `pandemic`). "It took {bottles} {bottle|bottles} of kombucha and a lot of confidence to hold the outbreak to {damage} health each."
   - `quarantine` "Quarantine in the van": {quarantineDays: 2} days pass (not traveling), every living traveler loses {quarantineDamage: 8} (cause `pandemic`) and sickness is cured. "A {days}-day quarantine cost {damage} health each and most of the snacks."
   - `push_on` "Drive through it": the living traveler with the lowest health (first in party order on a tie) loses {worstDamage: 45}; every other living traveler loses {damage: 15} and becomes sick (cause `pandemic`). "You drove through it. {name} took the worst of it; everyone else is sick."
 - `ebike_convoy`:
@@ -313,7 +313,7 @@ Effects. Numbers (T) live on the encounter's data object under the names in brac
   - `donate` "Give ${donation} to make it stop" (needs money {donation: 20}): "${donation} bought silence and a tote bag."
   - `call` "Take a very important call" (only `dev`): "You paced in a circle saying “let's circle back” until they left."
 
-No sentence spells out a tunable number in words or digits; every number in a sentence comes from a slot. Every resolution writes its result line to the journal, then checks for the end of the journey. An encounter resolves exactly once: the token must match.
+No sentence spells out a tunable number in words or digits; every number in a sentence comes from a slot, and a noun that follows a number takes the `{one|many}` plural form. Every resolution writes its result line to the journal, then checks for the end of the journey. An encounter resolves exactly once: the token must match.
 
 ### 3.9 Score (F4)
 
