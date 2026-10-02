@@ -124,7 +124,7 @@ Professions keep their names, descriptions and starting inventories from the cur
 | id | ability label | numbers | text template |
 |---|---|---|---|
 | `influencer` | Run a collab | `cooldown: 4, money: 45, food: 2` | Collab once every {cooldown} days for ${money} and {food} food. A Wi-Fi outage blocks it that day. |
-| `dev` | Salvage parts | `cooldown: 4, parts: 2, repairCost: 1` | Salvage {parts} repair kits once every {cooldown} days. Breakdown repairs cost {repairCost} kit instead of 2. |
+| `dev` | Salvage parts | `cooldown: 4, parts: 2, repairCost: 1` | Salvage {parts} repair kits once every {cooldown} days. Breakdown repairs cost {repairCost} kit instead of {standardCost}. |
 | `prepper` | Scout for food | `cooldown: 4, food: 6, damage: 3` | Foraging finds {forageBonus} extra food. Scout for {food} food once every {cooldown} days, costing {damage} health per survivor. |
 | `barista` | Brew coffee | `cooldown: 1, foodCost: 1, heal: 5` | Brew once a day: spend {foodCost} food to restore {heal} health to every living traveler. |
 
@@ -289,8 +289,8 @@ Effects. Numbers (T) live on the encounter's data object under the names in brac
 - `found_supplies`: gain {food: 8} food and {fuel: 2} fuel. "The free box held {food} food and {fuel} fuel."
 - `wifi_outage`: every living traveler loses {damage: 3}, or {influencerDamage: 8} when the profession is `influencer` (cause `wifi`); `flags.wifiDownDay = day`. "The Wi-Fi outage drained the party’s spirit."
 - `pandemic_death` (D2: answerable; nobody dies of a roll the player could not influence):
-  - `kombucha` "Dose everyone with kombucha" (needs kombucha {kombuchaCost: 2}): every living traveler loses {dosedDamage: 6} (cause `pandemic`). "Two bottles of kombucha and a lot of confidence held the outbreak to {damage} health each."
-  - `quarantine` "Quarantine in the van": two days pass (not traveling), every living traveler loses {quarantineDamage: 8} (cause `pandemic`) and sickness is cured. "Two days of quarantine cost {damage} health each and most of the snacks."
+  - `kombucha` "Dose everyone with kombucha" (needs kombucha {kombuchaCost: 2}): every living traveler loses {dosedDamage: 6} (cause `pandemic`). "It took {bottles} bottles of kombucha and a lot of confidence to hold the outbreak to {damage} health each."
+  - `quarantine` "Quarantine in the van": {quarantineDays: 2} days pass (not traveling), every living traveler loses {quarantineDamage: 8} (cause `pandemic`) and sickness is cured. "A {days}-day quarantine cost {damage} health each and most of the snacks."
   - `push_on` "Drive through it": the living traveler with the lowest health (first in party order on a tie) loses {worstDamage: 45}; every other living traveler loses {damage: 15} and becomes sick (cause `pandemic`). "You drove through it. {name} took the worst of it; everyone else is sick."
 - `ebike_convoy`:
   - `wait` "Crawl along behind them": lose up to {fuel: 2} fuel; every living traveler gains {heal: 2}. "You idled behind the convoy for an hour. It cost {fuel} fuel; the fresh air was free."
@@ -310,10 +310,10 @@ Effects. Numbers (T) live on the encounter's data object under the names in brac
   - `post` "Post about the line" (only `influencer`; refused while the Wi-Fi is out today): gain {sponsor: 40}. "Your post about the line got you waved through and ${money} in sponsored hash browns."
 - `petition_gauntlet`:
   - `sign` "Sign everything": every living traveler loses {damage: 3} (cause `petitions`). "Eleven signatures later, everyone is {damage} health more tired and on nine mailing lists."
-  - `donate` "Give $20 to make it stop" (needs money {donation: 20}): "Twenty dollars bought silence and a tote bag."
+  - `donate` "Give ${donation} to make it stop" (needs money {donation: 20}): "${donation} bought silence and a tote bag."
   - `call` "Take a very important call" (only `dev`): "You paced in a circle saying “let's circle back” until they left."
 
-Every resolution writes its result line to the journal, then checks for the end of the journey. An encounter resolves exactly once: the token must match.
+No sentence spells out a tunable number in words or digits; every number in a sentence comes from a slot. Every resolution writes its result line to the journal, then checks for the end of the journey. An encounter resolves exactly once: the token must match.
 
 ### 3.9 Score (F4)
 
@@ -337,7 +337,7 @@ Lost at 700 miles or more: "Roadside Legend", "They will tell stories about the 
 
 ### 3.10 Seeds and names (F11, F12)
 
-`createGame` takes a uint32 `seed` and stores it. `seedFromText(text)`: a string of only digits is parsed as a number modulo 2^32; anything else is hashed with 32-bit FNV-1a over its trimmed UTF-8 bytes. `dailySeed(date)` is `seedFromText('portland-trail-' + YYYY-MM-DD)` in local time. `NAME_POOL` holds: Kale, Juniper, Rowan, Birch, Echo, Sage, Fern, Wren, Indigo, Moss, River, Clementine, Atlas, Zephyr, Linden, Sorrel, Aspen, Marigold, Huck, Tansy, Cedar, Opal, Finch, Bodhi.
+`createGame` takes a uint32 `seed` and stores it unchanged. The generator starts at `rng = mix32(seed)`, the MurmurHash3 32-bit finalizer (`h ^= h >>> 16; h = Math.imul(h, 0x85ebca6b); h ^= h >>> 13; h = Math.imul(h, 0xc2b2ae35); h ^= h >>> 16; h >>> 0`), so that neighbouring seeds such as 1, 2 and 3 play differently. `seedFromText(text)`: a string of only digits is parsed as a number modulo 2^32; anything else is hashed with 32-bit FNV-1a over its trimmed UTF-8 bytes. `dailySeed(date)` is `seedFromText('portland-trail-' + YYYY-MM-DD)` in local time. `NAME_POOL` holds: Kale, Juniper, Rowan, Birch, Echo, Sage, Fern, Wren, Indigo, Moss, River, Clementine, Atlas, Zephyr, Linden, Sorrel, Aspen, Marigold, Huck, Tansy, Cedar, Opal, Finch, Bodhi.
 
 ### 3.11 Balance targets (D1–D6)
 
@@ -404,7 +404,7 @@ deserializeGame(raw)           // -> State | null; accepts versions 1, 2 and 3
 SAVE_VERSION                   // 3
 ```
 
-- `transition` never throws for any input and never mutates `state`. On refusal it returns the same `state` object, an error sentence written for a player (no internal ids, B15) and no notes. On success `notes` holds the journal lines this action wrote, oldest first.
+- `transition` never throws for any action value, given a state produced by `createGame`, `deserializeGame` or `transition`, and never mutates `state`. It copies the action once (refusing one that cannot be copied) and checks and applies that copy. On refusal it returns the same `state` object, an error sentence written for a player (no internal ids, B15) and no notes. On success `notes` holds the journal lines this action wrote, oldest first.
 - Gates, in order: an invalid action object is refused ("Choose a valid action."); `setEpitaph` skips the remaining gates; a finished journey refuses everything ("This journey has ended. Start a new one to play again."); a pending encounter refuses everything but `resolveEvent` ("Resolve the current encounter first."); `resolveEvent` with nothing pending is refused.
 - Actions: `travel`, `openShop`, `leaveShop`, `purchase {cart}`, `autoPurchase`, `sellNft`, `rest`, `forage`, `meal`, `talk`, `useItem {itemId: 'ammo'|'kombucha'}`, `ability`, `setPace {pace}`, `setRations {rations}`, `resolveEvent {token, choiceId?}`, `push`, `hitchhike`, `tradeLuggage`, `setEpitaph {memberId, text}`.
 
