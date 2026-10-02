@@ -1161,10 +1161,14 @@ test('transition never throws and never changes the state it is given', () => {
       }
     }
   }
+  // Anything that is not a version 3 journey is refused, not crashed on: an old save has to be
+  // read with deserializeGame first.
   /** @type {any[]} */
-  const notStates = [null, undefined, 'state', 7, []];
-  for (const state of notStates) {
-    assert.deepEqual(transition(state, TRAVEL), { state, error: 'Choose a valid action.', notes: [] });
+  const notJourneys = [null, undefined, 'state', 7, [], {}, { version: 2, phase: 'travel' }];
+  for (const state of notJourneys) {
+    for (const action of EVERY_ACTION) {
+      assert.deepEqual(transition(state, action), { state, error: 'Choose a valid action.', notes: [] });
+    }
   }
 });
 

@@ -8,6 +8,7 @@ import { checkResolve, resolve, rollEncounter } from './events.js';
 import { pick, roll, rollBetween } from './random.js';
 import { recommendSupplies } from './selectors.js';
 import {
+  SAVE_VERSION,
   cleanEpitaph,
   cure,
   currentStop,
@@ -425,15 +426,17 @@ export const ACTIONS = {
 
 /**
  * Why `transition` would refuse this action, as a sentence for the player; null when it would
- * accept it. Nothing is changed by asking. The gates come first, in this order: the action must
- * be one of ACTIONS; an epitaph may be carved at any time; a finished journey accepts nothing
- * else; a pending encounter accepts only its answer. Then the action's own check decides.
- * @param {State} state
+ * accept it. Nothing is changed by asking. The gates come first, in this order: the state must be
+ * a version 3 journey and the action one of ACTIONS; an epitaph may be carved at any time; a
+ * finished journey accepts nothing else; a pending encounter accepts only its answer. Then the
+ * action's own check decides.
+ * @param {State} state  a journey from createGame, deserializeGame or transition
  * @param {Action} action
  * @returns {string | null}
  */
 export function refusalFor(state, action) {
-  if (!isRecord(state) || !isRecord(action) || typeof action.type !== 'string') return REFUSALS.invalid;
+  if (!isRecord(state) || state.version !== SAVE_VERSION) return REFUSALS.invalid;
+  if (!isRecord(action) || typeof action.type !== 'string') return REFUSALS.invalid;
   if (!Object.hasOwn(ACTIONS, action.type)) return REFUSALS.invalid;
   if (action.type !== 'setEpitaph') {
     if (state.outcome || state.phase === 'ended') return REFUSALS.ended;
