@@ -67,7 +67,7 @@ SCENES = {
     'travel': (original(8), (0, 340, 1024, 940)),
     'departure': (original(5), None),
     'rest-stop': (original(11), None),
-    'motel': (original(12), None),
+    'motel': (original(12), (0, 195, 1024, 1024)),
     'landmark': (original(18), None),
     'crypto': (original(10), None),
     'food-carts': (original(1), None),
@@ -77,9 +77,9 @@ SCENES = {
     'doomscrolling': (original(13), (0, 160, 1024, 1024)),
     'illness': (original(3), None),
     'free-box': (original(15), (0, 125, 1024, 1024)),
-    'wifi': (original(2), (0, 105, 1024, 930)),
+    'wifi': (original(2), (0, 105, 1024, 865)),
     'nft': (original(14), None),
-    'bike-convoy': (original(6), (270, 250, 1024, 900)),
+    'bike-convoy': (original(6), (287, 250, 1024, 900)),
     'city-street': (original(7), (0, 110, 1024, 1024)),
     'outbreak': (original(9), (0, 70, 1024, 930)),
     **{
@@ -94,6 +94,9 @@ SCENES = {
 # for a crop. Each line is set in Portland Pixel at a whole-number `scale` in `color`; the lines are centred in
 # `rect` as one block with `gap` pixels between them. `was` is what the sign said before. The colours were sampled
 # from each sign: the fill is the median of its interior, the lettering the median of the original strokes' cores.
+# Two optional keys serve a sign that is not a plain rectangle: `area`, the corners of a polygon (inclusive pixel
+# coordinates) painted flat instead of `rect`, which then only places the lines; and `shadow`, a colour and an
+# [x, y] offset at which the lines are drawn first, for a sign whose own letters cast one.
 REPAIRS = {
     'title': [
         {
@@ -147,6 +150,25 @@ REPAIRS = {
             'color': '#85b578',
             'lines': [{'text': 'GAME OVER', 'scale': 3}, {'text': 'NO SIGNAL', 'scale': 2}],
             'gap': 8,
+        },
+    ],
+    'breakdown': [
+        {
+            'was': 'PORTLAND over TRAL on a speckled panel; the small THE above the panel stays as it is',
+            'rect': [388, 76, 664, 206],
+            # Inside the panel's inner line. The left side keeps the frame's bevel (x 377-387) and the step where
+            # it meets the bottom line, the top-left corner is cut clear of its stepped line, and the bottom-right
+            # follows the dotted diagonal one pixel short of each dot.
+            'area': [
+                [398, 76], [656, 76], [659, 79], [663, 79], [663, 146], [659, 150], [652, 158], [648, 163],
+                [636, 173], [625, 187], [618, 195], [613, 199], [613, 201], [607, 202], [607, 205], [410, 205],
+                [410, 204], [394, 204], [394, 201], [388, 201], [388, 86],
+            ],
+            'fill': '#3c613d',
+            'color': '#c2dcb1',
+            'shadow': {'color': '#0e210e', 'offset': [0, 5]},
+            'lines': [{'text': 'PORTLAND', 'scale': 5}, {'text': 'TRAIL', 'scale': 5}],
+            'gap': 15,
         },
     ],
 }
@@ -228,10 +250,26 @@ def fit_width(image, width: int):
 # Scenes
 
 
+def check_box(what: str, box, size: tuple[int, int]) -> None:
+    """Refuse a (left, top, right, bottom) box that is empty or reaches outside an image of this size."""
+    left, top, right, bottom = box
+    if not (0 <= left < right <= size[0] and 0 <= top < bottom <= size[1]):
+        raise ValueError(f'{what} {list(box)} is empty or lies outside the {size[0]}x{size[1]} image')
+
+
 def repair(image, spec: dict, glyphs: Glyphs) -> None:
     """Paint a sign's interior flat and set its lines in the pixel face, centred."""
+    check_box('the repair rectangle', spec['rect'], image.size)
     left, top, right, bottom = spec['rect']
-    ImageDraw.Draw(image).rectangle((left, top, right - 1, bottom - 1), fill=spec['fill'])
+    draw = ImageDraw.Draw(image)
+    if 'area' in spec:
+        corners = [(x, y) for x, y in spec['area']]
+        if len(corners) < 3 or not all(0 <= x < image.width and 0 <= y < image.height for x, y in corners):
+            size = f'{image.width}x{image.height}'
+            raise ValueError(f'the repair area {spec["area"]} is not a polygon inside the {size} image')
+        draw.polygon(corners, fill=spec['fill'])
+    else:
+        draw.rectangle((left, top, right - 1, bottom - 1), fill=spec['fill'])
     lines = [(line['text'], line['scale']) for line in spec['lines']]
     if not lines:
         return
@@ -242,13 +280,24 @@ def repair(image, spec: dict, glyphs: Glyphs) -> None:
         extents.append((min(lit), max(lit)))  # capitals light rows 1-7 of the cell, descenders row 8
     heights = [(last - first + 1) * scale for (_, scale), (first, last) in zip(lines, extents)]
     block = sum(heights) + spec['gap'] * (len(lines) - 1)
-    if max(widths) + 2 > right - left or block + 2 > bottom - top:
-        raise ValueError(f'the lines {lines} do not fit inside {spec["rect"]}')
+    shadow = spec.get('shadow')
+    offsets = [(0, 0)] + ([tuple(shadow['offset'])] if shadow else [])
     y = top + (bottom - top - block) // 2
+    placed = []
     for (text, scale), width, (first, _), height in zip(lines, widths, extents, heights):
         x = left + (right - left - width) // 2
-        pixelfont.draw_text(image, (x, y - first * scale), text, glyphs, scale, spec['color'])
+        # The lit pixels of the line, and of its shadow, keep at least one pixel clear of the rectangle's edge.
+        if not all(left < x + dx and x + dx + width < right and top < y + dy and y + dy + height < bottom
+                   for dx, dy in offsets):
+            raise ValueError(f'"{text}" at scale {scale} does not fit inside {spec["rect"]}')
+        placed.append((text, scale, x, y - first * scale))
         y += height + spec['gap']
+    if shadow:
+        dx, dy = shadow['offset']
+        for text, scale, x, y in placed:
+            pixelfont.draw_text(image, (x + dx, y + dy), text, glyphs, scale, shadow['color'])
+    for text, scale, x, y in placed:
+        pixelfont.draw_text(image, (x, y), text, glyphs, scale, spec['color'])
 
 
 def scene(scene_id: str, glyphs: Glyphs, repaired: bool = True):
@@ -257,8 +306,7 @@ def scene(scene_id: str, glyphs: Glyphs, repaired: bool = True):
     with Image.open(ROOT / source) as opened:
         image = opened.convert('RGB')
     if crop:
-        if not (0 <= crop[0] < crop[2] <= image.width and 0 <= crop[1] < crop[3] <= image.height):
-            raise ValueError(f'{scene_id}: the crop {crop} lies outside the {image.width}x{image.height} source')
+        check_box(f'the crop of {scene_id}', crop, image.size)
         image = image.crop(crop)
     if repaired:
         for spec in REPAIRS.get(scene_id, []):
@@ -296,6 +344,7 @@ def sprite(source: str, crop, cell: tuple[int, int]):
     with Image.open(ROOT / source) as opened:
         image = opened.convert('RGBA')
     if crop:
+        check_box(f'the crop of {source}', crop, image.size)
         image = image.crop(crop)
     bounds = image.getchannel('A').point(lambda alpha: 255 if alpha > ALPHA_FLOOR else 0).getbbox()
     if bounds:

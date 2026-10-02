@@ -77,32 +77,32 @@
       "source": "images/the_portland_trail_00006.jpg",
       "source_sha256": "460e41d8021e7dfe31c5337943309c2085c5649f9c8f438aee282a96c0f7b159",
       "crop": [
-        270,
+        287,
         250,
         1024,
         900
       ],
       "repairs": [],
-      "width": 754,
+      "width": 737,
       "height": 650,
-      "bytes": 46932,
-      "sha256": "d2ea58f2f4dbbe6cc4d44c7f5b8f48de9d2e5a8b8acf7433dd8f64a74e7ce238"
+      "bytes": 46758,
+      "sha256": "a56299328e2631c0ab6e95389cd7169691d602a0ced855e4e8b95f026b4510c6"
     },
     {
       "file": "scenes/bike-convoy.webp",
       "source": "images/the_portland_trail_00006.jpg",
       "source_sha256": "460e41d8021e7dfe31c5337943309c2085c5649f9c8f438aee282a96c0f7b159",
       "crop": [
-        270,
+        287,
         250,
         1024,
         900
       ],
       "repairs": [],
-      "width": 754,
+      "width": 737,
       "height": 650,
-      "bytes": 54304,
-      "sha256": "23f21188f11a8e57d1b81d01c16f2f07b2e5f319a809bdcc318fbf55fd26cbc2"
+      "bytes": 54196,
+      "sha256": "2affef3d79dc46ccb745c5ac015cc039d6ad88fc0b32e44f3cb91f5b3f62ad07"
     },
     {
       "file": "scenes/bookshop-960.webp",
@@ -136,11 +136,127 @@
         1024,
         1024
       ],
-      "repairs": [],
+      "repairs": [
+        {
+          "was": "PORTLAND over TRAL on a speckled panel; the small THE above the panel stays as it is",
+          "rect": [
+            388,
+            76,
+            664,
+            206
+          ],
+          "area": [
+            [
+              398,
+              76
+            ],
+            [
+              656,
+              76
+            ],
+            [
+              659,
+              79
+            ],
+            [
+              663,
+              79
+            ],
+            [
+              663,
+              146
+            ],
+            [
+              659,
+              150
+            ],
+            [
+              652,
+              158
+            ],
+            [
+              648,
+              163
+            ],
+            [
+              636,
+              173
+            ],
+            [
+              625,
+              187
+            ],
+            [
+              618,
+              195
+            ],
+            [
+              613,
+              199
+            ],
+            [
+              613,
+              201
+            ],
+            [
+              607,
+              202
+            ],
+            [
+              607,
+              205
+            ],
+            [
+              410,
+              205
+            ],
+            [
+              410,
+              204
+            ],
+            [
+              394,
+              204
+            ],
+            [
+              394,
+              201
+            ],
+            [
+              388,
+              201
+            ],
+            [
+              388,
+              86
+            ]
+          ],
+          "fill": "#3c613d",
+          "color": "#c2dcb1",
+          "shadow": {
+            "color": "#0e210e",
+            "offset": [
+              0,
+              5
+            ]
+          },
+          "lines": [
+            {
+              "text": "PORTLAND",
+              "scale": 5
+            },
+            {
+              "text": "TRAIL",
+              "scale": 5
+            }
+          ],
+          "gap": 15
+        }
+      ],
       "width": 960,
       "height": 641,
-      "bytes": 32812,
-      "sha256": "88c0a2147842498f1b2cc51c228820fa4f3346605245a6ebe5bd6e634bf67a20"
+      "bytes": 30590,
+      "sha256": "16596be8e7a4795715fafc91652ad9ce5b94e7711f0c58b6116a1241e0790381"
     },
     {
       "file": "scenes/breakdown.webp",
@@ -152,11 +268,127 @@
         1024,
         1024
       ],
-      "repairs": [],
+      "repairs": [
+        {
+          "was": "PORTLAND over TRAL on a speckled panel; the small THE above the panel stays as it is",
+          "rect": [
+            388,
+            76,
+            664,
+            206
+          ],
+          "area": [
+            [
+              398,
+              76
+            ],
+            [
+              656,
+              76
+            ],
+            [
+              659,
+              79
+            ],
+            [
+              663,
+              79
+            ],
+            [
+              663,
+              146
+            ],
+            [
+              659,
+              150
+            ],
+            [
+              652,
+              158
+            ],
+            [
+              648,
+              163
+            ],
+            [
+              636,
+              173
+            ],
+            [
+              625,
+              187
+            ],
+            [
+              618,
+              195
+            ],
+            [
+              613,
+              199
+            ],
+            [
+              613,
+              201
+            ],
+            [
+              607,
+              202
+            ],
+            [
+              607,
+              205
+            ],
+            [
+              410,
+              205
+            ],
+            [
+              410,
+              204
+            ],
+            [
+              394,
+              204
+            ],
+            [
+              394,
+              201
+            ],
+            [
+              388,
+              201
+            ],
+            [
+              388,
+              86
+            ]
+          ],
+          "fill": "#3c613d",
+          "color": "#c2dcb1",
+          "shadow": {
+            "color": "#0e210e",
+            "offset": [
+              0,
+              5
+            ]
+          },
+          "lines": [
+            {
+              "text": "PORTLAND",
+              "scale": 5
+            },
+            {
+              "text": "TRAIL",
+              "scale": 5
+            }
+          ],
+          "gap": 15
+        }
+      ],
       "width": 1024,
       "height": 684,
-      "bytes": 41238,
-      "sha256": "56fe08f38c754276b4aa7e788de2858e2d7fa4c4d8c8f2c07241a96a730e9f5a"
+      "bytes": 37718,
+      "sha256": "0a88c41eb6a5fcf1140f1529fc4f683804523b0589459924b9caf9b01583acc8"
     },
     {
       "file": "scenes/city-street-960.webp",
@@ -490,23 +722,33 @@
       "file": "scenes/motel-960.webp",
       "source": "images/the_portland_trail_00012.jpg",
       "source_sha256": "1e6389c31ffec315e0dafb42e80a612e97d351e1bcb455bee9e13913f4bacada",
-      "crop": null,
+      "crop": [
+        0,
+        195,
+        1024,
+        1024
+      ],
       "repairs": [],
       "width": 960,
-      "height": 960,
-      "bytes": 38480,
-      "sha256": "a6c8d91a08d700f03eccb155a47c38d0c8c8df77bc8cad1bd9f253f4f2e4e890"
+      "height": 777,
+      "bytes": 34254,
+      "sha256": "0a76da533fc911984ed85d7ce8f7f21624314fd3c9a156a0750d02e021cf56c6"
     },
     {
       "file": "scenes/motel.webp",
       "source": "images/the_portland_trail_00012.jpg",
       "source_sha256": "1e6389c31ffec315e0dafb42e80a612e97d351e1bcb455bee9e13913f4bacada",
-      "crop": null,
+      "crop": [
+        0,
+        195,
+        1024,
+        1024
+      ],
       "repairs": [],
       "width": 1024,
-      "height": 1024,
-      "bytes": 51476,
-      "sha256": "9d3ad622f3e5f207e698ad57f8fe0282123a597435095d02f18792b3d17b60ec"
+      "height": 829,
+      "bytes": 45132,
+      "sha256": "010cdeb6a3f682a7815aa0713348f52d9480c119801e3dd92f3d6a80649897b6"
     },
     {
       "file": "scenes/mushroom-market-960.webp",
@@ -986,13 +1228,13 @@
         0,
         105,
         1024,
-        930
+        865
       ],
       "repairs": [],
       "width": 960,
-      "height": 773,
-      "bytes": 118768,
-      "sha256": "048ac4b13e8287597544e4fa16bc5923dfe82c982da0afc428ceb9875e6e3ef2"
+      "height": 713,
+      "bytes": 111140,
+      "sha256": "55ead6227645d098245d9c910a98c92910e2f941573b33f9ee72bd546ed0811e"
     },
     {
       "file": "scenes/wifi.webp",
@@ -1002,13 +1244,13 @@
         0,
         105,
         1024,
-        930
+        865
       ],
       "repairs": [],
       "width": 1024,
-      "height": 825,
-      "bytes": 154956,
-      "sha256": "fa5beff872f86823be2833e6b00a68630bc47f8d474af9c7a71ebf0261759c4b"
+      "height": 760,
+      "bytes": 144602,
+      "sha256": "77eea227c3c9a27019a6c5871323c7bcb321be7cb2daf8f23c7e86fdad464f35"
     },
     {
       "file": "sprites/portrait-barista.png",
