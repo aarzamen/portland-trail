@@ -396,15 +396,16 @@ test('the dead eat nothing', () => {
 // --- Weather ---------------------------------------------------------------
 
 test('heat lasts its days, costs extra food and health on the road, then clears (B5, F8)', () => {
-  const base = healthAt(stocked(onRoad(start()), { food: 60, fuel: 40 }), 80);
-  let state = act(pendingEvent(base, 'bad_weather'), { type: 'resolveEvent', token: 7 });
+  // Each day starts from the same rested, stocked crew on open road, so only the weather differs.
+  const again = state => healthAt(stocked(onRoad(state), { food: 60, fuel: 40 }), 80);
+  let state = act(pendingEvent(again(start()), 'bad_weather'), { type: 'resolveEvent', token: 7 });
   assert.deepEqual(state.weather, { id: 'heat', until: state.day + RULES.heat.days });
   assert.equal(weatherName(state), 'Heatwave');
   const calm = RATIONS.meager.food * CREW;
   const calmHealth = RATIONS.meager.health - PACES.normal.wear;
 
   for (let day = 0; day < RULES.heat.days; day++) {
-    const before = quiet({ ...state, distance: ROAD });
+    const before = quiet(again(state));
     const result = transition(before, TRAVEL);
     const eaten = round(before.inventory.food - result.state.inventory.food);
     assert.equal(eaten, round(calm * RULES.heat.foodMultiplier));
@@ -416,7 +417,7 @@ test('heat lasts its days, costs extra food and health on the road, then clears 
     state = result.state;
   }
 
-  const before = quiet({ ...state, distance: ROAD });
+  const before = quiet(again(state));
   const result = transition(before, TRAVEL);
   assert.equal(result.notes[0], 'The weather clears.');
   assert.equal(weatherName(result.state), 'Clear');
@@ -425,7 +426,7 @@ test('heat lasts its days, costs extra food and health on the road, then clears 
     assert.equal(member.health, before.party[index].health + calmHealth);
   }
   // Once clear, nothing more is announced.
-  const later = transition(quiet({ ...result.state, distance: ROAD }), TRAVEL);
+  const later = transition(quiet(again(result.state)), TRAVEL);
   assert.ok(!later.notes.includes('The weather clears.'));
 });
 
@@ -443,13 +444,15 @@ test('heat makes a resting day hungrier but adds no travel damage', () => {
 });
 
 test('drizzle holds Floor it to Steady miles and heals a little each day (F8)', () => {
-  const base = healthAt({ ...stocked(onRoad(start()), { fuel: 40, food: 60 }), pace: 'fast' }, 50);
+  // Each day starts from the same rested, stocked crew on open road, so only the weather differs.
+  const again = state => healthAt(stocked(onRoad(state), { food: 60, fuel: 40 }), 80);
+  const base = { ...again(start()), pace: 'fast' };
   let state = { ...base, weather: { id: 'drizzle', until: base.day + RULES.drizzle.days } };
   assert.equal(weatherName(state), 'Perfect drizzle');
   const daily = RATIONS.meager.health - PACES.fast.wear;
 
   for (let day = 0; day < RULES.drizzle.days; day++) {
-    const before = quiet({ ...state, distance: ROAD });
+    const before = quiet(again(state));
     const after = act(before, TRAVEL);
     assert.equal(after.distance - before.distance, PACES.normal.miles);
     assert.equal(before.inventory.fuel - after.inventory.fuel, Math.ceil(PACES.normal.miles / PACES.fast.milesPerFuel));
@@ -459,7 +462,7 @@ test('drizzle holds Floor it to Steady miles and heals a little each day (F8)', 
     state = after;
   }
 
-  const before = quiet({ ...state, distance: ROAD });
+  const before = quiet(again(state));
   const result = transition(before, TRAVEL);
   assert.equal(result.notes[0], 'The weather clears.');
   assert.equal(result.state.distance - before.distance, PACES.fast.miles);
@@ -555,7 +558,7 @@ test('a walk for fuel that goes badly can be the last', () => {
   const lone = crew(stocked(onRoad(base), { fuel: 0 }), (member, index) =>
     index === 0 ? { health: brink } : fallen(base),
   );
-  const results = seeds(40).map(rng => transition({ ...lone, rng }, { type: 'hitchhike' }));
+  const results = seeds(120).map(rng => transition({ ...lone, rng }, { type: 'hitchhike' }));
   const failed = results.filter(result => result.state.inventory.fuel === 0);
   assert.ok(failed.length > 0 && failed.length < results.length);
   for (const result of failed) {
@@ -1017,7 +1020,9 @@ test('pushing moves the van a little for a day and some health, and rolls no enc
 
 test('a push stops at the next stop, and can roll into Portland', () => {
   const ferry = stop('river_ferry');
-  const near = stocked(onRoad(start(), ferry.miles - 3), { fuel: 0 });
+  // Closer than one push covers.
+  const short = Math.min(3, RULES.push.miles);
+  const near = stocked(onRoad(start(), ferry.miles - short), { fuel: 0 });
   const arrived = transition(near, { type: 'push' });
   assert.equal(arrived.state.distance, ferry.miles);
   assert.equal(arrived.state.phase, 'location');
@@ -1027,7 +1032,7 @@ test('a push stops at the next stop, and can roll into Portland', () => {
   assert.equal(left.phase, 'travel');
   assert.equal(left.distance, ferry.miles + RULES.push.miles);
 
-  const last = stocked(onRoad(start(), RULES.goalMiles - 3), { fuel: 0 });
+  const last = stocked(onRoad(start(), RULES.goalMiles - short), { fuel: 0 });
   const won = transition(last, { type: 'push' });
   assert.equal(won.state.outcome, 'won');
   assert.equal(won.state.distance, RULES.goalMiles);
@@ -1049,7 +1054,7 @@ test('hitchhiking for fuel sometimes works and sometimes costs the walker', () =
   const rested = 50 + RATIONS.meager.health;
   let worked = 0;
   let failed = 0;
-  for (const seed of seeds(80)) {
+  for (const seed of seeds(200)) {
     const state = { ...dry, rng: seed };
     const result = transition(state, { type: 'hitchhike' });
     assert.equal(result.error, null);
@@ -1224,7 +1229,7 @@ test('the generator is the 32-bit LCG, and each action takes its rolls in order'
   const eaten = RATIONS.meager.food * CREW;
   let encounters = 0;
   let sicknesses = 0;
-  for (const seed of seeds(80)) {
+  for (const seed of seeds(200)) {
     const [r1, r2, r3] = [lcg(seed), lcg(lcg(seed)), lcg(lcg(lcg(seed)))];
     const fresh = start('dev', seed);
 
@@ -1261,7 +1266,7 @@ test('the generator is the 32-bit LCG, and each action takes its rolls in order'
     assert.equal(walked.state.inventory.fuel, unit(r2) < RULES.hitchhike.chance ? RULES.hitchhike.fuel : 0);
     assert.ok(walked.notes[0].startsWith(`${walker} walked`));
   }
-  assert.ok(encounters > 0 && encounters < 80 && sicknesses > 0 && sicknesses < 80);
+  assert.ok(encounters > 0 && encounters < 200 && sicknesses > 0 && sicknesses < 200);
 
   // Nothing else rolls.
   const base = healthAt(stocked(start('barista', 5), { kombucha: 1, money: 500, nft: 1 }), 50);

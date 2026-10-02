@@ -325,8 +325,10 @@ test('with little cash auto-buy buys fuel for the stretch first, then food, and 
   const foodNeed = Math.ceil(travelDays * RATIONS.meager.food * CREW);
   const fuelCost = fuelNeed * price('fuel');
   const essentials = fuelCost + foodNeed * price('food');
-  assert.ok(fuelNeed > 0 && foodNeed > 0);
-  assert.ok(essentials < RULES.supplies.reserveCash, 'the purses below buy essentials only');
+  assert.ok(fuelNeed > 0 && foodNeed >= 2);
+  // No purse below exceeds the essentials, so what is left after them is less than one more unit:
+  // always under the reserve, and nothing beyond the essentials is bought.
+  assert.ok(Math.max(price('fuel'), price('food')) <= RULES.supplies.reserveCash);
 
   const purses = [
     0,

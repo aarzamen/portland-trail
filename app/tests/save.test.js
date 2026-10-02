@@ -83,8 +83,8 @@ test('a fresh journey round-trips for every background', () => {
   }
 });
 
-test('every state of a journey round-trips: on the road, in an encounter, won and lost', () => {
-  const seen = { road: 0, stop: 0, shop: 0, pending: 0, dead: 0, won: 0, lost: 0 };
+test('every state of a journey round-trips: on the road, at a stop, in a shop, in an encounter, lost', () => {
+  const seen = { road: 0, stop: 0, shop: 0, pending: 0, dead: 0, lost: 0 };
   const visit = state => {
     assert.deepEqual(roundTrip(state), state);
     if (state.phase === 'travel') seen.road += 1;
@@ -92,7 +92,7 @@ test('every state of a journey round-trips: on the road, in an encounter, won an
     if (state.phase === 'shop') seen.shop += 1;
     if (state.pendingEvent) seen.pending += 1;
     if (state.party.some(member => member.death)) seen.dead += 1;
-    if (state.outcome) seen[state.outcome] += 1;
+    if (state.outcome === 'lost') seen.lost += 1;
   };
   for (let index = 0; index < 24; index++) {
     const profession = PROFESSIONS[index % PROFESSIONS.length].id;
@@ -100,6 +100,14 @@ test('every state of a journey round-trips: on the road, in an encounter, won an
     assert.ok(ending.outcome, 'the journey ends');
   }
   for (const [kind, count] of Object.entries(seen)) assert.ok(count > 0, `no ${kind} state was saved`);
+});
+
+test('a won journey round-trips and stays won', () => {
+  const won = act({ ...start(), phase: 'travel', distance: RULES.goalMiles - 5 }, TRAVEL);
+  assert.equal(won.outcome, 'won');
+  const loaded = roundTrip(won);
+  assert.deepEqual(loaded, won);
+  assert.equal(transition(loaded, TRAVEL).error, ENDED);
 });
 
 test('weather, sickness and a death round-trip', () => {

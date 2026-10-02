@@ -215,7 +215,7 @@ test('every response does exactly what it advertises', () => {
       ? [choice.result, choice.otherwise].filter(Boolean)
       : [entry.result, entry.atStop, entry.onRoad].filter(Boolean);
     const seen = new Set();
-    for (const seed of seeds(60)) {
+    for (const seed of seeds(120)) {
       const before = facing(ready(choice?.only ?? 'barista', seed), entry.id);
       const result = transition(before, answer(choice?.id));
       assert.equal(result.error, null, key);
@@ -570,7 +570,7 @@ test('a failed kick costs a day, the tow charges cash, and the developer repairs
   const choice = id => breakdown.choices.find(option => option.id === id);
   let failed = 0;
   let worked = 0;
-  for (const seed of seeds(40)) {
+  for (const seed of seeds(120)) {
     const state = facing(ready('barista', seed), 'van_breakdown');
     const result = transition(state, answer('kick'));
     if (result.state.day === state.day) {
@@ -666,7 +666,9 @@ test('every way an encounter can kill has its own cause, line and epitaph', () =
       }
     }
   }
-  assert.deepEqual([...causes].sort(), [
+  // A response that spends a day can also starve the frailest on Meager rations, when those cost health.
+  const fromTheDay = RATIONS.meager.health < 0 ? ['rations'] : [];
+  const fromEncounters = [
     'breakdown',
     'doomscrolling',
     'ebike',
@@ -674,11 +676,11 @@ test('every way an encounter can kill has its own cause, line and epitaph', () =
     'heat',
     'pandemic',
     'petitions',
-    'rations',
     'sasquatch',
     'toll',
     'wifi',
-  ]);
+  ];
+  assert.deepEqual([...causes].sort(), [...fromEncounters, ...fromTheDay].sort());
 });
 
 test('berries that kill leave nobody sick', () => {
