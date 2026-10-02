@@ -1,6 +1,7 @@
 // The balance targets of spec section 3.11, measured with the three bots of scripts/balance.mjs.
 // The script measures 2,000 seeds per background against the exact targets; this test measures 300
-// and allows wider bands, so that ordinary variance between samples does not fail it.
+// and allows wider bands, so that ordinary variance between samples does not fail it. Careful play's
+// floors are the spec's own: its measured values clear them by a wide margin.
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { formatTables, measure, startingShortfalls } from '../scripts/balance.mjs';
@@ -9,8 +10,8 @@ const SEEDS = 300;
 const BANDS = {
   neverShopsMost: 0.08,
   autopilot: [0.25, 0.6],
-  carefulLeast: 0.75,
-  carefulAlive: 3.3,
+  carefulLeast: 0.8,
+  carefulAlive: 3.5,
   spreadPoints: 12,
   carefulOutbreakLosses: 0.05,
 };
