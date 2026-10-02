@@ -479,8 +479,11 @@ const twoDecimals = value => Math.round(value * 100) / 100;
 
 /** The receipt of a drive (or a push), and the miles an encounter adds to it. */
 function updateLeg(before, after, action) {
-  const moved = after.distance > before.distance || after.day > before.day;
-  if ((action.type === 'travel' || action.type === 'push') && moved) {
+  const moved = after.distance > before.distance;
+  if ((action.type === 'travel' || action.type === 'push') && !moved && after.outcome) {
+    // The day passed and ended the journey before the van moved: there is no stretch to show.
+    lastLeg = null;
+  } else if ((action.type === 'travel' || action.type === 'push') && moved) {
     lastLeg = {
       fromDistance: before.distance,
       toDistance: after.distance,
@@ -630,8 +633,20 @@ function startNewJourney() {
       confirm: 'Start a new journey',
       cancel: 'Keep playing',
     };
-    openConfirm(view, () => show('background'));
-  } else show('background');
+    openConfirm(view, () => {
+      forgetRoad();
+      show('background');
+    });
+  } else {
+    forgetRoad();
+    show('background');
+  }
+}
+
+/** A new journey other than a replay starts on a road nobody has driven yet. */
+function forgetRoad() {
+  setup.road = 'surprise';
+  setup.seedText = '';
 }
 
 /** Step 1 again, with this journey's background, crew and seed chosen, so the same road can be driven again. */
@@ -690,6 +705,8 @@ function packVan() {
   lastLeg = null;
   notes = [game.journal.at(-1).text];
   resetJourneyView();
+  // A replayed seed is used once; the next journey's road is a surprise again.
+  forgetRoad();
   persist();
   show('game');
 }

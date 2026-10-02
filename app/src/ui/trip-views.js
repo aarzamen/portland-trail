@@ -350,6 +350,8 @@ function leg(model) {
   const { lastLeg } = model;
   if (!lastLeg || model.playing || model.state.phase === 'shop') return '';
   const miles = lastLeg.toDistance - lastLeg.fromDistance;
+  // A receipt without miles (saved before the fatal-push fix) is not a stretch of road.
+  if (miles <= 0) return '';
   const title = lastLeg.arrived ? `Arrived at ${escapeHtml(lastLeg.arrived)}` : 'Another stretch behind you.';
   return `<section class="last-leg" aria-labelledby="last-leg-heading">
     <div class="last-leg-heading"><h2 id="last-leg-heading">${title}</h2>

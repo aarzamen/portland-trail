@@ -47,6 +47,8 @@ const WIN = { profession: 'influencer', seed: 5, bot: BOT.careful, width: 1440, 
 const LOSS = { profession: 'prepper', seed: 3, bot: BOT['never-shops'], width: 390, height: 664 };
 const FALLEN_WIN = { profession: 'influencer', seed: 14, bot: BOT.autopilot };
 const CLIPBOARD = ['clipboard-read', 'clipboard-write'];
+const MARKUP_NAME = '<img src=x onerror=alert(1)>';
+const MARKUP_EPITAPH = '<b>bold</b>';
 const MAX_ACTIONS = 400;
 
 const report = suite('browser-journey');
@@ -134,6 +136,9 @@ async function playThrough(page, { profession, seed, bot }) {
   const memory = { shopped: new Set(), rests: new Map() };
   const used = new Set();
   let mismatch = null;
+  /** @type {object[]} receipts that did not show what a push really did */
+  const legs = [];
+  let pushes = 0;
   let count = 0;
   for (; count < MAX_ACTIONS && !mirror.outcome && !mismatch; count += 1) {
     await settle(page);
@@ -145,11 +150,29 @@ async function playThrough(page, { profession, seed, bot }) {
     const action = bot.choose(saved, memory);
     used.add(action.type);
     await perform(page, saved, action);
+    const before = mirror;
     mirror = transition(mirror, action).state;
+    // A push that moved the van shows its real miles, fuel and food on the last-leg receipt.
+    if (action.type === 'push' && mirror.distance > before.distance) {
+      pushes += 1;
+      const receipt = await page.locator('[data-region="leg"] .leg-receipt').innerText();
+      const food = Math.round((before.inventory.food - mirror.inventory.food) * 100) / 100;
+      const fuel = Math.round((before.inventory.fuel - mirror.inventory.fuel) * 100) / 100;
+      const expected = [`+${mirror.distance - before.distance} mi`, `−${fuel} fuel`, `−${food} food`];
+      if (!expected.every(part => receipt.includes(part))) legs.push({ receipt, expected });
+    }
   }
   await settle(page);
   if (!mismatch && !isDeepStrictEqual(await readGame(page), plain(mirror))) mismatch = { count, at: 'the end' };
-  return { state: mirror, used, mismatch, count };
+  return { state: mirror, used, mismatch, count, legs, pushes };
+}
+
+/** True when step 2 offers Surprise me with an empty seed field. */
+async function surpriseRoad(page) {
+  return (
+    (await page.locator('[data-key="road:surprise"]').getAttribute('aria-checked')) === 'true' &&
+    (await page.locator('[data-key="seed"]').inputValue()) === ''
+  );
 }
 
 /** The ending's checks shared by every outcome: heading, cause, numbers, rank, rent and one stone per fallen. */
@@ -310,6 +333,15 @@ async function winningJourney() {
     check(shared?.text === shareText(state), at('Share hands shareText to the browser'), shared);
     await layoutHolds(page, at, 'the ending');
 
+    // Replay this seed is used once: leaving it and starting a journey another way offers a surprise road.
+    await page.locator('[data-key="replay"]').click();
+    await page.locator('[data-key="back-title"]').click();
+    await page.locator('[data-key="start"]').click();
+    await page.locator('[data-key="to-crew"]').click();
+    check(await surpriseRoad(page), at('Start after an abandoned Replay offers a surprise road and no seed'));
+    await page.locator('[data-key="home"]').click();
+    await page.locator('[data-key="resume"]').click();
+
     // Replay this seed: step 1 with the background, then the seed chosen in the road options.
     await page.locator('[data-key="replay"]').click();
     check(!(await dialogOpen(page, 'confirm-dialog')), at('Replay asks no confirmation after an ending'));
@@ -334,6 +366,10 @@ async function winningJourney() {
       at('the replay starts as a new journey: mile 0, day 1, a healthy crew'),
       replay && { distance: replay.distance, day: replay.day },
     );
+    await page.locator('#new-journey-header').click();
+    await page.locator('#confirm-dialog [data-key="confirm"]').click();
+    await page.locator('[data-key="to-crew"]').click();
+    check(await surpriseRoad(page), at('the next journey after a replay offers a surprise road and no seed'));
     check(errors.length === 0, at('no browser errors'), errors);
   } finally {
     await context.close();
@@ -358,6 +394,17 @@ async function losingJourney() {
       played.used.has('tradeLuggage') && played.used.has('push') && !played.used.has('autoPurchase'),
       at('it never shopped and used the last resorts'),
       [...played.used],
+    );
+    check(
+      played.pushes > 0 && played.legs.length === 0,
+      at('every push that moved the van shows its real miles, fuel and food on the receipt'),
+      { pushes: played.pushes, wrong: played.legs },
+    );
+    check(
+      (await page.locator('[data-region="leg"]').innerText()).trim() === '' &&
+        (await readRecord(page)).ui.lastLeg === null,
+      at('the fatal push that ended the journey without moving leaves no receipt'),
+      await page.locator('[data-region="leg"]').innerText(),
     );
     let state = played.state;
     const summary = await endingShows(page, state, at);
@@ -427,13 +474,66 @@ async function losingJourney() {
 
 // --- A won ending with fallen travelers, and ten records at most -------------------------------------------
 
-async function fallenWin() {
-  const { state } = playInEngine(FALLEN_WIN);
-  const summary = summarize(state);
+/**
+ * The journey with markup where a player can put it: the first fallen traveler's name (also in the journal lines
+ * that name them) and the epitaph. The save must accept it unchanged.
+ */
+function withMarkup(played, memberId) {
+  const next = structuredClone(played);
+  const member = next.party.find(entry => entry.id === memberId);
+  const named = new RegExp(`\\b${member.name}\\b`, 'g');
+  for (const entry of next.journal) entry.text = entry.text.replace(named, MARKUP_NAME);
+  member.name = MARKUP_NAME;
+  member.epitaph = MARKUP_EPITAPH;
+  const checked = deserializeGame(JSON.stringify(next));
+  if (!checked || !isDeepStrictEqual(plain(checked), plain(next))) throw new Error('the marked journey is not valid');
+  return checked;
+}
+
+/** Names and epitaphs with markup stay text on the headstone, in the whole journal and in the transfer field. */
+async function markupStaysText(page, state, at) {
+  const fallen = summarize(state).fallen.find(entry => entry.name === MARKUP_NAME);
+  const stone = await page.locator(`[data-headstone="${fallen.id}"]`).innerText();
   check(
-    state.outcome === 'won' && summary.fallen.length === 2,
+    stone.includes(MARKUP_NAME) && stone.includes(MARKUP_EPITAPH),
+    at('a name and an epitaph with markup show as text on the headstone'),
+    stone,
+  );
+  await page.locator('[data-key="ending-journal"]').click();
+  const lines = await page.locator('#journal-dialog li').allInnerTexts();
+  check(
+    lines.some(line => line.includes(MARKUP_NAME)),
+    at('a name with markup shows as text in the whole journal'),
+  );
+  await page.locator('#journal-dialog [data-key="close-journal"]').click();
+  await page.locator('[data-key="home"]').click();
+  await openTransfer(page);
+  const pasted = saveRecord(state);
+  await page.locator('#transfer-dialog [data-key="import-text"]').fill(pasted);
+  await page.locator('#transfer-dialog [data-key="close-transfer"]').click();
+  await openTransfer(page);
+  check(
+    (await page.locator('#transfer-dialog [data-key="import-text"]').inputValue()) === pasted &&
+      pasted.includes(MARKUP_NAME) &&
+      pasted.includes(MARKUP_EPITAPH),
+    at('a pasted save with markup is kept verbatim as text when the transfer dialog is drawn again'),
+  );
+  await page.locator('#transfer-dialog [data-key="close-transfer"]').click();
+  check(
+    (await page.locator('img[src="x"]').count()) === 0 &&
+      (await page.locator('[data-headstone] b, #journal-dialog li b, [data-list="crew"] p b').count()) === 0,
+    at('markup creates no element'),
+  );
+}
+
+async function fallenWin() {
+  const played = playInEngine(FALLEN_WIN).state;
+  check(
+    played.outcome === 'won' && summarize(played).fallen.length === 2,
     `the engine wins seed ${FALLEN_WIN.seed} with the autopilot and two fallen`,
   );
+  const state = withMarkup(played, summarize(played).fallen[0].id);
+  const summary = summarize(state);
   // Ten weaker journeys already on file: this one joins them, the weakest goes.
   const older = Array.from({ length: 10 }, (_, index) => ({
     key: `old-${index}`,
@@ -472,7 +572,8 @@ async function fallenWin() {
       await opened.page.locator('[data-headstone]').first().scrollIntoViewIfNeeded();
       await opened.page.screenshot({ path: join(report.folder, `ending-won-fallen-${width}-view.png`) });
       await layoutHolds(opened.page, at, 'the ending');
-      check(opened.errors.length === 0, at('no browser errors'), opened.errors);
+      await markupStaysText(opened.page, state, at);
+      check(opened.errors.length === 0, at('no browser errors and no browser dialog fired'), opened.errors);
     } finally {
       await opened.context.close();
     }
