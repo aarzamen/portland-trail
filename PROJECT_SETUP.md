@@ -14,41 +14,26 @@ The [iPhone polish pass](docs/validation/2026-10-01-iphone-polish.md) adds compa
 
 ## Run and verify
 
-Node 22 or newer is required. No npm install is needed.
+Node 22 or newer is required. Playing needs no install.
 
 ```bash
 cd "/Users/ama/The Portland Trail/app"
-npm start
+npm run dev
 ```
 
-Open [the local game](http://127.0.0.1:4173). Keep that terminal running. Saves belong to that browser and origin; switching ports or browsers creates a separate save area.
+Open [the local game](http://127.0.0.1:4173). Keep that terminal running. Saves belong to that browser and origin; switching ports or browsers creates a separate save area. `npm start` builds a stamped copy into `app/dist/` and serves that instead; the built copy registers a service worker and plays offline.
 
 ```bash
 cd "/Users/ama/The Portland Trail/app"
-npm test
-npm run build
+npm test               # rules, fuzz and balance tests, no install needed
+npm ci                 # once: Playwright, Prettier, TypeScript
+npm run test:browser   # builds, starts servers on free ports, runs every browser suite in installed Chrome
+npm run checksums      # refresh checksums.json and docs/handoff/checksums.json before merging to main
 ```
 
-The build writes portable static files to `app/dist/`. To serve that build:
+Browser evidence is written beneath `app/test-results/`, which Git ignores. Regenerating art needs [uv](https://docs.astral.sh/uv/): `npm run assets`.
 
-```bash
-cd "/Users/ama/The Portland Trail/app"
-node scripts/serve.mjs --dist
-```
-
-Stop the existing server first if it already occupies port 4173. The server binds to localhost only.
-
-Browser checks use Playwright with installed Chrome. On this Mac, the bundled runtime supplies Playwright:
-
-```bash
-cd "/Users/ama/The Portland Trail"
-PLAYWRIGHT_MODULE="/Users/ama/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright" node app/tests/browser-smoke.mjs
-PLAYWRIGHT_MODULE="/Users/ama/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright" node app/tests/browser-enhancements.mjs
-PLAYWRIGHT_MODULE="/Users/ama/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright" node app/tests/browser-icons.mjs
-PLAYWRIGHT_MODULE="/Users/ama/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright" BROWSER=chromium node app/tests/browser-iphone.mjs
-```
-
-Start the local server first. Other machines can supply their own Playwright module through PLAYWRIGHT_MODULE. Browser evidence is written beneath `app/test-results/`; this generated directory is excluded from Git. The iPhone validation record includes the WebKit command and saved reports.
+Version 0.2 is in progress on the `feat/review-implementation` branch and merged to `main` as it is reviewed; see [the plan](docs/superpowers/plans/2026-10-01-review-implementation.md) and [AGENTS.md](AGENTS.md).
 
 ## Development map
 
