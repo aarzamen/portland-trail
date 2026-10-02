@@ -1,12 +1,14 @@
 // The Portland Trail service worker (F5): the built game reloads and plays with no signal.
-// The page registers it only when BUILD.mode is 'build'. scripts/build.mjs rewrites the next two lines with
-// the build stamp and the list of shell files; as checked in, the file is valid on its own (stamp 'dev',
-// nothing to precache).
+// The page registers it only when BUILD.mode is 'build'. scripts/build.mjs rewrites the next three lines with
+// the build stamp, a digest of every other built file and the list of shell files; as checked in, the file is
+// valid on its own (stamp and digest 'dev', nothing to precache).
 const BUILD = { version: '0.2.0', sha: 'dev', branch: '', date: '', dirty: false, mode: 'dev' };
+const DIGEST = 'dev';
 const PRECACHE = [];
 
 const PREFIX = 'portland-trail-';
-const CACHE = `${PREFIX}${BUILD.sha}`;
+// A rebuild that changes any file, even at the same commit, gets a new digest: new worker bytes and a new cache.
+const CACHE = `${PREFIX}${BUILD.sha}-${DIGEST}`;
 const NETWORK_TIMEOUT_MS = 3000;
 const SCOPE = self.registration.scope;
 
@@ -40,9 +42,19 @@ self.addEventListener('fetch', event => {
   const network = fetch(request);
   // This reaction is registered before the ones in networkFirst, so the copy is taken before the page reads
   // the body.
-  event.waitUntil(network.then(response => keepable(response) && store(request, response.clone())).catch(() => {}));
+  event.waitUntil(network.then(response => refresh(request, response)).catch(() => {}));
   event.respondWith(networkFirst(request, network));
 });
+
+// Keeps the cache in step with the network. Every page of the game is the one shell, so a navigation refreshes
+// the entry under './' instead of adding a copy for each query string, and only an HTML answer may replace it.
+// The copy is taken before this returns.
+function refresh(request, response) {
+  if (!keepable(response)) return undefined;
+  if (request.mode !== 'navigate') return store(request, response.clone());
+  const type = response.headers.get('Content-Type') || '';
+  return type.includes('text/html') ? store('./', response.clone()) : undefined;
+}
 
 async function precache() {
   const cache = await caches.open(CACHE);
@@ -62,7 +74,7 @@ function isShell(request, url) {
     request.mode === 'navigate' ||
     ['document', 'script', 'style', 'worker'].includes(request.destination) ||
     url.pathname.endsWith('/') ||
-    /\.(?:html|js|mjs|css)$/.test(url.pathname)
+    /\.(?:html|js|css)$/.test(url.pathname)
   );
 }
 

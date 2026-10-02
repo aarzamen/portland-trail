@@ -11,7 +11,7 @@ import { dirname, join } from 'node:path';
 import { after, before, describe, test } from 'node:test';
 import { fileURLToPath } from 'node:url';
 import vm from 'node:vm';
-import { versionImports } from '../scripts/build.mjs';
+import { build, versionImports } from '../scripts/build.mjs';
 
 const app = fileURLToPath(new URL('../', import.meta.url));
 const script = name => join(app, 'scripts', name);
@@ -60,8 +60,17 @@ async function listFiles(root, folder = '') {
 
 // A stand-in for the service worker global scope: just enough of caches, fetch and clients.
 const SCOPE = 'https://game.test/trail/';
+// The checked-in worker's cache: stamp 'dev', digest 'dev'.
+const DEV_CACHE = 'portland-trail-dev-dev';
 const key = request => new URL(typeof request === 'string' ? request : request.url, `${SCOPE}sw.js`).href;
-const reply = body => ({ status: 200, type: 'basic', ok: true, body, clone: () => reply(body) });
+const reply = (body, type = 'text/html; charset=utf-8') => ({
+  status: 200,
+  type: 'basic',
+  ok: true,
+  headers: new Headers({ 'Content-Type': type }),
+  body,
+  clone: () => reply(body, type),
+});
 
 /**
  * Runs a worker script in a fresh realm against the stand-ins above.
@@ -219,7 +228,7 @@ describe('build', () => {
   });
   after(() => remove(folder));
 
-  test('writes the page, the web manifest, the worker, the sources and the assets without asset manifests', async () => {
+  test('writes the page, manifest, worker, sources and assets, without asset manifests', async () => {
     assert.deepEqual((await readdir(out)).sort(), ['assets', 'index.html', 'manifest.webmanifest', 'src', 'sw.js']);
     for (const path of ['src/build-info.js', 'src/main.js', 'src/styles.css']) {
       assert.ok(await exists(join(out, path)), path);
@@ -259,10 +268,13 @@ describe('build', () => {
     assert.match(main, new RegExp(`from '\\./[\\w./-]+\\.js\\?v=${BUILD.sha}'`));
   });
 
-  test('names the worker cache portland-trail-<sha> and precaches the shell but no scene', async () => {
+  test('names the worker cache portland-trail-<sha>-<digest> and precaches the shell but no scene', async () => {
     const worker = startWorker(await readFile(join(out, 'sw.js'), 'utf8'));
     await lifecycle(worker.listeners.install);
-    assert.deepEqual([...worker.stores.keys()], [`portland-trail-${BUILD.sha}`]);
+    const names = [...worker.stores.keys()];
+    assert.equal(names.length, 1);
+    assert.ok(names[0].startsWith(`portland-trail-${BUILD.sha}-`), names[0]);
+    assert.match(names[0], /-[0-9a-f]{10}$/, 'a short hex digest follows the sha');
     const shell = [
       './',
       './index.html',
@@ -307,6 +319,43 @@ describe('build', () => {
     assert.match(result.output, /notes\.txt/);
     assert.equal(await readFile(join(scratch, 'notes.txt'), 'utf8'), 'keep me');
   });
+
+  test('the cache digest is stable for identical input and changes with one byte of a scene', async t => {
+    // A small app of its own, outside any repository, so that nothing else can change between the builds.
+    const scratch = await temporary('build-digest');
+    t.after(() => remove(scratch));
+    const root = join(scratch, 'app');
+    await writeFiles(root, {
+      'package.json': '{ "version": "9.9.9" }',
+      'index.html':
+        '<link rel="stylesheet" href="./src/styles.css" />\n<script type="module" src="./src/main.js"></script>\n',
+      'manifest.webmanifest': '{}',
+      'sw.js': await readFile(join(app, 'sw.js'), 'utf8'),
+      'src/main.js': "import './other.js';",
+      'src/other.js': 'export {};',
+      'src/styles.css': 'body {}',
+      'assets/icons/icon-192.png': 'icon',
+      'assets/scenes/road.webp': 'scene A',
+    });
+    const workerOf = async name => readFile(join(scratch, name, 'sw.js'), 'utf8');
+    const cacheOf = async name => {
+      const worker = startWorker(await workerOf(name));
+      await lifecycle(worker.listeners.install);
+      return [...worker.stores.keys()][0];
+    };
+
+    await build({ root, out: join(scratch, 'one') });
+    await build({ root, out: join(scratch, 'two') });
+    assert.equal(await workerOf('two'), await workerOf('one'), 'identical input, identical worker');
+    assert.match(await cacheOf('one'), /^portland-trail-nogit-[0-9a-f]{10}$/);
+
+    await writeFile(join(root, 'assets/scenes/road.webp'), 'scene B');
+    await build({ root, out: join(scratch, 'three') });
+    assert.notEqual(await cacheOf('three'), await cacheOf('one'), 'a changed scene changes the cache name');
+    const withoutDigest = text => text.replace(/^const DIGEST = .*$/m, '');
+    assert.notEqual(await workerOf('three'), await workerOf('one'), 'so the browser installs a new worker');
+    assert.equal(withoutDigest(await workerOf('three')), withoutDigest(await workerOf('one')), 'only the digest moved');
+  });
 });
 
 describe('service worker', () => {
@@ -315,20 +364,19 @@ describe('service worker', () => {
     source = await readFile(join(app, 'sw.js'), 'utf8');
   });
 
-  test('as checked in it is valid on its own: stamp dev, nothing to precache', async () => {
+  test('as checked in it is valid on its own: stamp and digest dev, nothing to precache', async () => {
     const worker = startWorker(source);
     await lifecycle(worker.listeners.install);
-    assert.deepEqual([...worker.stores.keys()], ['portland-trail-dev']);
+    assert.deepEqual([...worker.stores.keys()], [DEV_CACHE]);
     assert.deepEqual(worker.precached, []);
   });
 
-  test('activation deletes older portland-trail caches only and takes control', async () => {
+  test('activation deletes every other portland-trail cache, same sha included, and takes control', async () => {
     const worker = startWorker(source);
-    for (const name of ['portland-trail-0123abc', 'portland-trail-dev', 'another-app']) {
-      worker.stores.set(name, new Map());
-    }
+    const others = ['portland-trail-0123abc', 'portland-trail-0123abc-0123456789', 'portland-trail-dev-0123456789'];
+    for (const name of [...others, DEV_CACHE, 'another-app']) worker.stores.set(name, new Map());
     await lifecycle(worker.listeners.activate);
-    assert.deepEqual([...worker.stores.keys()].sort(), ['another-app', 'portland-trail-dev']);
+    assert.deepEqual([...worker.stores.keys()].sort(), ['another-app', DEV_CACHE]);
     assert.equal(worker.claimed, true);
   });
 
@@ -339,7 +387,7 @@ describe('service worker', () => {
       fetched.push(key(request));
       return key(request).includes('missing') ? { status: 404, type: 'basic', ok: false } : reply('scene');
     };
-    worker.stores.set('portland-trail-dev', new Map([[`${SCOPE}assets/scenes/title-960.webp`, reply('already')]]));
+    worker.stores.set(DEV_CACHE, new Map([[`${SCOPE}assets/scenes/title-960.webp`, reply('already')]]));
     const urls = [
       './assets/scenes/road-960.webp',
       `${SCOPE}assets/scenes/title-960.webp`,
@@ -353,14 +401,14 @@ describe('service worker', () => {
       { type: 'scenes-cached', count: 2 },
     ]);
     assert.deepEqual(fetched.sort(), [`${SCOPE}assets/scenes/missing-960.webp`, `${SCOPE}assets/scenes/road-960.webp`]);
-    assert.equal(worker.stores.get('portland-trail-dev').get(`${SCOPE}assets/scenes/road-960.webp`).body, 'scene');
+    assert.equal(worker.stores.get(DEV_CACHE).get(`${SCOPE}assets/scenes/road-960.webp`).body, 'scene');
     await lifecycle(worker.listeners.message, { data: { type: 'something-else', urls } });
     assert.equal(worker.posted.length, 2, 'other messages are ignored');
   });
 
   test('pages, scripts and styles come from the network first; other files from the cache first', async () => {
     const worker = startWorker(source);
-    const store = () => worker.stores.get('portland-trail-dev');
+    const store = () => worker.stores.get(DEV_CACHE);
     const script = `${SCOPE}src/main.js?v=1`;
     let event = fetchEvent(worker, script, { destination: 'script' });
     assert.equal((await event.response).body, `network ${script}`);
@@ -382,7 +430,7 @@ describe('service worker', () => {
     assert.equal(await page.text(), 'redirected shell');
 
     let version = 1;
-    worker.network = async () => reply(`scene v${version++}`);
+    worker.network = async () => reply(`scene v${version++}`, 'image/webp');
     const scene = `${SCOPE}assets/scenes/road.webp`;
     event = fetchEvent(worker, scene, { destination: 'image' });
     assert.equal((await event.response).body, 'scene v1');
@@ -399,6 +447,25 @@ describe('service worker', () => {
     }
   });
 
+  test('navigations keep one page entry under ./ whatever their query, and only HTML replaces it', async () => {
+    const worker = startWorker(source);
+    for (const query of ['?seed=kale', '?seed=fern']) {
+      const event = fetchEvent(worker, `${SCOPE}${query}`, { mode: 'navigate', destination: 'document' });
+      assert.equal((await event.response).body, `network ${SCOPE}${query}`);
+      await event.settled;
+    }
+    const store = worker.stores.get(DEV_CACHE);
+    assert.deepEqual([...store.keys()], [SCOPE], 'one page entry');
+    assert.equal(store.get(SCOPE).body, `network ${SCOPE}?seed=fern`, 'holding the latest page');
+
+    worker.network = async request => reply(`image ${key(request)}`, 'image/webp');
+    const event = fetchEvent(worker, `${SCOPE}assets/scenes/road.webp`, { mode: 'navigate', destination: 'document' });
+    await event.response;
+    await event.settled;
+    assert.deepEqual([...store.keys()], [SCOPE]);
+    assert.equal(store.get(SCOPE).body, `network ${SCOPE}?seed=fern`, 'an image opened as a page leaves the shell');
+  });
+
   test('a network that takes longer than three seconds gives way to the cached copy', async () => {
     const timers = [];
     const worker = startWorker(source, {
@@ -406,7 +473,7 @@ describe('service worker', () => {
       clearTimeout() {},
     });
     const script = `${SCOPE}src/main.js`;
-    worker.stores.set('portland-trail-dev', new Map([[script, reply('cached')]]));
+    worker.stores.set(DEV_CACHE, new Map([[script, reply('cached')]]));
     worker.network = () => new Promise(() => {});
     const event = fetchEvent(worker, script, { destination: 'script' });
     let answered = false;

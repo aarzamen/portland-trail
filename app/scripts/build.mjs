@@ -1,12 +1,13 @@
 // Builds the static game into app/dist, or into --out <dir>: index.html, manifest.webmanifest, sw.js, src/**
 // and assets/** without the asset manifests (*.json). It writes the real build stamp into src/build-info.js
 // (mode 'build'), adds ?v=<sha> to the page's stylesheet and script and to every relative import, and writes
-// the stamp and the list of shell files into sw.js for offline play.
+// the stamp, a digest of every other built file and the list of shell files into sw.js for offline play.
 //
 //   node scripts/build.mjs [--out <dir>]
 //
 // The functions below are also used by serve.mjs and by tests/tooling.test.js.
 import { execFile } from 'node:child_process';
+import { createHash } from 'node:crypto';
 import { constants } from 'node:fs';
 import { copyFile, mkdir, readdir, readFile, realpath, rm, writeFile } from 'node:fs/promises';
 import { dirname, join, resolve } from 'node:path';
@@ -22,16 +23,16 @@ const PAGE_REFERENCES = ['./src/styles.css', './src/main.js'];
 // cached on first use or when the page asks for them.
 const SHELL_ASSET_FOLDERS = ['icons/', 'sprites/', 'fonts/'];
 
-/** The version in app/package.json. */
-export async function readVersion() {
-  return JSON.parse(await readFile(join(APP_ROOT, 'package.json'), 'utf8')).version;
+/** The version in the app's package.json. */
+export async function readVersion(root = APP_ROOT) {
+  return JSON.parse(await readFile(join(root, 'package.json'), 'utf8')).version;
 }
 
 /** Short commit, branch ('' when detached), commit date and dirty flag from Git, or null without Git. */
-export async function readGitStamp() {
+export async function readGitStamp(cwd = APP_ROOT) {
   // --no-optional-locks keeps `git status` from taking the index lock that a concurrent commit needs.
   const git = async (...args) => {
-    const options = { cwd: APP_ROOT, encoding: 'utf8', maxBuffer: 64 * 1024 * 1024 };
+    const options = { cwd, encoding: 'utf8', maxBuffer: 64 * 1024 * 1024 };
     return String((await run('git', ['--no-optional-locks', ...args], options)).stdout).trim();
   };
   try {
@@ -48,10 +49,10 @@ export async function readGitStamp() {
 }
 
 /** The stamp for a build. Without Git (or without a commit) the sha is 'nogit' and the date is the build date. */
-export async function readStamp(mode = 'build') {
+export async function readStamp(mode = 'build', root = APP_ROOT) {
   const today = new Date().toISOString().slice(0, 10);
-  const git = (await readGitStamp()) ?? { sha: 'nogit', branch: '', date: today, dirty: false };
-  return { version: await readVersion(), ...git, mode };
+  const git = (await readGitStamp(root)) ?? { sha: 'nogit', branch: '', date: today, dirty: false };
+  return { version: await readVersion(root), ...git, mode };
 }
 
 // A JavaScript string literal in single quotes, escaped by JSON.
@@ -68,7 +69,8 @@ export function stampLiteral(stamp) {
 
 /** The text of src/build-info.js for this stamp. */
 export function stampModule(stamp) {
-  return `// Generated build stamp; app/src/build-info.js holds the defaults.\nexport const BUILD = ${stampLiteral(stamp)};\n`;
+  const comment = '// Generated build stamp; app/src/build-info.js holds the defaults.';
+  return `${comment}\nexport const BUILD = ${stampLiteral(stamp)};\n`;
 }
 
 /** The stamp as the footer shows it: v0.2.0 · abc1234+ · main · 2026-10-01 (+ marks uncommitted changes). */
@@ -145,10 +147,22 @@ async function writeText(path, text) {
   await writeFile(path, text);
 }
 
-async function copy(path, target) {
-  await mkdir(dirname(join(target, path)), { recursive: true });
+async function copy(from, to) {
+  await mkdir(dirname(to), { recursive: true });
   // A copy-on-write clone where the file system offers one, a plain copy elsewhere.
-  await copyFile(join(APP_ROOT, path), join(target, path), constants.COPYFILE_FICLONE);
+  await copyFile(from, to, constants.COPYFILE_FICLONE);
+}
+
+/** A short hex digest of files under a folder: their paths and contents, in the order given. */
+async function digestFiles(folder, paths) {
+  const digest = createHash('sha256');
+  for (const path of paths) {
+    const content = createHash('sha256')
+      .update(await readFile(join(folder, path)))
+      .digest('hex');
+    digest.update(`${path}\0${content}\n`);
+  }
+  return digest.digest('hex').slice(0, 10);
 }
 
 // The output folder is deleted first, so it must be new, empty, or hold nothing but an earlier build.
@@ -183,46 +197,52 @@ function shellFiles(stamp, sourceFiles, assetFiles) {
     './index.html',
     './manifest.webmanifest',
     // Modules (and JSON imported as modules) are requested with ?v=, like the page's stylesheet.
-    ...sourceFiles.filter(path => /\.(?:js|mjs|json|css)$/.test(path)).map(path => `${url(`src/${path}`)}${query}`),
+    ...sourceFiles.filter(path => /\.(?:js|json|css)$/.test(path)).map(path => `${url(`src/${path}`)}${query}`),
     ...assetFiles
       .filter(path => SHELL_ASSET_FOLDERS.some(folder => path.startsWith(folder)))
       .map(path => url(`assets/${path}`)),
   ];
 }
 
-/** Builds the game into `out` and returns the stamp, the precache list and the number of files written. */
-export async function build({ out = join(APP_ROOT, 'dist') } = {}) {
+/**
+ * Builds the app in `root` (normally app/) into `out` and returns the stamp, the digest of the built files, the
+ * precache list and the number of files written.
+ */
+export async function build({ root = APP_ROOT, out = join(root, 'dist') } = {}) {
   const target = resolve(out);
   await assertReplaceable(target);
-  const stamp = await readStamp('build');
+  const stamp = await readStamp('build', root);
   await rm(target, { recursive: true, force: true });
   await mkdir(target, { recursive: true });
 
-  const page = await readFile(join(APP_ROOT, 'index.html'), 'utf8');
+  const page = await readFile(join(root, 'index.html'), 'utf8');
   await writeText(join(target, 'index.html'), versionPage(page, stamp.sha));
-  await copy('manifest.webmanifest', target);
-  for (const path of await listFiles(join(APP_ROOT, 'src'))) {
+  await copy(join(root, 'manifest.webmanifest'), join(target, 'manifest.webmanifest'));
+  for (const path of await listFiles(join(root, 'src'))) {
     if (path === 'build-info.js') continue;
     if (!path.endsWith('.js')) {
-      await copy(`src/${path}`, target);
+      await copy(join(root, 'src', path), join(target, 'src', path));
       continue;
     }
-    const source = await readFile(join(APP_ROOT, 'src', path), 'utf8');
+    const source = await readFile(join(root, 'src', path), 'utf8');
     await writeText(join(target, 'src', path), versionImports(source, stamp.sha));
   }
   await writeText(join(target, 'src/build-info.js'), stampModule(stamp));
-  for (const path of await listFiles(join(APP_ROOT, 'assets'))) {
-    if (!path.endsWith('.json')) await copy(`assets/${path}`, target);
+  for (const path of await listFiles(join(root, 'assets'))) {
+    if (!path.endsWith('.json')) await copy(join(root, 'assets', path), join(target, 'assets', path));
   }
 
+  // The worker is written last. Its cache is named by the sha and a digest of every other built file, so any
+  // changed file gives it new bytes (browsers then install it) and a cache of its own, even at the same commit.
+  const builtFiles = (await listFiles(target)).filter(path => path !== 'sw.js');
+  const digest = await digestFiles(target, builtFiles);
   const precache = shellFiles(stamp, await listFiles(join(target, 'src')), await listFiles(join(target, 'assets')));
-  const worker = await readFile(join(APP_ROOT, 'sw.js'), 'utf8');
-  const stamped = replaceLine(worker, /^const BUILD = \{.*\};$/m, `const BUILD = ${stampLiteral(stamp)};`);
-  await writeText(
-    join(target, 'sw.js'),
-    replaceLine(stamped, /^const PRECACHE = \[\];$/m, `const PRECACHE = ${JSON.stringify(precache, null, 2)};`),
-  );
-  return { out: target, stamp, precache, files: (await listFiles(target)).length };
+  let worker = await readFile(join(root, 'sw.js'), 'utf8');
+  worker = replaceLine(worker, /^const BUILD = \{.*\};$/m, `const BUILD = ${stampLiteral(stamp)};`);
+  worker = replaceLine(worker, /^const DIGEST = '[^']*';$/m, `const DIGEST = '${digest}';`);
+  worker = replaceLine(worker, /^const PRECACHE = \[\];$/m, `const PRECACHE = ${JSON.stringify(precache, null, 2)};`);
+  await writeText(join(target, 'sw.js'), worker);
+  return { out: target, stamp, digest, precache, files: (await listFiles(target)).length };
 }
 
 const invoked = process.argv[1] ? await realpath(process.argv[1]).catch(() => process.argv[1]) : '';
@@ -232,7 +252,8 @@ if (invoked === fileURLToPath(import.meta.url)) {
     const result = await build({ out: values.out });
     console.log(
       `Built The Portland Trail ${describeStamp(result.stamp)} in ${result.out}: ` +
-        `${result.files} files, ${result.precache.length} precached for offline play.`,
+        `${result.files} files, ${result.precache.length} precached for offline play ` +
+        `(cache portland-trail-${result.stamp.sha}-${result.digest}).`,
     );
   } catch (error) {
     console.error(`Build failed: ${error.message}`);
