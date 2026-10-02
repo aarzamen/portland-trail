@@ -11,6 +11,7 @@ export {
   paceOptions,
   rationOptions,
   recommendSupplies,
+  routeStops,
   shareText,
   shopItems,
   statusOf,

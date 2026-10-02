@@ -16,6 +16,7 @@ import {
   rationOptions,
   recommendSupplies,
   regionAt,
+  routeStops,
   seedFromText,
   shopItems,
   statusOf,
@@ -27,16 +28,16 @@ import { confirmDialog, encounterDialog, memorialDialog } from './ui/dialogs.js'
 import { drawScreen, forget, patchRegions } from './ui/render.js';
 import * as sound from './ui/sound.js';
 import { PROBLEMS, SAVE_KEY, loadJourney, readSettings, saveJourney } from './ui/storage.js';
-import { TRIP_SHELL, tripRegions } from './ui/trip-views.js';
+import { TRIP_SHELL, sceneIdOf, tripRegions } from './ui/trip-views.js';
 import {
-  PHONE_ART,
   SUPPLY_IDS,
   backgroundView,
   crewView,
+  formatNumber,
+  phoneArt,
   sceneUrl,
   stampText,
   supplyLabel,
-  formatNumber,
   titleView,
 } from './ui/views.js';
 
@@ -56,22 +57,6 @@ const eventDialog = /** @type {HTMLDialogElement} */ (document.querySelector('#e
 const memorialElement = /** @type {HTMLDialogElement} */ (document.querySelector('#memorial-dialog'));
 const confirmElement = /** @type {HTMLDialogElement} */ (document.querySelector('#confirm-dialog'));
 
-// The stops as the route list shows them.
-const STOPS = LOCATIONS.map(stop => ({
-  id: stop.id,
-  name: stop.name,
-  shortName: stop.shortName,
-  miles: stop.miles,
-  kind:
-    stop.miles >= RULES.goalMiles
-      ? 'Destination'
-      : stop.activities.includes('shop')
-        ? 'Supplies'
-        : stop.activities.includes('rest')
-          ? 'Rest stop'
-          : 'Explore',
-}));
-
 // --- What the interface remembers ------------------------------------------------------------------------
 
 /** @type {any} the journey in play, or on file before it is resumed */
@@ -88,6 +73,8 @@ let cue = null;
 let routeOpen = false;
 /** @type {Record<string, number>} the quantity chosen in each shop row */
 const shopQuantity = {};
+/** @type {null | { id: string, text: string }} what is typed in a quantity field while it has focus */
+let quantityDraft = null;
 /** @type {null | { before: any, notes: string[], started: number, focus: string | null }} */
 let playback = null;
 /**
@@ -139,10 +126,17 @@ function drawChrome() {
 
 // --- Saving ----------------------------------------------------------------------------------------------
 
+/** Save, and keep the banner true: a save that works ends every storage problem, one that fails is reported. */
 function persist() {
-  if (saveJourney(game, lastLeg)) problems.delete(PROBLEMS.unsaved);
-  else problems.add(PROBLEMS.unsaved);
+  if (saveJourney(game, lastLeg)) {
+    for (const problem of Object.values(PROBLEMS)) problems.delete(problem);
+  } else {
+    problems.add(PROBLEMS.unsaved);
+  }
 }
+
+/** True when a traveler is dead, as the engine sees it. */
+const isDead = member => statusOf(member).id === 'dead';
 
 // --- Drawing ---------------------------------------------------------------------------------------------
 
@@ -159,7 +153,9 @@ function shopModel(state) {
     let reason = '';
     if (item.canBuy < 1) reason = transition(state, { type: 'purchase', cart: { [item.id]: 1 } }).error ?? '';
     else if (quantity < 1) reason = 'Choose how many to buy.';
-    return { ...item, qty: quantity, buyEnabled: quantity >= 1, reason };
+    // While its field has focus, a quantity shows exactly what was typed, even an empty field.
+    const text = quantityDraft?.id === item.id ? quantityDraft.text : String(quantity);
+    return { ...item, qty: quantity, qtyText: text, buyEnabled: quantity >= 1, reason };
   });
   const probe = transition(state, { type: 'autoPurchase' });
   return { items, plan: recommendSupplies(state), autoBuy: { enabled: !probe.error, reason: probe.error ?? '' } };
@@ -196,7 +192,7 @@ function tripModel() {
       band: statusOf({ health: member.health, sick: false }).id,
       epitaph: member.epitaph,
     })),
-    stops: STOPS,
+    stops: routeStops(state),
     goal: RULES.goalMiles,
   };
 }
@@ -358,6 +354,8 @@ function carve() {
   const current = memorials[0];
   const field = memorialElement.querySelector('[data-key="epitaph"]');
   const text = field instanceof HTMLInputElement ? field.value : '';
+  // A refused epitaph stays in the field, to be corrected.
+  current.epitaph = text;
   if (dispatch({ type: 'setEpitaph', memberId: current.memberId, text })) memorialElement.close();
 }
 
@@ -460,7 +458,7 @@ function dispatch(action) {
       (before.distance !== game.distance || ['rest', 'forage', 'talk', 'meal', 'resolveEvent'].includes(action.type)),
   };
   persist();
-  const fallen = game.party.filter((member, index) => member.health === 0 && before.party[index].health > 0);
+  const fallen = game.party.filter((member, index) => isDead(member) && !isDead(before.party[index]));
   soundsFor(before, game, action, fallen);
   if (action.type === 'resolveEvent') {
     encounter = { ...encounter, step: 'outcome', results: result.notes, fallen: fallen.map(memorialFor), error: '' };
@@ -478,15 +476,6 @@ function dispatch(action) {
 
 // --- The drive (B7, E3) ----------------------------------------------------------------------------------
 
-/** The scene the journey shows now, for this device. */
-function sceneFor(state) {
-  const stop = currentStop(state);
-  let id = regionAt(state.distance).scene;
-  if (state.phase === 'ended') id = state.outcome === 'won' ? 'victory' : 'loss';
-  else if (stop) id = stop.scene;
-  return sceneUrl(id, matchMedia(PHONE_ART).matches);
-}
-
 function preload(url) {
   const image = new Image();
   image.decoding = 'async';
@@ -497,8 +486,8 @@ function startDrive(before, previousNotes) {
   const active = document.activeElement;
   const focus = active instanceof HTMLElement ? active.getAttribute('data-key') : null;
   playback = { before, notes: previousNotes, started: performance.now(), focus };
-  preload(sceneFor(game));
-  if (game.pendingEvent) preload(sceneUrl(eventOf(game.pendingEvent.id).scene, matchMedia(PHONE_ART).matches));
+  preload(sceneUrl(sceneIdOf(game, currentStop(game), regionAt(game.distance)), phoneArt()));
+  if (game.pendingEvent) preload(sceneUrl(eventOf(game.pendingEvent.id).scene, phoneArt()));
   sound.play('drive');
   draw();
   requestAnimationFrame(stepDrive);
@@ -705,10 +694,14 @@ function onInput(event) {
     }
   } else if (key.startsWith('qty:') && game) {
     const id = key.slice(4);
-    const row = shopItems(game).find(item => item.id === id);
-    const typed = Number.parseInt(field.value.replace(/\D/g, ''), 10);
-    shopQuantity[id] = Math.max(0, Math.min(Number.isNaN(typed) ? 0 : typed, row?.canBuy ?? 0));
-    if (field.value !== String(shopQuantity[id]) && field.value !== '') field.value = String(shopQuantity[id]);
+    const most = shopItems(game).find(item => item.id === id)?.canBuy ?? 0;
+    const digits = field.value.replace(/\D/g, '');
+    const typed = digits === '' ? 0 : Number.parseInt(digits, 10);
+    shopQuantity[id] = Math.min(typed, most);
+    // The field keeps what was typed (an empty field stays empty); only a number past canBuy is replaced.
+    quantityDraft = { id, text: typed > most ? String(most) : digits };
+    // The region may draw the same HTML as before (6 typed over 6), so the field itself is corrected here.
+    if (field.value !== quantityDraft.text) field.value = quantityDraft.text;
     draw();
   }
 }
@@ -740,6 +733,21 @@ function onFocusIn(event) {
   selectedOnFocus = field;
 }
 
+// A quantity field shows its number again once it loses focus. The draw waits until focus has moved, so the
+// control that receives it is kept.
+function onFocusOut(event) {
+  const field = event.target;
+  if (!(field instanceof HTMLInputElement) || !quantityDraft) return;
+  const key = `qty:${quantityDraft.id}`;
+  if (field.getAttribute('data-key') !== key) return;
+  // A redraw replaces the field and its focus moves to the new one: that is not the player leaving it.
+  setTimeout(() => {
+    if (!quantityDraft || document.activeElement?.getAttribute('data-key') === key) return;
+    quantityDraft = null;
+    if (screen === 'game') draw();
+  }, 0);
+}
+
 function onMouseUp(event) {
   if (event.target === selectedOnFocus) event.preventDefault();
   selectedOnFocus = null;
@@ -764,6 +772,7 @@ document.addEventListener('input', onInput);
 document.addEventListener('change', onChange);
 document.addEventListener('keydown', onKeydown);
 document.addEventListener('focusin', onFocusIn);
+document.addEventListener('focusout', onFocusOut);
 document.addEventListener('mouseup', onMouseUp);
 document.addEventListener('submit', onSubmit);
 document.addEventListener('toggle', onToggle, true);
@@ -788,9 +797,7 @@ memorialElement.addEventListener('close', () => {
 // Another tab changed the save: the title's Resume follows it.
 window.addEventListener('storage', event => {
   if (event.key !== SAVE_KEY || screen !== 'title') return;
-  const loaded = loadJourney();
-  game = loaded.game;
-  lastLeg = loaded.lastLeg;
+  adopt(loadJourney());
   draw();
 });
 
@@ -798,7 +805,7 @@ window.addEventListener('storage', event => {
 
 /** Every scene the journey can show, for this device. */
 function sceneUrls() {
-  const small = matchMedia(PHONE_ART).matches;
+  const small = phoneArt();
   const ids = new Set(['title', 'departure', 'victory', 'loss']);
   for (const entry of [...LOCATIONS, ...REGIONS, ...EVENTS]) ids.add(entry.scene);
   return [...ids].map(id => new URL(sceneUrl(id, small), document.baseURI).href);
@@ -839,11 +846,17 @@ async function setUpOffline() {
 
 // --- Start -----------------------------------------------------------------------------------------------
 
-const loaded = loadJourney();
-game = loaded.game;
-lastLeg = loaded.lastLeg;
-if (loaded.problem) problems.add(loaded.problem);
-notes = game?.journal.length ? [game.journal.at(-1).text] : [];
+/** Take the journey on file as the current one, with its receipt, its latest note and any storage problem. */
+function adopt(loaded) {
+  game = loaded.game;
+  lastLeg = loaded.lastLeg;
+  notes = game?.journal.length ? [game.journal.at(-1).text] : [];
+  problems.delete(PROBLEMS.unreadable);
+  problems.delete(PROBLEMS.unavailable);
+  if (loaded.problem) problems.add(loaded.problem);
+}
+
+adopt(loadJourney());
 sound.setEnabled(readSettings().sound);
 const stamp = document.querySelector('#build-stamp');
 if (stamp) stamp.textContent = stampText(BUILD);

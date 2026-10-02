@@ -67,6 +67,19 @@ export function tripRegions(model) {
 }
 
 const ended = model => model.state.phase === 'ended' && !model.playing;
+
+/**
+ * The scene a journey shows: the ending's art, the stop's art, or the road's.
+ * @param {{ phase: string, outcome: string | null }} state
+ * @param {{ scene: string } | null} stop     currentStop(state)
+ * @param {{ scene: string }} region           regionAt(state.distance)
+ */
+export function sceneIdOf(state, stop, region) {
+  if (state.phase === 'ended') return state.outcome === 'won' ? 'victory' : 'loss';
+  return stop ? stop.scene : region.scene;
+}
+
+const STOP_KINDS = { shop: 'Supplies', rest: 'Rest stop', explore: 'Explore', destination: 'Destination' };
 const pad = (value, length) => String(Math.floor(value)).padStart(length, '0');
 
 // --- Top line --------------------------------------------------------------------------------------------
@@ -103,7 +116,7 @@ function roadStage(model) {
   const classes = `road-stage region-${escapeHtml(region.id)} light-${light} weather-${weather}`;
   const label = `${escapeHtml(region.name)}, ${escapeHtml(model.weather)}`;
   return `<div class="${classes}${model.playing ? ' is-driving' : ''}" aria-label="${label}">
-    ${picture(region.scene, '', 'road-backdrop')}
+    ${picture(sceneIdOf(state, null, region), '', 'road-backdrop')}
     <div class="road-clouds" aria-hidden="true"></div>
     <div class="road-light"></div>
     <div class="road-mist"></div>
@@ -141,7 +154,7 @@ function sceneText(model) {
   if (ended(model)) {
     const won = summary.outcome === 'won';
     return {
-      art: won ? 'victory' : 'loss',
+      art: sceneIdOf(state, stop, model.region),
       alt: won ? 'The van rolls into Portland' : 'The end of the road',
       overline: 'Journey complete',
       heading: summary.heading,
@@ -151,7 +164,7 @@ function sceneText(model) {
   if (state.phase === 'shop') {
     const start = state.distance === 0;
     return {
-      art: stop.scene,
+      art: sceneIdOf(state, stop, model.region),
       alt: start ? 'The van loaded outside the co-op' : `The shop at ${stop.name}`,
       overline: 'Supply stop',
       heading: start ? 'Stock up before departure.' : `Supplies at ${stop.shortName}`,
@@ -162,7 +175,7 @@ function sceneText(model) {
   }
   if (state.phase === 'location') {
     return {
-      art: stop.scene,
+      art: sceneIdOf(state, stop, model.region),
       alt: stop.name,
       overline: 'You have arrived',
       heading: stop.name,
@@ -302,10 +315,9 @@ function route(model) {
     .join('');
   const list = stops
     .map(stop => {
-      const here = stop.miles === mile && state.phase !== 'travel' ? ' is-current' : '';
-      const where = stop.miles < mile ? ' is-passed' : here;
+      const where = stop.passed ? ' is-passed' : stop.current ? ' is-current' : '';
       return `<li class="route-stop${where}"><span>${formatNumber(stop.miles)} mi</span>
-        <strong>${escapeHtml(stop.shortName)}</strong><small>${escapeHtml(stop.kind)}</small></li>`;
+        <strong>${escapeHtml(stop.shortName)}</strong><small>${STOP_KINDS[stop.kind]}</small></li>`;
     })
     .join('');
   const open = model.routeOpen ? ' open' : '';
@@ -436,7 +448,7 @@ function shopRow(row) {
       <div class="stepper" role="group" aria-label="Quantity of ${name}">
         <button type="button" class="${step}" data-key="less:${id}" aria-label="One fewer">−</button>
         <input type="text" inputmode="numeric" pattern="[0-9]*" class="stepper-input" data-key="qty:${id}"
-          value="${row.qty}" aria-label="Quantity of ${name} to buy" autocomplete="off" />
+          value="${escapeHtml(row.qtyText)}" aria-label="Quantity of ${name} to buy" autocomplete="off" />
         <button type="button" class="${step}" data-key="more:${id}" aria-label="One more">+</button>
         <button type="button" class="${step} stepper-max" data-key="max:${id}"
           aria-label="As many as possible">Max</button>

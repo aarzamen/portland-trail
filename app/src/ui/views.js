@@ -27,6 +27,9 @@ export function signed(value) {
 // Phones and phones turned sideways get the 960-pixel scene art.
 export const PHONE_ART = '(max-width: 760px), (max-height: 500px) and (pointer: coarse)';
 
+/** True on a device that gets the 960-pixel scene art. */
+export const phoneArt = () => matchMedia(PHONE_ART).matches;
+
 /** The URL of a scene's art: the full file or the 960-pixel one. */
 export function sceneUrl(sceneId, small = false) {
   return `./assets/scenes/${sceneId}${small ? '-960' : ''}.webp`;

@@ -14,6 +14,7 @@ import {
   priceOf,
   professionById,
   roundFood,
+  stopAt,
 } from './state.js';
 
 /**
@@ -83,6 +84,9 @@ const signed = amount => (amount < 0 ? `−${-amount}` : `+${amount}`);
 
 // --- The road ahead ----------------------------------------------------------
 
+/** True when this stop sells supplies. */
+const sells = stop => stop.activities.includes('shop');
+
 /** The days and fuel one leg takes at a pace: full days, then a short last day (D4). */
 function legCost(miles, pace) {
   const fullDays = Math.floor(miles / pace.miles);
@@ -108,7 +112,7 @@ function stretchAhead(state) {
     stretch.fuel += leg.fuel;
     stretch.destination = stop;
     from = stop.miles;
-    if (stop.activities.includes('shop')) break;
+    if (sells(stop)) break;
   }
   return stretch;
 }
@@ -228,7 +232,7 @@ export function forecast(state) {
   const next = nextStop(state.distance);
   const stretch = stretchAhead(state);
   const food = foodFor(state, stretch.days);
-  const shop = stretch.destination?.activities.includes('shop') ? stretch.destination : null;
+  const shop = stretch.destination && sells(stretch.destination) ? stretch.destination : null;
   return {
     today: drivePlan(state),
     range: Math.floor(state.inventory.fuel * pace.milesPerFuel),
@@ -241,6 +245,32 @@ export function forecast(state) {
       food: Math.max(0, Math.ceil(roundFood(food - state.inventory.food))),
     },
   };
+}
+
+/**
+ * Every stop on the route, in order, as the route list shows it: what kind of stop it is (a shop, a rest
+ * stop, somewhere to explore, or Portland), whether the van has passed it and whether the van is there.
+ * @param {State} state
+ * @returns {{ id: string, name: string, shortName: string, miles: number,
+ *   kind: 'shop'|'rest'|'explore'|'destination', passed: boolean, current: boolean }[]}
+ */
+export function routeStops(state) {
+  const here = state.phase === 'travel' ? null : stopAt(state.distance);
+  return LOCATIONS.map(stop => {
+    let kind = 'explore';
+    if (stop.miles >= RULES.goalMiles) kind = 'destination';
+    else if (sells(stop)) kind = 'shop';
+    else if (stop.activities.includes('rest')) kind = 'rest';
+    return {
+      id: stop.id,
+      name: stop.name,
+      shortName: stop.shortName,
+      miles: stop.miles,
+      kind: /** @type {'shop'|'rest'|'explore'|'destination'} */ (kind),
+      passed: stop.miles < state.distance,
+      current: here?.id === stop.id,
+    };
+  });
 }
 
 // --- The crew, the shop and the settings -------------------------------------

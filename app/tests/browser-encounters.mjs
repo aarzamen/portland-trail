@@ -39,6 +39,14 @@ async function pendingCannotBeDismissed() {
       () => false,
     );
   check(reopened, 'Escape twice leaves the encounter open or reopens it (B1)');
+  await page.evaluate(() => document.querySelector('#event-dialog').close());
+  const back = await page
+    .waitForFunction(() => document.querySelector('#event-dialog').open, null, { timeout: 2000 })
+    .then(
+      () => true,
+      () => false,
+    );
+  check(back, 'an encounter closed by script reopens while it is pending (B1)');
 
   const repair = option(game, 'event:repair');
   const button = page.locator('#event-dialog [data-key="event:repair"]');
@@ -104,6 +112,11 @@ async function memorial(carve) {
   check((await field.inputValue()) === fallen.epitaph, 'the epitaph field holds the default');
   if (carve) {
     const words = '<b>Here lies</b> a "legend"';
+    await field.fill('   ');
+    await page.locator('#memorial-dialog [data-key="carve"]').click();
+    check(await dialogOpen(page, 'memorial-dialog'), 'a refused epitaph keeps the memorial open');
+    check((await field.inputValue()) === '   ', 'a refused epitaph keeps what was typed', await field.inputValue());
+    check(await page.locator('#memorial-dialog .dialog-error').isVisible(), 'a refused epitaph says why');
     await field.fill(words);
     await page.locator('#memorial-dialog [data-key="carve"]').click();
     const saved = (await readGame(page)).party.find(member => member.id === fallen.id);
@@ -129,6 +142,8 @@ async function typedText() {
   const full = event('bad_weather').description;
   {
     const { context, page } = await openJourney(browser, game, { motion: 'no-preference' });
+    // Wait until typing has begun, then read it before it ends.
+    await page.waitForFunction(() => document.querySelector('#event-dialog [data-typed]')?.textContent.length > 0);
     const typed = await page.locator('#event-dialog [data-typed]').innerText();
     check(typed.length < full.length, 'with motion the encounter text types itself out', typed);
     await page.locator('#event-dialog .event-text').click();

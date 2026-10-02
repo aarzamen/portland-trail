@@ -157,6 +157,23 @@ async function flowAt(width) {
     });
     game = after;
 
+    // Clearing a quantity with Backspace and typing digits on the keyboard gives exactly those digits.
+    const box = page.locator('[data-key="qty:food"]');
+    await box.click();
+    await page.keyboard.press('End');
+    for (let press = 0; press < 4; press += 1) await page.keyboard.press('Backspace');
+    check((await box.inputValue()) === '', at('a cleared quantity stays empty while typing'), await box.inputValue());
+    await page.keyboard.type('12');
+    check((await box.inputValue()) === '12', at('typed digits are the quantity'), await box.inputValue());
+    check((await page.locator('[data-key="buy:food"]').innerText()).includes('Buy 12'), at('Buy follows the typing'));
+    await page.locator('[data-key="buy:food"]').click();
+    after = await readGame(page);
+    check(after.inventory.food === game.inventory.food + 12, at('Buy after typing adds what was typed'), {
+      before: game.inventory.food,
+      after: after.inventory.food,
+    });
+    game = after;
+
     const fuel = row('fuel');
     await page.locator('[data-key="max:fuel"]').click();
     check((await quantity(page, 'fuel')) === fuel.canBuy, at('Max fills the quantity to canBuy'));
@@ -305,6 +322,8 @@ async function storage() {
     check(await page.locator('#banner').isVisible(), `unreadable ${key}: the banner says so`);
     check((await page.locator('[data-key="resume"]').count()) === 0, `unreadable ${key}: no Resume`);
     check((await page.evaluate(name => localStorage.getItem(name), key)) === raw, `unreadable ${key}: left untouched`);
+    await packVan(page);
+    check(await page.locator('#banner').isHidden(), `unreadable ${key}: the banner goes once a new journey saves`);
     await context.close();
   }
 
@@ -324,7 +343,8 @@ async function storage() {
     await page.locator('[data-key="travel"]').click();
     const mile = Number(await page.locator('[data-region="route"] [data-mile]').getAttribute('data-mile'));
     check(mile > 0, 'play continues without a save', mile);
-    check((await page.locator('#banner').count()) === 1, 'the failure is reported once');
+    const said = ((await page.locator('body').innerText()).match(/could not save/gi) ?? []).length;
+    check(said === 1, 'the failure is reported once, after two failed saves', said);
     check(errors.length === 0, 'no browser errors without storage', errors);
     await context.close();
   }
