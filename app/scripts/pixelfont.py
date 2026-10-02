@@ -1,9 +1,9 @@
 # /// script
 # requires-python = ">=3.10"
 # dependencies = [
-#     "fonttools",
-#     "brotli",
-#     "pillow",
+#     "fonttools==4.66.1",
+#     "brotli==1.2.0",
+#     "pillow==12.3.0",
 # ]
 # ///
 """Portland Pixel: the game's display typeface, built from a text glyph sheet.

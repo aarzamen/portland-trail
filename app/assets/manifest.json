@@ -1,119 +1,133 @@
 {
-  "version": 1,
-  "note": "Reviewed static scene copies and extracted concepts. Not animation or strict fixed-grid pixel art. Originals unchanged.",
+  "version": 2,
+  "tools": {
+    "pillow": "12.3.0",
+    "fonttools": "4.66.1",
+    "brotli": "1.2.0"
+  },
   "assets": [
     {
-      "file": "title.jpg",
-      "source": "images/the_portland_trail_00017.jpg",
-      "source_sha256": "75afc04e73755c5c401cfe1aea5156bb07049a3ce6e54160c4fc1c1a37901cff",
+      "file": "fonts/portland-pixel.woff2",
+      "source": "app/scripts/pixel-font.txt",
+      "source_sha256": "850e28fe788fecd7180ae584167c5ec1bb32b7ee3bce4bdfdf4090dea67938e0",
+      "crop": null,
+      "repairs": [],
+      "width": null,
+      "height": null,
+      "bytes": 1732,
+      "sha256": "26e6ba4909e139f4da9236c661e4a828fb016bd2e9f9f9fab73ea9fa1bf70ddb"
+    },
+    {
+      "file": "icons/apple-touch-icon.png",
+      "source": "docs/handoff/graphics-v2/app-icon.png",
+      "source_sha256": "c586258084c1fe9d236155475d7c03106f65b790cd0f501e537c83aff74eafe0",
+      "crop": null,
+      "repairs": [],
+      "width": 180,
+      "height": 180,
+      "bytes": 34351,
+      "sha256": "33fa118625a40c59e7626b8086dc62e3e67fe0bf02c6e04eddaa0ffdd9d9fed8"
+    },
+    {
+      "file": "icons/favicon-16.png",
+      "source": "docs/handoff/graphics-v2/app-icon.png",
+      "source_sha256": "c586258084c1fe9d236155475d7c03106f65b790cd0f501e537c83aff74eafe0",
+      "crop": null,
+      "repairs": [],
+      "width": 16,
+      "height": 16,
+      "bytes": 590,
+      "sha256": "8b5a58d0b88262b3182e74e498977364e04165a70719d406f68e047e69d702b0"
+    },
+    {
+      "file": "icons/favicon-32.png",
+      "source": "docs/handoff/graphics-v2/app-icon.png",
+      "source_sha256": "c586258084c1fe9d236155475d7c03106f65b790cd0f501e537c83aff74eafe0",
+      "crop": null,
+      "repairs": [],
+      "width": 32,
+      "height": 32,
+      "bytes": 1705,
+      "sha256": "26f9047393c017c41471b4c775a95cc454033959997ec2a63c9eeba91c906e35"
+    },
+    {
+      "file": "icons/icon-192.png",
+      "source": "docs/handoff/graphics-v2/app-icon.png",
+      "source_sha256": "c586258084c1fe9d236155475d7c03106f65b790cd0f501e537c83aff74eafe0",
+      "crop": null,
+      "repairs": [],
+      "width": 192,
+      "height": 192,
+      "bytes": 38467,
+      "sha256": "962fbb8e8b3bce56ca50e9eabcdac5afe619a88799cf33b1ba8554568045d36a"
+    },
+    {
+      "file": "icons/icon-512.png",
+      "source": "docs/handoff/graphics-v2/app-icon.png",
+      "source_sha256": "c586258084c1fe9d236155475d7c03106f65b790cd0f501e537c83aff74eafe0",
+      "crop": null,
+      "repairs": [],
+      "width": 512,
+      "height": 512,
+      "bytes": 221569,
+      "sha256": "9774667602affcd39a4e92268858a57826848e61e1accf79c6eefd2e305e9348"
+    },
+    {
+      "file": "scenes/bike-convoy-960.webp",
+      "source": "images/the_portland_trail_00006.jpg",
+      "source_sha256": "460e41d8021e7dfe31c5337943309c2085c5649f9c8f438aee282a96c0f7b159",
       "crop": [
-        0,
-        235,
+        270,
+        250,
         1024,
-        965
+        900
       ],
-      "width": 1024,
-      "height": 730,
-      "sha256": "7d026d60d46d4ece7b466b080653ba6460ea2fb0150d15a9cfd348bdc9cdca83"
+      "repairs": [],
+      "width": 754,
+      "height": 650,
+      "bytes": 46932,
+      "sha256": "d2ea58f2f4dbbe6cc4d44c7f5b8f48de9d2e5a8b8acf7433dd8f64a74e7ce238"
     },
     {
-      "file": "travel.jpg",
-      "source": "images/the_portland_trail_00008.jpg",
-      "source_sha256": "0be1eacf70dbf377b73141e0959c1983ff6ab4d66b5b4504d7a6b2345ca47edc",
+      "file": "scenes/bike-convoy.webp",
+      "source": "images/the_portland_trail_00006.jpg",
+      "source_sha256": "460e41d8021e7dfe31c5337943309c2085c5649f9c8f438aee282a96c0f7b159",
       "crop": [
-        0,
-        340,
+        270,
+        250,
         1024,
-        940
+        900
       ],
-      "width": 1024,
-      "height": 600,
-      "sha256": "fba3193a38cc34b04e7b45e6a65f445d301c6971fbac4d070f6c5206e5dee160"
+      "repairs": [],
+      "width": 754,
+      "height": 650,
+      "bytes": 54304,
+      "sha256": "23f21188f11a8e57d1b81d01c16f2f07b2e5f319a809bdcc318fbf55fd26cbc2"
     },
     {
-      "file": "departure.jpg",
-      "source": "images/the_portland_trail_00005.jpg",
-      "source_sha256": "63ed9716f4336a87b0c4e17dfe9b8bd1aea5bfe380fe8c3ec2cb3f4b3624f999",
+      "file": "scenes/bookshop-960.webp",
+      "source": "docs/handoff/graphics-v2/bookshop.png",
+      "source_sha256": "66434f6823d7d8dff2bd3070aabe3c83c76c6367570171177550126accf83670",
       "crop": null,
-      "width": 1024,
-      "height": 1024,
-      "sha256": "3628ce68243611ef25ad08ac444880143f65ee1b05e484975c84b35897ada118"
+      "repairs": [],
+      "width": 960,
+      "height": 640,
+      "bytes": 193270,
+      "sha256": "6b93cd000330481486ba6ea92a092c64e2834e2860d4bd69435e751b7da3d992"
     },
     {
-      "file": "rest-stop.jpg",
-      "source": "images/the_portland_trail_00011.jpg",
-      "source_sha256": "83a1116ed5933a5d9ff1eb3e9b635cfab6e5c81ba9b8ea9af6c47b6d429d4b57",
+      "file": "scenes/bookshop.webp",
+      "source": "docs/handoff/graphics-v2/bookshop.png",
+      "source_sha256": "66434f6823d7d8dff2bd3070aabe3c83c76c6367570171177550126accf83670",
       "crop": null,
-      "width": 1024,
+      "repairs": [],
+      "width": 1536,
       "height": 1024,
-      "sha256": "1f2c8ec4adcbf2277063ee8e10f5b0a49b36bbfdf4fc3019fdb7bc144542bbe8"
+      "bytes": 446712,
+      "sha256": "278f5858cf7560a5fdf0e92c62e4c204ffe2ad4cf401ddd217a4bb2afde509d5"
     },
     {
-      "file": "motel.jpg",
-      "source": "images/the_portland_trail_00012.jpg",
-      "source_sha256": "1e6389c31ffec315e0dafb42e80a612e97d351e1bcb455bee9e13913f4bacada",
-      "crop": null,
-      "width": 1024,
-      "height": 1024,
-      "sha256": "b3bd73091cf123ddecbdc4bfd9625b07cacfe0cb7d80e9d9018da7bf68e4f249"
-    },
-    {
-      "file": "landmark.jpg",
-      "source": "images/the_portland_trail_00018.jpg",
-      "source_sha256": "48657a3cae16d8041a42bd1ecd110b92963545c5bb1603af59d26c15be87c0d2",
-      "crop": null,
-      "width": 1024,
-      "height": 1024,
-      "sha256": "483983372c91336394f2cdcf56ee22a61b77f117a9a3a4a9d2f1786771e55424"
-    },
-    {
-      "file": "crypto.jpg",
-      "source": "images/the_portland_trail_00010.jpg",
-      "source_sha256": "a4ae1681005d58f7fc24bdfe43c576ec7e0415e4944e911d350b7aa57e59b648",
-      "crop": null,
-      "width": 1024,
-      "height": 1024,
-      "sha256": "d8adfe55d711441c9d7046240dcf295c9ab612930278a1ecc5452234c587e3f2"
-    },
-    {
-      "file": "food-carts.jpg",
-      "source": "images/the_portland_trail_00001.jpg",
-      "source_sha256": "59078b64182766f573710e05279a6241d5308a6583c40d042e63877d460061a2",
-      "crop": null,
-      "width": 1024,
-      "height": 1024,
-      "sha256": "c985509c91cd998c7163418966ff22e8d37294d2ec005457b43a59949631eb4e"
-    },
-    {
-      "file": "victory.jpg",
-      "source": "images/the_portland_trail_00016.jpg",
-      "source_sha256": "ab339586dabf5de43f52bc83a8ce77d74b70bf59afd16a89e1a6ec383b9e1cc0",
-      "crop": [
-        0,
-        175,
-        1024,
-        1024
-      ],
-      "width": 1024,
-      "height": 849,
-      "sha256": "769e6a5ee02ec86c6a434f0d138442dc33a2430909fa84cef2b37918413c9015"
-    },
-    {
-      "file": "loss.jpg",
-      "source": "images/the_portland_trail_00004.jpg",
-      "source_sha256": "e407207bb3e8513eef0099ecbbe3abc609fe267106af9c6a7094f47c44f9df83",
-      "crop": [
-        0,
-        180,
-        1024,
-        865
-      ],
-      "width": 1024,
-      "height": 685,
-      "sha256": "69e484c2ed1681c828521e5d935ba19907c898709da8dd38d53149d6a44efb26"
-    },
-    {
-      "file": "breakdown.jpg",
+      "file": "scenes/breakdown-960.webp",
       "source": "images/the_portland_trail_00000.jpg",
       "source_sha256": "e99b5681811c7fa3a61538a0db71698f163e2c604f356754280c42cc405cf96a",
       "crop": [
@@ -122,12 +136,106 @@
         1024,
         1024
       ],
-      "width": 1024,
-      "height": 684,
-      "sha256": "9e65ad9f8c2fc0edd002d1f0a497c630ddd7a1c127499b922c359e01a8d785ca"
+      "repairs": [],
+      "width": 960,
+      "height": 641,
+      "bytes": 32812,
+      "sha256": "88c0a2147842498f1b2cc51c228820fa4f3346605245a6ebe5bd6e634bf67a20"
     },
     {
-      "file": "doomscrolling.jpg",
+      "file": "scenes/breakdown.webp",
+      "source": "images/the_portland_trail_00000.jpg",
+      "source_sha256": "e99b5681811c7fa3a61538a0db71698f163e2c604f356754280c42cc405cf96a",
+      "crop": [
+        0,
+        340,
+        1024,
+        1024
+      ],
+      "repairs": [],
+      "width": 1024,
+      "height": 684,
+      "bytes": 41238,
+      "sha256": "56fe08f38c754276b4aa7e788de2858e2d7fa4c4d8c8f2c07241a96a730e9f5a"
+    },
+    {
+      "file": "scenes/city-street-960.webp",
+      "source": "images/the_portland_trail_00007.jpg",
+      "source_sha256": "06aa300bcd317ee25f8912e2ffc012eb485e4117f016240b6f3b78f65e87fd47",
+      "crop": [
+        0,
+        110,
+        1024,
+        1024
+      ],
+      "repairs": [],
+      "width": 960,
+      "height": 857,
+      "bytes": 76598,
+      "sha256": "3c62c8b1e60f4dcf19f7b4b6bc4e31cd911437f90388c9749843087641fdc40e"
+    },
+    {
+      "file": "scenes/city-street.webp",
+      "source": "images/the_portland_trail_00007.jpg",
+      "source_sha256": "06aa300bcd317ee25f8912e2ffc012eb485e4117f016240b6f3b78f65e87fd47",
+      "crop": [
+        0,
+        110,
+        1024,
+        1024
+      ],
+      "repairs": [],
+      "width": 1024,
+      "height": 914,
+      "bytes": 98002,
+      "sha256": "c07f422c09129c870599ea08892f8c19691d3d7bef54d68269fd45bc7ca734f5"
+    },
+    {
+      "file": "scenes/crypto-960.webp",
+      "source": "images/the_portland_trail_00010.jpg",
+      "source_sha256": "a4ae1681005d58f7fc24bdfe43c576ec7e0415e4944e911d350b7aa57e59b648",
+      "crop": null,
+      "repairs": [],
+      "width": 960,
+      "height": 960,
+      "bytes": 44996,
+      "sha256": "aaa76accb0e97df3e0c56305b9561732a178033b8698b9695032f0cb2f58ece2"
+    },
+    {
+      "file": "scenes/crypto.webp",
+      "source": "images/the_portland_trail_00010.jpg",
+      "source_sha256": "a4ae1681005d58f7fc24bdfe43c576ec7e0415e4944e911d350b7aa57e59b648",
+      "crop": null,
+      "repairs": [],
+      "width": 1024,
+      "height": 1024,
+      "bytes": 58640,
+      "sha256": "7425ed22d270d0711b7112bcf97040237959e65c4f8076b0923b5a74ddb48595"
+    },
+    {
+      "file": "scenes/departure-960.webp",
+      "source": "images/the_portland_trail_00005.jpg",
+      "source_sha256": "63ed9716f4336a87b0c4e17dfe9b8bd1aea5bfe380fe8c3ec2cb3f4b3624f999",
+      "crop": null,
+      "repairs": [],
+      "width": 960,
+      "height": 960,
+      "bytes": 58220,
+      "sha256": "ecc617fa1ff7ca64231ef97d88c8997cc58d3a22921ff259f215376d0e48c564"
+    },
+    {
+      "file": "scenes/departure.webp",
+      "source": "images/the_portland_trail_00005.jpg",
+      "source_sha256": "63ed9716f4336a87b0c4e17dfe9b8bd1aea5bfe380fe8c3ec2cb3f4b3624f999",
+      "crop": null,
+      "repairs": [],
+      "width": 1024,
+      "height": 1024,
+      "bytes": 78002,
+      "sha256": "8f0b4325673e50be011109d4ca7934d5a744bf25789ab38e1126a078b8bc6b58"
+    },
+    {
+      "file": "scenes/doomscrolling-960.webp",
       "source": "images/the_portland_trail_00013.jpg",
       "source_sha256": "ff38d39f324ad43e26ba9fa6ce451368d03e0750dd897a8baa2a005bd42a114a",
       "crop": [
@@ -136,21 +244,74 @@
         1024,
         1024
       ],
+      "repairs": [],
+      "width": 960,
+      "height": 810,
+      "bytes": 38320,
+      "sha256": "381d38a8a7be4ddce50011e4f4dfd4f3df80f29547a0cedbc88492415c8ab88d"
+    },
+    {
+      "file": "scenes/doomscrolling.webp",
+      "source": "images/the_portland_trail_00013.jpg",
+      "source_sha256": "ff38d39f324ad43e26ba9fa6ce451368d03e0750dd897a8baa2a005bd42a114a",
+      "crop": [
+        0,
+        160,
+        1024,
+        1024
+      ],
+      "repairs": [],
       "width": 1024,
       "height": 864,
-      "sha256": "af9993f553b28a327907393441741ab6cb2a47b60d1a8f3625abcc49a1dc749a"
+      "bytes": 47120,
+      "sha256": "e17a47700b6f8b000e4d0da88f1435782324316cea57b0cb519a4e6faa906bd5"
     },
     {
-      "file": "illness.jpg",
-      "source": "images/the_portland_trail_00003.jpg",
-      "source_sha256": "af278a337b29c0032ba9e2e1ec95a8e134c0652a65641262f7997833f047ee04",
+      "file": "scenes/food-carts-960.webp",
+      "source": "images/the_portland_trail_00001.jpg",
+      "source_sha256": "59078b64182766f573710e05279a6241d5308a6583c40d042e63877d460061a2",
       "crop": null,
+      "repairs": [],
+      "width": 960,
+      "height": 960,
+      "bytes": 99108,
+      "sha256": "890e88150a1266c1e391d11b3b8f2810d4e2314f2155ef45a0aa5cff5a0d4bb4"
+    },
+    {
+      "file": "scenes/food-carts.webp",
+      "source": "images/the_portland_trail_00001.jpg",
+      "source_sha256": "59078b64182766f573710e05279a6241d5308a6583c40d042e63877d460061a2",
+      "crop": null,
+      "repairs": [],
       "width": 1024,
       "height": 1024,
-      "sha256": "aac8516b97061ec42d6b86a7e8010d8d17b1d11bc04f2d6c5f84262eb2d4412e"
+      "bytes": 126378,
+      "sha256": "64984018704fec0508e1dced37e282335248e85a872d77155501c3a9a19e0423"
     },
     {
-      "file": "free-box.jpg",
+      "file": "scenes/forest-camp-960.webp",
+      "source": "docs/handoff/graphics-v2/forest-camp.png",
+      "source_sha256": "29632c74c23a21a6c15863c90038b775e563a44cba2e050c470f532551c257f3",
+      "crop": null,
+      "repairs": [],
+      "width": 960,
+      "height": 640,
+      "bytes": 138968,
+      "sha256": "0d3574973e1053d264bcb6e1219d16961d7f26976b5306bfb4a20c5b9c8a67dd"
+    },
+    {
+      "file": "scenes/forest-camp.webp",
+      "source": "docs/handoff/graphics-v2/forest-camp.png",
+      "source_sha256": "29632c74c23a21a6c15863c90038b775e563a44cba2e050c470f532551c257f3",
+      "crop": null,
+      "repairs": [],
+      "width": 1536,
+      "height": 1024,
+      "bytes": 316998,
+      "sha256": "cb8d2ccdeb36ce142314422f9265c069b1d728a836a9792e567fa33f7e47f40b"
+    },
+    {
+      "file": "scenes/free-box-960.webp",
       "source": "images/the_portland_trail_00015.jpg",
       "source_sha256": "501685adc27d60c8631738aa4261ad9c8a4cd1a1ed64b7e5d8527ab30cf18481",
       "crop": [
@@ -159,12 +320,666 @@
         1024,
         1024
       ],
-      "width": 1024,
-      "height": 899,
-      "sha256": "e65891413352f5a69b3b65a6b1cd62be0983eba9eeb1e1733f36e6d97ef9eabc"
+      "repairs": [],
+      "width": 960,
+      "height": 843,
+      "bytes": 41090,
+      "sha256": "1561515ff638579476ac9f353289e273025b7d237548b71c36dabac868ab3d10"
     },
     {
-      "file": "wifi.jpg",
+      "file": "scenes/free-box.webp",
+      "source": "images/the_portland_trail_00015.jpg",
+      "source_sha256": "501685adc27d60c8631738aa4261ad9c8a4cd1a1ed64b7e5d8527ab30cf18481",
+      "crop": [
+        0,
+        125,
+        1024,
+        1024
+      ],
+      "repairs": [],
+      "width": 1024,
+      "height": 899,
+      "bytes": 51784,
+      "sha256": "87f13ebd9153bf87310d7e676ef711692b56b2e7e4d57d94bb1b2cebb86ed28a"
+    },
+    {
+      "file": "scenes/heatwave-960.webp",
+      "source": "docs/handoff/graphics-v3/heatwave.png",
+      "source_sha256": "4d0f68fec3bc26635c687e1d658d5bc098e38bf4cab7b6b71bf7de2420fdaa18",
+      "crop": null,
+      "repairs": [],
+      "width": 960,
+      "height": 640,
+      "bytes": 124742,
+      "sha256": "8b98ef555332e27349463ca4477c9922917e3069b2a8689d55460089f8d386b1"
+    },
+    {
+      "file": "scenes/heatwave.webp",
+      "source": "docs/handoff/graphics-v3/heatwave.png",
+      "source_sha256": "4d0f68fec3bc26635c687e1d658d5bc098e38bf4cab7b6b71bf7de2420fdaa18",
+      "crop": null,
+      "repairs": [],
+      "width": 1536,
+      "height": 1024,
+      "bytes": 254124,
+      "sha256": "22e8211a9f32052158d6e65e507a4d4d2ca7ee97ca76828c77d251ad5d515a7e"
+    },
+    {
+      "file": "scenes/illness-960.webp",
+      "source": "images/the_portland_trail_00003.jpg",
+      "source_sha256": "af278a337b29c0032ba9e2e1ec95a8e134c0652a65641262f7997833f047ee04",
+      "crop": null,
+      "repairs": [],
+      "width": 960,
+      "height": 960,
+      "bytes": 14526,
+      "sha256": "5fc350133c3803f1f5071a3f951dbc14668d68a044eb384bb72cb2d7f946d05e"
+    },
+    {
+      "file": "scenes/illness.webp",
+      "source": "images/the_portland_trail_00003.jpg",
+      "source_sha256": "af278a337b29c0032ba9e2e1ec95a8e134c0652a65641262f7997833f047ee04",
+      "crop": null,
+      "repairs": [],
+      "width": 1024,
+      "height": 1024,
+      "bytes": 17562,
+      "sha256": "bb728184af5f177423ed1d950cf6d66f9e669d09f421c11559a9cf9ee9133b5c"
+    },
+    {
+      "file": "scenes/landmark-960.webp",
+      "source": "images/the_portland_trail_00018.jpg",
+      "source_sha256": "48657a3cae16d8041a42bd1ecd110b92963545c5bb1603af59d26c15be87c0d2",
+      "crop": null,
+      "repairs": [],
+      "width": 960,
+      "height": 960,
+      "bytes": 66616,
+      "sha256": "e9b2ee12dffc6e6d6b1ce13df5194124926ae9fe7a012453b2ce53612db94906"
+    },
+    {
+      "file": "scenes/landmark.webp",
+      "source": "images/the_portland_trail_00018.jpg",
+      "source_sha256": "48657a3cae16d8041a42bd1ecd110b92963545c5bb1603af59d26c15be87c0d2",
+      "crop": null,
+      "repairs": [],
+      "width": 1024,
+      "height": 1024,
+      "bytes": 84958,
+      "sha256": "8ce632f4a015c8c90b2940b1f22e2a3bc848bb69d4d58a017ec8c5ca94cf491c"
+    },
+    {
+      "file": "scenes/loss-960.webp",
+      "source": "images/the_portland_trail_00004.jpg",
+      "source_sha256": "e407207bb3e8513eef0099ecbbe3abc609fe267106af9c6a7094f47c44f9df83",
+      "crop": [
+        0,
+        180,
+        1024,
+        865
+      ],
+      "repairs": [
+        {
+          "was": "GAME OVER over garbled letters",
+          "rect": [
+            797,
+            228,
+            975,
+            291
+          ],
+          "fill": "#1c421d",
+          "color": "#85b578",
+          "lines": [
+            {
+              "text": "GAME OVER",
+              "scale": 3
+            },
+            {
+              "text": "NO SIGNAL",
+              "scale": 2
+            }
+          ],
+          "gap": 8
+        }
+      ],
+      "width": 960,
+      "height": 642,
+      "bytes": 26552,
+      "sha256": "687f4ebbfa4d50615d7d2be5d51653454fb83456145ea8591f6bcee7eb8b2d65"
+    },
+    {
+      "file": "scenes/loss.webp",
+      "source": "images/the_portland_trail_00004.jpg",
+      "source_sha256": "e407207bb3e8513eef0099ecbbe3abc609fe267106af9c6a7094f47c44f9df83",
+      "crop": [
+        0,
+        180,
+        1024,
+        865
+      ],
+      "repairs": [
+        {
+          "was": "GAME OVER over garbled letters",
+          "rect": [
+            797,
+            228,
+            975,
+            291
+          ],
+          "fill": "#1c421d",
+          "color": "#85b578",
+          "lines": [
+            {
+              "text": "GAME OVER",
+              "scale": 3
+            },
+            {
+              "text": "NO SIGNAL",
+              "scale": 2
+            }
+          ],
+          "gap": 8
+        }
+      ],
+      "width": 1024,
+      "height": 685,
+      "bytes": 34036,
+      "sha256": "e2cb1be3d8489f48daac82bfa4e68ff81ba06644dcbb34f18e9d0807ffa29209"
+    },
+    {
+      "file": "scenes/motel-960.webp",
+      "source": "images/the_portland_trail_00012.jpg",
+      "source_sha256": "1e6389c31ffec315e0dafb42e80a612e97d351e1bcb455bee9e13913f4bacada",
+      "crop": null,
+      "repairs": [],
+      "width": 960,
+      "height": 960,
+      "bytes": 38480,
+      "sha256": "a6c8d91a08d700f03eccb155a47c38d0c8c8df77bc8cad1bd9f253f4f2e4e890"
+    },
+    {
+      "file": "scenes/motel.webp",
+      "source": "images/the_portland_trail_00012.jpg",
+      "source_sha256": "1e6389c31ffec315e0dafb42e80a612e97d351e1bcb455bee9e13913f4bacada",
+      "crop": null,
+      "repairs": [],
+      "width": 1024,
+      "height": 1024,
+      "bytes": 51476,
+      "sha256": "9d3ad622f3e5f207e698ad57f8fe0282123a597435095d02f18792b3d17b60ec"
+    },
+    {
+      "file": "scenes/mushroom-market-960.webp",
+      "source": "docs/handoff/graphics-v2/mushroom-market.png",
+      "source_sha256": "b727b5a2d9524afecd0a2d85f35f8b3b49cd4e7fcdc0d71bb07f31ba3e288bf4",
+      "crop": null,
+      "repairs": [],
+      "width": 960,
+      "height": 640,
+      "bytes": 181968,
+      "sha256": "7b52b997bf935a5d81063ed0d706d3d96f1b1cf84398e76898615a996e30aaaa"
+    },
+    {
+      "file": "scenes/mushroom-market.webp",
+      "source": "docs/handoff/graphics-v2/mushroom-market.png",
+      "source_sha256": "b727b5a2d9524afecd0a2d85f35f8b3b49cd4e7fcdc0d71bb07f31ba3e288bf4",
+      "crop": null,
+      "repairs": [],
+      "width": 1536,
+      "height": 1024,
+      "bytes": 406256,
+      "sha256": "ab063450b61a59fb47894a42cab68aa6aa4243228f1dc7b40d7bb74cb6aa0c96"
+    },
+    {
+      "file": "scenes/nft-960.webp",
+      "source": "images/the_portland_trail_00014.jpg",
+      "source_sha256": "7277c70c3447496d856804cbac26ed7dd95d5be431355cc94a630290949af4fd",
+      "crop": null,
+      "repairs": [],
+      "width": 960,
+      "height": 960,
+      "bytes": 45184,
+      "sha256": "473f1ed74d388038ca9c0fbb346ecd3ce4cdfc060715e70d1a9c97e2658c9f4c"
+    },
+    {
+      "file": "scenes/nft.webp",
+      "source": "images/the_portland_trail_00014.jpg",
+      "source_sha256": "7277c70c3447496d856804cbac26ed7dd95d5be431355cc94a630290949af4fd",
+      "crop": null,
+      "repairs": [],
+      "width": 1024,
+      "height": 1024,
+      "bytes": 60310,
+      "sha256": "d0a724d5343cabbee9c3c8314fe19c83128b40dd6af0714f7d0d82c487a7e734"
+    },
+    {
+      "file": "scenes/outbreak-960.webp",
+      "source": "images/the_portland_trail_00009.jpg",
+      "source_sha256": "be49ba8641ce56198fc1e9cd6edb1e5a940528ff58b9052712298289a8ee29f1",
+      "crop": [
+        0,
+        70,
+        1024,
+        930
+      ],
+      "repairs": [],
+      "width": 960,
+      "height": 806,
+      "bytes": 27346,
+      "sha256": "fb095ddbbfe894006b8321a1cdb7b5e460c705f7b6617228f031b56b9c399123"
+    },
+    {
+      "file": "scenes/outbreak.webp",
+      "source": "images/the_portland_trail_00009.jpg",
+      "source_sha256": "be49ba8641ce56198fc1e9cd6edb1e5a940528ff58b9052712298289a8ee29f1",
+      "crop": [
+        0,
+        70,
+        1024,
+        930
+      ],
+      "repairs": [],
+      "width": 1024,
+      "height": 860,
+      "bytes": 36114,
+      "sha256": "4d1ca4d6c00e9a131ed67e69ca11f01a3ff25521d124c94dfd20a7fea62e4174"
+    },
+    {
+      "file": "scenes/rest-stop-960.webp",
+      "source": "images/the_portland_trail_00011.jpg",
+      "source_sha256": "83a1116ed5933a5d9ff1eb3e9b635cfab6e5c81ba9b8ea9af6c47b6d429d4b57",
+      "crop": null,
+      "repairs": [],
+      "width": 960,
+      "height": 960,
+      "bytes": 31374,
+      "sha256": "ef797c297af21f7f14d31c7b239eadf435eed05222216a5e56f461804ef17da9"
+    },
+    {
+      "file": "scenes/rest-stop.webp",
+      "source": "images/the_portland_trail_00011.jpg",
+      "source_sha256": "83a1116ed5933a5d9ff1eb3e9b635cfab6e5c81ba9b8ea9af6c47b6d429d4b57",
+      "crop": null,
+      "repairs": [],
+      "width": 1024,
+      "height": 1024,
+      "bytes": 41104,
+      "sha256": "8399c7b14e18798ffb9b7e0ab5ae60903b35ae0524413d325764fe5e974b44a1"
+    },
+    {
+      "file": "scenes/river-ferry-960.webp",
+      "source": "docs/handoff/graphics-v2/river-ferry.png",
+      "source_sha256": "51b6b0aed6889761ff5be5a2c84dff894809f6899b1c4e14c2c08c41c72a535a",
+      "crop": null,
+      "repairs": [],
+      "width": 960,
+      "height": 640,
+      "bytes": 134762,
+      "sha256": "ca1f2e3b9d8e14bbdb0afac6a0016aac35e9b060d80348f9607e1edcfc6b27a0"
+    },
+    {
+      "file": "scenes/river-ferry.webp",
+      "source": "docs/handoff/graphics-v2/river-ferry.png",
+      "source_sha256": "51b6b0aed6889761ff5be5a2c84dff894809f6899b1c4e14c2c08c41c72a535a",
+      "crop": null,
+      "repairs": [],
+      "width": 1536,
+      "height": 1024,
+      "bytes": 248734,
+      "sha256": "c1dab6b7b5c1dd4fba0940ff1f2a6067f1433f4e5c21beaa811e00945374c59c"
+    },
+    {
+      "file": "scenes/road-city-960.webp",
+      "source": "docs/handoff/graphics-v3/road-city.png",
+      "source_sha256": "2c431df15aa60078f3d4aad3d2256ee163f323ade67c4b45bba74846b5a4e209",
+      "crop": null,
+      "repairs": [],
+      "width": 960,
+      "height": 640,
+      "bytes": 84912,
+      "sha256": "d0e68584c52a0cc9de6db4eeb8f200d4991b7c679474a653f3af42982ff564d4"
+    },
+    {
+      "file": "scenes/road-city.webp",
+      "source": "docs/handoff/graphics-v3/road-city.png",
+      "source_sha256": "2c431df15aa60078f3d4aad3d2256ee163f323ade67c4b45bba74846b5a4e209",
+      "crop": null,
+      "repairs": [],
+      "width": 1536,
+      "height": 1024,
+      "bytes": 176986,
+      "sha256": "b0b565f1b5e2ff040db35cfb105169c44e417a2faca87c9e3cd74badeb89821c"
+    },
+    {
+      "file": "scenes/road-forest-960.webp",
+      "source": "docs/handoff/graphics-v2/road-forest.png",
+      "source_sha256": "5b0f7f5d0d936175cbd98711f478bb8d87ece89703d71eda5e3b6862efa9b537",
+      "crop": null,
+      "repairs": [],
+      "width": 960,
+      "height": 640,
+      "bytes": 106698,
+      "sha256": "24db8a5ab2f661f8b1251067099b96fbf2b14fee63d6d43e2b26fab83fcbb23c"
+    },
+    {
+      "file": "scenes/road-forest.webp",
+      "source": "docs/handoff/graphics-v2/road-forest.png",
+      "source_sha256": "5b0f7f5d0d936175cbd98711f478bb8d87ece89703d71eda5e3b6862efa9b537",
+      "crop": null,
+      "repairs": [],
+      "width": 1536,
+      "height": 1024,
+      "bytes": 187898,
+      "sha256": "c59288b5850fc6675eca67c9f4e33479b7992c0f98f4749a393363144fc5a80c"
+    },
+    {
+      "file": "scenes/road-river-960.webp",
+      "source": "docs/handoff/graphics-v3/road-river.png",
+      "source_sha256": "99dc429a221cf28b074b123d56cc340b4f2fcc70261cbb0772a7b99b5bbb0af4",
+      "crop": null,
+      "repairs": [],
+      "width": 960,
+      "height": 640,
+      "bytes": 118284,
+      "sha256": "40f90de41b23d81316a027a739e0c5199dec8c4df6078f4e79585537c00d4e6d"
+    },
+    {
+      "file": "scenes/road-river.webp",
+      "source": "docs/handoff/graphics-v3/road-river.png",
+      "source_sha256": "99dc429a221cf28b074b123d56cc340b4f2fcc70261cbb0772a7b99b5bbb0af4",
+      "crop": null,
+      "repairs": [],
+      "width": 1536,
+      "height": 1024,
+      "bytes": 282342,
+      "sha256": "a2b40e34c9fa432ad1b49b2086dc58a1aa01881d8d9376154c5b250b625e312a"
+    },
+    {
+      "file": "scenes/title-960.webp",
+      "source": "images/the_portland_trail_00017.jpg",
+      "source_sha256": "75afc04e73755c5c401cfe1aea5156bb07049a3ce6e54160c4fc1c1a37901cff",
+      "crop": [
+        0,
+        235,
+        1024,
+        965
+      ],
+      "repairs": [
+        {
+          "was": "GLOBL WARMING",
+          "rect": [
+            874,
+            442,
+            979,
+            478
+          ],
+          "fill": "#8ccb7f",
+          "color": "#1e4317",
+          "lines": [
+            {
+              "text": "GLOBAL",
+              "scale": 2
+            },
+            {
+              "text": "WARMING",
+              "scale": 2
+            }
+          ],
+          "gap": 2
+        }
+      ],
+      "width": 960,
+      "height": 684,
+      "bytes": 62744,
+      "sha256": "2758b5c0f1a71f2c7c06b9380753bac6548d003e6aac72ac1ef43e1ef724ab86"
+    },
+    {
+      "file": "scenes/title.webp",
+      "source": "images/the_portland_trail_00017.jpg",
+      "source_sha256": "75afc04e73755c5c401cfe1aea5156bb07049a3ce6e54160c4fc1c1a37901cff",
+      "crop": [
+        0,
+        235,
+        1024,
+        965
+      ],
+      "repairs": [
+        {
+          "was": "GLOBL WARMING",
+          "rect": [
+            874,
+            442,
+            979,
+            478
+          ],
+          "fill": "#8ccb7f",
+          "color": "#1e4317",
+          "lines": [
+            {
+              "text": "GLOBAL",
+              "scale": 2
+            },
+            {
+              "text": "WARMING",
+              "scale": 2
+            }
+          ],
+          "gap": 2
+        }
+      ],
+      "width": 1024,
+      "height": 730,
+      "bytes": 77420,
+      "sha256": "3c65360279d179411cea55482d52207d291ceaf44d68689756ba1f011f8912ef"
+    },
+    {
+      "file": "scenes/travel-960.webp",
+      "source": "images/the_portland_trail_00008.jpg",
+      "source_sha256": "0be1eacf70dbf377b73141e0959c1983ff6ab4d66b5b4504d7a6b2345ca47edc",
+      "crop": [
+        0,
+        340,
+        1024,
+        940
+      ],
+      "repairs": [],
+      "width": 960,
+      "height": 563,
+      "bytes": 39460,
+      "sha256": "e2ef89b2153eca6f5d875cf82f4b97c50e2992c13b828dc86ed26f7e4ce0b23c"
+    },
+    {
+      "file": "scenes/travel.webp",
+      "source": "images/the_portland_trail_00008.jpg",
+      "source_sha256": "0be1eacf70dbf377b73141e0959c1983ff6ab4d66b5b4504d7a6b2345ca47edc",
+      "crop": [
+        0,
+        340,
+        1024,
+        940
+      ],
+      "repairs": [],
+      "width": 1024,
+      "height": 600,
+      "bytes": 50324,
+      "sha256": "557c5995ed8bc4caaab5fafff02585187c860e5ea2f8890f6caa42f407b74adf"
+    },
+    {
+      "file": "scenes/victory-960.webp",
+      "source": "images/the_portland_trail_00016.jpg",
+      "source_sha256": "ab339586dabf5de43f52bc83a8ce77d74b70bf59afd16a89e1a6ec383b9e1cc0",
+      "crop": [
+        0,
+        175,
+        1024,
+        1024
+      ],
+      "repairs": [
+        {
+          "was": "WHITE STAG over garbled letters",
+          "rect": [
+            208,
+            314,
+            416,
+            398
+          ],
+          "fill": "#9eca84",
+          "color": "#23381c",
+          "lines": [
+            {
+              "text": "WHITE STAG",
+              "scale": 3
+            },
+            {
+              "text": "PORTLAND OREGON",
+              "scale": 2
+            }
+          ],
+          "gap": 10
+        },
+        {
+          "was": "garbled letters on the plate beneath",
+          "rect": [
+            222,
+            413,
+            389,
+            434
+          ],
+          "fill": "#a0c987",
+          "color": null,
+          "lines": [],
+          "gap": 0
+        },
+        {
+          "was": "the foot of the first garbled letter, on the lower lip of the plate",
+          "rect": [
+            225,
+            434,
+            361,
+            436
+          ],
+          "fill": "#a0c987",
+          "color": null,
+          "lines": [],
+          "gap": 0
+        },
+        {
+          "was": "POWELLL'S BOOKS",
+          "rect": [
+            738,
+            324,
+            887,
+            390
+          ],
+          "fill": "#22301c",
+          "color": "#acd394",
+          "lines": [
+            {
+              "text": "POWELL'S",
+              "scale": 3
+            },
+            {
+              "text": "BOOKS",
+              "scale": 3
+            }
+          ],
+          "gap": 9
+        }
+      ],
+      "width": 960,
+      "height": 796,
+      "bytes": 81132,
+      "sha256": "d35b362f3fabf0c230727b7ad63c0bdd32c4a384919817c96e316c802db3997c"
+    },
+    {
+      "file": "scenes/victory.webp",
+      "source": "images/the_portland_trail_00016.jpg",
+      "source_sha256": "ab339586dabf5de43f52bc83a8ce77d74b70bf59afd16a89e1a6ec383b9e1cc0",
+      "crop": [
+        0,
+        175,
+        1024,
+        1024
+      ],
+      "repairs": [
+        {
+          "was": "WHITE STAG over garbled letters",
+          "rect": [
+            208,
+            314,
+            416,
+            398
+          ],
+          "fill": "#9eca84",
+          "color": "#23381c",
+          "lines": [
+            {
+              "text": "WHITE STAG",
+              "scale": 3
+            },
+            {
+              "text": "PORTLAND OREGON",
+              "scale": 2
+            }
+          ],
+          "gap": 10
+        },
+        {
+          "was": "garbled letters on the plate beneath",
+          "rect": [
+            222,
+            413,
+            389,
+            434
+          ],
+          "fill": "#a0c987",
+          "color": null,
+          "lines": [],
+          "gap": 0
+        },
+        {
+          "was": "the foot of the first garbled letter, on the lower lip of the plate",
+          "rect": [
+            225,
+            434,
+            361,
+            436
+          ],
+          "fill": "#a0c987",
+          "color": null,
+          "lines": [],
+          "gap": 0
+        },
+        {
+          "was": "POWELLL'S BOOKS",
+          "rect": [
+            738,
+            324,
+            887,
+            390
+          ],
+          "fill": "#22301c",
+          "color": "#acd394",
+          "lines": [
+            {
+              "text": "POWELL'S",
+              "scale": 3
+            },
+            {
+              "text": "BOOKS",
+              "scale": 3
+            }
+          ],
+          "gap": 9
+        }
+      ],
+      "width": 1024,
+      "height": 849,
+      "bytes": 102484,
+      "sha256": "549d801c3023707d77c088ecbb625e3eed0a6519aeab4eedd1e5e12907682f35"
+    },
+    {
+      "file": "scenes/wifi-960.webp",
       "source": "images/the_portland_trail_00002.jpg",
       "source_sha256": "68000b695e1ab670b9b18b2897f1b1640e7f0804cd7447b71c332aae7e8161d2",
       "crop": [
@@ -173,63 +988,30 @@
         1024,
         930
       ],
+      "repairs": [],
+      "width": 960,
+      "height": 773,
+      "bytes": 118768,
+      "sha256": "048ac4b13e8287597544e4fa16bc5923dfe82c982da0afc428ceb9875e6e3ef2"
+    },
+    {
+      "file": "scenes/wifi.webp",
+      "source": "images/the_portland_trail_00002.jpg",
+      "source_sha256": "68000b695e1ab670b9b18b2897f1b1640e7f0804cd7447b71c332aae7e8161d2",
+      "crop": [
+        0,
+        105,
+        1024,
+        930
+      ],
+      "repairs": [],
       "width": 1024,
       "height": 825,
-      "sha256": "0b6687b21bf60fb17dc1ba0b1afbe50111f9bacd69b395c56f88e8de187ccb40"
+      "bytes": 154956,
+      "sha256": "fa5beff872f86823be2833e6b00a68630bc47f8d474af9c7a71ebf0261759c4b"
     },
     {
-      "file": "nft.jpg",
-      "source": "images/the_portland_trail_00014.jpg",
-      "source_sha256": "7277c70c3447496d856804cbac26ed7dd95d5be431355cc94a630290949af4fd",
-      "crop": null,
-      "width": 1024,
-      "height": 1024,
-      "sha256": "0ba4fbf00847fb6f01738cfb879907006fbb18fd9d8913236681185ce6856353"
-    },
-    {
-      "file": "portrait-influencer.png",
-      "source": "docs/handoff/graphics-v1/background-portraits-master.png",
-      "source_sha256": "b8c885198fcbba2a56846db6cb5018d6e12f9905699596fda1b5c4b3a11728a9",
-      "crop": [
-        20,
-        0,
-        731,
-        577
-      ],
-      "width": 128,
-      "height": 128,
-      "sha256": "c82ae210bcc25201f8e2dad09c9f24273aaf14a54e4666a5413eb297c567467b"
-    },
-    {
-      "file": "portrait-dev.png",
-      "source": "docs/handoff/graphics-v1/background-portraits-master.png",
-      "source_sha256": "b8c885198fcbba2a56846db6cb5018d6e12f9905699596fda1b5c4b3a11728a9",
-      "crop": [
-        732,
-        0,
-        1374,
-        577
-      ],
-      "width": 128,
-      "height": 128,
-      "sha256": "93094689e103330fa4fce94e3c4d074e5eddfde7d7dd8bf58f2ebf61592b8c5d"
-    },
-    {
-      "file": "portrait-prepper.png",
-      "source": "docs/handoff/graphics-v1/background-portraits-master.png",
-      "source_sha256": "b8c885198fcbba2a56846db6cb5018d6e12f9905699596fda1b5c4b3a11728a9",
-      "crop": [
-        25,
-        580,
-        682,
-        1145
-      ],
-      "width": 128,
-      "height": 128,
-      "sha256": "1527b04f0b10d9b04e60b847ec776568e019f91e0f108e485a9c3e3399333b76"
-    },
-    {
-      "file": "portrait-barista.png",
+      "file": "sprites/portrait-barista.png",
       "source": "docs/handoff/graphics-v1/background-portraits-master.png",
       "source_sha256": "b8c885198fcbba2a56846db6cb5018d6e12f9905699596fda1b5c4b3a11728a9",
       "crop": [
@@ -238,54 +1020,62 @@
         1374,
         1145
       ],
+      "repairs": [],
       "width": 128,
       "height": 128,
+      "bytes": 23875,
       "sha256": "5225ee8a15587bdf6dfedf7d3aa8bfbb289c09e64ecf3f2209087e756f8a6069"
     },
     {
-      "file": "resource-money.png",
-      "source": "docs/handoff/graphics-v1/resource-icons-master.png",
-      "source_sha256": "be40314ec1e2ecf67320807309699d06e0a88ba5c1dbe5f0073be64b2f74b64b",
+      "file": "sprites/portrait-dev.png",
+      "source": "docs/handoff/graphics-v1/background-portraits-master.png",
+      "source_sha256": "b8c885198fcbba2a56846db6cb5018d6e12f9905699596fda1b5c4b3a11728a9",
+      "crop": [
+        732,
+        0,
+        1374,
+        577
+      ],
+      "repairs": [],
+      "width": 128,
+      "height": 128,
+      "bytes": 22998,
+      "sha256": "93094689e103330fa4fce94e3c4d074e5eddfde7d7dd8bf58f2ebf61592b8c5d"
+    },
+    {
+      "file": "sprites/portrait-influencer.png",
+      "source": "docs/handoff/graphics-v1/background-portraits-master.png",
+      "source_sha256": "b8c885198fcbba2a56846db6cb5018d6e12f9905699596fda1b5c4b3a11728a9",
+      "crop": [
+        20,
+        0,
+        731,
+        577
+      ],
+      "repairs": [],
+      "width": 128,
+      "height": 128,
+      "bytes": 23391,
+      "sha256": "c82ae210bcc25201f8e2dad09c9f24273aaf14a54e4666a5413eb297c567467b"
+    },
+    {
+      "file": "sprites/portrait-prepper.png",
+      "source": "docs/handoff/graphics-v1/background-portraits-master.png",
+      "source_sha256": "b8c885198fcbba2a56846db6cb5018d6e12f9905699596fda1b5c4b3a11728a9",
       "crop": [
         25,
-        85,
-        453,
-        462
+        580,
+        682,
+        1145
       ],
-      "width": 64,
-      "height": 64,
-      "sha256": "6b466476317239914d9b077981ed4f612e69cd68379e964a83395ac1fbae17c5"
+      "repairs": [],
+      "width": 128,
+      "height": 128,
+      "bytes": 26463,
+      "sha256": "1527b04f0b10d9b04e60b847ec776568e019f91e0f108e485a9c3e3399333b76"
     },
     {
-      "file": "resource-food.png",
-      "source": "docs/handoff/graphics-v1/resource-icons-master.png",
-      "source_sha256": "be40314ec1e2ecf67320807309699d06e0a88ba5c1dbe5f0073be64b2f74b64b",
-      "crop": [
-        470,
-        30,
-        870,
-        460
-      ],
-      "width": 64,
-      "height": 64,
-      "sha256": "1ab26953e3512fd9c0e42e27ae29df6653c31de4d777cb0d04a83068df05a1db"
-    },
-    {
-      "file": "resource-fuel.png",
-      "source": "docs/handoff/graphics-v1/resource-icons-master.png",
-      "source_sha256": "be40314ec1e2ecf67320807309699d06e0a88ba5c1dbe5f0073be64b2f74b64b",
-      "crop": [
-        908,
-        35,
-        1307,
-        463
-      ],
-      "width": 64,
-      "height": 64,
-      "sha256": "15c227cf7d321bf9ac3d6393fb7f20c014727a0f3b28950539a8b2188254dd76"
-    },
-    {
-      "file": "resource-ammo.png",
+      "file": "sprites/resource-ammo.png",
       "source": "docs/handoff/graphics-v1/resource-icons-master.png",
       "source_sha256": "be40314ec1e2ecf67320807309699d06e0a88ba5c1dbe5f0073be64b2f74b64b",
       "crop": [
@@ -294,26 +1084,46 @@
         1774,
         464
       ],
+      "repairs": [],
       "width": 64,
       "height": 64,
+      "bytes": 6598,
       "sha256": "0d241b7514e17560f627d23ffebddeeb289b84a8b499a273226aa4c585e8f067"
     },
     {
-      "file": "resource-parts.png",
+      "file": "sprites/resource-food.png",
       "source": "docs/handoff/graphics-v1/resource-icons-master.png",
       "source_sha256": "be40314ec1e2ecf67320807309699d06e0a88ba5c1dbe5f0073be64b2f74b64b",
       "crop": [
-        24,
         470,
-        474,
-        880
+        30,
+        870,
+        460
       ],
+      "repairs": [],
       "width": 64,
       "height": 64,
-      "sha256": "fbc362b0806c2f7667c7c8b7be9089f323e2ed58a722c69057de51a2bb38aefb"
+      "bytes": 7843,
+      "sha256": "1ab26953e3512fd9c0e42e27ae29df6653c31de4d777cb0d04a83068df05a1db"
     },
     {
-      "file": "resource-kombucha.png",
+      "file": "sprites/resource-fuel.png",
+      "source": "docs/handoff/graphics-v1/resource-icons-master.png",
+      "source_sha256": "be40314ec1e2ecf67320807309699d06e0a88ba5c1dbe5f0073be64b2f74b64b",
+      "crop": [
+        908,
+        35,
+        1307,
+        463
+      ],
+      "repairs": [],
+      "width": 64,
+      "height": 64,
+      "bytes": 5827,
+      "sha256": "15c227cf7d321bf9ac3d6393fb7f20c014727a0f3b28950539a8b2188254dd76"
+    },
+    {
+      "file": "sprites/resource-kombucha.png",
       "source": "docs/handoff/graphics-v1/resource-icons-master.png",
       "source_sha256": "be40314ec1e2ecf67320807309699d06e0a88ba5c1dbe5f0073be64b2f74b64b",
       "crop": [
@@ -322,12 +1132,30 @@
         791,
         887
       ],
+      "repairs": [],
       "width": 64,
       "height": 64,
+      "bytes": 3722,
       "sha256": "2cfabf1c8eefaed2b55b2f269ac91b25b73f6e4b3e334b4c5cdd2feae8649608"
     },
     {
-      "file": "resource-nft.png",
+      "file": "sprites/resource-money.png",
+      "source": "docs/handoff/graphics-v1/resource-icons-master.png",
+      "source_sha256": "be40314ec1e2ecf67320807309699d06e0a88ba5c1dbe5f0073be64b2f74b64b",
+      "crop": [
+        25,
+        85,
+        453,
+        462
+      ],
+      "repairs": [],
+      "width": 64,
+      "height": 64,
+      "bytes": 5679,
+      "sha256": "6b466476317239914d9b077981ed4f612e69cd68379e964a83395ac1fbae17c5"
+    },
+    {
+      "file": "sprites/resource-nft.png",
       "source": "docs/handoff/graphics-v1/resource-icons-master.png",
       "source_sha256": "be40314ec1e2ecf67320807309699d06e0a88ba5c1dbe5f0073be64b2f74b64b",
       "crop": [
@@ -336,17 +1164,37 @@
         1306,
         887
       ],
+      "repairs": [],
       "width": 64,
       "height": 64,
+      "bytes": 5959,
       "sha256": "45658ef8f98947f77e432b9fd28030d7f1cd77682b54a96ddeb8e39a89be54a8"
     },
     {
-      "file": "van.png",
+      "file": "sprites/resource-parts.png",
+      "source": "docs/handoff/graphics-v1/resource-icons-master.png",
+      "source_sha256": "be40314ec1e2ecf67320807309699d06e0a88ba5c1dbe5f0073be64b2f74b64b",
+      "crop": [
+        24,
+        470,
+        474,
+        880
+      ],
+      "repairs": [],
+      "width": 64,
+      "height": 64,
+      "bytes": 5762,
+      "sha256": "fbc362b0806c2f7667c7c8b7be9089f323e2ed58a722c69057de51a2bb38aefb"
+    },
+    {
+      "file": "sprites/van.png",
       "source": "docs/handoff/graphics-v1/van-side-master.png",
       "source_sha256": "c2ce683138ad471a28a9af56ce4474ab6d800e0c127e8a05634a4394e2e52b03",
       "crop": null,
+      "repairs": [],
       "width": 256,
       "height": 128,
+      "bytes": 43835,
       "sha256": "6860f45cae815cd93e266b0e9abe9a4f2de049599ef9f01f0e1f5061cf85f47a"
     }
   ]
