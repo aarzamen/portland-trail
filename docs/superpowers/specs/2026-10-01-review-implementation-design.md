@@ -10,7 +10,7 @@ Not done, with reasons:
 
 - **E6** (move the handoff archive out of the repository). It needs a published GitHub release and only shrinks the repository if history is rewritten; AGENTS.md forbids force-pushes and deleting original assets. Left for the owner.
 - **New illustrations.** No image-generation tool is available. New encounters reuse existing art and three so far unused originals.
-- **L7 in part.** The title, victory and loss signs are repaired. The motel's "VAC_NCY" reads as a broken neon sign and stays. Small background lettering in other scenes stays.
+- **L7 in part.** The title uses a new illustration without lettering; victory and loss signs are repaired. The motel's "VAC_NCY" reads as a broken neon sign and stays. Small background lettering in other scenes stays.
 - **WebKit Playwright run.** It needs a browser runtime download that was not authorized. Safari is checked in the iOS Simulator instead.
 
 ## 2. Global constraints
@@ -499,7 +499,7 @@ Scenes: `app/assets/scenes/<id>.webp` (WebP quality 82, at most 1536 wide) and `
 
 | id | source | crop (left, top, right, bottom) |
 |---|---|---|
-| title | images/the_portland_trail_00017.jpg | 0, 235, 1024, 965 |
+| title | docs/handoff/graphics-v5/title-road-ahead.png | none |
 | travel | 00008 | 0, 340, 1024, 940 |
 | departure | 00005 | none |
 | rest-stop | 00011 | none |
@@ -524,7 +524,7 @@ Scenes: `app/assets/scenes/<id>.webp` (WebP quality 82, at most 1536 wide) and `
 
 Sprites, unchanged in content, from the graphics-v1 masters with the rectangles in the current `prepare-assets.py`: `app/assets/sprites/portrait-<profession>.png` (128×128), `app/assets/sprites/resource-<item>.png` (64×64), `app/assets/sprites/van.png` (256×128). App icons stay at `app/assets/icons/` with their current names and sizes, regenerated from `docs/handoff/graphics-v2/app-icon.png`.
 
-Sign repairs (L7), applied to the derived copy before encoding and recorded in the manifest: the title sign reads "GLOBAL WARMING"; the victory signs read "WHITE STAG" over "PORTLAND OREGON" with a blank plate beneath, and "POWELL'S BOOKS"; the loss sign reads "GAME OVER" over "NO SIGNAL"; the breakdown scene's roadside sign reads "THE PORTLAND TRAIL" instead of "TRAL". Each repair paints the sign's interior flat in the sign's own colour and sets the words in the pixel typeface at a whole-number scale. If a repair cannot be made to look native at 1× and on a phone, leave that sign as it is and say so in the report.
+Sign repairs (L7), applied to the derived copy before encoding and recorded in the manifest: the victory signs read "WHITE STAG" over "PORTLAND OREGON" with a blank plate beneath, and "POWELL'S BOOKS"; the loss sign reads "GAME OVER" over "NO SIGNAL"; the breakdown scene's roadside sign reads "THE PORTLAND TRAIL" instead of "TRAL". The new title illustration contains no lettering and receives no repair. Each repair paints the sign's interior flat in the sign's own colour and sets the words in the pixel typeface at a whole-number scale. If a repair cannot be made to look native at 1× and on a phone, leave that sign as it is and say so in the report.
 
 Typeface (L5): "Portland Pixel", an original proportional pixel face drawn for this project. Source of truth: `app/scripts/pixel-font.txt`, one glyph per block as rows of `#` and `.`, eight rows per glyph (rows 1–7 hold capitals, row 8 is the descender row), widths 1–7 columns. The script builds `app/assets/fonts/portland-pixel.woff2` with 100 font units per pixel, 800 units per em, ascent 700, descent 100, and an advance of glyph width plus one pixel. It covers printable ASCII 32–126 and ‘ ’ “ ” – — … · ×. Display sizes are whole multiples of 8px so pixels stay square.
 

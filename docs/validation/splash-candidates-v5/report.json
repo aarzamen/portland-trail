@@ -1,0 +1,1764 @@
+{
+  "date": "2026-10-02T12:05:14.312Z",
+  "scope": "Saved candidate artwork intercepted into the current source title UI; no integration",
+  "sourceUrl": "http://127.0.0.1:60795/",
+  "serviceWorkers": "block",
+  "reducedMotion": "reduce",
+  "browser": "Installed Chrome through Playwright",
+  "realDevice": false,
+  "candidates": [
+    {
+      "id": "title-road-ahead",
+      "name": "The Road Ahead",
+      "source": "/Users/ama/The Portland Trail/docs/handoff/graphics-v5/title-road-ahead.png",
+      "masterSha256": "5c1170558afcd9cefccea5cc7d535b8912bd911a025f061048e45704ccc7ee56",
+      "variants": [
+        {
+          "width": 1536,
+          "height": 1024,
+          "quality": 82,
+          "method": 6,
+          "path": "/Users/ama/The Portland Trail/tmp/splash-v5/preview-title-road-ahead.webp",
+          "bytes": 255494,
+          "sha256": "8c1149c626249fed6993d311f43b10e524ca43e8d9906486e8120c4d294a21fc"
+        },
+        {
+          "width": 960,
+          "height": 640,
+          "quality": 78,
+          "method": 6,
+          "path": "/Users/ama/The Portland Trail/tmp/splash-v5/preview-title-road-ahead-960.webp",
+          "bytes": 118676,
+          "sha256": "b230dd86a3bc9d6c6384bd5053d2018be7a4e7b92f4d3c7a04d39618fc052ef6"
+        }
+      ]
+    },
+    {
+      "id": "title-five-travelers",
+      "name": "The Departure Crew",
+      "source": "/Users/ama/The Portland Trail/docs/handoff/graphics-v5/title-five-travelers.png",
+      "masterSha256": "0a3ba99256a190f030dc338f84f5789a32121afc309a54079c6949472eaf7abf",
+      "variants": [
+        {
+          "width": 1536,
+          "height": 1024,
+          "quality": 82,
+          "method": 6,
+          "path": "/Users/ama/The Portland Trail/tmp/splash-v5/preview-title-five-travelers.webp",
+          "bytes": 238808,
+          "sha256": "b7e4cee9e16b226fd1c2427b67f51db69a958895d683c8af3a4e48832a16b438"
+        },
+        {
+          "width": 960,
+          "height": 640,
+          "quality": 78,
+          "method": 6,
+          "path": "/Users/ama/The Portland Trail/tmp/splash-v5/preview-title-five-travelers-960.webp",
+          "bytes": 105778,
+          "sha256": "0d883a2b542e98efd22c1bc2db8c62890f55332fe72207b99c13f5d3c1ccde77"
+        }
+      ]
+    },
+    {
+      "id": "title-portland-beckons",
+      "name": "Portland Beckons",
+      "source": "/Users/ama/The Portland Trail/docs/handoff/graphics-v5/title-portland-beckons.png",
+      "masterSha256": "7256d1d92c12de9e46cc6bb6d861382a1e8ee016cb2a201031ee06e443f2beae",
+      "variants": [
+        {
+          "width": 1536,
+          "height": 1024,
+          "quality": 82,
+          "method": 6,
+          "path": "/Users/ama/The Portland Trail/tmp/splash-v5/preview-title-portland-beckons.webp",
+          "bytes": 288428,
+          "sha256": "78f177f151bd7b80191e6cfd1cefcd09ab8e14e2e2bd66afc60cc2fe9038882a"
+        },
+        {
+          "width": 960,
+          "height": 640,
+          "quality": 78,
+          "method": 6,
+          "path": "/Users/ama/The Portland Trail/tmp/splash-v5/preview-title-portland-beckons-960.webp",
+          "bytes": 133646,
+          "sha256": "5b99653f1c2ff875536d30a1277575773b5138dbdb5c38cab0169620be9644a1"
+        }
+      ]
+    }
+  ],
+  "previews": [
+    {
+      "candidateId": "title-road-ahead",
+      "candidateName": "The Road Ahead",
+      "width": 390,
+      "height": 844,
+      "mobile": true,
+      "routeHits": [
+        {
+          "url": "http://127.0.0.1:60795/assets/scenes/title-960.webp",
+          "fulfilledPath": "/Users/ama/The Portland Trail/tmp/splash-v5/preview-title-road-ahead-960.webp",
+          "width": 960
+        }
+      ],
+      "screenshots": [
+        {
+          "kind": "full-page",
+          "path": "/Users/ama/The Portland Trail/docs/validation/splash-candidates-v5/title-road-ahead-390x844.png"
+        },
+        {
+          "kind": "initial-viewport",
+          "path": "/Users/ama/The Portland Trail/docs/validation/splash-candidates-v5/title-road-ahead-390x844-viewport.png"
+        }
+      ],
+      "checks": {
+        "candidateRouteHit": true,
+        "productionDimensions": true,
+        "loadedImages": true,
+        "noHorizontalOverflow": true,
+        "liveHeading": true,
+        "liveStart": true,
+        "controlMinimumSize": true,
+        "keyboardStartReachable": true,
+        "keyboardStartOpensNormalSetup": true,
+        "noBrowserErrors": true
+      },
+      "errors": [],
+      "layout": {
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "page": {
+          "width": 390,
+          "height": 851
+        },
+        "titleBox": {
+          "x": 0,
+          "y": 52,
+          "width": 390,
+          "height": 726.171875,
+          "right": 390,
+          "bottom": 778.171875
+        },
+        "image": {
+          "box": {
+            "x": 0,
+            "y": 52,
+            "width": 390,
+            "height": 260,
+            "right": 390,
+            "bottom": 312
+          },
+          "currentSrc": "http://127.0.0.1:60795/assets/scenes/title-960.webp",
+          "naturalWidth": 960,
+          "naturalHeight": 640,
+          "complete": true,
+          "objectPosition": "50% 40%",
+          "filter": "saturate(0.75) contrast(1.05)",
+          "visibleSourceCrop": {
+            "left": 0,
+            "top": 0,
+            "right": 960,
+            "bottom": 640
+          }
+        },
+        "heading": {
+          "text": "The Portland\nTrail.",
+          "box": {
+            "x": 20,
+            "y": 331.5,
+            "width": 350,
+            "height": 100,
+            "right": 370,
+            "bottom": 431.5
+          },
+          "rendered": true,
+          "fontSize": "40px",
+          "color": "rgb(225, 234, 203)"
+        },
+        "start": {
+          "text": "Start a new journey",
+          "box": {
+            "x": 20,
+            "y": 546.671875,
+            "width": 350,
+            "height": 52,
+            "right": 370,
+            "bottom": 598.671875
+          },
+          "rendered": true,
+          "disabled": false,
+          "fontSize": "16px",
+          "color": "rgb(7, 17, 10)",
+          "background": "rgb(164, 201, 106)",
+          "fullyInsideInitialViewport": true
+        },
+        "brokenImages": [],
+        "undersizedControls": []
+      },
+      "keyboardTabCount": 3,
+      "passed": true
+    },
+    {
+      "candidateId": "title-road-ahead",
+      "candidateName": "The Road Ahead",
+      "width": 414,
+      "height": 896,
+      "mobile": true,
+      "routeHits": [
+        {
+          "url": "http://127.0.0.1:60795/assets/scenes/title-960.webp",
+          "fulfilledPath": "/Users/ama/The Portland Trail/tmp/splash-v5/preview-title-road-ahead-960.webp",
+          "width": 960
+        }
+      ],
+      "screenshots": [
+        {
+          "kind": "full-page",
+          "path": "/Users/ama/The Portland Trail/docs/validation/splash-candidates-v5/title-road-ahead-414x896.png"
+        }
+      ],
+      "checks": {
+        "candidateRouteHit": true,
+        "productionDimensions": true,
+        "loadedImages": true,
+        "noHorizontalOverflow": true,
+        "liveHeading": true,
+        "liveStart": true,
+        "controlMinimumSize": true,
+        "keyboardStartReachable": true,
+        "keyboardStartOpensNormalSetup": true,
+        "noBrowserErrors": true
+      },
+      "errors": [],
+      "layout": {
+        "viewport": {
+          "width": 414,
+          "height": 896
+        },
+        "page": {
+          "width": 414,
+          "height": 896
+        },
+        "titleBox": {
+          "x": 0,
+          "y": 52,
+          "width": 414,
+          "height": 744.171875,
+          "right": 414,
+          "bottom": 796.171875
+        },
+        "image": {
+          "box": {
+            "x": 0,
+            "y": 52,
+            "width": 414,
+            "height": 276,
+            "right": 414,
+            "bottom": 328
+          },
+          "currentSrc": "http://127.0.0.1:60795/assets/scenes/title-960.webp",
+          "naturalWidth": 960,
+          "naturalHeight": 640,
+          "complete": true,
+          "objectPosition": "50% 40%",
+          "filter": "saturate(0.75) contrast(1.05)",
+          "visibleSourceCrop": {
+            "left": 0,
+            "top": 0,
+            "right": 960,
+            "bottom": 640
+          }
+        },
+        "heading": {
+          "text": "The Portland\nTrail.",
+          "box": {
+            "x": 20,
+            "y": 347.5,
+            "width": 374,
+            "height": 120,
+            "right": 394,
+            "bottom": 467.5
+          },
+          "rendered": true,
+          "fontSize": "48px",
+          "color": "rgb(225, 234, 203)"
+        },
+        "start": {
+          "text": "Start a new journey",
+          "box": {
+            "x": 20,
+            "y": 582.671875,
+            "width": 374,
+            "height": 52,
+            "right": 394,
+            "bottom": 634.671875
+          },
+          "rendered": true,
+          "disabled": false,
+          "fontSize": "16px",
+          "color": "rgb(7, 17, 10)",
+          "background": "rgb(164, 201, 106)",
+          "fullyInsideInitialViewport": true
+        },
+        "brokenImages": [],
+        "undersizedControls": []
+      },
+      "keyboardTabCount": 3,
+      "passed": true
+    },
+    {
+      "candidateId": "title-road-ahead",
+      "candidateName": "The Road Ahead",
+      "width": 430,
+      "height": 932,
+      "mobile": true,
+      "routeHits": [
+        {
+          "url": "http://127.0.0.1:60795/assets/scenes/title-960.webp",
+          "fulfilledPath": "/Users/ama/The Portland Trail/tmp/splash-v5/preview-title-road-ahead-960.webp",
+          "width": 960
+        }
+      ],
+      "screenshots": [
+        {
+          "kind": "full-page",
+          "path": "/Users/ama/The Portland Trail/docs/validation/splash-candidates-v5/title-road-ahead-430x932.png"
+        }
+      ],
+      "checks": {
+        "candidateRouteHit": true,
+        "productionDimensions": true,
+        "loadedImages": true,
+        "noHorizontalOverflow": true,
+        "liveHeading": true,
+        "liveStart": true,
+        "controlMinimumSize": true,
+        "keyboardStartReachable": true,
+        "keyboardStartOpensNormalSetup": true,
+        "noBrowserErrors": true
+      },
+      "errors": [],
+      "layout": {
+        "viewport": {
+          "width": 430,
+          "height": 932
+        },
+        "page": {
+          "width": 430,
+          "height": 932
+        },
+        "titleBox": {
+          "x": 0,
+          "y": 52,
+          "width": 430,
+          "height": 754.828125,
+          "right": 430,
+          "bottom": 806.828125
+        },
+        "image": {
+          "box": {
+            "x": 0,
+            "y": 52,
+            "width": 430,
+            "height": 286.65625,
+            "right": 430,
+            "bottom": 338.65625
+          },
+          "currentSrc": "http://127.0.0.1:60795/assets/scenes/title-960.webp",
+          "naturalWidth": 960,
+          "naturalHeight": 640,
+          "complete": true,
+          "objectPosition": "50% 40%",
+          "filter": "saturate(0.75) contrast(1.05)",
+          "visibleSourceCrop": {
+            "left": 0,
+            "top": 0.009302325581393234,
+            "right": 960,
+            "bottom": 639.9860465116279
+          }
+        },
+        "heading": {
+          "text": "The Portland\nTrail.",
+          "box": {
+            "x": 20,
+            "y": 358.15625,
+            "width": 390,
+            "height": 120,
+            "right": 410,
+            "bottom": 478.15625
+          },
+          "rendered": true,
+          "fontSize": "48px",
+          "color": "rgb(225, 234, 203)"
+        },
+        "start": {
+          "text": "Start a new journey",
+          "box": {
+            "x": 20,
+            "y": 593.328125,
+            "width": 390,
+            "height": 52,
+            "right": 410,
+            "bottom": 645.328125
+          },
+          "rendered": true,
+          "disabled": false,
+          "fontSize": "16px",
+          "color": "rgb(7, 17, 10)",
+          "background": "rgb(164, 201, 106)",
+          "fullyInsideInitialViewport": true
+        },
+        "brokenImages": [],
+        "undersizedControls": []
+      },
+      "keyboardTabCount": 3,
+      "passed": true
+    },
+    {
+      "candidateId": "title-road-ahead",
+      "candidateName": "The Road Ahead",
+      "width": 1440,
+      "height": 900,
+      "mobile": false,
+      "routeHits": [
+        {
+          "url": "http://127.0.0.1:60795/assets/scenes/title.webp",
+          "fulfilledPath": "/Users/ama/The Portland Trail/tmp/splash-v5/preview-title-road-ahead.webp",
+          "width": 1536
+        }
+      ],
+      "screenshots": [
+        {
+          "kind": "full-page",
+          "path": "/Users/ama/The Portland Trail/docs/validation/splash-candidates-v5/title-road-ahead-1440x900.png"
+        }
+      ],
+      "checks": {
+        "candidateRouteHit": true,
+        "productionDimensions": true,
+        "loadedImages": true,
+        "noHorizontalOverflow": true,
+        "liveHeading": true,
+        "liveStart": true,
+        "controlMinimumSize": true,
+        "keyboardStartReachable": true,
+        "keyboardStartOpensNormalSetup": true,
+        "noBrowserErrors": true
+      },
+      "errors": [],
+      "layout": {
+        "viewport": {
+          "width": 1440,
+          "height": 900
+        },
+        "page": {
+          "width": 1440,
+          "height": 900
+        },
+        "titleBox": {
+          "x": 0,
+          "y": 56,
+          "width": 1440,
+          "height": 780,
+          "right": 1440,
+          "bottom": 836
+        },
+        "image": {
+          "box": {
+            "x": 0,
+            "y": 56,
+            "width": 1440,
+            "height": 780,
+            "right": 1440,
+            "bottom": 836
+          },
+          "currentSrc": "http://127.0.0.1:60795/assets/scenes/title.webp",
+          "naturalWidth": 1536,
+          "naturalHeight": 1024,
+          "complete": true,
+          "objectPosition": "50% 58%",
+          "filter": "saturate(0.75) contrast(1.05)",
+          "visibleSourceCrop": {
+            "left": 0,
+            "top": 111.35999999999999,
+            "right": 1536,
+            "bottom": 943.36
+          }
+        },
+        "heading": {
+          "text": "The Portland\nTrail.",
+          "box": {
+            "x": 100.796875,
+            "y": 198.609375,
+            "width": 696,
+            "height": 200,
+            "right": 796.796875,
+            "bottom": 398.609375
+          },
+          "rendered": true,
+          "fontSize": "80px",
+          "color": "rgb(225, 234, 203)"
+        },
+        "start": {
+          "text": "Start a new journey",
+          "box": {
+            "x": 100.796875,
+            "y": 531.390625,
+            "width": 233.03125,
+            "height": 52,
+            "right": 333.828125,
+            "bottom": 583.390625
+          },
+          "rendered": true,
+          "disabled": false,
+          "fontSize": "16px",
+          "color": "rgb(7, 17, 10)",
+          "background": "rgb(164, 201, 106)",
+          "fullyInsideInitialViewport": true
+        },
+        "brokenImages": [],
+        "undersizedControls": []
+      },
+      "keyboardTabCount": 3,
+      "passed": true
+    },
+    {
+      "candidateId": "title-road-ahead",
+      "candidateName": "The Road Ahead",
+      "width": 844,
+      "height": 390,
+      "mobile": true,
+      "routeHits": [
+        {
+          "url": "http://127.0.0.1:60795/assets/scenes/title-960.webp",
+          "fulfilledPath": "/Users/ama/The Portland Trail/tmp/splash-v5/preview-title-road-ahead-960.webp",
+          "width": 960
+        },
+        {
+          "url": "http://127.0.0.1:60795/assets/scenes/title.webp",
+          "fulfilledPath": "/Users/ama/The Portland Trail/tmp/splash-v5/preview-title-road-ahead.webp",
+          "width": 1536
+        }
+      ],
+      "screenshots": [
+        {
+          "kind": "full-page",
+          "path": "/Users/ama/The Portland Trail/docs/validation/splash-candidates-v5/title-road-ahead-844x390.png"
+        },
+        {
+          "kind": "initial-viewport",
+          "path": "/Users/ama/The Portland Trail/docs/validation/splash-candidates-v5/title-road-ahead-844x390-viewport.png"
+        }
+      ],
+      "checks": {
+        "candidateRouteHit": true,
+        "productionDimensions": true,
+        "loadedImages": true,
+        "noHorizontalOverflow": true,
+        "liveHeading": true,
+        "liveStart": true,
+        "controlMinimumSize": true,
+        "keyboardStartReachable": true,
+        "keyboardStartOpensNormalSetup": true,
+        "noBrowserErrors": true
+      },
+      "errors": [],
+      "layout": {
+        "viewport": {
+          "width": 844,
+          "height": 390
+        },
+        "page": {
+          "width": 844,
+          "height": 622
+        },
+        "titleBox": {
+          "x": 0,
+          "y": 45,
+          "width": 844,
+          "height": 525.78125,
+          "right": 844,
+          "bottom": 570.78125
+        },
+        "image": {
+          "box": {
+            "x": 0,
+            "y": 45,
+            "width": 844,
+            "height": 525.78125,
+            "right": 844,
+            "bottom": 570.78125
+          },
+          "currentSrc": "http://127.0.0.1:60795/assets/scenes/title-960.webp",
+          "naturalWidth": 960,
+          "naturalHeight": 640,
+          "complete": true,
+          "objectPosition": "50% 58%",
+          "filter": "saturate(0.75) contrast(1.05)",
+          "visibleSourceCrop": {
+            "left": 0,
+            "top": 24.333886255924146,
+            "right": 960,
+            "bottom": 622.3789099526067
+          }
+        },
+        "heading": {
+          "text": "The Portland\nTrail.",
+          "box": {
+            "x": 59.078125,
+            "y": 104.5,
+            "width": 482.390625,
+            "height": 120,
+            "right": 541.46875,
+            "bottom": 224.5
+          },
+          "rendered": true,
+          "fontSize": "48px",
+          "color": "rgb(225, 234, 203)"
+        },
+        "start": {
+          "text": "Start a new journey",
+          "box": {
+            "x": 59.078125,
+            "y": 357.28125,
+            "width": 233.03125,
+            "height": 52,
+            "right": 292.109375,
+            "bottom": 409.28125
+          },
+          "rendered": true,
+          "disabled": false,
+          "fontSize": "16px",
+          "color": "rgb(7, 17, 10)",
+          "background": "rgb(164, 201, 106)",
+          "fullyInsideInitialViewport": false
+        },
+        "brokenImages": [],
+        "undersizedControls": []
+      },
+      "keyboardTabCount": 3,
+      "passed": true
+    },
+    {
+      "candidateId": "title-five-travelers",
+      "candidateName": "The Departure Crew",
+      "width": 390,
+      "height": 844,
+      "mobile": true,
+      "routeHits": [
+        {
+          "url": "http://127.0.0.1:60795/assets/scenes/title-960.webp",
+          "fulfilledPath": "/Users/ama/The Portland Trail/tmp/splash-v5/preview-title-five-travelers-960.webp",
+          "width": 960
+        }
+      ],
+      "screenshots": [
+        {
+          "kind": "full-page",
+          "path": "/Users/ama/The Portland Trail/docs/validation/splash-candidates-v5/title-five-travelers-390x844.png"
+        },
+        {
+          "kind": "initial-viewport",
+          "path": "/Users/ama/The Portland Trail/docs/validation/splash-candidates-v5/title-five-travelers-390x844-viewport.png"
+        }
+      ],
+      "checks": {
+        "candidateRouteHit": true,
+        "productionDimensions": true,
+        "loadedImages": true,
+        "noHorizontalOverflow": true,
+        "liveHeading": true,
+        "liveStart": true,
+        "controlMinimumSize": true,
+        "keyboardStartReachable": true,
+        "keyboardStartOpensNormalSetup": true,
+        "noBrowserErrors": true
+      },
+      "errors": [],
+      "layout": {
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "page": {
+          "width": 390,
+          "height": 851
+        },
+        "titleBox": {
+          "x": 0,
+          "y": 52,
+          "width": 390,
+          "height": 726.171875,
+          "right": 390,
+          "bottom": 778.171875
+        },
+        "image": {
+          "box": {
+            "x": 0,
+            "y": 52,
+            "width": 390,
+            "height": 260,
+            "right": 390,
+            "bottom": 312
+          },
+          "currentSrc": "http://127.0.0.1:60795/assets/scenes/title-960.webp",
+          "naturalWidth": 960,
+          "naturalHeight": 640,
+          "complete": true,
+          "objectPosition": "50% 40%",
+          "filter": "saturate(0.75) contrast(1.05)",
+          "visibleSourceCrop": {
+            "left": 0,
+            "top": 0,
+            "right": 960,
+            "bottom": 640
+          }
+        },
+        "heading": {
+          "text": "The Portland\nTrail.",
+          "box": {
+            "x": 20,
+            "y": 331.5,
+            "width": 350,
+            "height": 100,
+            "right": 370,
+            "bottom": 431.5
+          },
+          "rendered": true,
+          "fontSize": "40px",
+          "color": "rgb(225, 234, 203)"
+        },
+        "start": {
+          "text": "Start a new journey",
+          "box": {
+            "x": 20,
+            "y": 546.671875,
+            "width": 350,
+            "height": 52,
+            "right": 370,
+            "bottom": 598.671875
+          },
+          "rendered": true,
+          "disabled": false,
+          "fontSize": "16px",
+          "color": "rgb(7, 17, 10)",
+          "background": "rgb(164, 201, 106)",
+          "fullyInsideInitialViewport": true
+        },
+        "brokenImages": [],
+        "undersizedControls": []
+      },
+      "keyboardTabCount": 3,
+      "passed": true
+    },
+    {
+      "candidateId": "title-five-travelers",
+      "candidateName": "The Departure Crew",
+      "width": 414,
+      "height": 896,
+      "mobile": true,
+      "routeHits": [
+        {
+          "url": "http://127.0.0.1:60795/assets/scenes/title-960.webp",
+          "fulfilledPath": "/Users/ama/The Portland Trail/tmp/splash-v5/preview-title-five-travelers-960.webp",
+          "width": 960
+        }
+      ],
+      "screenshots": [
+        {
+          "kind": "full-page",
+          "path": "/Users/ama/The Portland Trail/docs/validation/splash-candidates-v5/title-five-travelers-414x896.png"
+        }
+      ],
+      "checks": {
+        "candidateRouteHit": true,
+        "productionDimensions": true,
+        "loadedImages": true,
+        "noHorizontalOverflow": true,
+        "liveHeading": true,
+        "liveStart": true,
+        "controlMinimumSize": true,
+        "keyboardStartReachable": true,
+        "keyboardStartOpensNormalSetup": true,
+        "noBrowserErrors": true
+      },
+      "errors": [],
+      "layout": {
+        "viewport": {
+          "width": 414,
+          "height": 896
+        },
+        "page": {
+          "width": 414,
+          "height": 896
+        },
+        "titleBox": {
+          "x": 0,
+          "y": 52,
+          "width": 414,
+          "height": 744.171875,
+          "right": 414,
+          "bottom": 796.171875
+        },
+        "image": {
+          "box": {
+            "x": 0,
+            "y": 52,
+            "width": 414,
+            "height": 276,
+            "right": 414,
+            "bottom": 328
+          },
+          "currentSrc": "http://127.0.0.1:60795/assets/scenes/title-960.webp",
+          "naturalWidth": 960,
+          "naturalHeight": 640,
+          "complete": true,
+          "objectPosition": "50% 40%",
+          "filter": "saturate(0.75) contrast(1.05)",
+          "visibleSourceCrop": {
+            "left": 0,
+            "top": 0,
+            "right": 960,
+            "bottom": 640
+          }
+        },
+        "heading": {
+          "text": "The Portland\nTrail.",
+          "box": {
+            "x": 20,
+            "y": 347.5,
+            "width": 374,
+            "height": 120,
+            "right": 394,
+            "bottom": 467.5
+          },
+          "rendered": true,
+          "fontSize": "48px",
+          "color": "rgb(225, 234, 203)"
+        },
+        "start": {
+          "text": "Start a new journey",
+          "box": {
+            "x": 20,
+            "y": 582.671875,
+            "width": 374,
+            "height": 52,
+            "right": 394,
+            "bottom": 634.671875
+          },
+          "rendered": true,
+          "disabled": false,
+          "fontSize": "16px",
+          "color": "rgb(7, 17, 10)",
+          "background": "rgb(164, 201, 106)",
+          "fullyInsideInitialViewport": true
+        },
+        "brokenImages": [],
+        "undersizedControls": []
+      },
+      "keyboardTabCount": 3,
+      "passed": true
+    },
+    {
+      "candidateId": "title-five-travelers",
+      "candidateName": "The Departure Crew",
+      "width": 430,
+      "height": 932,
+      "mobile": true,
+      "routeHits": [
+        {
+          "url": "http://127.0.0.1:60795/assets/scenes/title-960.webp",
+          "fulfilledPath": "/Users/ama/The Portland Trail/tmp/splash-v5/preview-title-five-travelers-960.webp",
+          "width": 960
+        }
+      ],
+      "screenshots": [
+        {
+          "kind": "full-page",
+          "path": "/Users/ama/The Portland Trail/docs/validation/splash-candidates-v5/title-five-travelers-430x932.png"
+        }
+      ],
+      "checks": {
+        "candidateRouteHit": true,
+        "productionDimensions": true,
+        "loadedImages": true,
+        "noHorizontalOverflow": true,
+        "liveHeading": true,
+        "liveStart": true,
+        "controlMinimumSize": true,
+        "keyboardStartReachable": true,
+        "keyboardStartOpensNormalSetup": true,
+        "noBrowserErrors": true
+      },
+      "errors": [],
+      "layout": {
+        "viewport": {
+          "width": 430,
+          "height": 932
+        },
+        "page": {
+          "width": 430,
+          "height": 932
+        },
+        "titleBox": {
+          "x": 0,
+          "y": 52,
+          "width": 430,
+          "height": 754.828125,
+          "right": 430,
+          "bottom": 806.828125
+        },
+        "image": {
+          "box": {
+            "x": 0,
+            "y": 52,
+            "width": 430,
+            "height": 286.65625,
+            "right": 430,
+            "bottom": 338.65625
+          },
+          "currentSrc": "http://127.0.0.1:60795/assets/scenes/title-960.webp",
+          "naturalWidth": 960,
+          "naturalHeight": 640,
+          "complete": true,
+          "objectPosition": "50% 40%",
+          "filter": "saturate(0.75) contrast(1.05)",
+          "visibleSourceCrop": {
+            "left": 0,
+            "top": 0.009302325581393234,
+            "right": 960,
+            "bottom": 639.9860465116279
+          }
+        },
+        "heading": {
+          "text": "The Portland\nTrail.",
+          "box": {
+            "x": 20,
+            "y": 358.15625,
+            "width": 390,
+            "height": 120,
+            "right": 410,
+            "bottom": 478.15625
+          },
+          "rendered": true,
+          "fontSize": "48px",
+          "color": "rgb(225, 234, 203)"
+        },
+        "start": {
+          "text": "Start a new journey",
+          "box": {
+            "x": 20,
+            "y": 593.328125,
+            "width": 390,
+            "height": 52,
+            "right": 410,
+            "bottom": 645.328125
+          },
+          "rendered": true,
+          "disabled": false,
+          "fontSize": "16px",
+          "color": "rgb(7, 17, 10)",
+          "background": "rgb(164, 201, 106)",
+          "fullyInsideInitialViewport": true
+        },
+        "brokenImages": [],
+        "undersizedControls": []
+      },
+      "keyboardTabCount": 3,
+      "passed": true
+    },
+    {
+      "candidateId": "title-five-travelers",
+      "candidateName": "The Departure Crew",
+      "width": 1440,
+      "height": 900,
+      "mobile": false,
+      "routeHits": [
+        {
+          "url": "http://127.0.0.1:60795/assets/scenes/title.webp",
+          "fulfilledPath": "/Users/ama/The Portland Trail/tmp/splash-v5/preview-title-five-travelers.webp",
+          "width": 1536
+        }
+      ],
+      "screenshots": [
+        {
+          "kind": "full-page",
+          "path": "/Users/ama/The Portland Trail/docs/validation/splash-candidates-v5/title-five-travelers-1440x900.png"
+        }
+      ],
+      "checks": {
+        "candidateRouteHit": true,
+        "productionDimensions": true,
+        "loadedImages": true,
+        "noHorizontalOverflow": true,
+        "liveHeading": true,
+        "liveStart": true,
+        "controlMinimumSize": true,
+        "keyboardStartReachable": true,
+        "keyboardStartOpensNormalSetup": true,
+        "noBrowserErrors": true
+      },
+      "errors": [],
+      "layout": {
+        "viewport": {
+          "width": 1440,
+          "height": 900
+        },
+        "page": {
+          "width": 1440,
+          "height": 900
+        },
+        "titleBox": {
+          "x": 0,
+          "y": 56,
+          "width": 1440,
+          "height": 780,
+          "right": 1440,
+          "bottom": 836
+        },
+        "image": {
+          "box": {
+            "x": 0,
+            "y": 56,
+            "width": 1440,
+            "height": 780,
+            "right": 1440,
+            "bottom": 836
+          },
+          "currentSrc": "http://127.0.0.1:60795/assets/scenes/title.webp",
+          "naturalWidth": 1536,
+          "naturalHeight": 1024,
+          "complete": true,
+          "objectPosition": "50% 58%",
+          "filter": "saturate(0.75) contrast(1.05)",
+          "visibleSourceCrop": {
+            "left": 0,
+            "top": 111.35999999999999,
+            "right": 1536,
+            "bottom": 943.36
+          }
+        },
+        "heading": {
+          "text": "The Portland\nTrail.",
+          "box": {
+            "x": 100.796875,
+            "y": 198.609375,
+            "width": 696,
+            "height": 200,
+            "right": 796.796875,
+            "bottom": 398.609375
+          },
+          "rendered": true,
+          "fontSize": "80px",
+          "color": "rgb(225, 234, 203)"
+        },
+        "start": {
+          "text": "Start a new journey",
+          "box": {
+            "x": 100.796875,
+            "y": 531.390625,
+            "width": 233.03125,
+            "height": 52,
+            "right": 333.828125,
+            "bottom": 583.390625
+          },
+          "rendered": true,
+          "disabled": false,
+          "fontSize": "16px",
+          "color": "rgb(7, 17, 10)",
+          "background": "rgb(164, 201, 106)",
+          "fullyInsideInitialViewport": true
+        },
+        "brokenImages": [],
+        "undersizedControls": []
+      },
+      "keyboardTabCount": 3,
+      "passed": true
+    },
+    {
+      "candidateId": "title-five-travelers",
+      "candidateName": "The Departure Crew",
+      "width": 844,
+      "height": 390,
+      "mobile": true,
+      "routeHits": [
+        {
+          "url": "http://127.0.0.1:60795/assets/scenes/title-960.webp",
+          "fulfilledPath": "/Users/ama/The Portland Trail/tmp/splash-v5/preview-title-five-travelers-960.webp",
+          "width": 960
+        },
+        {
+          "url": "http://127.0.0.1:60795/assets/scenes/title.webp",
+          "fulfilledPath": "/Users/ama/The Portland Trail/tmp/splash-v5/preview-title-five-travelers.webp",
+          "width": 1536
+        }
+      ],
+      "screenshots": [
+        {
+          "kind": "full-page",
+          "path": "/Users/ama/The Portland Trail/docs/validation/splash-candidates-v5/title-five-travelers-844x390.png"
+        },
+        {
+          "kind": "initial-viewport",
+          "path": "/Users/ama/The Portland Trail/docs/validation/splash-candidates-v5/title-five-travelers-844x390-viewport.png"
+        }
+      ],
+      "checks": {
+        "candidateRouteHit": true,
+        "productionDimensions": true,
+        "loadedImages": true,
+        "noHorizontalOverflow": true,
+        "liveHeading": true,
+        "liveStart": true,
+        "controlMinimumSize": true,
+        "keyboardStartReachable": true,
+        "keyboardStartOpensNormalSetup": true,
+        "noBrowserErrors": true
+      },
+      "errors": [],
+      "layout": {
+        "viewport": {
+          "width": 844,
+          "height": 390
+        },
+        "page": {
+          "width": 844,
+          "height": 622
+        },
+        "titleBox": {
+          "x": 0,
+          "y": 45,
+          "width": 844,
+          "height": 525.78125,
+          "right": 844,
+          "bottom": 570.78125
+        },
+        "image": {
+          "box": {
+            "x": 0,
+            "y": 45,
+            "width": 844,
+            "height": 525.78125,
+            "right": 844,
+            "bottom": 570.78125
+          },
+          "currentSrc": "http://127.0.0.1:60795/assets/scenes/title-960.webp",
+          "naturalWidth": 960,
+          "naturalHeight": 640,
+          "complete": true,
+          "objectPosition": "50% 58%",
+          "filter": "saturate(0.75) contrast(1.05)",
+          "visibleSourceCrop": {
+            "left": 0,
+            "top": 24.333886255924146,
+            "right": 960,
+            "bottom": 622.3789099526067
+          }
+        },
+        "heading": {
+          "text": "The Portland\nTrail.",
+          "box": {
+            "x": 59.078125,
+            "y": 104.5,
+            "width": 482.390625,
+            "height": 120,
+            "right": 541.46875,
+            "bottom": 224.5
+          },
+          "rendered": true,
+          "fontSize": "48px",
+          "color": "rgb(225, 234, 203)"
+        },
+        "start": {
+          "text": "Start a new journey",
+          "box": {
+            "x": 59.078125,
+            "y": 357.28125,
+            "width": 233.03125,
+            "height": 52,
+            "right": 292.109375,
+            "bottom": 409.28125
+          },
+          "rendered": true,
+          "disabled": false,
+          "fontSize": "16px",
+          "color": "rgb(7, 17, 10)",
+          "background": "rgb(164, 201, 106)",
+          "fullyInsideInitialViewport": false
+        },
+        "brokenImages": [],
+        "undersizedControls": []
+      },
+      "keyboardTabCount": 3,
+      "passed": true
+    },
+    {
+      "candidateId": "title-portland-beckons",
+      "candidateName": "Portland Beckons",
+      "width": 390,
+      "height": 844,
+      "mobile": true,
+      "routeHits": [
+        {
+          "url": "http://127.0.0.1:60795/assets/scenes/title-960.webp",
+          "fulfilledPath": "/Users/ama/The Portland Trail/tmp/splash-v5/preview-title-portland-beckons-960.webp",
+          "width": 960
+        }
+      ],
+      "screenshots": [
+        {
+          "kind": "full-page",
+          "path": "/Users/ama/The Portland Trail/docs/validation/splash-candidates-v5/title-portland-beckons-390x844.png"
+        },
+        {
+          "kind": "initial-viewport",
+          "path": "/Users/ama/The Portland Trail/docs/validation/splash-candidates-v5/title-portland-beckons-390x844-viewport.png"
+        }
+      ],
+      "checks": {
+        "candidateRouteHit": true,
+        "productionDimensions": true,
+        "loadedImages": true,
+        "noHorizontalOverflow": true,
+        "liveHeading": true,
+        "liveStart": true,
+        "controlMinimumSize": true,
+        "keyboardStartReachable": true,
+        "keyboardStartOpensNormalSetup": true,
+        "noBrowserErrors": true
+      },
+      "errors": [],
+      "layout": {
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "page": {
+          "width": 390,
+          "height": 851
+        },
+        "titleBox": {
+          "x": 0,
+          "y": 52,
+          "width": 390,
+          "height": 726.171875,
+          "right": 390,
+          "bottom": 778.171875
+        },
+        "image": {
+          "box": {
+            "x": 0,
+            "y": 52,
+            "width": 390,
+            "height": 260,
+            "right": 390,
+            "bottom": 312
+          },
+          "currentSrc": "http://127.0.0.1:60795/assets/scenes/title-960.webp",
+          "naturalWidth": 960,
+          "naturalHeight": 640,
+          "complete": true,
+          "objectPosition": "50% 40%",
+          "filter": "saturate(0.75) contrast(1.05)",
+          "visibleSourceCrop": {
+            "left": 0,
+            "top": 0,
+            "right": 960,
+            "bottom": 640
+          }
+        },
+        "heading": {
+          "text": "The Portland\nTrail.",
+          "box": {
+            "x": 20,
+            "y": 331.5,
+            "width": 350,
+            "height": 100,
+            "right": 370,
+            "bottom": 431.5
+          },
+          "rendered": true,
+          "fontSize": "40px",
+          "color": "rgb(225, 234, 203)"
+        },
+        "start": {
+          "text": "Start a new journey",
+          "box": {
+            "x": 20,
+            "y": 546.671875,
+            "width": 350,
+            "height": 52,
+            "right": 370,
+            "bottom": 598.671875
+          },
+          "rendered": true,
+          "disabled": false,
+          "fontSize": "16px",
+          "color": "rgb(7, 17, 10)",
+          "background": "rgb(164, 201, 106)",
+          "fullyInsideInitialViewport": true
+        },
+        "brokenImages": [],
+        "undersizedControls": []
+      },
+      "keyboardTabCount": 3,
+      "passed": true
+    },
+    {
+      "candidateId": "title-portland-beckons",
+      "candidateName": "Portland Beckons",
+      "width": 414,
+      "height": 896,
+      "mobile": true,
+      "routeHits": [
+        {
+          "url": "http://127.0.0.1:60795/assets/scenes/title-960.webp",
+          "fulfilledPath": "/Users/ama/The Portland Trail/tmp/splash-v5/preview-title-portland-beckons-960.webp",
+          "width": 960
+        }
+      ],
+      "screenshots": [
+        {
+          "kind": "full-page",
+          "path": "/Users/ama/The Portland Trail/docs/validation/splash-candidates-v5/title-portland-beckons-414x896.png"
+        }
+      ],
+      "checks": {
+        "candidateRouteHit": true,
+        "productionDimensions": true,
+        "loadedImages": true,
+        "noHorizontalOverflow": true,
+        "liveHeading": true,
+        "liveStart": true,
+        "controlMinimumSize": true,
+        "keyboardStartReachable": true,
+        "keyboardStartOpensNormalSetup": true,
+        "noBrowserErrors": true
+      },
+      "errors": [],
+      "layout": {
+        "viewport": {
+          "width": 414,
+          "height": 896
+        },
+        "page": {
+          "width": 414,
+          "height": 896
+        },
+        "titleBox": {
+          "x": 0,
+          "y": 52,
+          "width": 414,
+          "height": 744.171875,
+          "right": 414,
+          "bottom": 796.171875
+        },
+        "image": {
+          "box": {
+            "x": 0,
+            "y": 52,
+            "width": 414,
+            "height": 276,
+            "right": 414,
+            "bottom": 328
+          },
+          "currentSrc": "http://127.0.0.1:60795/assets/scenes/title-960.webp",
+          "naturalWidth": 960,
+          "naturalHeight": 640,
+          "complete": true,
+          "objectPosition": "50% 40%",
+          "filter": "saturate(0.75) contrast(1.05)",
+          "visibleSourceCrop": {
+            "left": 0,
+            "top": 0,
+            "right": 960,
+            "bottom": 640
+          }
+        },
+        "heading": {
+          "text": "The Portland\nTrail.",
+          "box": {
+            "x": 20,
+            "y": 347.5,
+            "width": 374,
+            "height": 120,
+            "right": 394,
+            "bottom": 467.5
+          },
+          "rendered": true,
+          "fontSize": "48px",
+          "color": "rgb(225, 234, 203)"
+        },
+        "start": {
+          "text": "Start a new journey",
+          "box": {
+            "x": 20,
+            "y": 582.671875,
+            "width": 374,
+            "height": 52,
+            "right": 394,
+            "bottom": 634.671875
+          },
+          "rendered": true,
+          "disabled": false,
+          "fontSize": "16px",
+          "color": "rgb(7, 17, 10)",
+          "background": "rgb(164, 201, 106)",
+          "fullyInsideInitialViewport": true
+        },
+        "brokenImages": [],
+        "undersizedControls": []
+      },
+      "keyboardTabCount": 3,
+      "passed": true
+    },
+    {
+      "candidateId": "title-portland-beckons",
+      "candidateName": "Portland Beckons",
+      "width": 430,
+      "height": 932,
+      "mobile": true,
+      "routeHits": [
+        {
+          "url": "http://127.0.0.1:60795/assets/scenes/title-960.webp",
+          "fulfilledPath": "/Users/ama/The Portland Trail/tmp/splash-v5/preview-title-portland-beckons-960.webp",
+          "width": 960
+        }
+      ],
+      "screenshots": [
+        {
+          "kind": "full-page",
+          "path": "/Users/ama/The Portland Trail/docs/validation/splash-candidates-v5/title-portland-beckons-430x932.png"
+        }
+      ],
+      "checks": {
+        "candidateRouteHit": true,
+        "productionDimensions": true,
+        "loadedImages": true,
+        "noHorizontalOverflow": true,
+        "liveHeading": true,
+        "liveStart": true,
+        "controlMinimumSize": true,
+        "keyboardStartReachable": true,
+        "keyboardStartOpensNormalSetup": true,
+        "noBrowserErrors": true
+      },
+      "errors": [],
+      "layout": {
+        "viewport": {
+          "width": 430,
+          "height": 932
+        },
+        "page": {
+          "width": 430,
+          "height": 932
+        },
+        "titleBox": {
+          "x": 0,
+          "y": 52,
+          "width": 430,
+          "height": 754.828125,
+          "right": 430,
+          "bottom": 806.828125
+        },
+        "image": {
+          "box": {
+            "x": 0,
+            "y": 52,
+            "width": 430,
+            "height": 286.65625,
+            "right": 430,
+            "bottom": 338.65625
+          },
+          "currentSrc": "http://127.0.0.1:60795/assets/scenes/title-960.webp",
+          "naturalWidth": 960,
+          "naturalHeight": 640,
+          "complete": true,
+          "objectPosition": "50% 40%",
+          "filter": "saturate(0.75) contrast(1.05)",
+          "visibleSourceCrop": {
+            "left": 0,
+            "top": 0.009302325581393234,
+            "right": 960,
+            "bottom": 639.9860465116279
+          }
+        },
+        "heading": {
+          "text": "The Portland\nTrail.",
+          "box": {
+            "x": 20,
+            "y": 358.15625,
+            "width": 390,
+            "height": 120,
+            "right": 410,
+            "bottom": 478.15625
+          },
+          "rendered": true,
+          "fontSize": "48px",
+          "color": "rgb(225, 234, 203)"
+        },
+        "start": {
+          "text": "Start a new journey",
+          "box": {
+            "x": 20,
+            "y": 593.328125,
+            "width": 390,
+            "height": 52,
+            "right": 410,
+            "bottom": 645.328125
+          },
+          "rendered": true,
+          "disabled": false,
+          "fontSize": "16px",
+          "color": "rgb(7, 17, 10)",
+          "background": "rgb(164, 201, 106)",
+          "fullyInsideInitialViewport": true
+        },
+        "brokenImages": [],
+        "undersizedControls": []
+      },
+      "keyboardTabCount": 3,
+      "passed": true
+    },
+    {
+      "candidateId": "title-portland-beckons",
+      "candidateName": "Portland Beckons",
+      "width": 1440,
+      "height": 900,
+      "mobile": false,
+      "routeHits": [
+        {
+          "url": "http://127.0.0.1:60795/assets/scenes/title.webp",
+          "fulfilledPath": "/Users/ama/The Portland Trail/tmp/splash-v5/preview-title-portland-beckons.webp",
+          "width": 1536
+        }
+      ],
+      "screenshots": [
+        {
+          "kind": "full-page",
+          "path": "/Users/ama/The Portland Trail/docs/validation/splash-candidates-v5/title-portland-beckons-1440x900.png"
+        }
+      ],
+      "checks": {
+        "candidateRouteHit": true,
+        "productionDimensions": true,
+        "loadedImages": true,
+        "noHorizontalOverflow": true,
+        "liveHeading": true,
+        "liveStart": true,
+        "controlMinimumSize": true,
+        "keyboardStartReachable": true,
+        "keyboardStartOpensNormalSetup": true,
+        "noBrowserErrors": true
+      },
+      "errors": [],
+      "layout": {
+        "viewport": {
+          "width": 1440,
+          "height": 900
+        },
+        "page": {
+          "width": 1440,
+          "height": 900
+        },
+        "titleBox": {
+          "x": 0,
+          "y": 56,
+          "width": 1440,
+          "height": 780,
+          "right": 1440,
+          "bottom": 836
+        },
+        "image": {
+          "box": {
+            "x": 0,
+            "y": 56,
+            "width": 1440,
+            "height": 780,
+            "right": 1440,
+            "bottom": 836
+          },
+          "currentSrc": "http://127.0.0.1:60795/assets/scenes/title.webp",
+          "naturalWidth": 1536,
+          "naturalHeight": 1024,
+          "complete": true,
+          "objectPosition": "50% 58%",
+          "filter": "saturate(0.75) contrast(1.05)",
+          "visibleSourceCrop": {
+            "left": 0,
+            "top": 111.35999999999999,
+            "right": 1536,
+            "bottom": 943.36
+          }
+        },
+        "heading": {
+          "text": "The Portland\nTrail.",
+          "box": {
+            "x": 100.796875,
+            "y": 198.609375,
+            "width": 696,
+            "height": 200,
+            "right": 796.796875,
+            "bottom": 398.609375
+          },
+          "rendered": true,
+          "fontSize": "80px",
+          "color": "rgb(225, 234, 203)"
+        },
+        "start": {
+          "text": "Start a new journey",
+          "box": {
+            "x": 100.796875,
+            "y": 531.390625,
+            "width": 233.03125,
+            "height": 52,
+            "right": 333.828125,
+            "bottom": 583.390625
+          },
+          "rendered": true,
+          "disabled": false,
+          "fontSize": "16px",
+          "color": "rgb(7, 17, 10)",
+          "background": "rgb(164, 201, 106)",
+          "fullyInsideInitialViewport": true
+        },
+        "brokenImages": [],
+        "undersizedControls": []
+      },
+      "keyboardTabCount": 3,
+      "passed": true
+    },
+    {
+      "candidateId": "title-portland-beckons",
+      "candidateName": "Portland Beckons",
+      "width": 844,
+      "height": 390,
+      "mobile": true,
+      "routeHits": [
+        {
+          "url": "http://127.0.0.1:60795/assets/scenes/title-960.webp",
+          "fulfilledPath": "/Users/ama/The Portland Trail/tmp/splash-v5/preview-title-portland-beckons-960.webp",
+          "width": 960
+        },
+        {
+          "url": "http://127.0.0.1:60795/assets/scenes/title.webp",
+          "fulfilledPath": "/Users/ama/The Portland Trail/tmp/splash-v5/preview-title-portland-beckons.webp",
+          "width": 1536
+        }
+      ],
+      "screenshots": [
+        {
+          "kind": "full-page",
+          "path": "/Users/ama/The Portland Trail/docs/validation/splash-candidates-v5/title-portland-beckons-844x390.png"
+        },
+        {
+          "kind": "initial-viewport",
+          "path": "/Users/ama/The Portland Trail/docs/validation/splash-candidates-v5/title-portland-beckons-844x390-viewport.png"
+        }
+      ],
+      "checks": {
+        "candidateRouteHit": true,
+        "productionDimensions": true,
+        "loadedImages": true,
+        "noHorizontalOverflow": true,
+        "liveHeading": true,
+        "liveStart": true,
+        "controlMinimumSize": true,
+        "keyboardStartReachable": true,
+        "keyboardStartOpensNormalSetup": true,
+        "noBrowserErrors": true
+      },
+      "errors": [],
+      "layout": {
+        "viewport": {
+          "width": 844,
+          "height": 390
+        },
+        "page": {
+          "width": 844,
+          "height": 622
+        },
+        "titleBox": {
+          "x": 0,
+          "y": 45,
+          "width": 844,
+          "height": 525.78125,
+          "right": 844,
+          "bottom": 570.78125
+        },
+        "image": {
+          "box": {
+            "x": 0,
+            "y": 45,
+            "width": 844,
+            "height": 525.78125,
+            "right": 844,
+            "bottom": 570.78125
+          },
+          "currentSrc": "http://127.0.0.1:60795/assets/scenes/title-960.webp",
+          "naturalWidth": 960,
+          "naturalHeight": 640,
+          "complete": true,
+          "objectPosition": "50% 58%",
+          "filter": "saturate(0.75) contrast(1.05)",
+          "visibleSourceCrop": {
+            "left": 0,
+            "top": 24.333886255924146,
+            "right": 960,
+            "bottom": 622.3789099526067
+          }
+        },
+        "heading": {
+          "text": "The Portland\nTrail.",
+          "box": {
+            "x": 59.078125,
+            "y": 104.5,
+            "width": 482.390625,
+            "height": 120,
+            "right": 541.46875,
+            "bottom": 224.5
+          },
+          "rendered": true,
+          "fontSize": "48px",
+          "color": "rgb(225, 234, 203)"
+        },
+        "start": {
+          "text": "Start a new journey",
+          "box": {
+            "x": 59.078125,
+            "y": 357.28125,
+            "width": 233.03125,
+            "height": 52,
+            "right": 292.109375,
+            "bottom": 409.28125
+          },
+          "rendered": true,
+          "disabled": false,
+          "fontSize": "16px",
+          "color": "rgb(7, 17, 10)",
+          "background": "rgb(164, 201, 106)",
+          "fullyInsideInitialViewport": false
+        },
+        "brokenImages": [],
+        "undersizedControls": []
+      },
+      "keyboardTabCount": 3,
+      "passed": true
+    }
+  ],
+  "errors": [],
+  "cleanup": {
+    "browserClosed": true,
+    "serverExited": true
+  },
+  "passed": true,
+  "summary": {
+    "cases": 15,
+    "passedCases": 15,
+    "checks": 150,
+    "failedChecks": [],
+    "screenshots": 21,
+    "browserErrors": 0
+  }
+}

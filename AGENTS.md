@@ -70,12 +70,14 @@ New art must stay inside the existing style and contracts. Read `docs/handoff/AS
 
 1. **Style.** Green handheld-game pixel illustration on near-black: palette near ink `#07110A`, pine `#18331B`, moss `#426E35`, phosphor `#A4C96A`, with restrained amber accents. Pacific Northwest scenery, the same scruffy loaded van (`app/assets/sprites/van.png` is the reference silhouette), heavy consistent outlines, dry humor from props. No titles, captions, UI, watermarks or generated lettering; signs only if they are decorative and spelled correctly. The reusable style prompt is in `ASSET_BRIEF.txt`.
 2. **Size.** Opaque landscape masters, 1536×1024 (3:2), with the subject inside the central 75% width and 80% height so phone crops keep it. Road scenes leave the lower third clear for the animated van.
-3. **Masters.** Save each original master as `docs/handoff/graphics-vN/<scene-id>.png` in a new numbered folder (the next is `graphics-v5`), with a `README.md` and a `generation.json` listing id, tool, prompt and date, as `graphics-v2` and `graphics-v3` do. Masters are never edited afterwards.
+3. **Masters.** Save each original master as `docs/handoff/graphics-vN/<scene-id>.png` in a new numbered folder (the next is `graphics-v6`), with a `README.md` and a `generation.json` listing id, tool, prompt and date, as `graphics-v2` and `graphics-v3` do. Masters are never edited afterwards.
 4. **Pipeline.** Add the scene to `SCENES` in `app/scripts/prepare-assets.py` (source path and crop or `None`), run `npm run assets`, and look at `app/test-results/assets/scenes.png`. Never put files into `app/assets/` by hand; the script writes the WebP pair and the manifest.
 5. **Use.** Point a stop, region or encounter at the scene id in `app/src/data.js` (`scene: '<id>'`). New encounters are data: an entry in `EVENTS` with weight, optional `where` range, choices and numbers, plus its effect in `app/src/engine/events.js` and a test in `app/tests/events.test.js`; keep `npm run balance` inside its targets.
 6. **Check.** `npm test`, `npm run test:browser`, then look at the scene in the game at 390px and 1440px.
 
 The regions `pines` and `outskirts` and the encounters `sasquatch`, `toll_troll` and `brunch_line` now have dedicated graphics-v4 scenes. See [docs/handoff/graphics-v4/README.md](docs/handoff/graphics-v4/README.md) for the completed batch and [docs/art/2026-10-02-scene-brief-v4.md](docs/art/2026-10-02-scene-brief-v4.md) for its shared style block, steering words, prompts and acceptance checklist.
+
+Three intro alternatives are preserved in [docs/handoff/graphics-v5/README.md](docs/handoff/graphics-v5/README.md), with previews using the current title and controls. The user selected the first generated image, `title-road-ahead.png`, for the live `title` scene. Its source mapping uses no crop or sign repair in `prepare-assets.py`.
 
 ## Read and maintain these documents
 
@@ -90,7 +92,7 @@ All paths below are relative to this project root:
 | `docs/handoff/HANDOFF_TO_CODEX.txt` | Original rebuild priorities and acceptance criteria |
 | `docs/handoff/ASSET_BRIEF.txt` | Style and graphic-production contract |
 | `docs/handoff/findings.json` | 18 findings on the original app |
-| `docs/handoff/graphics-v1/` … `graphics-v4/` | Preserved generated masters with prompts |
+| `docs/handoff/graphics-v1/` … `graphics-v5/` | Preserved generated masters with prompts |
 | `docs/handoff/LOCAL_IMAGE_REVIEW.md` | Review of the original local images in `images/` |
 | `docs/validation/` | Validation records, balance measurements and screenshots |
 

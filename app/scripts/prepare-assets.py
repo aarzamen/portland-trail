@@ -12,7 +12,7 @@
     uv run app/scripts/prepare-assets.py --only scenes    or sprites, icons, font
 
 Paths come from this file's location, so it runs from any directory (`npm run assets` starts it in app/).
-Sources are only read: the scene JPEGs in images/, the masters in docs/handoff/graphics-v1 through -v4, and the
+Sources are only read: the scene JPEGs in images/, the masters in docs/handoff/graphics-v1 through -v5, and the
 glyph sheet app/scripts/pixel-font.txt. The versions above are pinned because the output bytes depend on them.
 
     app/assets/scenes/<id>.webp            crop, sign repairs, WebP quality 82, at most 1536 wide
@@ -63,7 +63,7 @@ def original(number: int) -> str:
 
 # Scene id: (source, crop as (left, top, right, bottom) or None), as in spec section 7.
 SCENES = {
-    'title': (original(17), (0, 235, 1024, 965)),
+    'title': ('docs/handoff/graphics-v5/title-road-ahead.png', None),
     'travel': (original(8), (0, 340, 1024, 940)),
     'departure': (original(5), None),
     'rest-stop': (original(11), None),
@@ -102,16 +102,6 @@ SCENES = {
 # coordinates) painted flat instead of `rect`, which then only places the lines; and `shadow`, a colour and an
 # [x, y] offset at which the lines are drawn first, for a sign whose own letters cast one.
 REPAIRS = {
-    'title': [
-        {
-            'was': 'GLOBL WARMING',
-            'rect': [874, 442, 979, 478],
-            'fill': '#8ccb7f',
-            'color': '#1e4317',
-            'lines': [{'text': 'GLOBAL', 'scale': 2}, {'text': 'WARMING', 'scale': 2}],
-            'gap': 2,
-        },
-    ],
     'victory': [
         {
             'was': 'WHITE STAG over garbled letters',

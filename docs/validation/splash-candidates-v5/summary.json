@@ -1,0 +1,281 @@
+{
+  "date": "2026-10-02T12:09:02.262Z",
+  "passed": true,
+  "cases": 20,
+  "checks": 205,
+  "screenshots": 28,
+  "browserErrors": 0,
+  "realDeviceBrowserUsed": false,
+  "sourceOrProductionAssetsWrittenByPreviewWorker": false,
+  "browserAndServersClosed": true,
+  "selectedCandidate": "title-road-ahead",
+  "recommendation": "The Road Ahead is the strongest overall title: the crew is readable at phone size, the route invites play, and the bridge, city and mountain add depth without competing with the live heading.",
+  "visualInspection": {
+    "completed": "All three 390x844 and 1440x900 candidate pairs, both integrated primary screenshots, and Road Ahead initial short-landscape viewport were opened and inspected.",
+    "candidates": [
+      {
+        "id": "title-road-ahead",
+        "name": "The Road Ahead",
+        "observation": "Strongest balance of adventure, approachable crew and world scale. The map gag and van remain visible on phones; live copy has clear contrast on desktop. Desktop cover cropping trims the topmost mountain detail but preserves the whole focal group."
+      },
+      {
+        "id": "title-five-travelers",
+        "name": "The Departure Crew",
+        "observation": "Warmest ensemble and cozy coffee shelter. Its foreground travelers occupy more of the desktop copy boundary and the fern/suitcase gag becomes small on phones; the existing overlay keeps text readable."
+      },
+      {
+        "id": "title-portland-beckons",
+        "name": "Portland Beckons",
+        "observation": "Clearest city and bridge destination, with good scale and wet reflections. Travelers face away and are smaller on phones, so the characters feel less immediately welcoming than Road Ahead."
+      }
+    ]
+  },
+  "limitations": [
+    {
+      "viewport": "844x390",
+      "source": "Existing title layout, shared by every candidate",
+      "observation": "Start is partly below the initial viewport; the crew lower bodies are also below the fold. Scrolling exposes the full art and control, with no horizontal overflow; keyboard Tab then Enter opens the normal setup.",
+      "startBottom": 409.28125,
+      "viewportHeight": 390,
+      "initialControlOverflow": 19.28125,
+      "documentHeight": 622
+    }
+  ],
+  "reports": [
+    {
+      "path": "/Users/ama/The Portland Trail/docs/validation/splash-candidates-v5/report.json",
+      "scope": "Saved candidate artwork intercepted into the current source title UI; no integration",
+      "summary": {
+        "cases": 15,
+        "passedCases": 15,
+        "checks": 150,
+        "failedChecks": [],
+        "screenshots": 21,
+        "browserErrors": 0
+      },
+      "cleanup": {
+        "browserClosed": true,
+        "serverExited": true
+      }
+    },
+    {
+      "path": "/Users/ama/The Portland Trail/docs/validation/splash-candidates-v5/selected-report.json",
+      "scope": "Selected Road Ahead production title assets loaded directly from current source server; no interception",
+      "requestInterception": false,
+      "summary": {
+        "cases": 5,
+        "passedCases": 5,
+        "checks": 55,
+        "failedChecks": [],
+        "screenshots": 7,
+        "browserErrors": 0
+      },
+      "cleanup": {
+        "browserClosed": true,
+        "serverExited": true
+      }
+    }
+  ],
+  "primaryScreenshots": [
+    "/Users/ama/The Portland Trail/docs/validation/splash-candidates-v5/selected-title-390x844.png",
+    "/Users/ama/The Portland Trail/docs/validation/splash-candidates-v5/selected-title-1440x900.png"
+  ],
+  "allScreenshots": [
+    {
+      "candidateId": "title-road-ahead",
+      "viewport": "390x844",
+      "integrated": false,
+      "kind": "full-page",
+      "path": "/Users/ama/The Portland Trail/docs/validation/splash-candidates-v5/title-road-ahead-390x844.png"
+    },
+    {
+      "candidateId": "title-road-ahead",
+      "viewport": "390x844",
+      "integrated": false,
+      "kind": "initial-viewport",
+      "path": "/Users/ama/The Portland Trail/docs/validation/splash-candidates-v5/title-road-ahead-390x844-viewport.png"
+    },
+    {
+      "candidateId": "title-road-ahead",
+      "viewport": "414x896",
+      "integrated": false,
+      "kind": "full-page",
+      "path": "/Users/ama/The Portland Trail/docs/validation/splash-candidates-v5/title-road-ahead-414x896.png"
+    },
+    {
+      "candidateId": "title-road-ahead",
+      "viewport": "430x932",
+      "integrated": false,
+      "kind": "full-page",
+      "path": "/Users/ama/The Portland Trail/docs/validation/splash-candidates-v5/title-road-ahead-430x932.png"
+    },
+    {
+      "candidateId": "title-road-ahead",
+      "viewport": "1440x900",
+      "integrated": false,
+      "kind": "full-page",
+      "path": "/Users/ama/The Portland Trail/docs/validation/splash-candidates-v5/title-road-ahead-1440x900.png"
+    },
+    {
+      "candidateId": "title-road-ahead",
+      "viewport": "844x390",
+      "integrated": false,
+      "kind": "full-page",
+      "path": "/Users/ama/The Portland Trail/docs/validation/splash-candidates-v5/title-road-ahead-844x390.png"
+    },
+    {
+      "candidateId": "title-road-ahead",
+      "viewport": "844x390",
+      "integrated": false,
+      "kind": "initial-viewport",
+      "path": "/Users/ama/The Portland Trail/docs/validation/splash-candidates-v5/title-road-ahead-844x390-viewport.png"
+    },
+    {
+      "candidateId": "title-five-travelers",
+      "viewport": "390x844",
+      "integrated": false,
+      "kind": "full-page",
+      "path": "/Users/ama/The Portland Trail/docs/validation/splash-candidates-v5/title-five-travelers-390x844.png"
+    },
+    {
+      "candidateId": "title-five-travelers",
+      "viewport": "390x844",
+      "integrated": false,
+      "kind": "initial-viewport",
+      "path": "/Users/ama/The Portland Trail/docs/validation/splash-candidates-v5/title-five-travelers-390x844-viewport.png"
+    },
+    {
+      "candidateId": "title-five-travelers",
+      "viewport": "414x896",
+      "integrated": false,
+      "kind": "full-page",
+      "path": "/Users/ama/The Portland Trail/docs/validation/splash-candidates-v5/title-five-travelers-414x896.png"
+    },
+    {
+      "candidateId": "title-five-travelers",
+      "viewport": "430x932",
+      "integrated": false,
+      "kind": "full-page",
+      "path": "/Users/ama/The Portland Trail/docs/validation/splash-candidates-v5/title-five-travelers-430x932.png"
+    },
+    {
+      "candidateId": "title-five-travelers",
+      "viewport": "1440x900",
+      "integrated": false,
+      "kind": "full-page",
+      "path": "/Users/ama/The Portland Trail/docs/validation/splash-candidates-v5/title-five-travelers-1440x900.png"
+    },
+    {
+      "candidateId": "title-five-travelers",
+      "viewport": "844x390",
+      "integrated": false,
+      "kind": "full-page",
+      "path": "/Users/ama/The Portland Trail/docs/validation/splash-candidates-v5/title-five-travelers-844x390.png"
+    },
+    {
+      "candidateId": "title-five-travelers",
+      "viewport": "844x390",
+      "integrated": false,
+      "kind": "initial-viewport",
+      "path": "/Users/ama/The Portland Trail/docs/validation/splash-candidates-v5/title-five-travelers-844x390-viewport.png"
+    },
+    {
+      "candidateId": "title-portland-beckons",
+      "viewport": "390x844",
+      "integrated": false,
+      "kind": "full-page",
+      "path": "/Users/ama/The Portland Trail/docs/validation/splash-candidates-v5/title-portland-beckons-390x844.png"
+    },
+    {
+      "candidateId": "title-portland-beckons",
+      "viewport": "390x844",
+      "integrated": false,
+      "kind": "initial-viewport",
+      "path": "/Users/ama/The Portland Trail/docs/validation/splash-candidates-v5/title-portland-beckons-390x844-viewport.png"
+    },
+    {
+      "candidateId": "title-portland-beckons",
+      "viewport": "414x896",
+      "integrated": false,
+      "kind": "full-page",
+      "path": "/Users/ama/The Portland Trail/docs/validation/splash-candidates-v5/title-portland-beckons-414x896.png"
+    },
+    {
+      "candidateId": "title-portland-beckons",
+      "viewport": "430x932",
+      "integrated": false,
+      "kind": "full-page",
+      "path": "/Users/ama/The Portland Trail/docs/validation/splash-candidates-v5/title-portland-beckons-430x932.png"
+    },
+    {
+      "candidateId": "title-portland-beckons",
+      "viewport": "1440x900",
+      "integrated": false,
+      "kind": "full-page",
+      "path": "/Users/ama/The Portland Trail/docs/validation/splash-candidates-v5/title-portland-beckons-1440x900.png"
+    },
+    {
+      "candidateId": "title-portland-beckons",
+      "viewport": "844x390",
+      "integrated": false,
+      "kind": "full-page",
+      "path": "/Users/ama/The Portland Trail/docs/validation/splash-candidates-v5/title-portland-beckons-844x390.png"
+    },
+    {
+      "candidateId": "title-portland-beckons",
+      "viewport": "844x390",
+      "integrated": false,
+      "kind": "initial-viewport",
+      "path": "/Users/ama/The Portland Trail/docs/validation/splash-candidates-v5/title-portland-beckons-844x390-viewport.png"
+    },
+    {
+      "candidateId": "title-road-ahead",
+      "viewport": "390x844",
+      "integrated": true,
+      "kind": "full-page",
+      "path": "/Users/ama/The Portland Trail/docs/validation/splash-candidates-v5/selected-title-390x844.png"
+    },
+    {
+      "candidateId": "title-road-ahead",
+      "viewport": "390x844",
+      "integrated": true,
+      "kind": "initial-viewport",
+      "path": "/Users/ama/The Portland Trail/docs/validation/splash-candidates-v5/selected-title-390x844-viewport.png"
+    },
+    {
+      "candidateId": "title-road-ahead",
+      "viewport": "414x896",
+      "integrated": true,
+      "kind": "full-page",
+      "path": "/Users/ama/The Portland Trail/docs/validation/splash-candidates-v5/selected-title-414x896.png"
+    },
+    {
+      "candidateId": "title-road-ahead",
+      "viewport": "430x932",
+      "integrated": true,
+      "kind": "full-page",
+      "path": "/Users/ama/The Portland Trail/docs/validation/splash-candidates-v5/selected-title-430x932.png"
+    },
+    {
+      "candidateId": "title-road-ahead",
+      "viewport": "1440x900",
+      "integrated": true,
+      "kind": "full-page",
+      "path": "/Users/ama/The Portland Trail/docs/validation/splash-candidates-v5/selected-title-1440x900.png"
+    },
+    {
+      "candidateId": "title-road-ahead",
+      "viewport": "844x390",
+      "integrated": true,
+      "kind": "full-page",
+      "path": "/Users/ama/The Portland Trail/docs/validation/splash-candidates-v5/selected-title-844x390.png"
+    },
+    {
+      "candidateId": "title-road-ahead",
+      "viewport": "844x390",
+      "integrated": true,
+      "kind": "initial-viewport",
+      "path": "/Users/ama/The Portland Trail/docs/validation/splash-candidates-v5/selected-title-844x390-viewport.png"
+    }
+  ]
+}

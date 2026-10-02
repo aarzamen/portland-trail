@@ -1026,81 +1026,25 @@
     },
     {
       "file": "scenes/title-960.webp",
-      "source": "images/the_portland_trail_00017.jpg",
-      "source_sha256": "75afc04e73755c5c401cfe1aea5156bb07049a3ce6e54160c4fc1c1a37901cff",
-      "crop": [
-        0,
-        235,
-        1024,
-        965
-      ],
-      "repairs": [
-        {
-          "was": "GLOBL WARMING",
-          "rect": [
-            874,
-            442,
-            979,
-            478
-          ],
-          "fill": "#8ccb7f",
-          "color": "#1e4317",
-          "lines": [
-            {
-              "text": "GLOBAL",
-              "scale": 2
-            },
-            {
-              "text": "WARMING",
-              "scale": 2
-            }
-          ],
-          "gap": 2
-        }
-      ],
+      "source": "docs/handoff/graphics-v5/title-road-ahead.png",
+      "source_sha256": "5c1170558afcd9cefccea5cc7d535b8912bd911a025f061048e45704ccc7ee56",
+      "crop": null,
+      "repairs": [],
       "width": 960,
-      "height": 684,
-      "bytes": 62744,
-      "sha256": "2758b5c0f1a71f2c7c06b9380753bac6548d003e6aac72ac1ef43e1ef724ab86"
+      "height": 640,
+      "bytes": 118676,
+      "sha256": "b230dd86a3bc9d6c6384bd5053d2018be7a4e7b92f4d3c7a04d39618fc052ef6"
     },
     {
       "file": "scenes/title.webp",
-      "source": "images/the_portland_trail_00017.jpg",
-      "source_sha256": "75afc04e73755c5c401cfe1aea5156bb07049a3ce6e54160c4fc1c1a37901cff",
-      "crop": [
-        0,
-        235,
-        1024,
-        965
-      ],
-      "repairs": [
-        {
-          "was": "GLOBL WARMING",
-          "rect": [
-            874,
-            442,
-            979,
-            478
-          ],
-          "fill": "#8ccb7f",
-          "color": "#1e4317",
-          "lines": [
-            {
-              "text": "GLOBAL",
-              "scale": 2
-            },
-            {
-              "text": "WARMING",
-              "scale": 2
-            }
-          ],
-          "gap": 2
-        }
-      ],
-      "width": 1024,
-      "height": 730,
-      "bytes": 77420,
-      "sha256": "3c65360279d179411cea55482d52207d291ceaf44d68689756ba1f011f8912ef"
+      "source": "docs/handoff/graphics-v5/title-road-ahead.png",
+      "source_sha256": "5c1170558afcd9cefccea5cc7d535b8912bd911a025f061048e45704ccc7ee56",
+      "crop": null,
+      "repairs": [],
+      "width": 1536,
+      "height": 1024,
+      "bytes": 255494,
+      "sha256": "8c1149c626249fed6993d311f43b10e524ca43e8d9906486e8120c4d294a21fc"
     },
     {
       "file": "scenes/toll-troll-960.webp",
