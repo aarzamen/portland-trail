@@ -1,0 +1,4172 @@
+{
+  "date": "2026-10-02",
+  "rules": {
+    "tests": 211,
+    "passed": 211,
+    "failed": 0
+  },
+  "typecheck": {
+    "passed": true
+  },
+  "browser": [
+    {
+      "suite": "browser-encounters",
+      "checks": 50,
+      "passed": true,
+      "failures": []
+    },
+    {
+      "suite": "browser-flow",
+      "checks": 192,
+      "passed": true,
+      "failures": []
+    },
+    {
+      "suite": "browser-journey",
+      "checks": 230,
+      "passed": true,
+      "failures": []
+    },
+    {
+      "suite": "browser-layout",
+      "checks": 249,
+      "passed": true,
+      "failures": []
+    },
+    {
+      "suite": "look",
+      "checks": 84,
+      "passed": true,
+      "failures": []
+    },
+    {
+      "suite": "browser-offline",
+      "checks": 30,
+      "passed": true,
+      "failures": []
+    }
+  ],
+  "focused": {
+    "date": "2026-10-02T11:00:46.192Z",
+    "passed": true,
+    "count": 230,
+    "failures": [],
+    "checks": [
+      {
+        "passed": true,
+        "label": "road-pines-390x664: no horizontal overflow",
+        "evidence": {
+          "width": 390,
+          "height": 664,
+          "scrollWidth": 390,
+          "broken": [],
+          "small": [],
+          "smallText": []
+        }
+      },
+      {
+        "passed": true,
+        "label": "road-pines-390x664: images load",
+        "evidence": []
+      },
+      {
+        "passed": true,
+        "label": "road-pines-390x664: controls >=44px",
+        "evidence": []
+      },
+      {
+        "passed": true,
+        "label": "road-pines-390x664: editable text >=16px",
+        "evidence": []
+      },
+      {
+        "passed": true,
+        "label": "road-pines-390x664: correct scene asset",
+        "evidence": "http://127.0.0.1:52035/assets/scenes/road-pines-960.webp"
+      },
+      {
+        "passed": true,
+        "label": "road-pines-390x664: responsive asset size",
+        "evidence": "http://127.0.0.1:52035/assets/scenes/road-pines-960.webp"
+      },
+      {
+        "passed": true,
+        "label": "road-pines-390x664: primary action in viewport",
+        "evidence": {
+          "x": 23,
+          "y": 414,
+          "width": 344,
+          "height": 48,
+          "bottom": 462,
+          "right": 367
+        }
+      },
+      {
+        "passed": true,
+        "label": "road-pines-390x664: van inside scene",
+        "evidence": {
+          "van": {
+            "x": 139.796875,
+            "y": 169.53125,
+            "width": 172.953125,
+            "height": 86.46875,
+            "bottom": 256,
+            "right": 312.75
+          },
+          "scene": {
+            "x": 11,
+            "y": 84,
+            "width": 368,
+            "height": 200,
+            "bottom": 284,
+            "right": 379
+          }
+        }
+      },
+      {
+        "passed": true,
+        "label": "road-pines-390x664: no browser errors",
+        "evidence": []
+      },
+      {
+        "passed": true,
+        "label": "road-pines-414x715: no horizontal overflow",
+        "evidence": {
+          "width": 414,
+          "height": 715,
+          "scrollWidth": 414,
+          "broken": [],
+          "small": [],
+          "smallText": []
+        }
+      },
+      {
+        "passed": true,
+        "label": "road-pines-414x715: images load",
+        "evidence": []
+      },
+      {
+        "passed": true,
+        "label": "road-pines-414x715: controls >=44px",
+        "evidence": []
+      },
+      {
+        "passed": true,
+        "label": "road-pines-414x715: editable text >=16px",
+        "evidence": []
+      },
+      {
+        "passed": true,
+        "label": "road-pines-414x715: correct scene asset",
+        "evidence": "http://127.0.0.1:52035/assets/scenes/road-pines-960.webp"
+      },
+      {
+        "passed": true,
+        "label": "road-pines-414x715: responsive asset size",
+        "evidence": "http://127.0.0.1:52035/assets/scenes/road-pines-960.webp"
+      },
+      {
+        "passed": true,
+        "label": "road-pines-414x715: primary action in viewport",
+        "evidence": {
+          "x": 23,
+          "y": 414,
+          "width": 368,
+          "height": 48,
+          "bottom": 462,
+          "right": 391
+        }
+      },
+      {
+        "passed": true,
+        "label": "road-pines-414x715: van inside scene",
+        "evidence": {
+          "van": {
+            "x": 148.1875,
+            "y": 163.890625,
+            "width": 184.234375,
+            "height": 92.109375,
+            "bottom": 256,
+            "right": 332.421875
+          },
+          "scene": {
+            "x": 11,
+            "y": 84,
+            "width": 392,
+            "height": 200,
+            "bottom": 284,
+            "right": 403
+          }
+        }
+      },
+      {
+        "passed": true,
+        "label": "road-pines-414x715: no browser errors",
+        "evidence": []
+      },
+      {
+        "passed": true,
+        "label": "road-pines-430x739: no horizontal overflow",
+        "evidence": {
+          "width": 430,
+          "height": 739,
+          "scrollWidth": 430,
+          "broken": [],
+          "small": [],
+          "smallText": []
+        }
+      },
+      {
+        "passed": true,
+        "label": "road-pines-430x739: images load",
+        "evidence": []
+      },
+      {
+        "passed": true,
+        "label": "road-pines-430x739: controls >=44px",
+        "evidence": []
+      },
+      {
+        "passed": true,
+        "label": "road-pines-430x739: editable text >=16px",
+        "evidence": []
+      },
+      {
+        "passed": true,
+        "label": "road-pines-430x739: correct scene asset",
+        "evidence": "http://127.0.0.1:52035/assets/scenes/road-pines-960.webp"
+      },
+      {
+        "passed": true,
+        "label": "road-pines-430x739: responsive asset size",
+        "evidence": "http://127.0.0.1:52035/assets/scenes/road-pines-960.webp"
+      },
+      {
+        "passed": true,
+        "label": "road-pines-430x739: primary action in viewport",
+        "evidence": {
+          "x": 23,
+          "y": 414,
+          "width": 384,
+          "height": 48,
+          "bottom": 462,
+          "right": 407
+        }
+      },
+      {
+        "passed": true,
+        "label": "road-pines-430x739: van inside scene",
+        "evidence": {
+          "van": {
+            "x": 153.796875,
+            "y": 160.125,
+            "width": 191.75,
+            "height": 95.875,
+            "bottom": 256,
+            "right": 345.546875
+          },
+          "scene": {
+            "x": 11,
+            "y": 84,
+            "width": 408,
+            "height": 200,
+            "bottom": 284,
+            "right": 419
+          }
+        }
+      },
+      {
+        "passed": true,
+        "label": "road-pines-430x739: no browser errors",
+        "evidence": []
+      },
+      {
+        "passed": true,
+        "label": "road-pines-1440x900: no horizontal overflow",
+        "evidence": {
+          "width": 1440,
+          "height": 900,
+          "scrollWidth": 1440,
+          "broken": [],
+          "small": [],
+          "smallText": []
+        }
+      },
+      {
+        "passed": true,
+        "label": "road-pines-1440x900: images load",
+        "evidence": []
+      },
+      {
+        "passed": true,
+        "label": "road-pines-1440x900: correct scene asset",
+        "evidence": "http://127.0.0.1:52035/assets/scenes/road-pines.webp"
+      },
+      {
+        "passed": true,
+        "label": "road-pines-1440x900: responsive asset size",
+        "evidence": "http://127.0.0.1:52035/assets/scenes/road-pines.webp"
+      },
+      {
+        "passed": true,
+        "label": "road-pines-1440x900: primary action in viewport",
+        "evidence": {
+          "x": 601.5,
+          "y": 593.6875,
+          "width": 340,
+          "height": 52,
+          "bottom": 645.6875,
+          "right": 941.5
+        }
+      },
+      {
+        "passed": true,
+        "label": "road-pines-1440x900: van inside scene",
+        "evidence": {
+          "van": {
+            "x": 429.40625,
+            "y": 329.1875,
+            "width": 300.953125,
+            "height": 150.46875,
+            "bottom": 479.65625,
+            "right": 730.359375
+          },
+          "scene": {
+            "x": 25,
+            "y": 101.25,
+            "width": 940.5,
+            "height": 440,
+            "bottom": 541.25,
+            "right": 965.5
+          }
+        }
+      },
+      {
+        "passed": true,
+        "label": "road-pines-1440x900: no browser errors",
+        "evidence": []
+      },
+      {
+        "passed": true,
+        "label": "road-pines-844x390: no horizontal overflow",
+        "evidence": {
+          "width": 844,
+          "height": 390,
+          "scrollWidth": 844,
+          "broken": [],
+          "small": [],
+          "smallText": []
+        }
+      },
+      {
+        "passed": true,
+        "label": "road-pines-844x390: images load",
+        "evidence": []
+      },
+      {
+        "passed": true,
+        "label": "road-pines-844x390: controls >=44px",
+        "evidence": []
+      },
+      {
+        "passed": true,
+        "label": "road-pines-844x390: editable text >=16px",
+        "evidence": []
+      },
+      {
+        "passed": true,
+        "label": "road-pines-844x390: correct scene asset",
+        "evidence": "http://127.0.0.1:52035/assets/scenes/road-pines-960.webp"
+      },
+      {
+        "passed": true,
+        "label": "road-pines-844x390: responsive asset size",
+        "evidence": "http://127.0.0.1:52035/assets/scenes/road-pines-960.webp"
+      },
+      {
+        "passed": true,
+        "label": "road-pines-844x390: primary action in viewport",
+        "evidence": {
+          "x": 405.453125,
+          "y": 171.1875,
+          "width": 413.53125,
+          "height": 44,
+          "bottom": 215.1875,
+          "right": 818.984375
+        }
+      },
+      {
+        "passed": true,
+        "label": "road-pines-844x390: van inside scene",
+        "evidence": {
+          "van": {
+            "x": 165.171875,
+            "y": 168.65625,
+            "width": 171.203125,
+            "height": 85.59375,
+            "bottom": 254.25,
+            "right": 336.375
+          },
+          "scene": {
+            "x": 13,
+            "y": 73,
+            "width": 380.453125,
+            "height": 210.75,
+            "bottom": 283.75,
+            "right": 393.453125
+          }
+        }
+      },
+      {
+        "passed": true,
+        "label": "road-pines-844x390: no browser errors",
+        "evidence": []
+      },
+      {
+        "passed": true,
+        "label": "road-outskirts-390x664: no horizontal overflow",
+        "evidence": {
+          "width": 390,
+          "height": 664,
+          "scrollWidth": 390,
+          "broken": [],
+          "small": [],
+          "smallText": []
+        }
+      },
+      {
+        "passed": true,
+        "label": "road-outskirts-390x664: images load",
+        "evidence": []
+      },
+      {
+        "passed": true,
+        "label": "road-outskirts-390x664: controls >=44px",
+        "evidence": []
+      },
+      {
+        "passed": true,
+        "label": "road-outskirts-390x664: editable text >=16px",
+        "evidence": []
+      },
+      {
+        "passed": true,
+        "label": "road-outskirts-390x664: correct scene asset",
+        "evidence": "http://127.0.0.1:52035/assets/scenes/road-outskirts-960.webp"
+      },
+      {
+        "passed": true,
+        "label": "road-outskirts-390x664: responsive asset size",
+        "evidence": "http://127.0.0.1:52035/assets/scenes/road-outskirts-960.webp"
+      },
+      {
+        "passed": true,
+        "label": "road-outskirts-390x664: primary action in viewport",
+        "evidence": {
+          "x": 23,
+          "y": 414,
+          "width": 344,
+          "height": 48,
+          "bottom": 462,
+          "right": 367
+        }
+      },
+      {
+        "passed": true,
+        "label": "road-outskirts-390x664: van inside scene",
+        "evidence": {
+          "van": {
+            "x": 139.796875,
+            "y": 169.53125,
+            "width": 172.953125,
+            "height": 86.46875,
+            "bottom": 256,
+            "right": 312.75
+          },
+          "scene": {
+            "x": 11,
+            "y": 84,
+            "width": 368,
+            "height": 200,
+            "bottom": 284,
+            "right": 379
+          }
+        }
+      },
+      {
+        "passed": true,
+        "label": "road-outskirts-390x664: no browser errors",
+        "evidence": []
+      },
+      {
+        "passed": true,
+        "label": "road-outskirts-414x715: no horizontal overflow",
+        "evidence": {
+          "width": 414,
+          "height": 715,
+          "scrollWidth": 414,
+          "broken": [],
+          "small": [],
+          "smallText": []
+        }
+      },
+      {
+        "passed": true,
+        "label": "road-outskirts-414x715: images load",
+        "evidence": []
+      },
+      {
+        "passed": true,
+        "label": "road-outskirts-414x715: controls >=44px",
+        "evidence": []
+      },
+      {
+        "passed": true,
+        "label": "road-outskirts-414x715: editable text >=16px",
+        "evidence": []
+      },
+      {
+        "passed": true,
+        "label": "road-outskirts-414x715: correct scene asset",
+        "evidence": "http://127.0.0.1:52035/assets/scenes/road-outskirts-960.webp"
+      },
+      {
+        "passed": true,
+        "label": "road-outskirts-414x715: responsive asset size",
+        "evidence": "http://127.0.0.1:52035/assets/scenes/road-outskirts-960.webp"
+      },
+      {
+        "passed": true,
+        "label": "road-outskirts-414x715: primary action in viewport",
+        "evidence": {
+          "x": 23,
+          "y": 393,
+          "width": 368,
+          "height": 48,
+          "bottom": 441,
+          "right": 391
+        }
+      },
+      {
+        "passed": true,
+        "label": "road-outskirts-414x715: van inside scene",
+        "evidence": {
+          "van": {
+            "x": 148.1875,
+            "y": 163.890625,
+            "width": 184.234375,
+            "height": 92.109375,
+            "bottom": 256,
+            "right": 332.421875
+          },
+          "scene": {
+            "x": 11,
+            "y": 84,
+            "width": 392,
+            "height": 200,
+            "bottom": 284,
+            "right": 403
+          }
+        }
+      },
+      {
+        "passed": true,
+        "label": "road-outskirts-414x715: no browser errors",
+        "evidence": []
+      },
+      {
+        "passed": true,
+        "label": "road-outskirts-430x739: no horizontal overflow",
+        "evidence": {
+          "width": 430,
+          "height": 739,
+          "scrollWidth": 430,
+          "broken": [],
+          "small": [],
+          "smallText": []
+        }
+      },
+      {
+        "passed": true,
+        "label": "road-outskirts-430x739: images load",
+        "evidence": []
+      },
+      {
+        "passed": true,
+        "label": "road-outskirts-430x739: controls >=44px",
+        "evidence": []
+      },
+      {
+        "passed": true,
+        "label": "road-outskirts-430x739: editable text >=16px",
+        "evidence": []
+      },
+      {
+        "passed": true,
+        "label": "road-outskirts-430x739: correct scene asset",
+        "evidence": "http://127.0.0.1:52035/assets/scenes/road-outskirts-960.webp"
+      },
+      {
+        "passed": true,
+        "label": "road-outskirts-430x739: responsive asset size",
+        "evidence": "http://127.0.0.1:52035/assets/scenes/road-outskirts-960.webp"
+      },
+      {
+        "passed": true,
+        "label": "road-outskirts-430x739: primary action in viewport",
+        "evidence": {
+          "x": 23,
+          "y": 393,
+          "width": 384,
+          "height": 48,
+          "bottom": 441,
+          "right": 407
+        }
+      },
+      {
+        "passed": true,
+        "label": "road-outskirts-430x739: van inside scene",
+        "evidence": {
+          "van": {
+            "x": 153.796875,
+            "y": 160.125,
+            "width": 191.75,
+            "height": 95.875,
+            "bottom": 256,
+            "right": 345.546875
+          },
+          "scene": {
+            "x": 11,
+            "y": 84,
+            "width": 408,
+            "height": 200,
+            "bottom": 284,
+            "right": 419
+          }
+        }
+      },
+      {
+        "passed": true,
+        "label": "road-outskirts-430x739: no browser errors",
+        "evidence": []
+      },
+      {
+        "passed": true,
+        "label": "road-outskirts-1440x900: no horizontal overflow",
+        "evidence": {
+          "width": 1440,
+          "height": 900,
+          "scrollWidth": 1440,
+          "broken": [],
+          "small": [],
+          "smallText": []
+        }
+      },
+      {
+        "passed": true,
+        "label": "road-outskirts-1440x900: images load",
+        "evidence": []
+      },
+      {
+        "passed": true,
+        "label": "road-outskirts-1440x900: correct scene asset",
+        "evidence": "http://127.0.0.1:52035/assets/scenes/road-outskirts.webp"
+      },
+      {
+        "passed": true,
+        "label": "road-outskirts-1440x900: responsive asset size",
+        "evidence": "http://127.0.0.1:52035/assets/scenes/road-outskirts.webp"
+      },
+      {
+        "passed": true,
+        "label": "road-outskirts-1440x900: primary action in viewport",
+        "evidence": {
+          "x": 601.5,
+          "y": 593.6875,
+          "width": 340,
+          "height": 52,
+          "bottom": 645.6875,
+          "right": 941.5
+        }
+      },
+      {
+        "passed": true,
+        "label": "road-outskirts-1440x900: van inside scene",
+        "evidence": {
+          "van": {
+            "x": 429.40625,
+            "y": 329.1875,
+            "width": 300.953125,
+            "height": 150.46875,
+            "bottom": 479.65625,
+            "right": 730.359375
+          },
+          "scene": {
+            "x": 25,
+            "y": 101.25,
+            "width": 940.5,
+            "height": 440,
+            "bottom": 541.25,
+            "right": 965.5
+          }
+        }
+      },
+      {
+        "passed": true,
+        "label": "road-outskirts-1440x900: no browser errors",
+        "evidence": []
+      },
+      {
+        "passed": true,
+        "label": "road-outskirts-844x390: no horizontal overflow",
+        "evidence": {
+          "width": 844,
+          "height": 390,
+          "scrollWidth": 844,
+          "broken": [],
+          "small": [],
+          "smallText": []
+        }
+      },
+      {
+        "passed": true,
+        "label": "road-outskirts-844x390: images load",
+        "evidence": []
+      },
+      {
+        "passed": true,
+        "label": "road-outskirts-844x390: controls >=44px",
+        "evidence": []
+      },
+      {
+        "passed": true,
+        "label": "road-outskirts-844x390: editable text >=16px",
+        "evidence": []
+      },
+      {
+        "passed": true,
+        "label": "road-outskirts-844x390: correct scene asset",
+        "evidence": "http://127.0.0.1:52035/assets/scenes/road-outskirts-960.webp"
+      },
+      {
+        "passed": true,
+        "label": "road-outskirts-844x390: responsive asset size",
+        "evidence": "http://127.0.0.1:52035/assets/scenes/road-outskirts-960.webp"
+      },
+      {
+        "passed": true,
+        "label": "road-outskirts-844x390: primary action in viewport",
+        "evidence": {
+          "x": 405.453125,
+          "y": 141.1875,
+          "width": 413.53125,
+          "height": 44,
+          "bottom": 185.1875,
+          "right": 818.984375
+        }
+      },
+      {
+        "passed": true,
+        "label": "road-outskirts-844x390: van inside scene",
+        "evidence": {
+          "van": {
+            "x": 165.171875,
+            "y": 142.859375,
+            "width": 171.203125,
+            "height": 85.59375,
+            "bottom": 228.453125,
+            "right": 336.375
+          },
+          "scene": {
+            "x": 13,
+            "y": 73,
+            "width": 380.453125,
+            "height": 180.75,
+            "bottom": 253.75,
+            "right": 393.453125
+          }
+        }
+      },
+      {
+        "passed": true,
+        "label": "road-outskirts-844x390: no browser errors",
+        "evidence": []
+      },
+      {
+        "passed": true,
+        "label": "sasquatch-390x664: no horizontal overflow",
+        "evidence": {
+          "width": 390,
+          "height": 664,
+          "scrollWidth": 390,
+          "broken": [],
+          "small": [],
+          "smallText": []
+        }
+      },
+      {
+        "passed": true,
+        "label": "sasquatch-390x664: images load",
+        "evidence": []
+      },
+      {
+        "passed": true,
+        "label": "sasquatch-390x664: controls >=44px",
+        "evidence": []
+      },
+      {
+        "passed": true,
+        "label": "sasquatch-390x664: editable text >=16px",
+        "evidence": []
+      },
+      {
+        "passed": true,
+        "label": "sasquatch-390x664: correct scene asset",
+        "evidence": "http://127.0.0.1:52035/assets/scenes/sasquatch-960.webp"
+      },
+      {
+        "passed": true,
+        "label": "sasquatch-390x664: responsive asset size",
+        "evidence": "http://127.0.0.1:52035/assets/scenes/sasquatch-960.webp"
+      },
+      {
+        "passed": true,
+        "label": "sasquatch-390x664: every choice in viewport",
+        "evidence": [
+          {
+            "key": "event:photo",
+            "disabled": false,
+            "x": 35,
+            "y": 404.359375,
+            "bottom": 452.359375,
+            "right": 355,
+            "width": 320,
+            "height": 48
+          },
+          {
+            "key": "event:chase",
+            "disabled": false,
+            "x": 35,
+            "y": 460.359375,
+            "bottom": 508.359375,
+            "right": 355,
+            "width": 320,
+            "height": 48
+          },
+          {
+            "key": "event:leave",
+            "disabled": false,
+            "x": 35,
+            "y": 516.359375,
+            "bottom": 564.359375,
+            "right": 355,
+            "width": 320,
+            "height": 48
+          }
+        ]
+      },
+      {
+        "passed": true,
+        "label": "sasquatch-390x664: focus starts inside encounter",
+        "evidence": {
+          "inside": true,
+          "key": "event:photo",
+          "tag": "BUTTON"
+        }
+      },
+      {
+        "passed": true,
+        "label": "sasquatch-390x664: Tab retains dialog focus"
+      },
+      {
+        "passed": true,
+        "label": "sasquatch-390x664: no browser errors",
+        "evidence": []
+      },
+      {
+        "passed": true,
+        "label": "sasquatch-414x715: no horizontal overflow",
+        "evidence": {
+          "width": 414,
+          "height": 715,
+          "scrollWidth": 414,
+          "broken": [],
+          "small": [],
+          "smallText": []
+        }
+      },
+      {
+        "passed": true,
+        "label": "sasquatch-414x715: images load",
+        "evidence": []
+      },
+      {
+        "passed": true,
+        "label": "sasquatch-414x715: controls >=44px",
+        "evidence": []
+      },
+      {
+        "passed": true,
+        "label": "sasquatch-414x715: editable text >=16px",
+        "evidence": []
+      },
+      {
+        "passed": true,
+        "label": "sasquatch-414x715: correct scene asset",
+        "evidence": "http://127.0.0.1:52035/assets/scenes/sasquatch-960.webp"
+      },
+      {
+        "passed": true,
+        "label": "sasquatch-414x715: responsive asset size",
+        "evidence": "http://127.0.0.1:52035/assets/scenes/sasquatch-960.webp"
+      },
+      {
+        "passed": true,
+        "label": "sasquatch-414x715: every choice in viewport",
+        "evidence": [
+          {
+            "key": "event:photo",
+            "disabled": false,
+            "x": 35,
+            "y": 435.71875,
+            "bottom": 483.71875,
+            "right": 379,
+            "width": 344,
+            "height": 48
+          },
+          {
+            "key": "event:chase",
+            "disabled": false,
+            "x": 35,
+            "y": 491.71875,
+            "bottom": 539.71875,
+            "right": 379,
+            "width": 344,
+            "height": 48
+          },
+          {
+            "key": "event:leave",
+            "disabled": false,
+            "x": 35,
+            "y": 547.71875,
+            "bottom": 595.71875,
+            "right": 379,
+            "width": 344,
+            "height": 48
+          }
+        ]
+      },
+      {
+        "passed": true,
+        "label": "sasquatch-414x715: focus starts inside encounter",
+        "evidence": {
+          "inside": true,
+          "key": "event:photo",
+          "tag": "BUTTON"
+        }
+      },
+      {
+        "passed": true,
+        "label": "sasquatch-414x715: Tab retains dialog focus"
+      },
+      {
+        "passed": true,
+        "label": "sasquatch-414x715: no browser errors",
+        "evidence": []
+      },
+      {
+        "passed": true,
+        "label": "sasquatch-430x739: no horizontal overflow",
+        "evidence": {
+          "width": 430,
+          "height": 739,
+          "scrollWidth": 430,
+          "broken": [],
+          "small": [],
+          "smallText": []
+        }
+      },
+      {
+        "passed": true,
+        "label": "sasquatch-430x739: images load",
+        "evidence": []
+      },
+      {
+        "passed": true,
+        "label": "sasquatch-430x739: controls >=44px",
+        "evidence": []
+      },
+      {
+        "passed": true,
+        "label": "sasquatch-430x739: editable text >=16px",
+        "evidence": []
+      },
+      {
+        "passed": true,
+        "label": "sasquatch-430x739: correct scene asset",
+        "evidence": "http://127.0.0.1:52035/assets/scenes/sasquatch-960.webp"
+      },
+      {
+        "passed": true,
+        "label": "sasquatch-430x739: responsive asset size",
+        "evidence": "http://127.0.0.1:52035/assets/scenes/sasquatch-960.webp"
+      },
+      {
+        "passed": true,
+        "label": "sasquatch-430x739: every choice in viewport",
+        "evidence": [
+          {
+            "key": "event:photo",
+            "disabled": false,
+            "x": 35,
+            "y": 450.484375,
+            "bottom": 498.484375,
+            "right": 395,
+            "width": 360,
+            "height": 48
+          },
+          {
+            "key": "event:chase",
+            "disabled": false,
+            "x": 35,
+            "y": 506.484375,
+            "bottom": 554.484375,
+            "right": 395,
+            "width": 360,
+            "height": 48
+          },
+          {
+            "key": "event:leave",
+            "disabled": false,
+            "x": 35,
+            "y": 562.484375,
+            "bottom": 610.484375,
+            "right": 395,
+            "width": 360,
+            "height": 48
+          }
+        ]
+      },
+      {
+        "passed": true,
+        "label": "sasquatch-430x739: focus starts inside encounter",
+        "evidence": {
+          "inside": true,
+          "key": "event:photo",
+          "tag": "BUTTON"
+        }
+      },
+      {
+        "passed": true,
+        "label": "sasquatch-430x739: Tab retains dialog focus"
+      },
+      {
+        "passed": true,
+        "label": "sasquatch-430x739: no browser errors",
+        "evidence": []
+      },
+      {
+        "passed": true,
+        "label": "sasquatch-1440x900: no horizontal overflow",
+        "evidence": {
+          "width": 1440,
+          "height": 900,
+          "scrollWidth": 1440,
+          "broken": [],
+          "small": [],
+          "smallText": []
+        }
+      },
+      {
+        "passed": true,
+        "label": "sasquatch-1440x900: images load",
+        "evidence": []
+      },
+      {
+        "passed": true,
+        "label": "sasquatch-1440x900: correct scene asset",
+        "evidence": "http://127.0.0.1:52035/assets/scenes/sasquatch.webp"
+      },
+      {
+        "passed": true,
+        "label": "sasquatch-1440x900: responsive asset size",
+        "evidence": "http://127.0.0.1:52035/assets/scenes/sasquatch.webp"
+      },
+      {
+        "passed": true,
+        "label": "sasquatch-1440x900: every choice in viewport",
+        "evidence": [
+          {
+            "key": "event:photo",
+            "disabled": false,
+            "x": 466,
+            "y": 572,
+            "bottom": 620,
+            "right": 974,
+            "width": 508,
+            "height": 48
+          },
+          {
+            "key": "event:chase",
+            "disabled": false,
+            "x": 466,
+            "y": 628,
+            "bottom": 676,
+            "right": 974,
+            "width": 508,
+            "height": 48
+          },
+          {
+            "key": "event:leave",
+            "disabled": false,
+            "x": 466,
+            "y": 684,
+            "bottom": 732,
+            "right": 974,
+            "width": 508,
+            "height": 48
+          }
+        ]
+      },
+      {
+        "passed": true,
+        "label": "sasquatch-1440x900: focus starts inside encounter",
+        "evidence": {
+          "inside": true,
+          "key": "event:photo",
+          "tag": "BUTTON"
+        }
+      },
+      {
+        "passed": true,
+        "label": "sasquatch-1440x900: Tab retains dialog focus"
+      },
+      {
+        "passed": true,
+        "label": "sasquatch-1440x900: no browser errors",
+        "evidence": []
+      },
+      {
+        "passed": true,
+        "label": "sasquatch-844x390: no horizontal overflow",
+        "evidence": {
+          "width": 844,
+          "height": 390,
+          "scrollWidth": 844,
+          "broken": [],
+          "small": [],
+          "smallText": []
+        }
+      },
+      {
+        "passed": true,
+        "label": "sasquatch-844x390: images load",
+        "evidence": []
+      },
+      {
+        "passed": true,
+        "label": "sasquatch-844x390: controls >=44px",
+        "evidence": []
+      },
+      {
+        "passed": true,
+        "label": "sasquatch-844x390: editable text >=16px",
+        "evidence": []
+      },
+      {
+        "passed": true,
+        "label": "sasquatch-844x390: correct scene asset",
+        "evidence": "http://127.0.0.1:52035/assets/scenes/sasquatch-960.webp"
+      },
+      {
+        "passed": true,
+        "label": "sasquatch-844x390: responsive asset size",
+        "evidence": "http://127.0.0.1:52035/assets/scenes/sasquatch-960.webp"
+      },
+      {
+        "passed": true,
+        "label": "sasquatch-844x390: every choice in viewport",
+        "evidence": [
+          {
+            "key": "event:photo",
+            "disabled": false,
+            "x": 307.109375,
+            "y": 180,
+            "bottom": 224,
+            "right": 766,
+            "width": 458.890625,
+            "height": 44
+          },
+          {
+            "key": "event:chase",
+            "disabled": false,
+            "x": 307.109375,
+            "y": 230,
+            "bottom": 274,
+            "right": 766,
+            "width": 458.890625,
+            "height": 44
+          },
+          {
+            "key": "event:leave",
+            "disabled": false,
+            "x": 307.109375,
+            "y": 280,
+            "bottom": 324,
+            "right": 766,
+            "width": 458.890625,
+            "height": 44
+          }
+        ]
+      },
+      {
+        "passed": true,
+        "label": "sasquatch-844x390: focus starts inside encounter",
+        "evidence": {
+          "inside": true,
+          "key": "event:photo",
+          "tag": "BUTTON"
+        }
+      },
+      {
+        "passed": true,
+        "label": "sasquatch-844x390: Tab retains dialog focus"
+      },
+      {
+        "passed": true,
+        "label": "sasquatch-844x390: no browser errors",
+        "evidence": []
+      },
+      {
+        "passed": true,
+        "label": "toll-troll-390x664: no horizontal overflow",
+        "evidence": {
+          "width": 390,
+          "height": 664,
+          "scrollWidth": 390,
+          "broken": [],
+          "small": [],
+          "smallText": []
+        }
+      },
+      {
+        "passed": true,
+        "label": "toll-troll-390x664: images load",
+        "evidence": []
+      },
+      {
+        "passed": true,
+        "label": "toll-troll-390x664: controls >=44px",
+        "evidence": []
+      },
+      {
+        "passed": true,
+        "label": "toll-troll-390x664: editable text >=16px",
+        "evidence": []
+      },
+      {
+        "passed": true,
+        "label": "toll-troll-390x664: correct scene asset",
+        "evidence": "http://127.0.0.1:52035/assets/scenes/toll-troll-960.webp"
+      },
+      {
+        "passed": true,
+        "label": "toll-troll-390x664: responsive asset size",
+        "evidence": "http://127.0.0.1:52035/assets/scenes/toll-troll-960.webp"
+      },
+      {
+        "passed": true,
+        "label": "toll-troll-390x664: every choice in viewport",
+        "evidence": [
+          {
+            "key": "event:pay",
+            "disabled": false,
+            "x": 35,
+            "y": 427.859375,
+            "bottom": 475.859375,
+            "right": 355,
+            "width": 320,
+            "height": 48
+          },
+          {
+            "key": "event:riddle",
+            "disabled": false,
+            "x": 35,
+            "y": 483.859375,
+            "bottom": 531.859375,
+            "right": 355,
+            "width": 320,
+            "height": 48
+          }
+        ]
+      },
+      {
+        "passed": true,
+        "label": "toll-troll-390x664: focus starts inside encounter",
+        "evidence": {
+          "inside": true,
+          "key": "event:pay",
+          "tag": "BUTTON"
+        }
+      },
+      {
+        "passed": true,
+        "label": "toll-troll-390x664: Tab retains dialog focus"
+      },
+      {
+        "passed": true,
+        "label": "toll-troll-390x664: no browser errors",
+        "evidence": []
+      },
+      {
+        "passed": true,
+        "label": "toll-troll-414x715: no horizontal overflow",
+        "evidence": {
+          "width": 414,
+          "height": 715,
+          "scrollWidth": 414,
+          "broken": [],
+          "small": [],
+          "smallText": []
+        }
+      },
+      {
+        "passed": true,
+        "label": "toll-troll-414x715: images load",
+        "evidence": []
+      },
+      {
+        "passed": true,
+        "label": "toll-troll-414x715: controls >=44px",
+        "evidence": []
+      },
+      {
+        "passed": true,
+        "label": "toll-troll-414x715: editable text >=16px",
+        "evidence": []
+      },
+      {
+        "passed": true,
+        "label": "toll-troll-414x715: correct scene asset",
+        "evidence": "http://127.0.0.1:52035/assets/scenes/toll-troll-960.webp"
+      },
+      {
+        "passed": true,
+        "label": "toll-troll-414x715: responsive asset size",
+        "evidence": "http://127.0.0.1:52035/assets/scenes/toll-troll-960.webp"
+      },
+      {
+        "passed": true,
+        "label": "toll-troll-414x715: every choice in viewport",
+        "evidence": [
+          {
+            "key": "event:pay",
+            "disabled": false,
+            "x": 35,
+            "y": 459.21875,
+            "bottom": 507.21875,
+            "right": 379,
+            "width": 344,
+            "height": 48
+          },
+          {
+            "key": "event:riddle",
+            "disabled": false,
+            "x": 35,
+            "y": 515.21875,
+            "bottom": 563.21875,
+            "right": 379,
+            "width": 344,
+            "height": 48
+          }
+        ]
+      },
+      {
+        "passed": true,
+        "label": "toll-troll-414x715: focus starts inside encounter",
+        "evidence": {
+          "inside": true,
+          "key": "event:pay",
+          "tag": "BUTTON"
+        }
+      },
+      {
+        "passed": true,
+        "label": "toll-troll-414x715: Tab retains dialog focus"
+      },
+      {
+        "passed": true,
+        "label": "toll-troll-414x715: no browser errors",
+        "evidence": []
+      },
+      {
+        "passed": true,
+        "label": "toll-troll-430x739: no horizontal overflow",
+        "evidence": {
+          "width": 430,
+          "height": 739,
+          "scrollWidth": 430,
+          "broken": [],
+          "small": [],
+          "smallText": []
+        }
+      },
+      {
+        "passed": true,
+        "label": "toll-troll-430x739: images load",
+        "evidence": []
+      },
+      {
+        "passed": true,
+        "label": "toll-troll-430x739: controls >=44px",
+        "evidence": []
+      },
+      {
+        "passed": true,
+        "label": "toll-troll-430x739: editable text >=16px",
+        "evidence": []
+      },
+      {
+        "passed": true,
+        "label": "toll-troll-430x739: correct scene asset",
+        "evidence": "http://127.0.0.1:52035/assets/scenes/toll-troll-960.webp"
+      },
+      {
+        "passed": true,
+        "label": "toll-troll-430x739: responsive asset size",
+        "evidence": "http://127.0.0.1:52035/assets/scenes/toll-troll-960.webp"
+      },
+      {
+        "passed": true,
+        "label": "toll-troll-430x739: every choice in viewport",
+        "evidence": [
+          {
+            "key": "event:pay",
+            "disabled": false,
+            "x": 35,
+            "y": 473.984375,
+            "bottom": 521.984375,
+            "right": 395,
+            "width": 360,
+            "height": 48
+          },
+          {
+            "key": "event:riddle",
+            "disabled": false,
+            "x": 35,
+            "y": 529.984375,
+            "bottom": 577.984375,
+            "right": 395,
+            "width": 360,
+            "height": 48
+          }
+        ]
+      },
+      {
+        "passed": true,
+        "label": "toll-troll-430x739: focus starts inside encounter",
+        "evidence": {
+          "inside": true,
+          "key": "event:pay",
+          "tag": "BUTTON"
+        }
+      },
+      {
+        "passed": true,
+        "label": "toll-troll-430x739: Tab retains dialog focus"
+      },
+      {
+        "passed": true,
+        "label": "toll-troll-430x739: no browser errors",
+        "evidence": []
+      },
+      {
+        "passed": true,
+        "label": "toll-troll-1440x900: no horizontal overflow",
+        "evidence": {
+          "width": 1440,
+          "height": 900,
+          "scrollWidth": 1440,
+          "broken": [],
+          "small": [],
+          "smallText": []
+        }
+      },
+      {
+        "passed": true,
+        "label": "toll-troll-1440x900: images load",
+        "evidence": []
+      },
+      {
+        "passed": true,
+        "label": "toll-troll-1440x900: correct scene asset",
+        "evidence": "http://127.0.0.1:52035/assets/scenes/toll-troll.webp"
+      },
+      {
+        "passed": true,
+        "label": "toll-troll-1440x900: responsive asset size",
+        "evidence": "http://127.0.0.1:52035/assets/scenes/toll-troll.webp"
+      },
+      {
+        "passed": true,
+        "label": "toll-troll-1440x900: every choice in viewport",
+        "evidence": [
+          {
+            "key": "event:pay",
+            "disabled": false,
+            "x": 466,
+            "y": 580,
+            "bottom": 628,
+            "right": 974,
+            "width": 508,
+            "height": 48
+          },
+          {
+            "key": "event:riddle",
+            "disabled": false,
+            "x": 466,
+            "y": 636,
+            "bottom": 684,
+            "right": 974,
+            "width": 508,
+            "height": 48
+          }
+        ]
+      },
+      {
+        "passed": true,
+        "label": "toll-troll-1440x900: focus starts inside encounter",
+        "evidence": {
+          "inside": true,
+          "key": "event:pay",
+          "tag": "BUTTON"
+        }
+      },
+      {
+        "passed": true,
+        "label": "toll-troll-1440x900: Tab retains dialog focus"
+      },
+      {
+        "passed": true,
+        "label": "toll-troll-1440x900: no browser errors",
+        "evidence": []
+      },
+      {
+        "passed": true,
+        "label": "toll-troll-844x390: no horizontal overflow",
+        "evidence": {
+          "width": 844,
+          "height": 390,
+          "scrollWidth": 844,
+          "broken": [],
+          "small": [],
+          "smallText": []
+        }
+      },
+      {
+        "passed": true,
+        "label": "toll-troll-844x390: images load",
+        "evidence": []
+      },
+      {
+        "passed": true,
+        "label": "toll-troll-844x390: controls >=44px",
+        "evidence": []
+      },
+      {
+        "passed": true,
+        "label": "toll-troll-844x390: editable text >=16px",
+        "evidence": []
+      },
+      {
+        "passed": true,
+        "label": "toll-troll-844x390: correct scene asset",
+        "evidence": "http://127.0.0.1:52035/assets/scenes/toll-troll-960.webp"
+      },
+      {
+        "passed": true,
+        "label": "toll-troll-844x390: responsive asset size",
+        "evidence": "http://127.0.0.1:52035/assets/scenes/toll-troll-960.webp"
+      },
+      {
+        "passed": true,
+        "label": "toll-troll-844x390: every choice in viewport",
+        "evidence": [
+          {
+            "key": "event:pay",
+            "disabled": false,
+            "x": 307.109375,
+            "y": 193,
+            "bottom": 237,
+            "right": 766,
+            "width": 458.890625,
+            "height": 44
+          },
+          {
+            "key": "event:riddle",
+            "disabled": false,
+            "x": 307.109375,
+            "y": 243,
+            "bottom": 287,
+            "right": 766,
+            "width": 458.890625,
+            "height": 44
+          }
+        ]
+      },
+      {
+        "passed": true,
+        "label": "toll-troll-844x390: focus starts inside encounter",
+        "evidence": {
+          "inside": true,
+          "key": "event:pay",
+          "tag": "BUTTON"
+        }
+      },
+      {
+        "passed": true,
+        "label": "toll-troll-844x390: Tab retains dialog focus"
+      },
+      {
+        "passed": true,
+        "label": "toll-troll-844x390: no browser errors",
+        "evidence": []
+      },
+      {
+        "passed": true,
+        "label": "brunch-line-390x664: no horizontal overflow",
+        "evidence": {
+          "width": 390,
+          "height": 664,
+          "scrollWidth": 390,
+          "broken": [],
+          "small": [],
+          "smallText": []
+        }
+      },
+      {
+        "passed": true,
+        "label": "brunch-line-390x664: images load",
+        "evidence": []
+      },
+      {
+        "passed": true,
+        "label": "brunch-line-390x664: controls >=44px",
+        "evidence": []
+      },
+      {
+        "passed": true,
+        "label": "brunch-line-390x664: editable text >=16px",
+        "evidence": []
+      },
+      {
+        "passed": true,
+        "label": "brunch-line-390x664: correct scene asset",
+        "evidence": "http://127.0.0.1:52035/assets/scenes/brunch-line-960.webp"
+      },
+      {
+        "passed": true,
+        "label": "brunch-line-390x664: responsive asset size",
+        "evidence": "http://127.0.0.1:52035/assets/scenes/brunch-line-960.webp"
+      },
+      {
+        "passed": true,
+        "label": "brunch-line-390x664: every choice in viewport",
+        "evidence": [
+          {
+            "key": "event:wait",
+            "disabled": false,
+            "x": 35,
+            "y": 442.859375,
+            "bottom": 490.859375,
+            "right": 355,
+            "width": 320,
+            "height": 48
+          },
+          {
+            "key": "event:detour",
+            "disabled": false,
+            "x": 35,
+            "y": 498.859375,
+            "bottom": 546.859375,
+            "right": 355,
+            "width": 320,
+            "height": 48
+          }
+        ]
+      },
+      {
+        "passed": true,
+        "label": "brunch-line-390x664: focus starts inside encounter",
+        "evidence": {
+          "inside": true,
+          "key": "event:wait",
+          "tag": "BUTTON"
+        }
+      },
+      {
+        "passed": true,
+        "label": "brunch-line-390x664: Tab retains dialog focus"
+      },
+      {
+        "passed": true,
+        "label": "brunch-line-390x664: no browser errors",
+        "evidence": []
+      },
+      {
+        "passed": true,
+        "label": "brunch-line-414x715: no horizontal overflow",
+        "evidence": {
+          "width": 414,
+          "height": 715,
+          "scrollWidth": 414,
+          "broken": [],
+          "small": [],
+          "smallText": []
+        }
+      },
+      {
+        "passed": true,
+        "label": "brunch-line-414x715: images load",
+        "evidence": []
+      },
+      {
+        "passed": true,
+        "label": "brunch-line-414x715: controls >=44px",
+        "evidence": []
+      },
+      {
+        "passed": true,
+        "label": "brunch-line-414x715: editable text >=16px",
+        "evidence": []
+      },
+      {
+        "passed": true,
+        "label": "brunch-line-414x715: correct scene asset",
+        "evidence": "http://127.0.0.1:52035/assets/scenes/brunch-line-960.webp"
+      },
+      {
+        "passed": true,
+        "label": "brunch-line-414x715: responsive asset size",
+        "evidence": "http://127.0.0.1:52035/assets/scenes/brunch-line-960.webp"
+      },
+      {
+        "passed": true,
+        "label": "brunch-line-414x715: every choice in viewport",
+        "evidence": [
+          {
+            "key": "event:wait",
+            "disabled": false,
+            "x": 35,
+            "y": 463.71875,
+            "bottom": 511.71875,
+            "right": 379,
+            "width": 344,
+            "height": 48
+          },
+          {
+            "key": "event:detour",
+            "disabled": false,
+            "x": 35,
+            "y": 519.71875,
+            "bottom": 567.71875,
+            "right": 379,
+            "width": 344,
+            "height": 48
+          }
+        ]
+      },
+      {
+        "passed": true,
+        "label": "brunch-line-414x715: focus starts inside encounter",
+        "evidence": {
+          "inside": true,
+          "key": "event:wait",
+          "tag": "BUTTON"
+        }
+      },
+      {
+        "passed": true,
+        "label": "brunch-line-414x715: Tab retains dialog focus"
+      },
+      {
+        "passed": true,
+        "label": "brunch-line-414x715: no browser errors",
+        "evidence": []
+      },
+      {
+        "passed": true,
+        "label": "brunch-line-430x739: no horizontal overflow",
+        "evidence": {
+          "width": 430,
+          "height": 739,
+          "scrollWidth": 430,
+          "broken": [],
+          "small": [],
+          "smallText": []
+        }
+      },
+      {
+        "passed": true,
+        "label": "brunch-line-430x739: images load",
+        "evidence": []
+      },
+      {
+        "passed": true,
+        "label": "brunch-line-430x739: controls >=44px",
+        "evidence": []
+      },
+      {
+        "passed": true,
+        "label": "brunch-line-430x739: editable text >=16px",
+        "evidence": []
+      },
+      {
+        "passed": true,
+        "label": "brunch-line-430x739: correct scene asset",
+        "evidence": "http://127.0.0.1:52035/assets/scenes/brunch-line-960.webp"
+      },
+      {
+        "passed": true,
+        "label": "brunch-line-430x739: responsive asset size",
+        "evidence": "http://127.0.0.1:52035/assets/scenes/brunch-line-960.webp"
+      },
+      {
+        "passed": true,
+        "label": "brunch-line-430x739: every choice in viewport",
+        "evidence": [
+          {
+            "key": "event:wait",
+            "disabled": false,
+            "x": 35,
+            "y": 478.484375,
+            "bottom": 526.484375,
+            "right": 395,
+            "width": 360,
+            "height": 48
+          },
+          {
+            "key": "event:detour",
+            "disabled": false,
+            "x": 35,
+            "y": 534.484375,
+            "bottom": 582.484375,
+            "right": 395,
+            "width": 360,
+            "height": 48
+          }
+        ]
+      },
+      {
+        "passed": true,
+        "label": "brunch-line-430x739: focus starts inside encounter",
+        "evidence": {
+          "inside": true,
+          "key": "event:wait",
+          "tag": "BUTTON"
+        }
+      },
+      {
+        "passed": true,
+        "label": "brunch-line-430x739: Tab retains dialog focus"
+      },
+      {
+        "passed": true,
+        "label": "brunch-line-430x739: no browser errors",
+        "evidence": []
+      },
+      {
+        "passed": true,
+        "label": "brunch-line-1440x900: no horizontal overflow",
+        "evidence": {
+          "width": 1440,
+          "height": 900,
+          "scrollWidth": 1440,
+          "broken": [],
+          "small": [],
+          "smallText": []
+        }
+      },
+      {
+        "passed": true,
+        "label": "brunch-line-1440x900: images load",
+        "evidence": []
+      },
+      {
+        "passed": true,
+        "label": "brunch-line-1440x900: correct scene asset",
+        "evidence": "http://127.0.0.1:52035/assets/scenes/brunch-line.webp"
+      },
+      {
+        "passed": true,
+        "label": "brunch-line-1440x900: responsive asset size",
+        "evidence": "http://127.0.0.1:52035/assets/scenes/brunch-line.webp"
+      },
+      {
+        "passed": true,
+        "label": "brunch-line-1440x900: every choice in viewport",
+        "evidence": [
+          {
+            "key": "event:wait",
+            "disabled": false,
+            "x": 466,
+            "y": 600,
+            "bottom": 648,
+            "right": 974,
+            "width": 508,
+            "height": 48
+          },
+          {
+            "key": "event:detour",
+            "disabled": false,
+            "x": 466,
+            "y": 656,
+            "bottom": 704,
+            "right": 974,
+            "width": 508,
+            "height": 48
+          }
+        ]
+      },
+      {
+        "passed": true,
+        "label": "brunch-line-1440x900: focus starts inside encounter",
+        "evidence": {
+          "inside": true,
+          "key": "event:wait",
+          "tag": "BUTTON"
+        }
+      },
+      {
+        "passed": true,
+        "label": "brunch-line-1440x900: Tab retains dialog focus"
+      },
+      {
+        "passed": true,
+        "label": "brunch-line-1440x900: no browser errors",
+        "evidence": []
+      },
+      {
+        "passed": true,
+        "label": "brunch-line-844x390: no horizontal overflow",
+        "evidence": {
+          "width": 844,
+          "height": 390,
+          "scrollWidth": 844,
+          "broken": [],
+          "small": [],
+          "smallText": []
+        }
+      },
+      {
+        "passed": true,
+        "label": "brunch-line-844x390: images load",
+        "evidence": []
+      },
+      {
+        "passed": true,
+        "label": "brunch-line-844x390: controls >=44px",
+        "evidence": []
+      },
+      {
+        "passed": true,
+        "label": "brunch-line-844x390: editable text >=16px",
+        "evidence": []
+      },
+      {
+        "passed": true,
+        "label": "brunch-line-844x390: correct scene asset",
+        "evidence": "http://127.0.0.1:52035/assets/scenes/brunch-line-960.webp"
+      },
+      {
+        "passed": true,
+        "label": "brunch-line-844x390: responsive asset size",
+        "evidence": "http://127.0.0.1:52035/assets/scenes/brunch-line-960.webp"
+      },
+      {
+        "passed": true,
+        "label": "brunch-line-844x390: every choice in viewport",
+        "evidence": [
+          {
+            "key": "event:wait",
+            "disabled": false,
+            "x": 307.109375,
+            "y": 220,
+            "bottom": 264,
+            "right": 766,
+            "width": 458.890625,
+            "height": 44
+          },
+          {
+            "key": "event:detour",
+            "disabled": false,
+            "x": 307.109375,
+            "y": 270,
+            "bottom": 314,
+            "right": 766,
+            "width": 458.890625,
+            "height": 44
+          }
+        ]
+      },
+      {
+        "passed": true,
+        "label": "brunch-line-844x390: focus starts inside encounter",
+        "evidence": {
+          "inside": true,
+          "key": "event:wait",
+          "tag": "BUTTON"
+        }
+      },
+      {
+        "passed": true,
+        "label": "brunch-line-844x390: Tab retains dialog focus"
+      },
+      {
+        "passed": true,
+        "label": "brunch-line-844x390: no browser errors",
+        "evidence": []
+      }
+    ],
+    "cases": [
+      {
+        "id": "road-pines",
+        "mile": 400,
+        "viewport": {
+          "width": 390,
+          "height": 664
+        },
+        "metrics": {
+          "width": 390,
+          "height": 664,
+          "scrollWidth": 390,
+          "broken": [],
+          "small": [],
+          "smallText": []
+        },
+        "image": {
+          "src": "http://127.0.0.1:52035/assets/scenes/road-pines-960.webp",
+          "natural": {
+            "width": 960,
+            "height": 640
+          },
+          "rendered": {
+            "x": -35.726409912109375,
+            "y": 58.599998474121094,
+            "width": 461.46844482421875,
+            "height": 250.79998779296875,
+            "bottom": 309.39998626708984,
+            "right": 425.7420349121094
+          },
+          "objectFit": "cover",
+          "objectPosition": "34% 45%",
+          "elementCoverCrop": {
+            "x": 0,
+            "y": 53.21559395500334,
+            "width": 960,
+            "height": 521.743124544437
+          },
+          "actualVisibleCrop": {
+            "x": 97.2056789987275,
+            "y": 106.05561311196224,
+            "width": 765.5561370714533,
+            "height": 416.06311797361593
+          },
+          "visibleFraction": {
+            "width": 0.7974543094494305,
+            "height": 0.6500986218337749
+          }
+        },
+        "dialog": null,
+        "choices": null,
+        "focus": null,
+        "errors": [],
+        "screenshot": "/Users/ama/The Portland Trail/app/test-results/scene-art-v4/road-pines-390x664.png",
+        "crop": "/Users/ama/The Portland Trail/app/test-results/scene-art-v4/road-pines-390x664-art.png"
+      },
+      {
+        "id": "road-pines",
+        "mile": 400,
+        "viewport": {
+          "width": 414,
+          "height": 715
+        },
+        "metrics": {
+          "width": 414,
+          "height": 715,
+          "scrollWidth": 414,
+          "broken": [],
+          "small": [],
+          "smallText": []
+        },
+        "image": {
+          "src": "http://127.0.0.1:52035/assets/scenes/road-pines-960.webp",
+          "natural": {
+            "width": 960,
+            "height": 640
+          },
+          "rendered": {
+            "x": -38.77687072753906,
+            "y": 58.599998474121094,
+            "width": 491.5537109375,
+            "height": 250.79998779296875,
+            "bottom": 309.39998626708984,
+            "right": 452.77684020996094
+          },
+          "objectFit": "cover",
+          "objectPosition": "34% 45%",
+          "elementCoverCrop": {
+            "x": -3.865352482534945e-14,
+            "y": 67.58544037858272,
+            "width": 960.0000000000001,
+            "height": 489.8101324920384
+          },
+          "actualVisibleCrop": {
+            "x": 97.21378322482718,
+            "y": 117.19141612910273,
+            "width": 765.5724931509027,
+            "height": 390.5982107912769
+          },
+          "visibleFraction": {
+            "width": 0.7974713470321902,
+            "height": 0.6103097043613702
+          }
+        },
+        "dialog": null,
+        "choices": null,
+        "focus": null,
+        "errors": [],
+        "screenshot": "/Users/ama/The Portland Trail/app/test-results/scene-art-v4/road-pines-414x715.png",
+        "crop": "/Users/ama/The Portland Trail/app/test-results/scene-art-v4/road-pines-414x715-art.png"
+      },
+      {
+        "id": "road-pines",
+        "mile": 400,
+        "viewport": {
+          "width": 430,
+          "height": 739
+        },
+        "metrics": {
+          "width": 430,
+          "height": 739,
+          "scrollWidth": 430,
+          "broken": [],
+          "small": [],
+          "smallText": []
+        },
+        "image": {
+          "src": "http://127.0.0.1:52035/assets/scenes/road-pines-960.webp",
+          "natural": {
+            "width": 960,
+            "height": 640
+          },
+          "rendered": {
+            "x": -40.806396484375,
+            "y": 58.599998474121094,
+            "width": 511.62841796875,
+            "height": 250.79998779296875,
+            "bottom": 309.39998626708984,
+            "right": 470.822021484375
+          },
+          "objectFit": "cover",
+          "objectPosition": "34% 45%",
+          "elementCoverCrop": {
+            "x": -3.865352482534945e-14,
+            "y": 76.23382181014779,
+            "width": 960.0000000000001,
+            "height": 470.5915070885605
+          },
+          "actualVisibleCrop": {
+            "x": 97.20754140759577,
+            "y": 123.89341343653223,
+            "width": 765.555599032272,
+            "height": 375.2723524668
+          },
+          "visibleFraction": {
+            "width": 0.79745374899195,
+            "height": 0.586363050729375
+          }
+        },
+        "dialog": null,
+        "choices": null,
+        "focus": null,
+        "errors": [],
+        "screenshot": "/Users/ama/The Portland Trail/app/test-results/scene-art-v4/road-pines-430x739.png",
+        "crop": "/Users/ama/The Portland Trail/app/test-results/scene-art-v4/road-pines-430x739-art.png"
+      },
+      {
+        "id": "road-pines",
+        "mile": 400,
+        "viewport": {
+          "width": 1440,
+          "height": 900
+        },
+        "metrics": {
+          "width": 1440,
+          "height": 900,
+          "scrollWidth": 1440,
+          "broken": [],
+          "small": [],
+          "smallText": []
+        },
+        "image": {
+          "src": "http://127.0.0.1:52035/assets/scenes/road-pines.webp",
+          "natural": {
+            "width": 1536,
+            "height": 1024
+          },
+          "rendered": {
+            "x": -94.43389892578125,
+            "y": 45.3699951171875,
+            "width": 1179.38330078125,
+            "height": 551.760009765625,
+            "bottom": 597.1300048828125,
+            "right": 1084.9494018554688
+          },
+          "objectFit": "cover",
+          "objectPosition": "34% 45%",
+          "elementCoverCrop": {
+            "x": 0,
+            "y": 137.43055895622092,
+            "width": 1536,
+            "height": 718.5987578750646
+          },
+          "actualVisibleCrop": {
+            "x": 155.54779233221151,
+            "y": 210.2073122332456,
+            "width": 1224.8842246986703,
+            "height": 573.0452513210154
+          },
+          "visibleFraction": {
+            "width": 0.7974506671215301,
+            "height": 0.5596145032431791
+          }
+        },
+        "dialog": null,
+        "choices": null,
+        "focus": null,
+        "errors": [],
+        "screenshot": "/Users/ama/The Portland Trail/app/test-results/scene-art-v4/road-pines-1440x900.png",
+        "crop": "/Users/ama/The Portland Trail/app/test-results/scene-art-v4/road-pines-1440x900-art.png"
+      },
+      {
+        "id": "road-pines",
+        "mile": 400,
+        "viewport": {
+          "width": 844,
+          "height": 390
+        },
+        "metrics": {
+          "width": 844,
+          "height": 390,
+          "scrollWidth": 844,
+          "broken": [],
+          "small": [],
+          "smallText": []
+        },
+        "image": {
+          "src": "http://127.0.0.1:52035/assets/scenes/road-pines-960.webp",
+          "natural": {
+            "width": 960,
+            "height": 640
+          },
+          "rendered": {
+            "x": -35.30952453613281,
+            "y": 46.24188232421875,
+            "width": 477.0721435546875,
+            "height": 264.2662353515625,
+            "bottom": 310.50811767578125,
+            "right": 441.7626190185547
+          },
+          "objectFit": "cover",
+          "objectPosition": "34% 45%",
+          "elementCoverCrop": {
+            "x": 0,
+            "y": 48.70073423017137,
+            "width": 960,
+            "height": 531.7761461551747
+          },
+          "actualVisibleCrop": {
+            "x": 97.21201327985568,
+            "y": 102.54540597593507,
+            "width": 765.576034850026,
+            "height": 424.08680266364735
+          },
+          "visibleFraction": {
+            "width": 0.7974750363021104,
+            "height": 0.662635629161949
+          }
+        },
+        "dialog": null,
+        "choices": null,
+        "focus": null,
+        "errors": [],
+        "screenshot": "/Users/ama/The Portland Trail/app/test-results/scene-art-v4/road-pines-844x390.png",
+        "crop": "/Users/ama/The Portland Trail/app/test-results/scene-art-v4/road-pines-844x390-art.png"
+      },
+      {
+        "id": "road-outskirts",
+        "mile": 800,
+        "viewport": {
+          "width": 390,
+          "height": 664
+        },
+        "metrics": {
+          "width": 390,
+          "height": 664,
+          "scrollWidth": 390,
+          "broken": [],
+          "small": [],
+          "smallText": []
+        },
+        "image": {
+          "src": "http://127.0.0.1:52035/assets/scenes/road-outskirts-960.webp",
+          "natural": {
+            "width": 960,
+            "height": 640
+          },
+          "rendered": {
+            "x": -19.534515380859375,
+            "y": 67.40000915527344,
+            "width": 429.08465576171875,
+            "height": 233.19996643066406,
+            "bottom": 300.5999755859375,
+            "right": 409.5501403808594
+          },
+          "objectFit": "cover",
+          "objectPosition": "65% 58%",
+          "elementCoverCrop": {
+            "x": 0,
+            "y": 68.58898941028485,
+            "width": 960,
+            "height": 521.7431217064054
+          },
+          "actualVisibleCrop": {
+            "x": 68.31550457936511,
+            "y": 105.72849322835461,
+            "width": 823.334032704691,
+            "height": 447.4641482090712
+          },
+          "visibleFraction": {
+            "width": 0.8576396174007198,
+            "height": 0.6991627315766737
+          }
+        },
+        "dialog": null,
+        "choices": null,
+        "focus": null,
+        "errors": [],
+        "screenshot": "/Users/ama/The Portland Trail/app/test-results/scene-art-v4/road-outskirts-390x664.png",
+        "crop": "/Users/ama/The Portland Trail/app/test-results/scene-art-v4/road-outskirts-390x664-art.png"
+      },
+      {
+        "id": "road-outskirts",
+        "mile": 800,
+        "viewport": {
+          "width": 414,
+          "height": 715
+        },
+        "metrics": {
+          "width": 414,
+          "height": 715,
+          "scrollWidth": 414,
+          "broken": [],
+          "small": [],
+          "smallText": []
+        },
+        "image": {
+          "src": "http://127.0.0.1:52035/assets/scenes/road-outskirts-960.webp",
+          "natural": {
+            "width": 960,
+            "height": 640
+          },
+          "rendered": {
+            "x": -21.52935791015625,
+            "y": 67.40000915527344,
+            "width": 457.0587158203125,
+            "height": 233.19996643066406,
+            "bottom": 300.5999755859375,
+            "right": 435.52935791015625
+          },
+          "objectFit": "cover",
+          "objectPosition": "65% 58%",
+          "elementCoverCrop": {
+            "x": 0,
+            "y": 87.11015155339221,
+            "width": 960,
+            "height": 489.8100835286341
+          },
+          "actualVisibleCrop": {
+            "x": 68.3242273100575,
+            "y": 121.97654980670231,
+            "width": 823.351545379885,
+            "height": 420.0773190713699
+          },
+          "visibleFraction": {
+            "width": 0.8576578597707135,
+            "height": 0.6563708110490155
+          }
+        },
+        "dialog": null,
+        "choices": null,
+        "focus": null,
+        "errors": [],
+        "screenshot": "/Users/ama/The Portland Trail/app/test-results/scene-art-v4/road-outskirts-414x715.png",
+        "crop": "/Users/ama/The Portland Trail/app/test-results/scene-art-v4/road-outskirts-414x715-art.png"
+      },
+      {
+        "id": "road-outskirts",
+        "mile": 800,
+        "viewport": {
+          "width": 430,
+          "height": 739
+        },
+        "metrics": {
+          "width": 430,
+          "height": 739,
+          "scrollWidth": 430,
+          "broken": [],
+          "small": [],
+          "smallText": []
+        },
+        "image": {
+          "src": "http://127.0.0.1:52035/assets/scenes/road-outskirts-960.webp",
+          "natural": {
+            "width": 960,
+            "height": 640
+          },
+          "rendered": {
+            "x": -22.854522705078125,
+            "y": 67.40000915527344,
+            "width": 475.72467041015625,
+            "height": 233.19996643066406,
+            "bottom": 300.5999755859375,
+            "right": 452.8701477050781
+          },
+          "objectFit": "cover",
+          "objectPosition": "65% 58%",
+          "elementCoverCrop": {
+            "x": 0,
+            "y": 98.2569525085919,
+            "width": 960,
+            "height": 470.59146119208293
+          },
+          "actualVisibleCrop": {
+            "x": 68.31754545933919,
+            "y": 131.75530187356793,
+            "width": 823.3333782380987,
+            "height": 403.5947932539699
+          },
+          "visibleFraction": {
+            "width": 0.8576389356646862,
+            "height": 0.630616864459328
+          }
+        },
+        "dialog": null,
+        "choices": null,
+        "focus": null,
+        "errors": [],
+        "screenshot": "/Users/ama/The Portland Trail/app/test-results/scene-art-v4/road-outskirts-430x739.png",
+        "crop": "/Users/ama/The Portland Trail/app/test-results/scene-art-v4/road-outskirts-430x739-art.png"
+      },
+      {
+        "id": "road-outskirts",
+        "mile": 800,
+        "viewport": {
+          "width": 1440,
+          "height": 900
+        },
+        "metrics": {
+          "width": 1440,
+          "height": 900,
+          "scrollWidth": 1440,
+          "broken": [],
+          "small": [],
+          "smallText": []
+        },
+        "image": {
+          "src": "http://127.0.0.1:52035/assets/scenes/road-outskirts.webp",
+          "natural": {
+            "width": 1536,
+            "height": 1024
+          },
+          "rendered": {
+            "x": -53.052001953125,
+            "y": 64.73001098632812,
+            "width": 1096.61962890625,
+            "height": 513.0400390625,
+            "bottom": 577.7700500488281,
+            "right": 1043.567626953125
+          },
+          "objectFit": "cover",
+          "objectPosition": "65% 58%",
+          "elementCoverCrop": {
+            "x": 0,
+            "y": 177.13272212146967,
+            "width": 1536,
+            "height": 718.5987549629833
+          },
+          "actualVisibleCrop": {
+            "x": 109.32493987871999,
+            "y": 228.28510134793666,
+            "width": 1317.328234805379,
+            "height": 616.2939110200604
+          },
+          "visibleFraction": {
+            "width": 0.857635569534752,
+            "height": 0.6018495224805277
+          }
+        },
+        "dialog": null,
+        "choices": null,
+        "focus": null,
+        "errors": [],
+        "screenshot": "/Users/ama/The Portland Trail/app/test-results/scene-art-v4/road-outskirts-1440x900.png",
+        "crop": "/Users/ama/The Portland Trail/app/test-results/scene-art-v4/road-outskirts-1440x900-art.png"
+      },
+      {
+        "id": "road-outskirts",
+        "mile": 800,
+        "viewport": {
+          "width": 844,
+          "height": 390
+        },
+        "metrics": {
+          "width": 844,
+          "height": 390,
+          "scrollWidth": 844,
+          "broken": [],
+          "small": [],
+          "smallText": []
+        },
+        "image": {
+          "src": "http://127.0.0.1:52035/assets/scenes/road-outskirts-960.webp",
+          "natural": {
+            "width": 960,
+            "height": 640
+          },
+          "rendered": {
+            "x": -18.570144653320312,
+            "y": 58.00437927246094,
+            "width": 443.5933837890625,
+            "height": 210.74122619628906,
+            "bottom": 268.74560546875,
+            "right": 425.0232391357422
+          },
+          "objectFit": "cover",
+          "objectPosition": "65% 58%",
+          "elementCoverCrop": {
+            "x": 0,
+            "y": 106.6768600383553,
+            "width": 960,
+            "height": 456.074379244215
+          },
+          "actualVisibleCrop": {
+            "x": 68.32234197974252,
+            "y": 139.12954401545218,
+            "width": 823.3553820849513,
+            "height": 391.1690443122394
+          },
+          "visibleFraction": {
+            "width": 0.8576618563384909,
+            "height": 0.6112016317378741
+          }
+        },
+        "dialog": null,
+        "choices": null,
+        "focus": null,
+        "errors": [],
+        "screenshot": "/Users/ama/The Portland Trail/app/test-results/scene-art-v4/road-outskirts-844x390.png",
+        "crop": "/Users/ama/The Portland Trail/app/test-results/scene-art-v4/road-outskirts-844x390-art.png"
+      },
+      {
+        "id": "sasquatch",
+        "mile": 400,
+        "event": "sasquatch",
+        "viewport": {
+          "width": 390,
+          "height": 664
+        },
+        "metrics": {
+          "width": 390,
+          "height": 664,
+          "scrollWidth": 390,
+          "broken": [],
+          "small": [],
+          "smallText": []
+        },
+        "image": {
+          "src": "http://127.0.0.1:52035/assets/scenes/sasquatch-960.webp",
+          "natural": {
+            "width": 960,
+            "height": 640
+          },
+          "rendered": {
+            "x": 19,
+            "y": 83.640625,
+            "width": 352,
+            "height": 152.71875,
+            "bottom": 236.359375,
+            "right": 371
+          },
+          "objectFit": "cover",
+          "objectPosition": "50% 50%",
+          "elementCoverCrop": {
+            "x": -5.684341886080802e-14,
+            "y": 111.74715909090907,
+            "width": 960.0000000000001,
+            "height": 416.50568181818187
+          },
+          "actualVisibleCrop": {
+            "x": -5.684341886080802e-14,
+            "y": 111.74715909090907,
+            "width": 960.0000000000001,
+            "height": 416.50568181818187
+          },
+          "visibleFraction": {
+            "width": 1.0000000000000002,
+            "height": 0.6507901278409092
+          }
+        },
+        "dialog": {
+          "x": 17,
+          "y": 81.640625,
+          "width": 356,
+          "height": 500.71875,
+          "bottom": 582.359375,
+          "right": 373
+        },
+        "choices": [
+          {
+            "key": "event:photo",
+            "disabled": false,
+            "x": 35,
+            "y": 404.359375,
+            "bottom": 452.359375,
+            "right": 355,
+            "width": 320,
+            "height": 48
+          },
+          {
+            "key": "event:chase",
+            "disabled": false,
+            "x": 35,
+            "y": 460.359375,
+            "bottom": 508.359375,
+            "right": 355,
+            "width": 320,
+            "height": 48
+          },
+          {
+            "key": "event:leave",
+            "disabled": false,
+            "x": 35,
+            "y": 516.359375,
+            "bottom": 564.359375,
+            "right": 355,
+            "width": 320,
+            "height": 48
+          }
+        ],
+        "focus": {
+          "inside": true,
+          "key": "event:photo",
+          "tag": "BUTTON"
+        },
+        "errors": [],
+        "screenshot": "/Users/ama/The Portland Trail/app/test-results/scene-art-v4/sasquatch-390x664.png",
+        "crop": "/Users/ama/The Portland Trail/app/test-results/scene-art-v4/sasquatch-390x664-art.png"
+      },
+      {
+        "id": "sasquatch",
+        "mile": 400,
+        "event": "sasquatch",
+        "viewport": {
+          "width": 414,
+          "height": 715
+        },
+        "metrics": {
+          "width": 414,
+          "height": 715,
+          "scrollWidth": 414,
+          "broken": [],
+          "small": [],
+          "smallText": []
+        },
+        "image": {
+          "src": "http://127.0.0.1:52035/assets/scenes/sasquatch-960.webp",
+          "natural": {
+            "width": 960,
+            "height": 640
+          },
+          "rendered": {
+            "x": 19,
+            "y": 103.28125,
+            "width": 376,
+            "height": 164.4375,
+            "bottom": 267.71875,
+            "right": 395
+          },
+          "objectFit": "cover",
+          "objectPosition": "50% 50%",
+          "elementCoverCrop": {
+            "x": 0,
+            "y": 110.07978723404256,
+            "width": 960,
+            "height": 419.8404255319149
+          },
+          "actualVisibleCrop": {
+            "x": 0,
+            "y": 110.07978723404256,
+            "width": 960,
+            "height": 419.8404255319149
+          },
+          "visibleFraction": {
+            "width": 1,
+            "height": 0.656000664893617
+          }
+        },
+        "dialog": {
+          "x": 17,
+          "y": 101.28125,
+          "width": 380,
+          "height": 512.4375,
+          "bottom": 613.71875,
+          "right": 397
+        },
+        "choices": [
+          {
+            "key": "event:photo",
+            "disabled": false,
+            "x": 35,
+            "y": 435.71875,
+            "bottom": 483.71875,
+            "right": 379,
+            "width": 344,
+            "height": 48
+          },
+          {
+            "key": "event:chase",
+            "disabled": false,
+            "x": 35,
+            "y": 491.71875,
+            "bottom": 539.71875,
+            "right": 379,
+            "width": 344,
+            "height": 48
+          },
+          {
+            "key": "event:leave",
+            "disabled": false,
+            "x": 35,
+            "y": 547.71875,
+            "bottom": 595.71875,
+            "right": 379,
+            "width": 344,
+            "height": 48
+          }
+        ],
+        "focus": {
+          "inside": true,
+          "key": "event:photo",
+          "tag": "BUTTON"
+        },
+        "errors": [],
+        "screenshot": "/Users/ama/The Portland Trail/app/test-results/scene-art-v4/sasquatch-414x715.png",
+        "crop": "/Users/ama/The Portland Trail/app/test-results/scene-art-v4/sasquatch-414x715-art.png"
+      },
+      {
+        "id": "sasquatch",
+        "mile": 400,
+        "event": "sasquatch",
+        "viewport": {
+          "width": 430,
+          "height": 739
+        },
+        "metrics": {
+          "width": 430,
+          "height": 739,
+          "scrollWidth": 430,
+          "broken": [],
+          "small": [],
+          "smallText": []
+        },
+        "image": {
+          "src": "http://127.0.0.1:52035/assets/scenes/sasquatch-960.webp",
+          "natural": {
+            "width": 960,
+            "height": 640
+          },
+          "rendered": {
+            "x": 19,
+            "y": 112.515625,
+            "width": 392,
+            "height": 169.96875,
+            "bottom": 282.484375,
+            "right": 411
+          },
+          "objectFit": "cover",
+          "objectPosition": "50% 50%",
+          "elementCoverCrop": {
+            "x": 0,
+            "y": 111.875,
+            "width": 960,
+            "height": 416.25
+          },
+          "actualVisibleCrop": {
+            "x": 0,
+            "y": 111.875,
+            "width": 960,
+            "height": 416.25
+          },
+          "visibleFraction": {
+            "width": 1,
+            "height": 0.650390625
+          }
+        },
+        "dialog": {
+          "x": 17,
+          "y": 110.515625,
+          "width": 396,
+          "height": 517.96875,
+          "bottom": 628.484375,
+          "right": 413
+        },
+        "choices": [
+          {
+            "key": "event:photo",
+            "disabled": false,
+            "x": 35,
+            "y": 450.484375,
+            "bottom": 498.484375,
+            "right": 395,
+            "width": 360,
+            "height": 48
+          },
+          {
+            "key": "event:chase",
+            "disabled": false,
+            "x": 35,
+            "y": 506.484375,
+            "bottom": 554.484375,
+            "right": 395,
+            "width": 360,
+            "height": 48
+          },
+          {
+            "key": "event:leave",
+            "disabled": false,
+            "x": 35,
+            "y": 562.484375,
+            "bottom": 610.484375,
+            "right": 395,
+            "width": 360,
+            "height": 48
+          }
+        ],
+        "focus": {
+          "inside": true,
+          "key": "event:photo",
+          "tag": "BUTTON"
+        },
+        "errors": [],
+        "screenshot": "/Users/ama/The Portland Trail/app/test-results/scene-art-v4/sasquatch-430x739.png",
+        "crop": "/Users/ama/The Portland Trail/app/test-results/scene-art-v4/sasquatch-430x739-art.png"
+      },
+      {
+        "id": "sasquatch",
+        "mile": 400,
+        "event": "sasquatch",
+        "viewport": {
+          "width": 1440,
+          "height": 900
+        },
+        "metrics": {
+          "width": 1440,
+          "height": 900,
+          "scrollWidth": 1440,
+          "broken": [],
+          "small": [],
+          "smallText": []
+        },
+        "image": {
+          "src": "http://127.0.0.1:52035/assets/scenes/sasquatch.webp",
+          "natural": {
+            "width": 1536,
+            "height": 1024
+          },
+          "rendered": {
+            "x": 442,
+            "y": 144,
+            "width": 556,
+            "height": 224,
+            "bottom": 368,
+            "right": 998
+          },
+          "objectFit": "cover",
+          "objectPosition": "50% 50%",
+          "elementCoverCrop": {
+            "x": 0,
+            "y": 202.58992805755395,
+            "width": 1536,
+            "height": 618.8201438848921
+          },
+          "actualVisibleCrop": {
+            "x": 0,
+            "y": 202.58992805755395,
+            "width": 1536,
+            "height": 618.8201438848921
+          },
+          "visibleFraction": {
+            "width": 1,
+            "height": 0.60431654676259
+          }
+        },
+        "dialog": {
+          "x": 440,
+          "y": 142,
+          "width": 560,
+          "height": 616,
+          "bottom": 758,
+          "right": 1000
+        },
+        "choices": [
+          {
+            "key": "event:photo",
+            "disabled": false,
+            "x": 466,
+            "y": 572,
+            "bottom": 620,
+            "right": 974,
+            "width": 508,
+            "height": 48
+          },
+          {
+            "key": "event:chase",
+            "disabled": false,
+            "x": 466,
+            "y": 628,
+            "bottom": 676,
+            "right": 974,
+            "width": 508,
+            "height": 48
+          },
+          {
+            "key": "event:leave",
+            "disabled": false,
+            "x": 466,
+            "y": 684,
+            "bottom": 732,
+            "right": 974,
+            "width": 508,
+            "height": 48
+          }
+        ],
+        "focus": {
+          "inside": true,
+          "key": "event:photo",
+          "tag": "BUTTON"
+        },
+        "errors": [],
+        "screenshot": "/Users/ama/The Portland Trail/app/test-results/scene-art-v4/sasquatch-1440x900.png",
+        "crop": "/Users/ama/The Portland Trail/app/test-results/scene-art-v4/sasquatch-1440x900-art.png"
+      },
+      {
+        "id": "sasquatch",
+        "mile": 400,
+        "event": "sasquatch",
+        "viewport": {
+          "width": 844,
+          "height": 390
+        },
+        "metrics": {
+          "width": 844,
+          "height": 390,
+          "scrollWidth": 844,
+          "broken": [],
+          "small": [],
+          "smallText": []
+        },
+        "image": {
+          "src": "http://127.0.0.1:52035/assets/scenes/sasquatch-960.webp",
+          "natural": {
+            "width": 960,
+            "height": 640
+          },
+          "rendered": {
+            "x": 64,
+            "y": 52,
+            "width": 229.109375,
+            "height": 286,
+            "bottom": 338,
+            "right": 293.109375
+          },
+          "objectFit": "cover",
+          "objectPosition": "50% 50%",
+          "elementCoverCrop": {
+            "x": 223.6538461538462,
+            "y": 0,
+            "width": 512.6923076923076,
+            "height": 640
+          },
+          "actualVisibleCrop": {
+            "x": 223.6538461538462,
+            "y": 0,
+            "width": 512.6923076923076,
+            "height": 640
+          },
+          "visibleFraction": {
+            "width": 0.5340544871794871,
+            "height": 1
+          }
+        },
+        "dialog": {
+          "x": 62,
+          "y": 50,
+          "width": 720,
+          "height": 290,
+          "bottom": 340,
+          "right": 782
+        },
+        "choices": [
+          {
+            "key": "event:photo",
+            "disabled": false,
+            "x": 307.109375,
+            "y": 180,
+            "bottom": 224,
+            "right": 766,
+            "width": 458.890625,
+            "height": 44
+          },
+          {
+            "key": "event:chase",
+            "disabled": false,
+            "x": 307.109375,
+            "y": 230,
+            "bottom": 274,
+            "right": 766,
+            "width": 458.890625,
+            "height": 44
+          },
+          {
+            "key": "event:leave",
+            "disabled": false,
+            "x": 307.109375,
+            "y": 280,
+            "bottom": 324,
+            "right": 766,
+            "width": 458.890625,
+            "height": 44
+          }
+        ],
+        "focus": {
+          "inside": true,
+          "key": "event:photo",
+          "tag": "BUTTON"
+        },
+        "errors": [],
+        "screenshot": "/Users/ama/The Portland Trail/app/test-results/scene-art-v4/sasquatch-844x390.png",
+        "crop": "/Users/ama/The Portland Trail/app/test-results/scene-art-v4/sasquatch-844x390-art.png"
+      },
+      {
+        "id": "toll-troll",
+        "mile": 300,
+        "event": "toll_troll",
+        "viewport": {
+          "width": 390,
+          "height": 664
+        },
+        "metrics": {
+          "width": 390,
+          "height": 664,
+          "scrollWidth": 390,
+          "broken": [],
+          "small": [],
+          "smallText": []
+        },
+        "image": {
+          "src": "http://127.0.0.1:52035/assets/scenes/toll-troll-960.webp",
+          "natural": {
+            "width": 960,
+            "height": 640
+          },
+          "rendered": {
+            "x": 19,
+            "y": 116.140625,
+            "width": 352,
+            "height": 152.71875,
+            "bottom": 268.859375,
+            "right": 371
+          },
+          "objectFit": "cover",
+          "objectPosition": "50% 50%",
+          "elementCoverCrop": {
+            "x": -5.684341886080802e-14,
+            "y": 111.74715909090907,
+            "width": 960.0000000000001,
+            "height": 416.50568181818187
+          },
+          "actualVisibleCrop": {
+            "x": -5.684341886080802e-14,
+            "y": 111.74715909090907,
+            "width": 960.0000000000001,
+            "height": 416.50568181818187
+          },
+          "visibleFraction": {
+            "width": 1.0000000000000002,
+            "height": 0.6507901278409092
+          }
+        },
+        "dialog": {
+          "x": 17,
+          "y": 114.140625,
+          "width": 356,
+          "height": 435.71875,
+          "bottom": 549.859375,
+          "right": 373
+        },
+        "choices": [
+          {
+            "key": "event:pay",
+            "disabled": false,
+            "x": 35,
+            "y": 427.859375,
+            "bottom": 475.859375,
+            "right": 355,
+            "width": 320,
+            "height": 48
+          },
+          {
+            "key": "event:riddle",
+            "disabled": false,
+            "x": 35,
+            "y": 483.859375,
+            "bottom": 531.859375,
+            "right": 355,
+            "width": 320,
+            "height": 48
+          }
+        ],
+        "focus": {
+          "inside": true,
+          "key": "event:pay",
+          "tag": "BUTTON"
+        },
+        "errors": [],
+        "screenshot": "/Users/ama/The Portland Trail/app/test-results/scene-art-v4/toll-troll-390x664.png",
+        "crop": "/Users/ama/The Portland Trail/app/test-results/scene-art-v4/toll-troll-390x664-art.png"
+      },
+      {
+        "id": "toll-troll",
+        "mile": 300,
+        "event": "toll_troll",
+        "viewport": {
+          "width": 414,
+          "height": 715
+        },
+        "metrics": {
+          "width": 414,
+          "height": 715,
+          "scrollWidth": 414,
+          "broken": [],
+          "small": [],
+          "smallText": []
+        },
+        "image": {
+          "src": "http://127.0.0.1:52035/assets/scenes/toll-troll-960.webp",
+          "natural": {
+            "width": 960,
+            "height": 640
+          },
+          "rendered": {
+            "x": 19,
+            "y": 135.78125,
+            "width": 376,
+            "height": 164.4375,
+            "bottom": 300.21875,
+            "right": 395
+          },
+          "objectFit": "cover",
+          "objectPosition": "50% 50%",
+          "elementCoverCrop": {
+            "x": 0,
+            "y": 110.07978723404256,
+            "width": 960,
+            "height": 419.8404255319149
+          },
+          "actualVisibleCrop": {
+            "x": 0,
+            "y": 110.07978723404256,
+            "width": 960,
+            "height": 419.8404255319149
+          },
+          "visibleFraction": {
+            "width": 1,
+            "height": 0.656000664893617
+          }
+        },
+        "dialog": {
+          "x": 17,
+          "y": 133.78125,
+          "width": 380,
+          "height": 447.4375,
+          "bottom": 581.21875,
+          "right": 397
+        },
+        "choices": [
+          {
+            "key": "event:pay",
+            "disabled": false,
+            "x": 35,
+            "y": 459.21875,
+            "bottom": 507.21875,
+            "right": 379,
+            "width": 344,
+            "height": 48
+          },
+          {
+            "key": "event:riddle",
+            "disabled": false,
+            "x": 35,
+            "y": 515.21875,
+            "bottom": 563.21875,
+            "right": 379,
+            "width": 344,
+            "height": 48
+          }
+        ],
+        "focus": {
+          "inside": true,
+          "key": "event:pay",
+          "tag": "BUTTON"
+        },
+        "errors": [],
+        "screenshot": "/Users/ama/The Portland Trail/app/test-results/scene-art-v4/toll-troll-414x715.png",
+        "crop": "/Users/ama/The Portland Trail/app/test-results/scene-art-v4/toll-troll-414x715-art.png"
+      },
+      {
+        "id": "toll-troll",
+        "mile": 300,
+        "event": "toll_troll",
+        "viewport": {
+          "width": 430,
+          "height": 739
+        },
+        "metrics": {
+          "width": 430,
+          "height": 739,
+          "scrollWidth": 430,
+          "broken": [],
+          "small": [],
+          "smallText": []
+        },
+        "image": {
+          "src": "http://127.0.0.1:52035/assets/scenes/toll-troll-960.webp",
+          "natural": {
+            "width": 960,
+            "height": 640
+          },
+          "rendered": {
+            "x": 19,
+            "y": 145.015625,
+            "width": 392,
+            "height": 169.96875,
+            "bottom": 314.984375,
+            "right": 411
+          },
+          "objectFit": "cover",
+          "objectPosition": "50% 50%",
+          "elementCoverCrop": {
+            "x": 0,
+            "y": 111.875,
+            "width": 960,
+            "height": 416.25
+          },
+          "actualVisibleCrop": {
+            "x": 0,
+            "y": 111.875,
+            "width": 960,
+            "height": 416.25
+          },
+          "visibleFraction": {
+            "width": 1,
+            "height": 0.650390625
+          }
+        },
+        "dialog": {
+          "x": 17,
+          "y": 143.015625,
+          "width": 396,
+          "height": 452.96875,
+          "bottom": 595.984375,
+          "right": 413
+        },
+        "choices": [
+          {
+            "key": "event:pay",
+            "disabled": false,
+            "x": 35,
+            "y": 473.984375,
+            "bottom": 521.984375,
+            "right": 395,
+            "width": 360,
+            "height": 48
+          },
+          {
+            "key": "event:riddle",
+            "disabled": false,
+            "x": 35,
+            "y": 529.984375,
+            "bottom": 577.984375,
+            "right": 395,
+            "width": 360,
+            "height": 48
+          }
+        ],
+        "focus": {
+          "inside": true,
+          "key": "event:pay",
+          "tag": "BUTTON"
+        },
+        "errors": [],
+        "screenshot": "/Users/ama/The Portland Trail/app/test-results/scene-art-v4/toll-troll-430x739.png",
+        "crop": "/Users/ama/The Portland Trail/app/test-results/scene-art-v4/toll-troll-430x739-art.png"
+      },
+      {
+        "id": "toll-troll",
+        "mile": 300,
+        "event": "toll_troll",
+        "viewport": {
+          "width": 1440,
+          "height": 900
+        },
+        "metrics": {
+          "width": 1440,
+          "height": 900,
+          "scrollWidth": 1440,
+          "broken": [],
+          "small": [],
+          "smallText": []
+        },
+        "image": {
+          "src": "http://127.0.0.1:52035/assets/scenes/toll-troll.webp",
+          "natural": {
+            "width": 1536,
+            "height": 1024
+          },
+          "rendered": {
+            "x": 442,
+            "y": 192,
+            "width": 556,
+            "height": 224,
+            "bottom": 416,
+            "right": 998
+          },
+          "objectFit": "cover",
+          "objectPosition": "50% 50%",
+          "elementCoverCrop": {
+            "x": 0,
+            "y": 202.58992805755395,
+            "width": 1536,
+            "height": 618.8201438848921
+          },
+          "actualVisibleCrop": {
+            "x": 0,
+            "y": 202.58992805755395,
+            "width": 1536,
+            "height": 618.8201438848921
+          },
+          "visibleFraction": {
+            "width": 1,
+            "height": 0.60431654676259
+          }
+        },
+        "dialog": {
+          "x": 440,
+          "y": 190,
+          "width": 560,
+          "height": 520,
+          "bottom": 710,
+          "right": 1000
+        },
+        "choices": [
+          {
+            "key": "event:pay",
+            "disabled": false,
+            "x": 466,
+            "y": 580,
+            "bottom": 628,
+            "right": 974,
+            "width": 508,
+            "height": 48
+          },
+          {
+            "key": "event:riddle",
+            "disabled": false,
+            "x": 466,
+            "y": 636,
+            "bottom": 684,
+            "right": 974,
+            "width": 508,
+            "height": 48
+          }
+        ],
+        "focus": {
+          "inside": true,
+          "key": "event:pay",
+          "tag": "BUTTON"
+        },
+        "errors": [],
+        "screenshot": "/Users/ama/The Portland Trail/app/test-results/scene-art-v4/toll-troll-1440x900.png",
+        "crop": "/Users/ama/The Portland Trail/app/test-results/scene-art-v4/toll-troll-1440x900-art.png"
+      },
+      {
+        "id": "toll-troll",
+        "mile": 300,
+        "event": "toll_troll",
+        "viewport": {
+          "width": 844,
+          "height": 390
+        },
+        "metrics": {
+          "width": 844,
+          "height": 390,
+          "scrollWidth": 844,
+          "broken": [],
+          "small": [],
+          "smallText": []
+        },
+        "image": {
+          "src": "http://127.0.0.1:52035/assets/scenes/toll-troll-960.webp",
+          "natural": {
+            "width": 960,
+            "height": 640
+          },
+          "rendered": {
+            "x": 64,
+            "y": 65,
+            "width": 229.109375,
+            "height": 260,
+            "bottom": 325,
+            "right": 293.109375
+          },
+          "objectFit": "cover",
+          "objectPosition": "50% 50%",
+          "elementCoverCrop": {
+            "x": 198.01923076923077,
+            "y": 0,
+            "width": 563.9615384615385,
+            "height": 640
+          },
+          "actualVisibleCrop": {
+            "x": 198.01923076923077,
+            "y": 0,
+            "width": 563.9615384615385,
+            "height": 640
+          },
+          "visibleFraction": {
+            "width": 0.5874599358974358,
+            "height": 1
+          }
+        },
+        "dialog": {
+          "x": 62,
+          "y": 63,
+          "width": 720,
+          "height": 264,
+          "bottom": 327,
+          "right": 782
+        },
+        "choices": [
+          {
+            "key": "event:pay",
+            "disabled": false,
+            "x": 307.109375,
+            "y": 193,
+            "bottom": 237,
+            "right": 766,
+            "width": 458.890625,
+            "height": 44
+          },
+          {
+            "key": "event:riddle",
+            "disabled": false,
+            "x": 307.109375,
+            "y": 243,
+            "bottom": 287,
+            "right": 766,
+            "width": 458.890625,
+            "height": 44
+          }
+        ],
+        "focus": {
+          "inside": true,
+          "key": "event:pay",
+          "tag": "BUTTON"
+        },
+        "errors": [],
+        "screenshot": "/Users/ama/The Portland Trail/app/test-results/scene-art-v4/toll-troll-844x390.png",
+        "crop": "/Users/ama/The Portland Trail/app/test-results/scene-art-v4/toll-troll-844x390-art.png"
+      },
+      {
+        "id": "brunch-line",
+        "mile": 900,
+        "event": "brunch_line",
+        "viewport": {
+          "width": 390,
+          "height": 664
+        },
+        "metrics": {
+          "width": 390,
+          "height": 664,
+          "scrollWidth": 390,
+          "broken": [],
+          "small": [],
+          "smallText": []
+        },
+        "image": {
+          "src": "http://127.0.0.1:52035/assets/scenes/brunch-line-960.webp",
+          "natural": {
+            "width": 960,
+            "height": 640
+          },
+          "rendered": {
+            "x": 19,
+            "y": 101.140625,
+            "width": 352,
+            "height": 152.71875,
+            "bottom": 253.859375,
+            "right": 371
+          },
+          "objectFit": "cover",
+          "objectPosition": "50% 50%",
+          "elementCoverCrop": {
+            "x": -5.684341886080802e-14,
+            "y": 111.74715909090907,
+            "width": 960.0000000000001,
+            "height": 416.50568181818187
+          },
+          "actualVisibleCrop": {
+            "x": -5.684341886080802e-14,
+            "y": 111.74715909090907,
+            "width": 960.0000000000001,
+            "height": 416.50568181818187
+          },
+          "visibleFraction": {
+            "width": 1.0000000000000002,
+            "height": 0.6507901278409092
+          }
+        },
+        "dialog": {
+          "x": 17,
+          "y": 99.140625,
+          "width": 356,
+          "height": 465.71875,
+          "bottom": 564.859375,
+          "right": 373
+        },
+        "choices": [
+          {
+            "key": "event:wait",
+            "disabled": false,
+            "x": 35,
+            "y": 442.859375,
+            "bottom": 490.859375,
+            "right": 355,
+            "width": 320,
+            "height": 48
+          },
+          {
+            "key": "event:detour",
+            "disabled": false,
+            "x": 35,
+            "y": 498.859375,
+            "bottom": 546.859375,
+            "right": 355,
+            "width": 320,
+            "height": 48
+          }
+        ],
+        "focus": {
+          "inside": true,
+          "key": "event:wait",
+          "tag": "BUTTON"
+        },
+        "errors": [],
+        "screenshot": "/Users/ama/The Portland Trail/app/test-results/scene-art-v4/brunch-line-390x664.png",
+        "crop": "/Users/ama/The Portland Trail/app/test-results/scene-art-v4/brunch-line-390x664-art.png"
+      },
+      {
+        "id": "brunch-line",
+        "mile": 900,
+        "event": "brunch_line",
+        "viewport": {
+          "width": 414,
+          "height": 715
+        },
+        "metrics": {
+          "width": 414,
+          "height": 715,
+          "scrollWidth": 414,
+          "broken": [],
+          "small": [],
+          "smallText": []
+        },
+        "image": {
+          "src": "http://127.0.0.1:52035/assets/scenes/brunch-line-960.webp",
+          "natural": {
+            "width": 960,
+            "height": 640
+          },
+          "rendered": {
+            "x": 19,
+            "y": 131.28125,
+            "width": 376,
+            "height": 164.4375,
+            "bottom": 295.71875,
+            "right": 395
+          },
+          "objectFit": "cover",
+          "objectPosition": "50% 50%",
+          "elementCoverCrop": {
+            "x": 0,
+            "y": 110.07978723404256,
+            "width": 960,
+            "height": 419.8404255319149
+          },
+          "actualVisibleCrop": {
+            "x": 0,
+            "y": 110.07978723404256,
+            "width": 960,
+            "height": 419.8404255319149
+          },
+          "visibleFraction": {
+            "width": 1,
+            "height": 0.656000664893617
+          }
+        },
+        "dialog": {
+          "x": 17,
+          "y": 129.28125,
+          "width": 380,
+          "height": 456.4375,
+          "bottom": 585.71875,
+          "right": 397
+        },
+        "choices": [
+          {
+            "key": "event:wait",
+            "disabled": false,
+            "x": 35,
+            "y": 463.71875,
+            "bottom": 511.71875,
+            "right": 379,
+            "width": 344,
+            "height": 48
+          },
+          {
+            "key": "event:detour",
+            "disabled": false,
+            "x": 35,
+            "y": 519.71875,
+            "bottom": 567.71875,
+            "right": 379,
+            "width": 344,
+            "height": 48
+          }
+        ],
+        "focus": {
+          "inside": true,
+          "key": "event:wait",
+          "tag": "BUTTON"
+        },
+        "errors": [],
+        "screenshot": "/Users/ama/The Portland Trail/app/test-results/scene-art-v4/brunch-line-414x715.png",
+        "crop": "/Users/ama/The Portland Trail/app/test-results/scene-art-v4/brunch-line-414x715-art.png"
+      },
+      {
+        "id": "brunch-line",
+        "mile": 900,
+        "event": "brunch_line",
+        "viewport": {
+          "width": 430,
+          "height": 739
+        },
+        "metrics": {
+          "width": 430,
+          "height": 739,
+          "scrollWidth": 430,
+          "broken": [],
+          "small": [],
+          "smallText": []
+        },
+        "image": {
+          "src": "http://127.0.0.1:52035/assets/scenes/brunch-line-960.webp",
+          "natural": {
+            "width": 960,
+            "height": 640
+          },
+          "rendered": {
+            "x": 19,
+            "y": 140.515625,
+            "width": 392,
+            "height": 169.96875,
+            "bottom": 310.484375,
+            "right": 411
+          },
+          "objectFit": "cover",
+          "objectPosition": "50% 50%",
+          "elementCoverCrop": {
+            "x": 0,
+            "y": 111.875,
+            "width": 960,
+            "height": 416.25
+          },
+          "actualVisibleCrop": {
+            "x": 0,
+            "y": 111.875,
+            "width": 960,
+            "height": 416.25
+          },
+          "visibleFraction": {
+            "width": 1,
+            "height": 0.650390625
+          }
+        },
+        "dialog": {
+          "x": 17,
+          "y": 138.515625,
+          "width": 396,
+          "height": 461.96875,
+          "bottom": 600.484375,
+          "right": 413
+        },
+        "choices": [
+          {
+            "key": "event:wait",
+            "disabled": false,
+            "x": 35,
+            "y": 478.484375,
+            "bottom": 526.484375,
+            "right": 395,
+            "width": 360,
+            "height": 48
+          },
+          {
+            "key": "event:detour",
+            "disabled": false,
+            "x": 35,
+            "y": 534.484375,
+            "bottom": 582.484375,
+            "right": 395,
+            "width": 360,
+            "height": 48
+          }
+        ],
+        "focus": {
+          "inside": true,
+          "key": "event:wait",
+          "tag": "BUTTON"
+        },
+        "errors": [],
+        "screenshot": "/Users/ama/The Portland Trail/app/test-results/scene-art-v4/brunch-line-430x739.png",
+        "crop": "/Users/ama/The Portland Trail/app/test-results/scene-art-v4/brunch-line-430x739-art.png"
+      },
+      {
+        "id": "brunch-line",
+        "mile": 900,
+        "event": "brunch_line",
+        "viewport": {
+          "width": 1440,
+          "height": 900
+        },
+        "metrics": {
+          "width": 1440,
+          "height": 900,
+          "scrollWidth": 1440,
+          "broken": [],
+          "small": [],
+          "smallText": []
+        },
+        "image": {
+          "src": "http://127.0.0.1:52035/assets/scenes/brunch-line.webp",
+          "natural": {
+            "width": 1536,
+            "height": 1024
+          },
+          "rendered": {
+            "x": 442,
+            "y": 172,
+            "width": 556,
+            "height": 224,
+            "bottom": 396,
+            "right": 998
+          },
+          "objectFit": "cover",
+          "objectPosition": "50% 50%",
+          "elementCoverCrop": {
+            "x": 0,
+            "y": 202.58992805755395,
+            "width": 1536,
+            "height": 618.8201438848921
+          },
+          "actualVisibleCrop": {
+            "x": 0,
+            "y": 202.58992805755395,
+            "width": 1536,
+            "height": 618.8201438848921
+          },
+          "visibleFraction": {
+            "width": 1,
+            "height": 0.60431654676259
+          }
+        },
+        "dialog": {
+          "x": 440,
+          "y": 170,
+          "width": 560,
+          "height": 560,
+          "bottom": 730,
+          "right": 1000
+        },
+        "choices": [
+          {
+            "key": "event:wait",
+            "disabled": false,
+            "x": 466,
+            "y": 600,
+            "bottom": 648,
+            "right": 974,
+            "width": 508,
+            "height": 48
+          },
+          {
+            "key": "event:detour",
+            "disabled": false,
+            "x": 466,
+            "y": 656,
+            "bottom": 704,
+            "right": 974,
+            "width": 508,
+            "height": 48
+          }
+        ],
+        "focus": {
+          "inside": true,
+          "key": "event:wait",
+          "tag": "BUTTON"
+        },
+        "errors": [],
+        "screenshot": "/Users/ama/The Portland Trail/app/test-results/scene-art-v4/brunch-line-1440x900.png",
+        "crop": "/Users/ama/The Portland Trail/app/test-results/scene-art-v4/brunch-line-1440x900-art.png"
+      },
+      {
+        "id": "brunch-line",
+        "mile": 900,
+        "event": "brunch_line",
+        "viewport": {
+          "width": 844,
+          "height": 390
+        },
+        "metrics": {
+          "width": 844,
+          "height": 390,
+          "scrollWidth": 844,
+          "broken": [],
+          "small": [],
+          "smallText": []
+        },
+        "image": {
+          "src": "http://127.0.0.1:52035/assets/scenes/brunch-line-960.webp",
+          "natural": {
+            "width": 960,
+            "height": 640
+          },
+          "rendered": {
+            "x": 64,
+            "y": 62,
+            "width": 229.109375,
+            "height": 266,
+            "bottom": 328,
+            "right": 293.109375
+          },
+          "objectFit": "cover",
+          "objectPosition": "50% 50%",
+          "elementCoverCrop": {
+            "x": 204.3796992481203,
+            "y": 0,
+            "width": 551.2406015037594,
+            "height": 640
+          },
+          "actualVisibleCrop": {
+            "x": 204.3796992481203,
+            "y": 0,
+            "width": 551.2406015037594,
+            "height": 640
+          },
+          "visibleFraction": {
+            "width": 0.5742089598997494,
+            "height": 1
+          }
+        },
+        "dialog": {
+          "x": 62,
+          "y": 60,
+          "width": 720,
+          "height": 270,
+          "bottom": 330,
+          "right": 782
+        },
+        "choices": [
+          {
+            "key": "event:wait",
+            "disabled": false,
+            "x": 307.109375,
+            "y": 220,
+            "bottom": 264,
+            "right": 766,
+            "width": 458.890625,
+            "height": 44
+          },
+          {
+            "key": "event:detour",
+            "disabled": false,
+            "x": 307.109375,
+            "y": 270,
+            "bottom": 314,
+            "right": 766,
+            "width": 458.890625,
+            "height": 44
+          }
+        ],
+        "focus": {
+          "inside": true,
+          "key": "event:wait",
+          "tag": "BUTTON"
+        },
+        "errors": [],
+        "screenshot": "/Users/ama/The Portland Trail/app/test-results/scene-art-v4/brunch-line-844x390.png",
+        "crop": "/Users/ama/The Portland Trail/app/test-results/scene-art-v4/brunch-line-844x390-art.png"
+      }
+    ],
+    "realDeviceBrowser": false
+  },
+  "color": [
+    {
+      "id": "road-pines",
+      "size": [
+        1536,
+        1024
+      ],
+      "mode": "RGB",
+      "green_eight_color_check": true,
+      "dominant_colors": [
+        {
+          "hex": "#0e2411",
+          "fraction": 0.1478
+        },
+        {
+          "hex": "#2f4c28",
+          "fraction": 0.1401
+        },
+        {
+          "hex": "#608042",
+          "fraction": 0.1373
+        },
+        {
+          "hex": "#476635",
+          "fraction": 0.1343
+        },
+        {
+          "hex": "#3a582f",
+          "fraction": 0.1224
+        },
+        {
+          "hex": "#9db869",
+          "fraction": 0.1202
+        },
+        {
+          "hex": "#1e381c",
+          "fraction": 0.112
+        },
+        {
+          "hex": "#081b0c",
+          "fraction": 0.0859
+        }
+      ]
+    },
+    {
+      "id": "road-outskirts",
+      "size": [
+        1536,
+        1024
+      ],
+      "mode": "RGB",
+      "green_eight_color_check": true,
+      "dominant_colors": [
+        {
+          "hex": "#97af67",
+          "fraction": 0.152
+        },
+        {
+          "hex": "#354e2c",
+          "fraction": 0.1404
+        },
+        {
+          "hex": "#7f9657",
+          "fraction": 0.1393
+        },
+        {
+          "hex": "#435a34",
+          "fraction": 0.139
+        },
+        {
+          "hex": "#20391f",
+          "fraction": 0.12
+        },
+        {
+          "hex": "#adc375",
+          "fraction": 0.1116
+        },
+        {
+          "hex": "#0a1b0f",
+          "fraction": 0.1093
+        },
+        {
+          "hex": "#667c46",
+          "fraction": 0.0885
+        }
+      ]
+    },
+    {
+      "id": "sasquatch",
+      "size": [
+        1536,
+        1024
+      ],
+      "mode": "RGB",
+      "green_eight_color_check": true,
+      "dominant_colors": [
+        {
+          "hex": "#162a15",
+          "fraction": 0.1363
+        },
+        {
+          "hex": "#acc77a",
+          "fraction": 0.1337
+        },
+        {
+          "hex": "#66844b",
+          "fraction": 0.1291
+        },
+        {
+          "hex": "#4e6a3b",
+          "fraction": 0.1242
+        },
+        {
+          "hex": "#37522c",
+          "fraction": 0.1222
+        },
+        {
+          "hex": "#88a566",
+          "fraction": 0.1205
+        },
+        {
+          "hex": "#243c1f",
+          "fraction": 0.1196
+        },
+        {
+          "hex": "#0a160a",
+          "fraction": 0.1143
+        }
+      ]
+    },
+    {
+      "id": "toll-troll",
+      "size": [
+        1536,
+        1024
+      ],
+      "mode": "RGB",
+      "green_eight_color_check": true,
+      "dominant_colors": [
+        {
+          "hex": "#304628",
+          "fraction": 0.1345
+        },
+        {
+          "hex": "#bcd088",
+          "fraction": 0.1265
+        },
+        {
+          "hex": "#132312",
+          "fraction": 0.1262
+        },
+        {
+          "hex": "#587141",
+          "fraction": 0.1245
+        },
+        {
+          "hex": "#405732",
+          "fraction": 0.1244
+        },
+        {
+          "hex": "#7d975a",
+          "fraction": 0.1227
+        },
+        {
+          "hex": "#081208",
+          "fraction": 0.1216
+        },
+        {
+          "hex": "#21351d",
+          "fraction": 0.1197
+        }
+      ]
+    },
+    {
+      "id": "brunch-line",
+      "size": [
+        1536,
+        1024
+      ],
+      "mode": "RGB",
+      "green_eight_color_check": true,
+      "dominant_colors": [
+        {
+          "hex": "#acc372",
+          "fraction": 0.1501
+        },
+        {
+          "hex": "#38522e",
+          "fraction": 0.1369
+        },
+        {
+          "hex": "#4d6939",
+          "fraction": 0.13
+        },
+        {
+          "hex": "#254221",
+          "fraction": 0.1258
+        },
+        {
+          "hex": "#030f06",
+          "fraction": 0.1248
+        },
+        {
+          "hex": "#6e894f",
+          "fraction": 0.1133
+        },
+        {
+          "hex": "#90a965",
+          "fraction": 0.1113
+        },
+        {
+          "hex": "#132b15",
+          "fraction": 0.1078
+        }
+      ]
+    }
+  ]
+}

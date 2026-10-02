@@ -1,5 +1,7 @@
 # Scene brief, graphics v4: five new scenes
 
+Completed October 2, 2026: all five scenes are integrated. See the [graphics-v4 batch](../handoff/graphics-v4/README.md) and [validation record](../validation/2026-10-02-scene-art-v4.md). The production brief and prompts below are retained for provenance and future reference.
+
 For an image-generation agent (Codex or any other). Read [AGENTS.md](../../AGENTS.md), section "Adding new scenes and artwork", first; this brief fills in what to draw and how it must look. Reference art to study before generating: `app/assets/scenes/road-forest.webp`, `road-river.webp`, `road-city.webp`, `heatwave.webp`, `mushroom-market.webp`, `forest-camp.webp` (the newest, most consistent set) and `app/assets/sprites/van.png`.
 
 ## The five scenes
@@ -42,9 +44,9 @@ Use these to nudge, never to replace the blocks.
 - No vehicles and no people anywhere. The van is drawn by the game on top of the road.
 - The left and right edges should be quiet, without strong subjects cut off, because the image is panned and cropped.
 
-**Encounter illustrations** (`sasquatch`, `toll-troll`, `brunch-line`) appear in the encounter dialog, cropped to a wide strip on phones and shown nearly whole on desktop.
+**Encounter illustrations** (`sasquatch`, `toll-troll`, `brunch-line`) appear in the encounter dialog with centered `object-fit: cover` cropping. Portrait phones and desktop both show a wide strip: desktop art is at most 224px tall in a 560px-wide dialog; phone art is 92–170px tall. Short landscape screens (521–1000px wide, at most 500px tall) instead show a narrow art column occupying 32% of the dialog, which crops the image's sides.
 
-- Put the gag in a horizontal band through the middle 50% of the height. The top and bottom 20% may be lost on phones.
+- Put the gag in a horizontal band through the middle 50% of the height, with its essential subject close to the center. Both the top and bottom may be lost in wide strips; short landscape screens may lose most of the sides. Inspect the actual dialog at phone, desktop and short landscape sizes before accepting the crop.
 - Do not draw the van. Its design differs between generations, and the game's van sprite is the canonical one. Show the travelers on foot, or imply the van with a corner of a bumper at the frame's edge at most.
 - A clear foreground, middle ground and background, as in `heatwave`.
 
@@ -66,9 +68,9 @@ Steering: *flat, sparse, utilitarian, power lines, blank signs, washed-out sky.*
 
 ### sasquatch
 
-> [Style block] Scene: the edge of a misty fir forest beside a quiet road. In the middle ground a very tall, shaggy, slightly blurred figure stands half behind a tree trunk, looking back over its shoulder at the viewer, perfectly still, as if caught mid-step. Its outline is softened by mist so it could be a big man in a fur coat. In the near middle ground, small on the left, two scruffy travelers in beanies crouch behind a fern, one holding up a phone at arm's length, the other covering their mouth. Foreground: road shoulder, a lost hiking boot. Background: layered firs fading into fog. Mood: hushed, uncertain, comic standoff. Key subjects in the middle band. [Exclusion block]
+> [Style block] Scene: the edge of a misty fir forest beside a quiet road. In the middle ground a very tall, shaggy, ambiguous figure stands half behind a tree trunk, looking back over its shoulder at the viewer, perfectly still, as if caught mid-step. Crisp pixel-dither mist partially obscures its hard-edged outline so it could be a big man in a fur coat; no optical blur. In the near middle ground, small on the left, two scruffy travelers in beanies crouch behind a fern, one holding up a phone at arm's length, the other covering their mouth. Foreground: road shoulder, a lost hiking boot. Background: layered firs fading into fog. Mood: hushed, uncertain, comic standoff. Key subjects in the middle band. [Exclusion block]
 
-Steering: *blurry, ambiguous, caught-in-the-act, hushed, fog-softened.* The figure must stay ambiguous (the joke: "a tall man named Greg"). No gore, no menace.
+Steering: *ambiguous, caught-in-the-act, hushed, pixel-dither mist, partially obscured silhouette.* The figure must stay ambiguous (the joke: "a tall man named Greg") while retaining crisp pixel edges, with no optical blur. No gore, no menace.
 
 ### toll-troll
 
@@ -91,7 +93,7 @@ Before an image goes into the game, check every point. Regenerate rather than ed
 3. **Pixel crispness.** Hard edges, visible dithering, no soft gradients or photographic noise.
 4. **Composition.** Road backdrops: a straight horizontal road in the lower third, edge to edge, no vehicles or people. Encounters: the gag reads in the middle 50% band, and no van appears.
 5. **Consistency.** Put the image beside `road-forest`, `road-river` and `heatwave`: the same outline weight, light direction, tree style and mood.
-6. **Phone legibility.** Shrink to 390 pixels wide: the subject and the gag still read.
+6. **Crop legibility.** Inspect the actual centered cover crops at 390px phone, 1440px desktop and short landscape sizes: the subject and the gag still read. A full-image thumbnail alone does not verify the dialog crop.
 
 ## Putting the scenes in the game
 

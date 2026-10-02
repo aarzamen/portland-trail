@@ -12,7 +12,7 @@
     uv run app/scripts/prepare-assets.py --only scenes    or sprites, icons, font
 
 Paths come from this file's location, so it runs from any directory (`npm run assets` starts it in app/).
-Sources are only read: the scene JPEGs in images/, the masters in docs/handoff/graphics-v1, -v2 and -v3, and the
+Sources are only read: the scene JPEGs in images/, the masters in docs/handoff/graphics-v1 through -v4, and the
 glyph sheet app/scripts/pixel-font.txt. The versions above are pinned because the output bytes depend on them.
 
     app/assets/scenes/<id>.webp            crop, sign repairs, WebP quality 82, at most 1536 wide
@@ -87,6 +87,10 @@ SCENES = {
         for name in ('mushroom-market', 'river-ferry', 'forest-camp', 'bookshop', 'road-forest')
     },
     **{name: (f'docs/handoff/graphics-v3/{name}.png', None) for name in ('road-river', 'road-city', 'heatwave')},
+    **{
+        name: (f'docs/handoff/graphics-v4/{name}.png', None)
+        for name in ('road-pines', 'road-outskirts', 'sasquatch', 'toll-troll', 'brunch-line')
+    },
 }
 
 # Sign repairs (L7), applied to the cropped scene before it is encoded. `rect` is the part of the sign's interior

@@ -215,9 +215,9 @@ Talk lines keep their current wording. Rest stops (T): heal numbers may be retun
 |---|---:|---:|---|---|---|
 | `foothills` | 0 | 200 | Into the foothills | road-forest | [8, 12] |
 | `river` | 200 | 350 | Along the river | road-river | [10, 14] |
-| `pines` | 350 | 570 | The long way through the pines | road-forest | [8, 12] |
+| `pines` | 350 | 570 | The long way through the pines | road-pines | [8, 12] |
 | `forest` | 570 | 750 | Deep in Cascadia | road-forest | [10, 16] |
-| `outskirts` | 750 | 870 | The outskirts of somewhere | road-forest | [5, 9] |
+| `outskirts` | 750 | 870 | The outskirts of somewhere | road-outskirts | [5, 9] |
 | `city` | 870 | 1000 | Portland is getting closer | road-city | [3, 6] |
 
 Activities:
@@ -257,9 +257,9 @@ Activities:
 | `wifi_outage` | Local ISP Outage! | auto | wifi | 9 | |
 | `pandemic_death` | Sudden Pandemic Relapse | critical | outbreak | 2 | |
 | `ebike_convoy` | E-Bike Convoy Claims the Lane | choice | bike-convoy | 7 | 100–870 |
-| `sasquatch` | Blurry Shape in the Treeline | choice | road-forest | 6 | 350–750 |
-| `toll_troll` | Toll Under the Bridge | choice | road-river | 6 | 200–350 |
-| `brunch_line` | Brunch Line Across the Highway | choice | road-city | 6 | 870–1000 |
+| `sasquatch` | Blurry Shape in the Treeline | choice | sasquatch | 6 | 350–750 |
+| `toll_troll` | Toll Under the Bridge | choice | toll-troll | 6 | 200–350 |
+| `brunch_line` | Brunch Line Across the Highway | choice | brunch-line | 6 | 870–1000 |
 | `petition_gauntlet` | Sidewalk Petition Gauntlet | choice | city-street | 6 | 750–1000 |
 
 Existing descriptions stay, except the pandemic's, which becomes "A devastating outbreak catches up with the van." New descriptions:
@@ -520,6 +520,7 @@ Scenes: `app/assets/scenes/<id>.webp` (WebP quality 82, at most 1536 wide) and `
 | outbreak | 00009 | 0, 70, 1024, 930 |
 | mushroom-market, river-ferry, forest-camp, bookshop, road-forest | docs/handoff/graphics-v2/<id>.png | none |
 | road-river, road-city, heatwave | docs/handoff/graphics-v3/<id>.png | none |
+| road-pines, road-outskirts, sasquatch, toll-troll, brunch-line | docs/handoff/graphics-v4/<id>.png | none |
 
 Sprites, unchanged in content, from the graphics-v1 masters with the rectangles in the current `prepare-assets.py`: `app/assets/sprites/portrait-<profession>.png` (128×128), `app/assets/sprites/resource-<item>.png` (64×64), `app/assets/sprites/van.png` (256×128). App icons stay at `app/assets/icons/` with their current names and sizes, regenerated from `docs/handoff/graphics-v2/app-icon.png`.
 

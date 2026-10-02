@@ -391,6 +391,28 @@
       "sha256": "0a88c41eb6a5fcf1140f1529fc4f683804523b0589459924b9caf9b01583acc8"
     },
     {
+      "file": "scenes/brunch-line-960.webp",
+      "source": "docs/handoff/graphics-v4/brunch-line.png",
+      "source_sha256": "5d2ad3bf4e2fc5500b6b9e7957457cb9f07676297edbe4f1a0fe6b642032816a",
+      "crop": null,
+      "repairs": [],
+      "width": 960,
+      "height": 640,
+      "bytes": 133902,
+      "sha256": "637a5ce1d90267c59fd623ec662183964d0228567031ff9f8163d839a0d4702c"
+    },
+    {
+      "file": "scenes/brunch-line.webp",
+      "source": "docs/handoff/graphics-v4/brunch-line.png",
+      "source_sha256": "5d2ad3bf4e2fc5500b6b9e7957457cb9f07676297edbe4f1a0fe6b642032816a",
+      "crop": null,
+      "repairs": [],
+      "width": 1536,
+      "height": 1024,
+      "bytes": 301226,
+      "sha256": "cfc6f326aa9b2b5612b3e94804aa0046bc1a699b9f6753e287da3508ed6ad369"
+    },
+    {
       "file": "scenes/city-street-960.webp",
       "source": "images/the_portland_trail_00007.jpg",
       "source_sha256": "06aa300bcd317ee25f8912e2ffc012eb485e4117f016240b6f3b78f65e87fd47",
@@ -915,6 +937,50 @@
       "sha256": "c59288b5850fc6675eca67c9f4e33479b7992c0f98f4749a393363144fc5a80c"
     },
     {
+      "file": "scenes/road-outskirts-960.webp",
+      "source": "docs/handoff/graphics-v4/road-outskirts.png",
+      "source_sha256": "39258726428fd974b9d2d22b16bdb02f0da95c89c93c5c1e6e15a697a090a1e8",
+      "crop": null,
+      "repairs": [],
+      "width": 960,
+      "height": 640,
+      "bytes": 104780,
+      "sha256": "4314b313eff56d9fadac7fbe51933b10aee8f3e2729bda44850e0e268bb32530"
+    },
+    {
+      "file": "scenes/road-outskirts.webp",
+      "source": "docs/handoff/graphics-v4/road-outskirts.png",
+      "source_sha256": "39258726428fd974b9d2d22b16bdb02f0da95c89c93c5c1e6e15a697a090a1e8",
+      "crop": null,
+      "repairs": [],
+      "width": 1536,
+      "height": 1024,
+      "bytes": 247008,
+      "sha256": "e8e51f781905215ddf6d6154b6ac670a394f7072db2d37e401e7e342556cd2b9"
+    },
+    {
+      "file": "scenes/road-pines-960.webp",
+      "source": "docs/handoff/graphics-v4/road-pines.png",
+      "source_sha256": "0cfeaf60594d48d4cb8e7fd2350de0e3bbdaf53fed5249d17a61b1e8a595b09a",
+      "crop": null,
+      "repairs": [],
+      "width": 960,
+      "height": 640,
+      "bytes": 119492,
+      "sha256": "bd413866b14fa3b3b7cbe8666cf1313ba753d4968fdd4c6d24203fd71b424ad2"
+    },
+    {
+      "file": "scenes/road-pines.webp",
+      "source": "docs/handoff/graphics-v4/road-pines.png",
+      "source_sha256": "0cfeaf60594d48d4cb8e7fd2350de0e3bbdaf53fed5249d17a61b1e8a595b09a",
+      "crop": null,
+      "repairs": [],
+      "width": 1536,
+      "height": 1024,
+      "bytes": 217992,
+      "sha256": "6f32fe97251cd794a455acac58d16b4921403b5abb9bab37ae29e4e00f464b7e"
+    },
+    {
       "file": "scenes/road-river-960.webp",
       "source": "docs/handoff/graphics-v3/road-river.png",
       "source_sha256": "99dc429a221cf28b074b123d56cc340b4f2fcc70261cbb0772a7b99b5bbb0af4",
@@ -935,6 +1001,28 @@
       "height": 1024,
       "bytes": 282342,
       "sha256": "a2b40e34c9fa432ad1b49b2086dc58a1aa01881d8d9376154c5b250b625e312a"
+    },
+    {
+      "file": "scenes/sasquatch-960.webp",
+      "source": "docs/handoff/graphics-v4/sasquatch.png",
+      "source_sha256": "14dd1a189025e8570802365389832ef97c3a31c873b4b0aa15620e3e8d8d622b",
+      "crop": null,
+      "repairs": [],
+      "width": 960,
+      "height": 640,
+      "bytes": 138418,
+      "sha256": "88fce3169d3ed83ca744651e098f3233d017e15348fe11adb1b682b85bc2f21e"
+    },
+    {
+      "file": "scenes/sasquatch.webp",
+      "source": "docs/handoff/graphics-v4/sasquatch.png",
+      "source_sha256": "14dd1a189025e8570802365389832ef97c3a31c873b4b0aa15620e3e8d8d622b",
+      "crop": null,
+      "repairs": [],
+      "width": 1536,
+      "height": 1024,
+      "bytes": 292634,
+      "sha256": "7fcc9025150999441928ee56d308df930fe8d5c98c276b719feeb5b7e6f3bef3"
     },
     {
       "file": "scenes/title-960.webp",
@@ -1013,6 +1101,28 @@
       "height": 730,
       "bytes": 77420,
       "sha256": "3c65360279d179411cea55482d52207d291ceaf44d68689756ba1f011f8912ef"
+    },
+    {
+      "file": "scenes/toll-troll-960.webp",
+      "source": "docs/handoff/graphics-v4/toll-troll.png",
+      "source_sha256": "3c60f4ea4d571e06fa8a85c5f33cc57746c79390182496b199b90a74b3d67ee6",
+      "crop": null,
+      "repairs": [],
+      "width": 960,
+      "height": 640,
+      "bytes": 125684,
+      "sha256": "ba35874eff528139c551eff9b1f8ed376e59b05facbd8e9391c93b26e0a78774"
+    },
+    {
+      "file": "scenes/toll-troll.webp",
+      "source": "docs/handoff/graphics-v4/toll-troll.png",
+      "source_sha256": "3c60f4ea4d571e06fa8a85c5f33cc57746c79390182496b199b90a74b3d67ee6",
+      "crop": null,
+      "repairs": [],
+      "width": 1536,
+      "height": 1024,
+      "bytes": 219432,
+      "sha256": "c6f2ff69e6cebcbbba8e6d5c7d7cc4f6feeb9c5f7ab06790fe9ffeb76299366a"
     },
     {
       "file": "scenes/travel-960.webp",
