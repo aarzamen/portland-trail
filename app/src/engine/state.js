@@ -17,11 +17,12 @@ import {
   RULES,
   WEATHER,
 } from '../data.js';
+import { mix32 } from './random.js';
 
 /**
  * @typedef {Object} Traveler
  * @property {string} id         'traveler_1' … 'traveler_5'
- * @property {string} name       1–32 characters, trimmed
+ * @property {string} name       1–32 characters, trimmed, no control characters
  * @property {number} health     integer 0–100; 0 means dead
  * @property {boolean} sick
  * @property {null | { day: number, mile: number, cause: string }} death
@@ -30,7 +31,7 @@ import {
  * @typedef {Object} State
  * @property {3} version
  * @property {number} seed       uint32 the journey started from; never changes
- * @property {number} rng        uint32 generator state
+ * @property {number} rng        uint32 generator state; starts at mix32(seed)
  * @property {'influencer'|'dev'|'prepper'|'barista'} profession
  * @property {Traveler[]} party  exactly five
  * @property {{money: number, food: number, fuel: number, ammo: number, parts: number, kombucha: number,
@@ -56,8 +57,10 @@ export const RESOURCE_IDS = ['money', 'food', 'fuel', 'ammo', 'parts', 'kombucha
 
 const ITEM_BY_ID = new Map(ITEMS.map(item => [item.id, item]));
 const PROFESSION_BY_ID = new Map(PROFESSIONS.map(profession => [profession.id, profession]));
-// Unprintable characters: they would break a name plate or a headstone.
+// Unprintable characters (C0, DEL and C1, newlines included): they would break a name plate or a
+// headstone. A name loses them; an epitaph that has them is refused.
 const CONTROL_CHARACTERS = /[\u0000-\u001f\u007f-\u009f]/;
+const EVERY_CONTROL_CHARACTER = new RegExp(CONTROL_CHARACTERS.source, 'g');
 
 /** The item with this id, or undefined: cash and unknown ids are not items. */
 export const itemOf = id => ITEM_BY_ID.get(id);
@@ -94,10 +97,13 @@ export function fill(template, values = {}) {
   });
 }
 
-/** A traveler's name as it is stored, or null when the text cannot be a name. */
+/**
+ * A traveler's name as it is stored: control characters removed, then trimmed. Null when that
+ * leaves no name of 1 to LIMITS.name characters.
+ */
 export function cleanName(name) {
   if (typeof name !== 'string') return null;
-  const trimmed = name.trim();
+  const trimmed = name.replace(EVERY_CONTROL_CHARACTER, '').trim();
   return trimmed.length >= 1 && trimmed.length <= LIMITS.name ? trimmed : null;
 }
 
@@ -130,7 +136,8 @@ export const clearWeather = () => ({ id: 'clear', until: 0 });
 /**
  * Start a journey in the shop at mile 0.
  * @param {{ profession: string, names?: string[], seed: number }} options
- *   `seed` is a whole number; it is stored as a uint32.
+ *   `seed` is a whole number; it is stored as a uint32, and the generator starts at mix32(seed).
+ *   Names lose their control characters and are trimmed.
  * @returns {State}
  * @throws {Error} with a sentence for the player, on an unknown background, bad names or a bad seed
  */
@@ -146,7 +153,7 @@ export function createGame({ profession, names = DEFAULT_NAMES, seed } = /** @ty
   return {
     version: SAVE_VERSION,
     seed: start,
-    rng: start,
+    rng: mix32(start),
     profession: /** @type {State['profession']} */ (profession),
     party: cleaned.map((name, index) => ({
       id: `traveler_${index + 1}`,
@@ -222,8 +229,10 @@ export function cure(state) {
 
 // --- Supplies --------------------------------------------------------------
 
-// Food is kept to two decimals so that a saved journey reads back exactly.
-const tidy = (id, amount) => (id === 'food' ? Math.round(amount * 100) / 100 : amount);
+/** Food to two decimals, so that a saved journey reads back exactly. */
+export const roundFood = amount => Math.round(amount * 100) / 100;
+
+const tidy = (id, amount) => (id === 'food' ? roundFood(amount) : amount);
 
 /**
  * Add to a supply. A gain never lifts an item above what the van holds, and never lowers a stock
@@ -260,6 +269,12 @@ export function lastStop(distance) {
 /** The first stop after this mile; undefined at the end of the road. */
 export function nextStop(distance) {
   return LOCATIONS.find(stop => stop.miles > distance);
+}
+
+/** As much of `miles` as the van can cover from this mile without passing the next stop. */
+export function milesBeforeNextStop(distance, miles) {
+  const next = nextStop(distance);
+  return next ? Math.min(miles, next.miles - distance) : 0;
 }
 
 /** The stretch of road this mile belongs to. */
@@ -355,12 +370,10 @@ export const fuelFor = (miles, pace) => Math.ceil(miles / pace.milesPerFuel);
  */
 export function drivePlan(state) {
   const pace = PACES[state.pace];
-  const next = nextStop(state.distance);
   const drizzle = weatherOn(state, state.day + 1) === 'drizzle';
   const cap = drizzle ? Math.min(pace.miles, PACES.normal.miles) : pace.miles;
-  const away = next ? next.miles - state.distance : 0;
   const reach = Math.floor(state.inventory.fuel * pace.milesPerFuel);
-  const miles = Math.min(cap, away, reach);
+  const miles = milesBeforeNextStop(state.distance, Math.min(cap, reach));
   return { miles, fuel: fuelFor(miles, pace) };
 }
 
@@ -374,7 +387,7 @@ export function drivePlan(state) {
  */
 export function moveVan(state, miles, roadLine) {
   const next = nextStop(state.distance);
-  const moved = next ? Math.min(miles, next.miles - state.distance) : 0;
+  const moved = milesBeforeNextStop(state.distance, miles);
   state.distance += moved;
   const arrived = Boolean(next) && state.distance === next.miles;
   state.phase = arrived ? 'location' : 'travel';

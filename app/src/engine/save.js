@@ -3,7 +3,8 @@
 // journey can go on. Only a save that cannot be a journey at all is rejected. Writing uses the
 // same reading: a state is valid exactly when it reads back unchanged.
 
-import { DEATHS, EVENTS, LOCATIONS, PACES, RATIONS, REFUSALS, RULES, WEATHER } from '../data.js';
+import { DEATHS, EVENTS, LIMITS, LOCATIONS, PACES, RATIONS, REFUSALS, RULES, WEATHER } from '../data.js';
+import { mix32 } from './random.js';
 import {
   MAX_HEALTH,
   PARTY_SIZE,
@@ -15,6 +16,7 @@ import {
   isRecord,
   newFlags,
   professionById,
+  roundFood,
   stopAt,
 } from './state.js';
 
@@ -38,17 +40,20 @@ function readInventory(saved) {
   for (const id of RESOURCE_IDS) {
     const amount = saved[id];
     if (typeof amount !== 'number' || !Number.isFinite(amount) || amount < 0) return null;
-    inventory[id] = id === 'food' ? Math.round(amount * 100) / 100 : Math.floor(amount);
+    inventory[id] = id === 'food' ? roundFood(amount) : Math.floor(amount);
   }
   return inventory;
 }
 
-/** When and where a traveler died. A missing or impossible detail takes the journey's own. */
+/**
+ * When and where a traveler died. A missing or impossible detail takes the journey's own, and a
+ * death is never later than the journey's day.
+ */
 function readDeath(saved, journey) {
   const death = isRecord(saved) ? saved : {};
   const onTheRoute = wholeFrom(death.mile, 0) && death.mile <= RULES.goalMiles;
   return {
-    day: wholeFrom(death.day, 1) ? death.day : journey.day,
+    day: wholeFrom(death.day, 1) ? Math.min(death.day, journey.day) : journey.day,
     mile: onTheRoute ? death.mile : journey.distance,
     cause: listed(DEATHS, death.cause) ? death.cause : 'unknown',
   };
@@ -77,12 +82,18 @@ function readPending(saved) {
   return known ? { id: saved.id, token: saved.token } : null;
 }
 
-/** Every well-formed journal line, oldest first. */
-function readJournal(saved) {
+/**
+ * Every well-formed journal line, oldest first: at most LIMITS.journalLine characters, and never
+ * dated after the journey's day.
+ */
+function readJournal(saved, day) {
   if (!Array.isArray(saved)) return [];
   return saved
     .filter(entry => isRecord(entry) && wholeFrom(entry.day, 1) && typeof entry.text === 'string')
-    .map(entry => ({ day: entry.day, text: entry.text }));
+    .map(entry => ({
+      day: Math.min(entry.day, day),
+      text: [...entry.text].slice(0, LIMITS.journalLine).join(''),
+    }));
 }
 
 function readFlags(saved) {
@@ -111,10 +122,13 @@ function repair(state) {
   }
   if (state.outcome === 'won') state.distance = RULES.goalMiles;
 
+  // A shop is only ever open at a stop that has one, and never while an encounter is pending.
   const stop = stopAt(state.distance);
   const stopped = state.phase === 'shop' || state.phase === 'location';
   if (stopped && !stop) state.phase = 'travel';
-  else if (state.phase === 'shop' && !stop.activities.includes('shop')) state.phase = 'location';
+  else if (state.phase === 'shop' && (!stop.activities.includes('shop') || state.pendingEvent)) {
+    state.phase = 'location';
+  }
 
   if (state.pendingEvent) state.flags.nextToken = Math.max(state.flags.nextToken, state.pendingEvent.token);
 }
@@ -135,12 +149,12 @@ function rebuild(saved) {
   const party = saved.party.map((member, index) => readTraveler(member, index, saved));
   if (party.includes(null)) return null;
 
-  const journal = readJournal(saved.journal);
+  const journal = readJournal(saved.journal, saved.day);
   const seed = uint32(saved.seed) ?? uint32(saved.rng) ?? 0;
   const state = /** @type {State} */ ({
     version: SAVE_VERSION,
     seed,
-    rng: uint32(saved.rng) ?? seed,
+    rng: uint32(saved.rng) ?? mix32(seed),
     profession: saved.profession,
     party,
     inventory,

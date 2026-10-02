@@ -11,6 +11,7 @@ import {
   weatherName,
 } from '../src/engine.js';
 import { DEATHS, DEFAULT_NAMES, EVENTS, ITEMS, LIMITS, LOCATIONS, PROFESSIONS, RULES } from '../src/data.js';
+import { mix32 } from '../src/engine/random.js';
 
 const TRAVEL = { type: 'travel' };
 const ENDED = 'This journey has ended. Start a new one to play again.';
@@ -257,6 +258,26 @@ test('a stop phase away from any stop becomes the road', () => {
   assert.equal(motel.phase, 'shop');
 });
 
+test('a shop is never open while an encounter is pending', () => {
+  const state = start();
+  /** @type {any} */
+  const save = {
+    ...state,
+    phase: 'shop',
+    distance: stop('sketchy_motel').miles,
+    pendingEvent: { id: 'found_supplies', token: 4 },
+    flags: { ...state.flags, nextToken: 4 },
+  };
+  const repaired = load(save);
+  assert.equal(repaired.phase, 'location');
+  assert.equal(currentStop(repaired).id, 'sketchy_motel');
+  assert.deepEqual(repaired.pendingEvent, save.pendingEvent);
+  assert.throws(() => serializeGame(save), /invalid journey/);
+  assert.deepEqual(roundTrip(repaired), repaired);
+  const resolved = act(repaired, { type: 'resolveEvent', token: 4 });
+  assert.equal(act(resolved, { type: 'openShop' }).phase, 'shop');
+});
+
 test('a pending encounter that no longer exists is dropped', () => {
   const state = { ...start(), phase: 'travel', distance: 40 };
   const facing = (id, token, nextToken) => ({
@@ -353,6 +374,27 @@ test('a journal over the limit keeps its newest lines', () => {
   assert.equal(load({ ...state, logged: -5 }).logged, state.journal.length);
 });
 
+test('a journal line is cut to its limit and never dated after the journey', () => {
+  const state = { ...start(), phase: 'travel', distance: 300, day: 6 };
+  const long = 'x'.repeat(LIMITS.journalLine + 40);
+  const emoji = '🚐'.repeat(LIMITS.journalLine + 1);
+  const journal = [
+    { day: 2, text: long },
+    { day: 9, text: 'From the future.' },
+    { day: 6, text: emoji },
+  ];
+  const repaired = load({ ...state, journal, logged: journal.length });
+  assert.deepEqual(repaired.journal, [
+    { day: 2, text: 'x'.repeat(LIMITS.journalLine) },
+    { day: 6, text: 'From the future.' },
+    { day: 6, text: '🚐'.repeat(LIMITS.journalLine) },
+  ]);
+  assert.deepEqual(roundTrip(repaired), repaired);
+  /** @type {any} */
+  const unrepaired = { ...state, journal, logged: journal.length };
+  assert.throws(() => serializeGame(unrepaired), /invalid journey/);
+});
+
 test('a traveler is made consistent: the dead have a death, the living have none', () => {
   const state = { ...start(), phase: 'travel', distance: 300, day: 9 };
   const repaired = load(
@@ -374,6 +416,13 @@ test('a traveler is made consistent: the dead have a death, the living have none
   });
   assert.deepEqual(repaired.party[1].death, { day: 4, mile: 120, cause: 'unknown' });
   assert.equal(repaired.party[1].epitaph, DEATHS.unknown.epitaph);
+  // A death is never later than the journey's own day.
+  const early = load(
+    crew(state, (member, index) =>
+      index === 0 ? { ...fallen(state), death: { day: 30, mile: 120, cause: 'road' } } : {},
+    ),
+  );
+  assert.deepEqual(early.party[0].death, { day: state.day, mile: 120, cause: 'road' });
   assert.equal(repaired.party[2].death, null);
   assert.equal(repaired.party[2].epitaph, '');
   assert.equal(repaired.party[3].sick, false);
@@ -408,7 +457,7 @@ test('unknown fields are dropped and missing later fields take their defaults', 
   assert.equal(minimal.logged, 0);
   assert.equal(weatherName(minimal), 'Clear');
   assert.deepEqual(minimal.flags, { ...state.flags });
-  assert.ok(Number.isInteger(minimal.rng) && minimal.rng === minimal.seed);
+  assert.equal(minimal.rng, mix32(minimal.seed));
   assert.deepEqual(roundTrip(minimal), minimal);
   assert.equal(transition(minimal, TRAVEL).error, null);
 });
@@ -647,6 +696,23 @@ for (const version of [2, 1]) {
   });
 }
 
+test('a save whose names hold control characters still loads, without them', () => {
+  const party = oldParty({ 0: { name: 'Kale\n' }, 2: { name: 'Ro\u0000wan\u0085' }, 4: { name: '\tEcho' } });
+  for (const version of [1, 2]) {
+    const state = load(legacy(version, { phase: 'travel', distance: 160, party }));
+    assert.ok(state, `version ${version}`);
+    assert.deepEqual(
+      state.party.map(member => member.name),
+      ['Kale', 'Juniper', 'Rowan', 'Birch', 'Echo'],
+    );
+    assert.deepEqual(roundTrip(state), state);
+  }
+  const current = start();
+  const named = load(crew(current, (member, index) => (index === 1 ? { name: 'Juni\u0007per\r\n' } : {})));
+  assert.equal(named.party[1].name, 'Juniper');
+  assert.equal(load(crew(current, (member, index) => (index === 1 ? { name: '\n\u0007' } : {}))), null);
+});
+
 test('an old save on a mile that has since become a stop stays on the road', () => {
   const market = stop('mushroom_market');
   const state = deserializeGame(JSON.stringify(legacy(1, { phase: 'travel', distance: market.miles, day: 3 })));
@@ -689,8 +755,9 @@ test('an old save with a stop that does not match its mile is repaired, not refu
 
 test('details a save gets wrong are put right', () => {
   const state = { ...start(), phase: 'travel', distance: 300 };
-  assert.equal(load({ ...state, rng: undefined }).rng, state.seed);
-  assert.equal(load({ ...state, rng: 2 ** 32 }).rng, state.seed);
+  // A missing or impossible generator state starts again where a new journey with this seed would.
+  assert.equal(load({ ...state, rng: undefined }).rng, mix32(state.seed));
+  assert.equal(load({ ...state, rng: 2 ** 32 }).rng, mix32(state.seed));
   assert.equal(load({ ...state, seed: undefined, rng: 77 }).seed, 77);
   assert.equal(load({ ...state, seed: -3, rng: 77 }).seed, 77);
   for (const weather of [{ id: 'hail', until: 9 }, { id: 'heat' }, { id: 'heat', until: -1 }, 'Heatwave', null]) {

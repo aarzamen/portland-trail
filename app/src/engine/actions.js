@@ -454,15 +454,25 @@ function notesSince(before, after) {
 /**
  * Carry out an action. The state given is never changed. A refusal returns that same state, a
  * sentence for the player and no notes; otherwise the new state and the journal lines the action wrote.
+ * The action is copied once, and that copy is what is checked and carried out, so an action that
+ * reads differently each time (a getter) cannot pass the check with one value and act on another.
+ * An action that cannot be copied is refused. Given a state from createGame, deserializeGame or
+ * transition, this never throws.
  * @param {State} state
  * @param {Action} action
  * @returns {{ state: State, error: string | null, notes: string[] }}
  */
 export function transition(state, action) {
-  const error = refusalFor(state, action);
+  let copy;
+  try {
+    copy = structuredClone(action);
+  } catch {
+    return { state, error: REFUSALS.invalid, notes: [] };
+  }
+  const error = refusalFor(state, copy);
   if (error) return { state, error, notes: [] };
   const next = structuredClone(state);
-  ACTIONS[action.type].apply(next, action);
+  ACTIONS[copy.type].apply(next, copy);
   // Whatever the action did, see whether it ended the journey: the last death, or the last mile.
   finish(next);
   return { state: next, error: null, notes: notesSince(state, next) };

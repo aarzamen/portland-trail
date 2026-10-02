@@ -30,6 +30,7 @@ import {
 } from '../src/data.js';
 import * as data from '../src/data.js';
 import { ACTIONS, refusalFor } from '../src/engine/actions.js';
+import { mix32 } from '../src/engine/random.js';
 import { fill, finish, hurt } from '../src/engine/state.js';
 
 // The game data as it was before any test ran.
@@ -156,7 +157,7 @@ test('a new journey starts in the shop at mile 0 with the background kit', () =>
     assert.equal(state.distance, 0);
     assert.equal(state.day, 1);
     assert.equal(state.seed, 77);
-    assert.equal(state.rng, 77);
+    assert.equal(state.rng, mix32(77));
     assert.equal(state.profession, profession.id);
     assert.deepEqual(state.inventory, profession.inventory);
     assert.deepEqual(
@@ -191,6 +192,19 @@ test('names are trimmed and may be 32 characters long', () => {
     state.party.map(member => member.name),
     ['Kale', 'A'.repeat(LIMITS.name), 'Rowan <b>', 'Birch', 'Echo'],
   );
+});
+
+test('names lose their control characters before they are trimmed and measured', () => {
+  const names = ['Ka\nle', '\u0000 Juniper\t', 'Ro\u0085wan\r\n', `${'B'.repeat(LIMITS.name)}\u0007`, 'Echo\u007f'];
+  const state = createGame({ profession: 'dev', names, seed: 1 });
+  assert.deepEqual(
+    state.party.map(member => member.name),
+    ['Kale', 'Juniper', 'Rowan', 'B'.repeat(LIMITS.name), 'Echo'],
+  );
+  assert.deepEqual(deserializeGame(serializeGame(state)), state);
+  for (const bad of ['\n\t', '\u0000\u009f', ` \u0085 `]) {
+    assert.throws(() => createGame({ profession: 'dev', names: [bad, ...DEFAULT_NAMES.slice(1)], seed: 1 }), /names/);
+  }
 });
 
 test('two new journeys share no objects, with each other or with the data', () => {
@@ -233,7 +247,38 @@ test('a bad background, bad names and bad seeds are refused at the start', () =>
   assert.throws(() => createGame(), /background/);
   // A whole number outside 32 bits is wrapped into them, as the first game did.
   assert.equal(createGame({ profession: 'dev', seed: 2 ** 32 + 5 }).seed, 5);
-  assert.equal(createGame({ profession: 'dev', seed: -1 }).rng, 4294967295);
+  assert.equal(createGame({ profession: 'dev', seed: -1 }).seed, 4294967295);
+  assert.equal(createGame({ profession: 'dev', seed: -1 }).rng, mix32(4294967295));
+});
+
+test('the generator starts at the seed mixed by the MurmurHash3 finalizer', () => {
+  // The finalizer as the spec writes it.
+  const finalizer = seed => {
+    let h = seed;
+    h ^= h >>> 16;
+    h = Math.imul(h, 0x85ebca6b);
+    h ^= h >>> 13;
+    h = Math.imul(h, 0xc2b2ae35);
+    h ^= h >>> 16;
+    return h >>> 0;
+  };
+  for (const seed of [0, 1, 2, 3, 42, 77, 2 ** 31, 0xffffffff, seedFromText('kale')]) {
+    assert.equal(mix32(seed), finalizer(seed), String(seed));
+    assert.equal(createGame({ profession: 'dev', seed }).rng, finalizer(seed));
+    assert.equal(createGame({ profession: 'dev', seed }).seed, seed, 'the seed itself is kept unchanged');
+  }
+  assert.notEqual(mix32(1), mix32(2));
+});
+
+test('neighbouring seeds meet encounters on the first drive as often as the odds say', () => {
+  let met = 0;
+  const games = 2000;
+  for (let seed = 1; seed <= games; seed++) {
+    const drove = act(createGame({ profession: 'dev', seed }), TRAVEL);
+    if (drove.pendingEvent) met += 1;
+  }
+  const rate = met / games;
+  assert.ok(Math.abs(rate - RULES.eventChance) <= 0.05, `${met} of ${games} first drives met an encounter`);
 });
 
 // --- Driving ---------------------------------------------------------------
@@ -1172,6 +1217,61 @@ test('transition never throws and never changes the state it is given', () => {
   }
 });
 
+test('transition reads the action once, so a getter cannot pass the check with one value and act on another', () => {
+  // Listed when first read; an inherited name after that.
+  let reads = 0;
+  const shifty = {
+    type: 'setPace',
+    get pace() {
+      reads += 1;
+      return reads === 1 ? 'slow' : '__proto__';
+    },
+  };
+  const result = transition(start(), shifty);
+  assert.equal(reads, 1);
+  assert.equal(result.error, null);
+  assert.equal(result.state.pace, 'slow');
+  assert.deepEqual(deserializeGame(serializeGame(result.state)), result.state);
+
+  // Usable when first read; an item with no use after that.
+  let looks = 0;
+  const sly = {
+    type: 'useItem',
+    get itemId() {
+      looks += 1;
+      return looks === 1 ? 'kombucha' : 'nft';
+    },
+  };
+  const dosed = transition(stocked(onRoad(start('dev')), { kombucha: 1 }), sly);
+  assert.equal(looks, 1);
+  assert.equal(dosed.error, null);
+  assert.equal(dosed.state.inventory.kombucha, 0);
+  assert.equal(dosed.state.inventory.nft, start('dev').inventory.nft);
+});
+
+test('an action that cannot be read or copied is refused, never thrown', () => {
+  const state = start();
+  /** @type {any[]} */
+  const broken = [
+    {
+      type: 'travel',
+      get extra() {
+        throw new Error('boom');
+      },
+    },
+    {
+      get type() {
+        throw new Error('boom');
+      },
+    },
+    { type: 'travel', later: () => {} },
+    { type: 'travel', tag: Symbol('tag') },
+  ];
+  for (const action of broken) {
+    assert.deepEqual(transition(state, action), { state, error: REFUSALS.invalid, notes: [] });
+  }
+});
+
 test('an unknown action is refused as invalid, and depart no longer exists', () => {
   for (const state of [start(), onRoad(start()), atStop(start(), 'first_stop')]) {
     assert.equal(refusal(state, { type: 'depart' }), 'Choose a valid action.');
@@ -1234,8 +1334,8 @@ test('the generator is the 32-bit LCG, and each action takes its rolls in order'
   let encounters = 0;
   let sicknesses = 0;
   for (const seed of seeds(200)) {
-    const [r1, r2, r3] = [lcg(seed), lcg(lcg(seed)), lcg(lcg(lcg(seed)))];
     const fresh = start('dev', seed);
+    const [r1, r2, r3] = [lcg(fresh.rng), lcg(lcg(fresh.rng)), lcg(lcg(lcg(fresh.rng)))];
 
     // Seed bombs: one roll, for the yield.
     const [min, max] = item('ammo').yield;
@@ -1320,6 +1420,90 @@ test('an ending leaves no encounter pending', () => {
   assert.equal(state.journal.at(-1).text, JOURNAL.lost);
   finish(state);
   assert.equal(state.logged, wiped.logged + 1, 'an ending is written once');
+});
+
+// --- Sentences -------------------------------------------------------------
+
+const NUMBER_WORDS = [
+  ...['one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten'],
+  ...['eleven', 'twelve', 'thirteen', 'fourteen', 'fifteen', 'sixteen', 'seventeen', 'eighteen', 'nineteen', 'twenty'],
+];
+const NUMBER = new RegExp(`\\b(${NUMBER_WORDS.join('|')})\\b|[0-9]+`, 'gi');
+
+// Words and digits in sentences that no number in data.js stands behind. Anything else that reads
+// as a number must come from a slot, so that retuning a number can never leave a sentence behind.
+const NOT_A_NUMBER = [
+  // The rules fix these: the crew is five, there are four backgrounds, one conversation a stop,
+  // one NFT a sale or a trade, and a unit of an item is one bag or one canister.
+  'Five travelers',
+  'Enter five names',
+  'four backgrounds',
+  'One conversation per stop',
+  'one NFT',
+  'One unit of food',
+  'One canister covers',
+  // The shortest name or epitaph is one character, on one line.
+  'of 1–{max} characters',
+  'of 1 to {max} characters',
+  'on one line',
+  // "One" as a pronoun.
+  'Start a new one',
+  'Choose one of the',
+  'No one here',
+  // Scenery and jokes.
+  'three miles from a farm-to-table bistro',
+  'one petition too many',
+  'The one coffee shop',
+  'one lane',
+  'like it is 1848',
+  'two lanes',
+  'Two hours later',
+  'three more brunch lines',
+  'Eleven signatures',
+  'nine mailing lists',
+  'one extremely credentialed raccoon',
+  'the 90s',
+];
+
+/** Every string in data.js, with where it lives. */
+function sentences() {
+  const found = [];
+  const walk = (value, path) => {
+    if (typeof value === 'string') found.push({ path, text: value });
+    else if (value && typeof value === 'object') {
+      for (const [key, inner] of Object.entries(value)) walk(inner, `${path}.${key}`);
+    }
+  };
+  for (const [name, value] of Object.entries(data)) walk(value, name);
+  return found;
+}
+
+/** The numbers a sentence spells out, in words or digits, outside its slots and the phrases above. */
+function spelledNumbers(text) {
+  const bare = NOT_A_NUMBER.reduce((rest, phrase) => rest.split(phrase).join(' '), text).replace(/\{[^{}]*\}/g, ' ');
+  return bare.match(NUMBER) ?? [];
+}
+
+test('no sentence spells out a number: every number in a sentence comes from a slot', () => {
+  // The check itself catches what it is for.
+  assert.deepEqual(spelledNumbers('Give $20 to make it stop'), ['20']);
+  assert.deepEqual(spelledNumbers('Two bottles of kombucha'), ['Two']);
+  assert.deepEqual(spelledNumbers('Breakdown repairs cost {repairCost} kit instead of 2.'), ['2']);
+  assert.deepEqual(spelledNumbers('Twenty dollars bought silence.'), ['Twenty']);
+  assert.deepEqual(spelledNumbers('Someone gave {money} to everyone at once.'), []);
+
+  const all = sentences();
+  const offenders = all.filter(({ text }) => spelledNumbers(text).length > 0);
+  assert.deepEqual(
+    offenders.map(({ path, text }) => `${path}: ${text}`),
+    [],
+  );
+  for (const phrase of NOT_A_NUMBER) {
+    assert.ok(
+      all.some(({ text }) => text.includes(phrase)),
+      `"${phrase}" is no longer in data.js`,
+    );
+  }
 });
 
 test('the same seed plays the same journey', () => {

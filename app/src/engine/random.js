@@ -3,6 +3,22 @@
 
 const RANGE = 4294967296; // 2 ** 32
 
+/**
+ * The generator's first state for a seed: the MurmurHash3 32-bit finalizer. It scrambles the
+ * seed so that neighbouring seeds such as 1, 2 and 3 play differently.
+ * @param {number} seed a uint32
+ * @returns {number} a uint32
+ */
+export function mix32(seed) {
+  let h = seed >>> 0;
+  h ^= h >>> 16;
+  h = Math.imul(h, 0x85ebca6b);
+  h ^= h >>> 13;
+  h = Math.imul(h, 0xc2b2ae35);
+  h ^= h >>> 16;
+  return h >>> 0;
+}
+
 /** Advance the journey's generator and return a number from 0 up to, but not including, 1. */
 export function roll(state) {
   state.rng = (Math.imul(state.rng, 1664525) + 1013904223) >>> 0;

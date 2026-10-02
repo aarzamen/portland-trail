@@ -56,8 +56,9 @@ export const RULES = {
   score: { survivor: 200, cashPerPoint: 5, earlyDay: 15, lateDay: 10, lossMilesPerPoint: 5 },
 };
 
-// Limits on what a player may type or order. They are part of the save format, not of the balance.
-export const LIMITS = { name: 32, epitaph: 60, order: 1000 };
+// Limits on what a player may type or order, and on a journal line read from a save. They are part
+// of the save format, not of the balance.
+export const LIMITS = { name: 32, epitaph: 60, order: 1000, journalLine: 300 };
 
 export const PACES = {
   slow: { name: 'Scenic', miles: 50, milesPerFuel: 25, wear: 1 }, // wear (T)
@@ -101,10 +102,11 @@ export const PROFESSIONS = [
       cooldown: 4,
       parts: 2,
       repairCost: 1,
+      // {standardCost} is what the breakdown's repair needs from everyone else.
       text:
         'Salvage {parts} repair kits once every {cooldown} days. ' +
-        'Breakdown repairs cost {repairCost} kit instead of 2.',
-      result: 'Salvaged {parts} repair {part|parts} from discarded gadgets.',
+        'Breakdown repairs cost {repairCost} kit instead of {standardCost}.',
+      result: 'Salvaged {parts} repair {kit|kits} from discarded gadgets.',
     },
     inventory: { money: 1200, food: 30, fuel: 20, ammo: 0, parts: 0, kombucha: 0, nft: 1 },
   },
@@ -159,7 +161,7 @@ export const ITEMS = [
     price: 12,
     max: 40,
     unit: 'canister',
-    text: 'One canister of fuel. Steady driving covers {miles} miles on it.',
+    text: 'One canister covers {milesPerFuel} miles at a Steady pace.',
   },
   {
     id: 'ammo',
@@ -169,7 +171,7 @@ export const ITEMS = [
     max: 6,
     unit: 'pack',
     yield: [2, 6],
-    text: 'Scatter on the road for {min} to {max} food at once.',
+    text: 'Scatter on the road for {low} to {high} food at once.',
   },
   {
     id: 'parts',
@@ -252,7 +254,7 @@ export const LOCATIONS = [
     rest: { heal: 12 },
     talk: {
       gain: { parts: 1 },
-      line: 'The ferry captain gives you {parts} repair {part|parts} and an unsolicited knot lesson.',
+      line: 'The ferry captain gives you {parts} repair {kit|kits} and an unsolicited knot lesson.',
     },
   },
   {
@@ -383,8 +385,8 @@ export const REGIONS = [
 //   offline    the refusal on the day of a Wi-Fi outage, for a choice that needs a signal
 //   result     the journal line; `otherwise` is the line when the choice's roll goes badly
 //
-// Every other number on an encounter is (T), unless a comment says it is spelled out in a sentence.
-// The effects live in engine/events.js, looked up by id.
+// Every other number on an encounter is (T). The effects live in engine/events.js, looked up by id.
+// No sentence spells out a number: every number in a sentence comes from a slot.
 export const EVENTS = [
   {
     id: 'tiktok_distraction',
@@ -536,8 +538,6 @@ export const EVENTS = [
     result: 'The Wi-Fi outage drained the party’s spirit.',
   },
   {
-    // Two results spell out `kombuchaCost` and `quarantineDays` in words ("Two bottles", "Two days"):
-    // a change to either number needs the sentence changed with it.
     id: 'pandemic_death',
     title: 'Sudden Pandemic Relapse',
     description: 'A devastating outbreak catches up with the van.',
@@ -556,12 +556,13 @@ export const EVENTS = [
         label: 'Dose everyone with kombucha',
         needs: { kombucha: 'kombuchaCost' },
         lacking: 'Dosing everyone takes {need} {bottle|bottles} of kombucha; you have {have}.',
-        result: 'Two bottles of kombucha and a lot of confidence held the outbreak to {damage} health each.',
+        result:
+          'It took {bottles} bottles of kombucha and a lot of confidence to hold the outbreak to {damage} health each.',
       },
       {
         id: 'quarantine',
         label: 'Quarantine in the van',
-        result: 'Two days of quarantine cost {damage} health each and most of the snacks.',
+        result: 'A {days}-day quarantine cost {damage} health each and most of the snacks.',
       },
       {
         id: 'push_on',
@@ -594,7 +595,7 @@ export const EVENTS = [
         label: 'Honk, apologetically',
         result: 'They parted like a slow, judgmental sea.',
         otherwise:
-          "An organizer explained the van's carbon footprint for forty minutes. " + 'Everyone lost {damage} health.',
+          "An organizer explained the van's carbon footprint for forty minutes. Everyone lost {damage} health.",
       },
       {
         id: 'trade',
@@ -689,8 +690,7 @@ export const EVENTS = [
       {
         id: 'wait',
         label: 'Wait it out',
-        result:
-          'Two hours later the line moved. It cost {fuel} fuel; ' + 'someone handed you {food} food in leftovers.',
+        result: 'Two hours later the line moved. It cost {fuel} fuel; someone handed you {food} food in leftovers.',
       },
       {
         id: 'detour',
@@ -707,8 +707,6 @@ export const EVENTS = [
     ],
   },
   {
-    // The `donate` label and result spell out `donation` ("$20", "Twenty dollars"):
-    // a change to the number needs both changed with it.
     id: 'petition_gauntlet',
     title: 'Sidewalk Petition Gauntlet',
     description: 'Clipboards approach from both sides. Every cause is urgent and none of them are the same.',
@@ -726,10 +724,10 @@ export const EVENTS = [
       },
       {
         id: 'donate',
-        label: 'Give $20 to make it stop',
+        label: 'Give ${donation} to make it stop',
         needs: { money: 'donation' },
         lacking: 'Silence costs ${need}; you have ${have}.',
-        result: 'Twenty dollars bought silence and a tote bag.',
+        result: '${donation} bought silence and a tote bag.',
       },
       {
         id: 'call',
@@ -810,13 +808,13 @@ export const ACTION_TEXT = {
       paidDetail: 'Costs ${cost} and a day of food. +{heal} health each and cures sickness.',
     },
   },
-  forage: { label: 'Forage', detail: '{min} to {max} food for a day and {damage} health each.' },
+  forage: { label: 'Forage', detail: '{low} to {high} food for a day and {damage} health each.' },
   meal: { detail: '${cost} for the crew. +{heal} health each, no day lost.' },
   talk: { label: 'Talk to locals', detail: 'Hear what this place offers. One conversation per stop.' },
   openShop: { label: 'Visit the shop', detail: 'Top up supplies before the next stretch.' },
   leaveShop: { label: 'Back to {stop}', detail: '' },
   useItem: {
-    ammo: { label: 'Scatter seed bombs', detail: '{min} to {max} food, right now.' },
+    ammo: { label: 'Scatter seed bombs', detail: '{low} to {high} food, right now.' },
     kombucha: { label: 'Share the kombucha', detail: '+{heal} health each and cures sickness.' },
   },
   sellNft: { label: 'Sell one NFT for ${resale}', detail: '' },

@@ -12,8 +12,8 @@ import {
   hurtAll,
   living,
   log,
+  milesBeforeNextStop,
   moveVan,
-  nextStop,
   passDay,
   professionOf,
   say,
@@ -161,8 +161,7 @@ export const EFFECTS = {
       say(state, event.atStop, { fuel: bonusFuel });
       return;
     }
-    const next = nextStop(state.distance);
-    const miles = next ? Math.min(bonusMiles, next.miles - state.distance) : 0;
+    const miles = milesBeforeNextStop(state.distance, bonusMiles);
     say(state, event.onRoad, { miles });
     moveVan(state, miles);
   },
@@ -186,12 +185,12 @@ export const EFFECTS = {
   },
 
   pandemic_death: {
-    kombucha(state, event, choice) {
-      say(state, choice.result, { damage: event.dosedDamage });
+    kombucha(state, event, choice, paid) {
+      say(state, choice.result, { bottles: paid.kombucha, damage: event.dosedDamage });
       hurtAll(state, event.dosedDamage, 'pandemic');
     },
     quarantine(state, event, choice) {
-      say(state, choice.result, { damage: event.quarantineDamage });
+      say(state, choice.result, { days: event.quarantineDays, damage: event.quarantineDamage });
       for (let day = 0; day < event.quarantineDays && !state.outcome; day++) passDay(state, { traveling: false });
       hurtAll(state, event.quarantineDamage, 'pandemic');
       cure(state);
@@ -285,8 +284,8 @@ export const EFFECTS = {
       say(state, choice.result, { damage: event.damage });
       hurtAll(state, event.damage, 'petitions');
     },
-    donate(state, event, choice) {
-      say(state, choice.result);
+    donate(state, event, choice, paid) {
+      say(state, choice.result, { donation: paid.money });
     },
     call(state, event, choice) {
       say(state, choice.result);

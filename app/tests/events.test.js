@@ -11,7 +11,7 @@ import {
   weatherName,
 } from '../src/engine.js';
 import { DEATHS, EVENTS, JOURNAL, LOCATIONS, PACES, PROFESSIONS, RATIONS, REFUSALS, RULES } from '../src/data.js';
-import { EFFECTS } from '../src/engine/events.js';
+import { EFFECTS, needsOf } from '../src/engine/events.js';
 import { fill } from '../src/engine/state.js';
 
 const TRAVEL = { type: 'travel' };
@@ -161,6 +161,20 @@ const responses = EVENTS.flatMap(entry =>
     : entry.choices.map(choice => ({ key: `${entry.id}:${choice.id}`, entry, choice })),
 );
 
+/**
+ * A crew facing the encounter with exactly the supplies the response needs (through needsOf) and
+ * may take as it advertises, and nothing more. A retuned cost changes the stock, not the outcome.
+ */
+function supplied({ key, entry, choice }, seed = 21) {
+  const base = facing(ready(choice?.only ?? 'barista', seed), entry.id);
+  const stock = Object.fromEntries(RESOURCES.map(id => [id, 0]));
+  if (choice) Object.assign(stock, needsOf(base, entry, choice));
+  for (const outcome of ADVERTISED[key](entry, choice)) {
+    for (const id of RESOURCES) stock[id] = Math.max(stock[id], -(outcome[id] ?? 0));
+  }
+  return { ...base, inventory: stock };
+}
+
 // --- The encounter list ----------------------------------------------------
 
 test('every encounter is complete and every response has an effect', () => {
@@ -206,7 +220,8 @@ test('every encounter is complete and every response has an effect', () => {
 
 test('every response does exactly what it advertises', () => {
   assert.deepEqual(Object.keys(ADVERTISED).sort(), responses.map(response => response.key).sort());
-  for (const { key, entry, choice } of responses) {
+  for (const response of responses) {
+    const { key, entry, choice } = response;
     const expected = ADVERTISED[key](entry, choice).map(outcome => ({
       ...outcome,
       ...(outcome.health ? { health: [...outcome.health].sort((a, b) => a - b) } : {}),
@@ -216,7 +231,7 @@ test('every response does exactly what it advertises', () => {
       : [entry.result, entry.atStop, entry.onRoad].filter(Boolean);
     const seen = new Set();
     for (const seed of seeds(120)) {
-      const before = facing(ready(choice?.only ?? 'barista', seed), entry.id);
+      const before = supplied(response, seed);
       const result = transition(before, answer(choice?.id));
       assert.equal(result.error, null, key);
       assert.equal(result.state.pendingEvent, null, key);
@@ -497,12 +512,18 @@ test('drizzle at a stop saves fuel and keeps the party there', () => {
 
 test('kombucha and quarantine answer the outbreak without killing anyone at full health (D2)', () => {
   const outbreak = event('pandemic_death');
-  const base = crew(facing(ready(), 'pandemic_death'), (member, index) => ({ health: 100, sick: index < 2 }));
+  const choice = id => outbreak.choices.find(option => option.id === id);
+  const stockedUp = stocked(facing(ready(), 'pandemic_death'), { kombucha: outbreak.kombuchaCost + 1 });
+  const base = crew(stockedUp, (member, index) => ({ health: 100, sick: index < 2 }));
 
-  const dosed = act(base, answer('kombucha'));
-  assert.equal(dosed.inventory.kombucha, base.inventory.kombucha - outbreak.kombuchaCost);
+  const doseResult = transition(base, answer('kombucha'));
+  const dosed = doseResult.state;
+  assert.equal(dosed.inventory.kombucha, 1);
   for (const member of dosed.party) assert.equal(member.health, 100 - outbreak.dosedDamage);
   assert.equal(dosed.day, base.day);
+  const doseLine = fill(choice('kombucha').result, { bottles: outbreak.kombuchaCost, damage: outbreak.dosedDamage });
+  assert.deepEqual(doseResult.notes, [doseLine]);
+  assert.ok(doseLine.includes(`took ${outbreak.kombuchaCost} bottles`));
 
   const result = transition(base, answer('quarantine'));
   const quarantined = result.state;
@@ -523,7 +544,9 @@ test('kombucha and quarantine answer the outbreak without killing anyone at full
     assert.equal(member.health, (index < 2 ? ill : well) - outbreak.quarantineDamage);
   }
   assert.equal(round(base.inventory.food - quarantined.inventory.food), round(eaten * days));
-  assert.ok(result.notes[0].includes(String(outbreak.quarantineDamage)));
+  const quarantineLine = fill(choice('quarantine').result, { days, damage: outbreak.quarantineDamage });
+  assert.equal(result.notes[0], quarantineLine);
+  assert.ok(quarantineLine.startsWith(`A ${days}-day quarantine cost ${outbreak.quarantineDamage} health`));
 
   for (const state of [dosed, quarantined]) {
     assert.ok(state.party.every(member => member.health > 0 && member.death === null));
@@ -587,14 +610,14 @@ test('a failed kick costs a day, the tow charges cash, and the developer repairs
   }
   assert.ok(failed > 0 && worked > 0);
 
-  const towed = transition(facing(ready(), 'van_breakdown'), answer('tow'));
-  assert.equal(towed.state.inventory.money, ready().inventory.money - breakdown.towCost);
+  const towed = transition(stocked(facing(ready(), 'van_breakdown'), { money: breakdown.towCost + 5 }), answer('tow'));
+  assert.equal(towed.state.inventory.money, 5);
   assert.deepEqual(towed.notes, [fill(choice('tow').result, { money: breakdown.towCost })]);
   assert.ok(towed.notes[0].includes(`$${breakdown.towCost}`));
 
   const standard = choice('repair').needs.parts;
-  const fixed = transition(facing(ready(), 'van_breakdown'), answer('repair'));
-  assert.equal(fixed.state.inventory.parts, ready().inventory.parts - standard);
+  const fixed = transition(stocked(facing(ready(), 'van_breakdown'), { parts: standard + 1 }), answer('repair'));
+  assert.equal(fixed.state.inventory.parts, 1);
   assert.deepEqual(fixed.notes, [`The van runs again after ${standard} repair kits.`]);
 
   const { repairCost } = PROFESSIONS.find(profession => profession.id === 'dev').ability;
@@ -611,6 +634,17 @@ test('a failed kick costs a day, the tow charges cash, and the developer repairs
   );
   // Anyone else needs the full set.
   refusal(stocked(facing(ready('prepper'), 'van_breakdown'), { parts: standard - 1 }), answer('repair'));
+});
+
+test('the petition donation names the price it charged', () => {
+  const petitions = event('petition_gauntlet');
+  const donate = petitions.choices.find(option => option.id === 'donate');
+  const state = stocked(facing(ready(), 'petition_gauntlet'), { money: petitions.donation + 3 });
+  const result = transition(state, answer('donate'));
+  assert.equal(result.state.inventory.money, 3);
+  assert.deepEqual(result.notes, [fill(donate.result, { donation: petitions.donation })]);
+  assert.ok(result.notes[0].startsWith(`$${petitions.donation} bought silence`));
+  assert.equal(fill(donate.label, petitions), `Give $${petitions.donation} to make it stop`);
 });
 
 // --- Harm and endings in encounters ----------------------------------------
@@ -642,10 +676,11 @@ test('every way an encounter can kill has its own cause, line and epitaph', () =
   // spends, so that the harm after that day is the one that kills.
   const healths = [1, 1 - RATIONS.meager.health];
   const causes = new Set();
-  for (const { key, entry, choice } of responses) {
+  for (const response of responses) {
+    const { key, choice } = response;
     for (const health of healths) {
-      for (const seed of seeds(12)) {
-        const base = facing(ready(choice?.only ?? 'barista', seed), entry.id);
+      for (const seed of seeds(40)) {
+        const base = supplied(response, seed);
         const result = transition(
           crew(base, () => ({ health })),
           answer(choice?.id),
@@ -724,11 +759,12 @@ test('each response takes its rolls in order', () => {
     'toll_troll:riddle': 1,
     'toll_troll:ford': 1,
   };
-  for (const { key, entry, choice } of responses) {
+  for (const response of responses) {
+    const { key, choice } = response;
     for (const seed of seeds(12)) {
-      const before = facing(ready(choice?.only ?? 'barista', seed), entry.id);
+      const before = supplied(response, seed);
       const after = act(before, answer(choice?.id));
-      const expected = Array.from({ length: ROLLS[key] ?? 0 }).reduce(lcg, seed);
+      const expected = Array.from({ length: ROLLS[key] ?? 0 }).reduce(lcg, before.rng);
       assert.equal(after.rng, expected, `${key} rolls ${ROLLS[key] ?? 0} times`);
     }
   }
@@ -737,13 +773,14 @@ test('each response takes its rolls in order', () => {
   const sasquatch = event('sasquatch');
   const breakdown = event('van_breakdown');
   for (const seed of seeds(40)) {
-    const [r1, r2] = [lcg(seed), lcg(lcg(seed))];
-    const chased = act(facing(ready('barista', seed), 'sasquatch'), answer('chase'));
+    const start = ready('barista', seed);
+    const [r1, r2] = [lcg(start.rng), lcg(lcg(start.rng))];
+    const chased = act(facing(start, 'sasquatch'), answer('chase'));
     const victim = Math.floor(unit(r1) * CREW);
     assert.equal(chased.party[victim].health, 90 - sasquatch.damage);
     assert.equal(chased.inventory.nft, ready().inventory.nft + (unit(r2) < sasquatch.nftChance ? 1 : 0));
 
-    const kicked = act(facing(ready('barista', seed), 'van_breakdown'), answer('kick'));
+    const kicked = act(facing(start, 'van_breakdown'), answer('kick'));
     assert.equal(kicked.day === ready().day, unit(r1) < breakdown.kickChance);
   }
 });
