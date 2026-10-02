@@ -186,7 +186,7 @@ The journey is lost only when nobody is alive ("The last traveler fell. The road
 Last resorts (F3), allowed in phases `travel` and `location` only while `fuel < 1`:
 
 - `push`: `passDay({ traveling: false })`, then every living traveler loses `RULES.push.damage` (cause `push`), then the van moves `min(RULES.push.miles, milesToNextStop)` with the same arrival and win handling as driving. "The crew pushed the van {miles} miles to mile {distance}." No encounter is rolled.
-- `hitchhike`: `passDay({ traveling: false })`; one roll picks a living walker, one roll against `RULES.hitchhike.chance`. Success adds `RULES.hitchhike.fuel` fuel: "{name} walked for fuel and came back with {fuel}." Failure costs the walker `RULES.hitchhike.damage` (cause `hitchhike`): "{name} walked all day and came back with blisters."
+- `hitchhike`: `passDay({ traveling: false })`; one roll picks a living walker, one roll against `RULES.hitchhike.chance`. Success adds `RULES.hitchhike.fuel` fuel: "{name} walked for fuel and came back with {fuel} fuel." Failure costs the walker `RULES.hitchhike.damage` (cause `hitchhike`): "{name} walked all day and came back with blisters."
 - `tradeLuggage`: once per journey; adds `RULES.luggage.fuel` fuel, no day passes: "A passing collector traded {fuel} fuel for the roof luggage. The van looks naked."
 
 ### 3.6 Stops and the road
@@ -230,7 +230,7 @@ Activities:
 - `sellNft`, in phase `shop`.
 - `ability`, in phases `travel` and `location`, with the cooldowns and effects in 3.2. The scout's damage has cause `scout`.
 - `openShop` at a stop with a shop; `leaveShop` returns to the stop.
-- `purchase { cart }` and `autoPurchase` in phase `shop`. A purchase is refused as a whole when any quantity is not a whole number from 0 to 1000, when no quantity is above 0, when an item would exceed its `max` ("The van can hold only {max} {name}."), or when the total exceeds the cash.
+- `purchase { cart }` and `autoPurchase` in phase `shop`. A purchase is refused as a whole when any quantity is not a whole number from 0 to 1000, when no quantity is above 0, when an item would exceed its `max` ("The van can hold only {max} {name}.", with the short name as a word in the sentence: "100 food", "5 NFTs"), or when the total exceeds the cash.
 - `setPace`, `setRations` in every phase except `ended`.
 - `setEpitaph { memberId, text }` for a dead traveler, at any time, even after the journey has ended or while an encounter is pending. Text is trimmed and must be 1–60 characters with no control characters.
 
@@ -293,7 +293,7 @@ Effects. Numbers (T) live on the encounter's data object under the names in brac
   - `quarantine` "Quarantine in the van": {quarantineDays: 2} days pass (not traveling), every living traveler loses {quarantineDamage: 8} (cause `pandemic`) and sickness is cured. "A {days}-day quarantine cost {damage} health each and most of the snacks."
   - `push_on` "Drive through it": the living traveler with the lowest health (first in party order on a tie) loses {worstDamage: 45}; every other living traveler loses {damage: 15} and becomes sick (cause `pandemic`). "You drove through it. {name} took the worst of it; everyone else is sick."
 - `ebike_convoy`:
-  - `wait` "Crawl along behind them": lose up to {fuel: 2} fuel; every living traveler gains {heal: 2}. "You idled behind the convoy for an hour. It cost {fuel} fuel; the fresh air was free."
+  - `wait` "Crawl along behind them": lose up to {fuel: 2} fuel; every living traveler gains {heal: 2}. "You idled behind the convoy for an hour. It cost {fuel} fuel; the fresh air was free." With an empty tank: "You idled behind the convoy for an hour with no fuel left to burn. The fresh air was free."
   - `honk` "Honk, apologetically": a roll below {honkChance: 0.5}: "They parted like a slow, judgmental sea." Otherwise every living traveler loses {damage: 4} (cause `ebike`): "An organizer explained the van's carbon footprint for forty minutes. Everyone lost {damage} health."
   - `trade` "Offer a round of pour-overs" (only `barista`, needs food 2): lose 2 food, gain {tips: 35}. "The convoy tipped ${money} for roadside pour-overs and waved you through."
 - `sasquatch`:
@@ -305,8 +305,8 @@ Effects. Numbers (T) live on the encounter's data object under the names in brac
   - `riddle` "Answer his riddle instead": a roll below {riddleChance: 0.5}: "The answer was “gentrification.” He let you through." Otherwise lose up to {fine: 50} cash and every living traveler loses {damage: 3} (cause `toll`): "Wrong. The fine was ${money} and {damage} health each for the lecture."
   - `ford` "Ford the creek like it is 1848" (only `prepper`): one random traveler loses {fordDamage: 6} (cause `toll`). "The van forded the creek. {name} lost {damage} health to wet socks."
 - `brunch_line`:
-  - `wait` "Wait it out": lose up to {fuel: 2} fuel, gain {food: 6} food. "Two hours later the line moved. It cost {fuel} fuel; someone handed you {food} food in leftovers."
-  - `detour` "Take the long way around": lose up to {detourFuel: 3} fuel. "The detour cost {fuel} fuel and passed three more brunch lines."
+  - `wait` "Wait it out": lose up to {fuel: 2} fuel, gain {food: 6} food. "Two hours later the line moved. It cost {fuel} fuel; someone handed you {food} food in leftovers." With an empty tank: "Two hours later the line moved. The tank had nothing to burn; someone handed you {food} food in leftovers."
+  - `detour` "Take the long way around": lose up to {detourFuel: 3} fuel. "The detour cost {fuel} fuel and passed three more brunch lines." With an empty tank: "The tank was already dry, so the detour cost only time. It passed three more brunch lines."
   - `post` "Post about the line" (only `influencer`; refused while the Wi-Fi is out today): gain {sponsor: 40}. "Your post about the line got you waved through and ${money} in sponsored hash browns."
 - `petition_gauntlet`:
   - `sign` "Sign everything": every living traveler loses {damage: 3} (cause `petitions`). "Eleven signatures later, everyone is {damage} health more tired and on nine mailing lists."
@@ -454,6 +454,8 @@ SAVE_VERSION                   // 3
  * @property {{ title: string, line: string }} rank
  * @property {string} heading       ending headline written from the outcome and the survivors (B18)
  * @property {string} cause         how a lost journey ended, as a sentence; '' otherwise
+ * @property {string} line          the scene line under the heading: for a win, whether everyone or only some
+ *                                  made the city; for a loss, the cause; '' under way (sentences in ENDINGS)
  * @property {{ name: string, health: number }[]} survivors
  * @property {{ id: string, name: string, day: number, mile: number, line: string, epitaph: string }[]} fallen
  * @property {number} day
@@ -475,7 +477,7 @@ SAVE_VERSION                   // 3
 
 - It rebuilds the state field by field. Unknown fields are dropped. Fields added after 3.0 take defaults when missing.
 - It rejects (returns `null`): text that is not JSON, an unknown version, a party that is not five travelers with valid names and health, an unknown profession, pace or rations, inventory values that are negative or not numbers, a distance outside 0–1000, a day below 1.
-- It repairs instead of rejecting: a `shop` or `location` phase whose distance is not a stop becomes `travel`; a pending encounter whose id no longer exists is dropped; unknown stop ids in `talked` and `meals` are dropped; a non-`ended` phase with nobody alive becomes a lost ending; an `ended` phase without an outcome becomes `lost`; a won journey is at mile 1000; a journal longer than the limit keeps its newest lines; a `shop` phase with a pending encounter becomes `location`; a death day later than the journey's day is clamped to it; journal lines are capped at 300 characters and their day clamped to the journey's day; control characters are stripped from names.
+- It repairs instead of rejecting: a `shop` or `location` phase whose distance is not a stop becomes `travel`; a `travel` phase exactly at a stop's mile becomes `location` at that stop (no arrival line is written); a pending encounter whose id no longer exists is dropped; unknown stop ids in `talked` and `meals` are dropped; a non-`ended` phase with nobody alive becomes a lost ending; an `ended` phase without an outcome becomes `lost`; a won journey is at mile 1000; a journal longer than the limit keeps its newest lines; a `shop` phase with a pending encounter becomes `location`; a death day later than the journey's day is clamped to it; journal lines are capped at 300 characters and their day clamped to the journey's day; control characters are stripped from names.
 - Versions 1 and 2: `status === 'Sick'` becomes `sick: true`; health 0 or `Deceased` becomes a death with cause `unknown` at the saved day and mile; the weather text becomes `{ id, until: day }`; `locationId` and `shopReturn` are dropped; `seed` is the saved `rng`; `logged` is the journal length; new flags take defaults. Version 1 and 2 validation of the route is not repeated: the repairs above cover it.
 - Inventory above an item's `max` is kept.
 
@@ -584,10 +586,10 @@ Persistent storage problems stay in the banner at the top. Everything transient 
 ### 9.5 Other
 
 - Whole journal (E4): a dialog listing every stored line, grouped by day.
-- Records: when a journey ends, store its summary once (key: seed, day, distance and score) and keep the ten best by score.
+- Records: when a journey ends through an action in this browser, store its summary once (key: seed, day, distance and score) and keep the ten best by score. A saved ending found at start-up and an imported ending are shown, never recorded.
 - Transfer (F13): a dialog with Copy save code, Download save file, and a field to paste a code and load it. Loading replaces the current journey after a confirmation when one exists.
 - Sound (L8): a toggle in the masthead, off by default, remembered. Short generated tones (Web Audio oscillators, no files) for drive, arrival, encounter, good and bad results, purchase, death, win and loss.
-- Offline (F5): register the worker as in section 8; after it is ready send the scene URLs for this device's variant; show "Ready to play offline" once when it answers.
+- Offline (F5): register the worker as in section 8; after it is ready, check for a newer build; send the scene URLs for this device's variant to the active worker when none is on the way, and otherwise to the new worker when it takes control (`controllerchange`); show "Ready to play offline" once, when the active worker with no newer one pending answers.
 - Focus (B9): every control shows the focus ring, including the selected background card; `<main>` shows none.
 - Multi-tab: when another tab changes the save (`storage` event), the title screen refreshes its Resume state.
 

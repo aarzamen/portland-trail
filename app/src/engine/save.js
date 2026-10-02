@@ -126,6 +126,8 @@ function repair(state) {
   const stop = stopAt(state.distance);
   const stopped = state.phase === 'shop' || state.phase === 'location';
   if (stopped && !stop) state.phase = 'travel';
+  // The rules never leave the van on the road at a stop's mile: an old save found there has arrived.
+  else if (state.phase === 'travel' && stop) state.phase = 'location';
   else if (state.phase === 'shop' && (!stop.activities.includes('shop') || state.pendingEvent)) {
     state.phase = 'location';
   }

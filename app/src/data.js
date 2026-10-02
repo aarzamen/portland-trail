@@ -383,7 +383,8 @@ export const REGIONS = [
 //              one of the encounter's own numbers. Needs are checked, then spent.
 //   lacking    the refusal when a need is not met; {need} and {have} are the amounts
 //   offline    the refusal on the day of a Wi-Fi outage, for a choice that needs a signal
-//   result     the journal line; `otherwise` is the line when the choice's roll goes badly
+//   result     the journal line; `otherwise` is the line when the choice's roll goes badly, and `dry`
+//              the line when a choice that burns fuel finds the tank already empty
 //
 // Every other number on an encounter is (T). The effects live in engine/events.js, looked up by id.
 // No sentence spells out a number: every number in a sentence comes from a slot.
@@ -590,6 +591,7 @@ export const EVENTS = [
         id: 'wait',
         label: 'Crawl along behind them',
         result: 'You idled behind the convoy for an hour. It cost {fuel} fuel; the fresh air was free.',
+        dry: 'You idled behind the convoy for an hour with no fuel left to burn. The fresh air was free.',
       },
       {
         id: 'honk',
@@ -692,11 +694,13 @@ export const EVENTS = [
         id: 'wait',
         label: 'Wait it out',
         result: 'Two hours later the line moved. It cost {fuel} fuel; someone handed you {food} food in leftovers.',
+        dry: 'Two hours later the line moved. The tank had nothing to burn; someone handed you {food} food in leftovers.',
       },
       {
         id: 'detour',
         label: 'Take the long way around',
         result: 'The detour cost {fuel} fuel and passed three more brunch lines.',
+        dry: 'The tank was already dry, so the detour cost only time. It passed three more brunch lines.',
       },
       {
         id: 'post',
@@ -792,6 +796,17 @@ export const RANKS = {
   ],
 };
 
+// The ending's headline and the scene line under it. A lost journey's line is how it ended.
+export const ENDINGS = {
+  everyoneArrived: 'All five made it to Portland.',
+  someArrived: '{survivors} of five made it to Portland.',
+  everyoneLine: 'Against the odds, the van and everyone in it made the city.',
+  someLine: 'Against the odds, the van and at least some of its passengers made the city.',
+  lost: 'The road won this round.',
+  fellNear: '{line} near mile {distance}.',
+  ranDry: 'The van ran dry near mile {distance}.',
+};
+
 // Button labels and details, by action type. `rest` and `useItem` have one entry for each case.
 // A stop's own `rest.label` or `meal.label` replaces the label here; the ability's label and
 // description are on its background.
@@ -849,7 +864,7 @@ export const JOURNAL = {
   seedBombs: 'Seed bombs produced {food} food from a roadside patch.',
   kombucha: 'Kombucha restored {heal} health to every survivor.',
   pushed: 'The crew pushed the van {miles} {mile|miles} to mile {distance}.',
-  hitchhiked: '{name} walked for fuel and came back with {fuel}.',
+  hitchhiked: '{name} walked for fuel and came back with {fuel} fuel.',
   hitchhikeFailed: '{name} walked all day and came back with blisters.',
   luggage: 'A passing collector traded {fuel} fuel for the roof luggage. The van looks naked.',
 };

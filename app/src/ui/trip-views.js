@@ -161,7 +161,7 @@ function sceneText(model) {
       alt: won ? 'The van rolls into Portland' : 'The end of the road',
       overline: won ? 'Journey complete' : 'Journey over',
       heading: summary.heading,
-      text: summary.cause || 'Against the odds, the van and at least some of its passengers made the city.',
+      text: summary.line,
     };
   }
   if (state.phase === 'shop') {
@@ -306,7 +306,7 @@ function notes(model) {
 // --- Route -----------------------------------------------------------------------------------------------
 
 // A shop on the map: a small symbol with its words for anyone who cannot see it.
-const SHOP_MARK = '<span class="route-shop" role="img" aria-label="supplies" title="Supplies">$</span>';
+const SHOP_MARK = '<span class="route-shop" role="img" aria-label="supplies">$</span>';
 // The van on the route map, thirteen by seven pixels drawn at twice the size: luggage, body, windows, wheels.
 const MAP_VAN = `<svg viewBox="0 0 13 7" width="26" height="14" shape-rendering="crispEdges" aria-hidden="true">
   <rect class="map-van-load" x="2" y="0" width="7" height="1" /><rect x="1" y="1" width="10" height="4" />

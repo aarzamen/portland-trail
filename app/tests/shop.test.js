@@ -145,8 +145,10 @@ test('an order the van cannot hold is refused whole, by the supply label', () =>
   for (const entry of ITEMS) {
     const nearlyFull = stocked(start(), { money: 1e6, [entry.id]: entry.max - 1 });
     const error = refusal(nearlyFull, buy({ [entry.id]: 2 }));
-    assert.equal(error, `The van can hold only ${entry.max} ${entry.short}.`);
-    assert.equal(error, fill(REFUSALS.overMax, { max: entry.max, name: entry.short }));
+    // The short name reads as a word in the sentence: "100 food", but "5 NFTs".
+    const noun = entry.id === 'nft' ? entry.short : entry.short.toLowerCase();
+    assert.equal(error, fill(REFUSALS.overMax, { max: entry.max, name: noun }));
+    assert.ok(error.includes(` ${entry.max} ${noun}.`), error);
     assert.equal(act(nearlyFull, buy({ [entry.id]: 1 })).inventory[entry.id], entry.max);
     // Nothing else in the same order is bought either.
     const other = entry.id === 'fuel' ? 'food' : 'fuel';

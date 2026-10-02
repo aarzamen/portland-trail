@@ -29,7 +29,7 @@ All from `app/`, on this commit, with Node 22.19.0, Playwright 1.63.0 and instal
 | `node scripts/checksums.mjs --check` | exits 0 after the refresh in this commit |
 | Relative links in the documents touched by this task | every link resolves to an existing file |
 
-The browser suites cover the twelve viewports of spec section 11 (320×568 to 1440×900), keyboard play of setup, a drive, an encounter and a purchase, Escape pressed twice on an encounter, a dry tank at a shop and on the road, the drive drawn from the previous state, reduced motion, the memorial and epitaphs, markup in names and epitaphs shown as text, records, the transfer dialog, another tab changing the save, the build stamp, and an offline reload that starts a journey and drives with its scene art. The journey suite checks after every action that the saved journey equals the engine's own result.
+The browser suites cover the twelve viewports of spec section 11 (320×568 to 1440×900), keyboard play of setup, a drive, an encounter and a purchase, Escape pressed twice on an encounter, a dry tank at a shop and on the road, the drive drawn from the previous state, reduced motion, the memorial and epitaphs, markup in names and epitaphs shown as text, records, the transfer dialog, another tab changing the save, the build stamp, an offline reload that starts a journey and drives with its scene art, and a visit that installs a newer build (offline play is announced only once the new build's cache holds every scene). Only endings that happen in the browser are recorded; a saved or imported ending is shown, not recorded. The journey suite checks after every action that the saved journey equals the engine's own result.
 
 ## Balance
 
@@ -68,4 +68,3 @@ Desktop, 1440×900: [title with the build stamp](review-implementation/title-144
 - **Careful play almost never loses a traveler** (see Balance).
 - **Some decorative lettering stays garbled** in the wifi, motel, nft, food-carts, free-box and rest-stop scenes (for example "NO SIGGNAL" and "VAC_NCY"). The title, victory, loss and breakdown signs are repaired. New art needs an image-generation tool; [AGENTS.md](../../AGENTS.md) describes how to add it.
 - **The handoff archive** is still in the repository (review item E6); moving it needs a published release and a history rewrite, which are the owner's decision.
-- The won ending's line under the heading still reads "at least some of its passengers" even when all five arrive (review item B18, in `app/src/ui/trip-views.js`).

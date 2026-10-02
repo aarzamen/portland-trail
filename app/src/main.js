@@ -229,7 +229,10 @@ function bestRecords() {
     .sort((first, second) => second.score - first.score);
 }
 
-/** Store an ended journey among the best journeys; once, however often it is ended, reloaded or loaded. */
+/**
+ * Store a journey that has just ended here among the best journeys, once. Only dispatch calls it: a saved or
+ * imported ending is shown but never recorded.
+ */
 function recordEnding(state) {
   const summary = summarize(state);
   addRecord({
@@ -882,7 +885,7 @@ function adoptImport(loaded) {
   notes = game.journal.length ? [game.journal.at(-1).text] : [];
   resetJourneyView();
   persist();
-  if (game.outcome) recordEnding(game);
+  // An imported ending is shown, never recorded: the records hold journeys that ended in this browser.
   transferText = '';
   show('title');
   toast(
@@ -1158,16 +1161,39 @@ async function setUpOffline() {
     }
     return;
   }
+  /** @type {ServiceWorkerRegistration | null} */
+  let registration = null;
+  // On a visit that installs a new build, the worker that answers first is the outgoing one, and its cache is
+  // deleted when the new one activates. Only the active worker with no newer one on the way may announce
+  // offline play.
+  const current = worker =>
+    Boolean(registration && worker) &&
+    !registration.installing &&
+    !registration.waiting &&
+    worker === registration.active;
+  const cacheScenes = worker => worker?.postMessage({ type: 'cache-scenes', urls: sceneUrls() });
   workers.addEventListener('message', event => {
-    if (event.data?.type !== 'scenes-cached' || offlineNoted) return;
+    if (event.data?.type !== 'scenes-cached' || offlineNoted || !current(event.source)) return;
     offlineNoted = true;
     toast('Ready to play offline', 'ok');
   });
+  // A new build's worker takes over the page once it has activated: ask it, too, to keep the scenes.
+  workers.addEventListener('controllerchange', () => cacheScenes(workers.controller));
   workers.startMessages();
   try {
-    await workers.register('./sw.js');
-    const registration = await workers.ready;
-    registration.active?.postMessage({ type: 'cache-scenes', urls: sceneUrls() });
+    registration = await workers.register('./sw.js');
+    registration = await workers.ready;
+    // register() does not look for a newer build when one is already registered; ask before choosing a worker.
+    await registration.update().catch(() => {});
+    const next = registration.installing || registration.waiting;
+    if (!next) {
+      cacheScenes(registration.active);
+      return;
+    }
+    // The newer worker asks on controllerchange; if it fails to install, the current one is asked instead.
+    next.addEventListener('statechange', () => {
+      if (next.state === 'redundant') cacheScenes(registration?.active);
+    });
   } catch {
     // The game plays online without a worker.
   }
@@ -1183,8 +1209,7 @@ function adopt(loaded) {
   problems.delete(PROBLEMS.unreadable);
   problems.delete(PROBLEMS.unavailable);
   if (loaded.problem) problems.add(loaded.problem);
-  // An ending saved before it could be recorded (or in an older version) is recorded now, once.
-  if (game?.outcome) recordEnding(game);
+  // A saved ending is only shown: endings enter the records when they happen here, through dispatch.
 }
 
 adopt(loadJourney());

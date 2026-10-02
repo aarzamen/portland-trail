@@ -18,6 +18,7 @@ import {
 import {
   ACTION_TEXT,
   DEATHS,
+  ENDINGS,
   EVENTS,
   ITEMS,
   LOCATIONS,
@@ -787,9 +788,13 @@ test('summarize: headings and causes for each ending', () => {
   const all = wonJourney({ health: [90, 90, 90, 90, 90], day: 20, money: 100 });
   assert.equal(summarize(all).heading, 'All five made it to Portland.');
   assert.equal(summarize(all).cause, '');
+  // The scene line agrees with the heading: everyone, not "at least some" (B18).
+  assert.equal(summarize(all).line, ENDINGS.everyoneLine);
+  assert.ok(summarize(all).line.includes('everyone'), summarize(all).line);
   const three = wonJourney({ health: [90, 90, 90], day: 20, money: 100 });
   assert.equal(summarize(three).heading, '3 of five made it to Portland.');
   assert.equal(summarize(three).cause, '');
+  assert.equal(summarize(three).line, ENDINGS.someLine);
 
   const state = { ...start(), day: 9, distance: 420 };
   const lost = ended(
@@ -800,6 +805,7 @@ test('summarize: headings and causes for each ending', () => {
   assert.equal(summary.heading, 'The road won this round.');
   const line = fill(DEATHS.heat.line, { name: lost.party[3].name });
   assert.equal(summary.cause, `${line.replace(/\.$/, '')} near mile 420.`);
+  assert.equal(summary.line, summary.cause);
 
   const legacy = ended({ ...start(), distance: 640 }, 'lost');
   const dry = summarize(legacy);
@@ -814,6 +820,7 @@ test('summarize: headings and causes for each ending', () => {
   const unfinished = summarize(onRoad(start()));
   assert.equal(unfinished.heading, '');
   assert.equal(unfinished.cause, '');
+  assert.equal(unfinished.line, '');
   assert.equal(unfinished.outcome, null);
 });
 

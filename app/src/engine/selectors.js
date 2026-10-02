@@ -1,6 +1,6 @@
 // Read-only questions about a journey. Nothing here changes the state it is given.
 
-import { DEATHS, EVENTS, ITEMS, LIMITS, LOCATIONS, PACES, RANKS, RATIONS, RULES } from '../data.js';
+import { DEATHS, ENDINGS, EVENTS, ITEMS, LIMITS, LOCATIONS, PACES, RANKS, RATIONS, RULES } from '../data.js';
 import {
   MAX_HEALTH,
   PARTY_SIZE,
@@ -49,6 +49,8 @@ import {
  * @property {{ title: string, line: string }} rank
  * @property {string} heading       the ending's headline; '' for a journey still under way
  * @property {string} cause         how a lost journey ended, as a sentence; '' otherwise
+ * @property {string} line          the scene line under the heading: who made the city, or the cause;
+ *   '' for a journey still under way
  * @property {{ name: string, health: number }[]} survivors
  * @property {{ id: string, name: string, day: number, mile: number, line: string, epitaph: string }[]} fallen
  *   in the order they fell
@@ -65,11 +67,6 @@ const TEXT = {
   status: { dead: 'Deceased', sick: 'Sick', good: 'Healthy', worn: 'Worn down', bad: 'Hanging on' },
   pace: '{name} · {miles} mi a day · {fuel} fuel · {health} health',
   rations: '{name} · {food} food each · {health} health',
-  everyoneArrived: 'All five made it to Portland.',
-  someArrived: '{survivors} of five made it to Portland.',
-  lost: 'The road won this round.',
-  fellNear: '{line} near mile {distance}.',
-  ranDry: 'The van ran dry near mile {distance}.',
   share:
     'The Portland Trail: {profession}, {ending}, {survivors} of {crew} alive, ' +
     '${money} ({rentDays} {day|days} of rent). {rank}, score {score}. Seed {seed}.',
@@ -394,21 +391,24 @@ function rankOf(state, score) {
   return { title: rank.title, line: rank.line };
 }
 
-/** The ending's headline and, for a loss, how it happened (B18). */
+/** The ending's headline, its scene line and, for a loss, how it happened (B18). */
 function endingOf(state, survivors, fallen) {
   if (state.outcome === 'won') {
-    const heading =
-      survivors.length === PARTY_SIZE ? TEXT.everyoneArrived : fill(TEXT.someArrived, { survivors: survivors.length });
-    return { heading, cause: '' };
+    const everyone = survivors.length === PARTY_SIZE;
+    return {
+      heading: everyone ? ENDINGS.everyoneArrived : fill(ENDINGS.someArrived, { survivors: survivors.length }),
+      line: everyone ? ENDINGS.everyoneLine : ENDINGS.someLine,
+      cause: '',
+    };
   }
-  if (state.outcome !== 'lost') return { heading: '', cause: '' };
+  if (state.outcome !== 'lost') return { heading: '', line: '', cause: '' };
   // A journey lost with someone still alive is an old save that ended on an empty tank.
   const last = fallen.at(-1);
   const cause =
     survivors.length > 0 || !last
-      ? fill(TEXT.ranDry, { distance: state.distance })
-      : fill(TEXT.fellNear, { line: last.line.replace(/\.$/, ''), distance: state.distance });
-  return { heading: TEXT.lost, cause };
+      ? fill(ENDINGS.ranDry, { distance: state.distance })
+      : fill(ENDINGS.fellNear, { line: last.line.replace(/\.$/, ''), distance: state.distance });
+  return { heading: ENDINGS.lost, line: cause, cause };
 }
 
 /**

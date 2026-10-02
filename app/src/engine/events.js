@@ -91,6 +91,9 @@ export function resolve(state, action) {
   effect(state, event, choice, paid);
 }
 
+/** The line for a choice that burns fuel: its `dry` line when the tank had none to give. */
+const burned = (choice, fuel) => (fuel > 0 ? choice.result : choice.dry);
+
 /** One random living traveler loses health; the line names them. */
 function hurtOne(state, template, damage, cause) {
   const victim = pick(state, living(state));
@@ -211,7 +214,7 @@ export const EFFECTS = {
     wait(state, event, choice) {
       const fuel = spend(state, 'fuel', event.fuel);
       healAll(state, event.heal);
-      say(state, choice.result, { fuel });
+      say(state, burned(choice, fuel), { fuel });
     },
     honk(state, event, choice) {
       if (roll(state) < event.honkChance) {
@@ -268,10 +271,11 @@ export const EFFECTS = {
     wait(state, event, choice) {
       const fuel = spend(state, 'fuel', event.fuel);
       gain(state, 'food', event.food);
-      say(state, choice.result, { fuel, food: event.food });
+      say(state, burned(choice, fuel), { fuel, food: event.food });
     },
     detour(state, event, choice) {
-      say(state, choice.result, { fuel: spend(state, 'fuel', event.detourFuel) });
+      const fuel = spend(state, 'fuel', event.detourFuel);
+      say(state, burned(choice, fuel), { fuel });
     },
     post(state, event, choice) {
       gain(state, 'money', event.sponsor);

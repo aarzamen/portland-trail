@@ -1111,8 +1111,11 @@ test('hitchhiking for fuel sometimes works and sometimes costs the walker', () =
       worked += 1;
       assert.equal(result.state.inventory.fuel, RULES.hitchhike.fuel);
       assert.equal(hurt.length, 0);
-      assert.match(result.notes[0], / walked for fuel and came back with \d+\.$/);
-      assert.ok(result.notes[0].endsWith(`came back with ${RULES.hitchhike.fuel}.`));
+      const lines = state.party.map(member =>
+        fill(JOURNAL.hitchhiked, { name: member.name, fuel: RULES.hitchhike.fuel }),
+      );
+      assert.ok(lines.includes(result.notes[0]), result.notes[0]);
+      assert.ok(result.notes[0].endsWith(`came back with ${RULES.hitchhike.fuel} fuel.`), result.notes[0]);
     } else {
       failed += 1;
       assert.equal(hurt.length, 1);
@@ -1437,6 +1440,8 @@ const NOT_A_NUMBER = [
   // one NFT a sale or a trade, and a unit of an item is one bag or one canister.
   'Five travelers',
   'Enter five names',
+  'All five made it',
+  'of five made it',
   'four backgrounds',
   'One conversation per stop',
   'one NFT',

@@ -831,6 +831,28 @@ test('a loss that cannot be paid in full takes what is there', () => {
   }
 });
 
+test('a response that burns fuel on an empty tank says there was none to spend, never "0 fuel"', () => {
+  const burners = [
+    ['ebike_convoy', 'wait'],
+    ['brunch_line', 'wait'],
+    ['brunch_line', 'detour'],
+  ];
+  for (const [id, choiceId] of burners) {
+    const entry = event(id);
+    const choice = entry.choices.find(option => option.id === choiceId);
+    assert.equal(typeof choice.dry, 'string', `${id}:${choiceId} has a line for an empty tank`);
+    const empty = stocked(facing(ready(), id), { fuel: 0 });
+    const result = transition(empty, answer(choiceId));
+    assert.equal(result.error, null);
+    assert.equal(result.state.inventory.fuel, 0);
+    assert.equal(result.notes[0], fill(choice.dry, { food: entry.food }), `${id}:${choiceId}`);
+    assert.doesNotMatch(result.notes[0], /\b0 fuel\b/);
+    // With fuel in the tank the usual line, with what it cost.
+    const full = transition(stocked(facing(ready(), id), { fuel: 20 }), answer(choiceId));
+    assert.equal(full.notes[0], fill(choice.result, { fuel: 20 - full.state.inventory.fuel, food: entry.food }));
+  }
+});
+
 // --- Saving ----------------------------------------------------------------
 
 test('a pending encounter survives a save round trip and then resolves once', () => {

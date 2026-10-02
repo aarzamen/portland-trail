@@ -450,7 +450,8 @@ test('unknown fields are dropped and missing later fields take their defaults', 
   // Everything but the essentials can be missing.
   const { profession, party, inventory, distance, day, pace, rations } = state;
   const minimal = load({ version: 3, profession, party, inventory, distance, day, pace, rations });
-  assert.equal(minimal.phase, 'travel');
+  // A missing phase is the road; at mile 0, a stop, that means the van is at the stop.
+  assert.equal(minimal.phase, 'location');
   assert.equal(minimal.outcome, null);
   assert.equal(minimal.pendingEvent, null);
   assert.deepEqual(minimal.journal, []);
@@ -713,12 +714,24 @@ test('a save whose names hold control characters still loads, without them', () 
   assert.equal(load(crew(current, (member, index) => (index === 1 ? { name: '\n\u0007' } : {}))), null);
 });
 
-test('an old save on a mile that has since become a stop stays on the road', () => {
+test('a save on the road exactly at a stop has arrived there', () => {
+  // The rules never leave the van in phase travel at a stop's mile; an old save on a mile that has since become
+  // a stop would otherwise drive past that stop without seeing it.
   const market = stop('mushroom_market');
-  const state = deserializeGame(JSON.stringify(legacy(1, { phase: 'travel', distance: market.miles, day: 3 })));
-  assert.equal(state.phase, 'travel', 'migration does not replay an arrival');
-  assert.equal(currentStop(state), null);
-  assert.equal(transition(state, { type: 'talk' }).state, state);
+  for (const version of [1, 2]) {
+    const state = deserializeGame(JSON.stringify(legacy(version, { phase: 'travel', distance: market.miles, day: 3 })));
+    assert.equal(state.phase, 'location', `version ${version}`);
+    assert.equal(state.distance, market.miles);
+    assert.equal(currentStop(state), market);
+    assert.equal(state.journal.length, legacy(version).journal.length, 'no arrival line is written');
+    assert.equal(transition(state, { type: 'talk' }).error, null, 'the stop can be used');
+    assert.deepEqual(roundTrip(state), state);
+  }
+  const current = load({ ...start(), phase: 'travel', distance: market.miles });
+  assert.equal(current.phase, 'location');
+  assert.equal(currentStop(current), market);
+  // Between stops the van stays on the road.
+  assert.equal(load(legacy(2, { phase: 'travel', distance: market.miles + 1 })).phase, 'travel');
 });
 
 test('an old save with a stop that does not match its mile is repaired, not refused', () => {

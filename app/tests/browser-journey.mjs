@@ -1,6 +1,7 @@
 // Whole journeys through the visible controls, and what follows the end: the scored ending with its headstones
-// (F4, B18), best-journey records, the whole journal (E4), Copy result and Share, Replay this seed, Start another
-// journey (B16), moving a journey between devices (F13), the title's best score and the multi-tab title.
+// (F4, B18), best-journey records (only for endings that happen in this browser), the whole journal (E4), Copy
+// result and Share, Replay this seed, Start another journey (B16), moving a journey between devices (F13), the
+// title's best score and the multi-tab title.
 //
 // The seeds were chosen by playing the real engine with the balance bots of spec 3.11 (app/scripts/balance.mjs)
 // and are checked again below before the browser plays them, so a retune that changes an outcome fails loudly:
@@ -8,8 +9,9 @@
 //     outbreaks, eight other encounters, a rest, talks, a meal and the ability. Played at 1440×900.
 //   - LOSS: the Prepper on seed 3 never shops: drives, trades the luggage, then pushes; everyone falls near mile
 //     750 ("Roadside Legend"). Played at 390×664.
-//   - FALLEN_WIN: the Influencer on seed 14 with the autopilot policy wins with two travelers fallen; it is played
-//     by the engine and loaded as a fixture, for the headstones on a won ending.
+//   - FALLEN_WIN: the Influencer on seed 14 with the autopilot policy wins with two travelers fallen; the engine
+//     plays it to one action from the end, which is loaded as a fixture and finished in the browser, for the
+//     headstones on a won ending and the ten-record limit.
 import { readFile } from 'node:fs/promises';
 import { join } from 'node:path';
 import { isDeepStrictEqual } from 'node:util';
@@ -24,6 +26,7 @@ import {
   summarize,
   transition,
 } from '../src/engine.js';
+import { ENDINGS } from '../src/data.js';
 import {
   RECORDS_KEY,
   SAVE_KEY,
@@ -71,17 +74,24 @@ const recordsOf = (list, summary) =>
       entry.score === summary.score,
   );
 
-/** Plays a journey with a bot in the engine alone: the end state and the action types it used. */
+/**
+ * Plays a journey with a bot in the engine alone: the end state, the action types it used, and the state
+ * before the last action with that action.
+ */
 function playInEngine({ profession, seed, bot }) {
   let state = createGame({ profession, seed });
   const memory = { shopped: new Set(), rests: new Map() };
   const used = new Set();
+  let previous = state;
+  let last = null;
   for (let count = 0; count < 1500 && !state.outcome; count += 1) {
     const action = bot.choose(state, memory);
     used.add(action.type);
+    previous = state;
+    last = action;
     state = transition(state, action).state;
   }
-  return { state, used };
+  return { state, used, previous, last };
 }
 
 /** One turn of the page's task queue: a dialog's close event, and the dialog it opens next, have run. */
@@ -183,6 +193,12 @@ async function endingShows(page, state, at) {
   check((await panel.locator('#ending-heading').innerText()) === summary.heading, at('the heading is summarize’s'));
   const text = await panel.innerText();
   check(!summary.cause || text.includes(summary.cause), at('the cause is summarize’s'), summary.cause);
+  const scene = await page.locator('[data-region="scene"] .scene-text').innerText();
+  check(
+    scene.includes(summary.heading) && scene.includes(summary.line),
+    at('the scene shows summarize’s heading and line'),
+    scene,
+  );
   check(
     (await panel.locator('[data-score]').getAttribute('data-score')) === String(summary.score) &&
       text.includes(summary.score.toLocaleString('en-US')),
@@ -277,6 +293,13 @@ async function winningJourney() {
     const state = played.state;
     const summary = await endingShows(page, state, at);
     check(summary.fallen.length === 0, at('everyone arrived, so no headstones'), summary.fallen.length);
+    // All five alive: the scene line says everyone made it, never "at least some" (B18).
+    const scene = await page.locator('[data-region="scene"] .scene-text').innerText();
+    check(
+      summary.survivors.length === 5 && scene.includes(ENDINGS.everyoneLine) && !scene.includes(ENDINGS.someLine),
+      at('the scene line agrees that all five made it'),
+      scene,
+    );
     await shot(page, 'ending-won-1440');
 
     // Copy result puts shareText on the clipboard.
@@ -475,8 +498,8 @@ async function losingJourney() {
 // --- A won ending with fallen travelers, and ten records at most -------------------------------------------
 
 /**
- * The journey with markup where a player can put it: the first fallen traveler's name (also in the journal lines
- * that name them) and the epitaph. The save must accept it unchanged.
+ * The journey with markup in a traveler's name, also in the journal lines that name them. The save must accept
+ * it unchanged. The epitaph's markup is carved in the browser once the traveler has fallen.
  */
 function withMarkup(played, memberId) {
   const next = structuredClone(played);
@@ -484,7 +507,6 @@ function withMarkup(played, memberId) {
   const named = new RegExp(`\\b${member.name}\\b`, 'g');
   for (const entry of next.journal) entry.text = entry.text.replace(named, MARKUP_NAME);
   member.name = MARKUP_NAME;
-  member.epitaph = MARKUP_EPITAPH;
   const checked = deserializeGame(JSON.stringify(next));
   if (!checked || !isDeepStrictEqual(plain(checked), plain(next))) throw new Error('the marked journey is not valid');
   return checked;
@@ -527,13 +549,21 @@ async function markupStaysText(page, state, at) {
 }
 
 async function fallenWin() {
-  const played = playInEngine(FALLEN_WIN).state;
+  const played = playInEngine(FALLEN_WIN);
   check(
-    played.outcome === 'won' && summarize(played).fallen.length === 2,
+    played.state.outcome === 'won' && summarize(played.state).fallen.length === 2,
     `the engine wins seed ${FALLEN_WIN.seed} with the autopilot and two fallen`,
   );
-  const state = withMarkup(played, summarize(played).fallen[0].id);
-  const summary = summarize(state);
+  // The journey one action from its end, with markup in the name of a traveler who falls on that last drive; the
+  // drive ends it in the browser, because only an ending that happens here enters the records.
+  const marked = summarize(played.state).fallen[0];
+  const before = withMarkup(played.previous, marked.id);
+  const ended = transition(before, played.last).state;
+  const summary = summarize(ended);
+  check(
+    ended.outcome === 'won' && summary.fallen.some(entry => entry.name === MARKUP_NAME),
+    'the marked journey ends the same way',
+  );
   // Ten weaker journeys already on file: this one joins them, the weakest goes.
   const older = Array.from({ length: 10 }, (_, index) => ({
     key: `old-${index}`,
@@ -554,11 +584,28 @@ async function fallenWin() {
     const opened = await openPage(browser, {
       width,
       height,
-      storage: { [SAVE_KEY]: saveRecord(state), [RECORDS_KEY]: JSON.stringify(older) },
+      storage: { [SAVE_KEY]: saveRecord(before), [RECORDS_KEY]: JSON.stringify(older) },
     });
     try {
       await viewShot(opened.page, `title-${width}`);
       await opened.page.locator('[data-key="resume"]').click();
+      await opened.page.locator('[data-region="scene"]').waitFor();
+      await perform(opened.page, before, played.last);
+      await settle(opened.page);
+      check(
+        isDeepStrictEqual(await readGame(opened.page), plain(ended)),
+        at('the last action ends the journey as the engine does'),
+      );
+      // An epitaph with markup, carved on the ending.
+      await opened.page.locator(`[data-key="epitaph:${marked.id}"]`).click();
+      await opened.page.locator('#memorial-dialog [data-key="epitaph"]').fill(MARKUP_EPITAPH);
+      await opened.page.locator('#memorial-dialog [data-key="carve"]').click();
+      await nextTask(opened.page);
+      const state = deserializeGame(JSON.stringify(await readGame(opened.page)));
+      check(
+        state?.party.find(member => member.id === marked.id)?.epitaph === MARKUP_EPITAPH,
+        at('an epitaph with markup is saved as it was typed'),
+      );
       await endingShows(opened.page, state, at);
       const records = await readRecords(opened.page);
       check(
@@ -577,6 +624,45 @@ async function fallenWin() {
     } finally {
       await opened.context.close();
     }
+  }
+}
+
+// --- Endings that did not happen in this browser -----------------------------------------------------------
+
+/** A saved ending found at start-up and an imported ending are shown, never recorded. */
+async function endingsFromElsewhere() {
+  const at = label => `endings from elsewhere: ${label}`;
+  const won = playInEngine(FALLEN_WIN).state;
+  const lost = playInEngine(LOSS).state;
+  const { context, page, errors } = await openPage(browser, {
+    width: 390,
+    height: 664,
+    storage: { [SAVE_KEY]: saveRecord(won) },
+  });
+  try {
+    await page.locator('[data-key="resume"]').click();
+    await endingShows(page, won, at);
+    check((await readRecords(page)).length === 0, at('a saved ending found at start-up is not recorded'));
+    check((await page.locator('[data-list="records"] li').count()) === 0, at('so best journeys lists nothing'));
+
+    await page.locator('[data-key="home"]').click();
+    check((await page.locator('[data-best]').count()) === 0, at('the title shows no best score'));
+    await openTransfer(page);
+    await page.locator('#transfer-dialog [data-key="import-text"]').fill(saveRecord(lost));
+    await page.locator('#transfer-dialog [data-key="import"]').click();
+    await page.locator('#confirm-dialog [data-key="confirm"]').click();
+    check(isDeepStrictEqual(await readGame(page), plain(lost)), at('the imported ending replaces the journey'));
+    check((await readRecords(page)).length === 0, at('an imported ending is not recorded'));
+    await page.locator('[data-key="resume"]').click();
+    await endingShows(page, lost, at);
+    check((await readRecords(page)).length === 0, at('viewing the imported ending records nothing'));
+
+    await page.reload();
+    await page.locator('[data-key="resume"]').waitFor();
+    check((await readRecords(page)).length === 0, at('a reload records nothing'));
+    check(errors.length === 0, at('no browser errors'), errors);
+  } finally {
+    await context.close();
   }
 }
 
@@ -747,6 +833,7 @@ try {
   await step('winning journey', winningJourney);
   await step('losing journey', losingJourney);
   await step('won ending with fallen travelers', fallenWin);
+  await step('endings that did not happen here', endingsFromElsewhere);
   await step('transfer', transfer);
   await step('another tab', otherTab);
 } finally {

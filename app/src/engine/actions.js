@@ -69,6 +69,8 @@ import {
 const onTheRoad = state => state.phase === 'travel';
 const inTheShop = state => state.phase === 'shop';
 const outOfTheShop = state => state.phase === 'travel' || state.phase === 'location';
+/** An item's short name inside a sentence: "Food" becomes "food"; an acronym such as "NFTs" stays. */
+const inSentence = name => name.replace(/^[A-Z](?=[a-z])/, letter => letter.toLowerCase());
 /** True when the van carries at least one of an item. */
 const owns = (state, id) => state.inventory[id] >= 1;
 
@@ -252,7 +254,9 @@ export const ACTIONS = {
       if (!lines) return REFUSALS.quantities;
       for (const [id, quantity] of lines) {
         const { max, short } = itemOf(id);
-        if (quantity > 0 && state.inventory[id] + quantity > max) return fill(REFUSALS.overMax, { max, name: short });
+        if (quantity > 0 && state.inventory[id] + quantity > max) {
+          return fill(REFUSALS.overMax, { max, name: inSentence(short) });
+        }
       }
       const cost = orderCost(state, lines);
       const { money } = state.inventory;

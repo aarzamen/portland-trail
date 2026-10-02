@@ -27,7 +27,7 @@ Updated October 2, 2026. Version 0.2.0 implements this review, following the [de
 | B15 | Done | Refusals use display names ("You have no seed bombs to use.") |
 | B16 | Done | Start another journey skips the confirmation once a journey has ended |
 | B17 | Done | Drive is offered in the shop; the other button reads "Back to {stop}" |
-| B18 | Done, one residue | Heading and cause come from `summarize`; a loss reads "Journey over" with its cause; the trip numbers say where the journey ended. The won ending's line under the heading still reads "at least some of its passengers" when all five arrive ([trip-views.js](../../app/src/ui/trip-views.js) `sceneText`) |
+| B18 | Done | Heading, scene line and cause come from `summarize` (sentences in `ENDINGS` in [data.js](../../app/src/data.js)); a loss reads "Journey over" with its cause; a win with all five alive says everyone made the city, a thinner one "at least some of its passengers"; the trip numbers say where the journey ended |
 | B19 | Done | Step 1 has Back to the title, and the brand returns to the title |
 | D1 | Done | Health now matters: harsher heat, encounters every other day on average, sickness, rations. Autopilot wins 43.5–45.5% and loses a traveler in about 70% of journeys. Careful play wins every journey with all five alive; the ruling keeps that and puts the risk in the gap between careful and careless play ([balance](../validation/2026-10-01-balance.md)) |
 | D2 | Done, as suggested | The outbreak is a critical choice: dose with kombucha, quarantine, or drive through it. No branch kills the whole party; its description changed only to "catches up with the van". The owner can restore the old tone in one entry of `data.js` |
@@ -54,7 +54,7 @@ Updated October 2, 2026. Version 0.2.0 implements this review, following the [de
 | S3 | Done | Ten base colours in one token block, everything else derived with `color-mix()`; a rem type scale from 0.75rem; three letter-spacings |
 | S4 | Done | Storage problems stay in the banner; everything else is a toast, phosphor for success and amber for refusals |
 | S5 | Done | The save key is `the-portland-trail:save`; the old key is migrated and removed |
-| S6 | Done, one small new case | The weather-alert fallback, the unused `sceneAlt` branch, the old route tooltips and the dead CSS are gone. The new route map's shop mark carries `title="Supplies"` inside a list with `pointer-events: none`, so that tooltip never shows; its `aria-label` carries the meaning ([trip-views.js](../../app/src/ui/trip-views.js) `SHOP_MARK`) |
+| S6 | Done | The weather-alert fallback, the unused `sceneAlt` branch, the old route tooltips and the dead CSS are gone. The route map's shop mark has no tooltip; its `aria-label` carries the meaning ([trip-views.js](../../app/src/ui/trip-views.js) `SHOP_MARK`) |
 | L1 | Done | Nothing below 12px; body 14px, controls 16px, all in rem |
 | L2 | Done | Health bars are phosphor, amber or rust by band and show the number |
 | L3 | Done | Supplies use short names and are never truncated (tested at 320, 390 and 1440) |

@@ -1,6 +1,7 @@
 // The built game (TEST_DIST_URL): the build stamp (F6), the worker and the scene message, offline play (F5),
-// the manifest and its icons at the root and under a nested path; and the source (TEST_URL), which registers no
-// worker.
+// a visit that installs a newer build (the scenes land in the new build's cache before offline play is
+// announced), the manifest and its icons at the root and under a nested path; and the source (TEST_URL), which
+// registers no worker.
 import { createServer } from 'node:http';
 import { readFile } from 'node:fs/promises';
 import { extname, resolve, sep } from 'node:path';
@@ -123,7 +124,11 @@ async function manifestAt(url, label) {
   await context.close();
 }
 
-async function nestedPath() {
+/**
+ * Serves app/dist/ under a path prefix on a free port. `rewrite(path, bytes)` may change a file on its way out.
+ * Resolves with the URL and a function that stops the server.
+ */
+async function serveDist(prefix, rewrite = (path, bytes) => bytes) {
   const root = fileURLToPath(new URL('../dist/', import.meta.url));
   const types = {
     '.html': 'text/html',
@@ -134,18 +139,21 @@ async function nestedPath() {
     '.woff2': 'font/woff2',
     '.webmanifest': 'application/manifest+json',
   };
-  const prefix = '/games/portland/';
   const server = createServer(async (request, response) => {
     const { pathname } = new URL(request.url, 'http://localhost');
-    const file = resolve(root, decodeURIComponent(pathname.slice(prefix.length)) || 'index.html');
+    const path = decodeURIComponent(pathname.slice(prefix.length)) || 'index.html';
+    const file = resolve(root, path);
     if (!pathname.startsWith(prefix) || !file.startsWith(root.endsWith(sep) ? root : root + sep)) {
       response.writeHead(404);
       response.end();
       return;
     }
     try {
-      const bytes = await readFile(file);
-      response.writeHead(200, { 'Content-Type': types[extname(file)] || 'application/octet-stream' });
+      const bytes = rewrite(path, await readFile(file));
+      response.writeHead(200, {
+        'Content-Type': types[extname(file)] || 'application/octet-stream',
+        'Cache-Control': 'no-store',
+      });
       response.end(bytes);
     } catch {
       response.writeHead(404);
@@ -153,10 +161,84 @@ async function nestedPath() {
     }
   });
   await new Promise(done => server.listen(0, '127.0.0.1', done));
+  return {
+    url: `http://127.0.0.1:${server.address().port}${prefix}`,
+    close: () => new Promise(done => server.close(done)),
+  };
+}
+
+async function nestedPath() {
+  const served = await serveDist('/games/portland/');
   try {
-    await manifestAt(`http://127.0.0.1:${server.address().port}${prefix}`, 'nested path');
+    await manifestAt(served.url, 'nested path');
   } finally {
-    await new Promise(done => server.close(done));
+    await served.close();
+  }
+}
+
+/** The game's caches in the page: each name with how many scene images it holds. */
+const sceneCaches = page =>
+  page.evaluate(async () => {
+    const names = (await caches.keys()).filter(name => name.startsWith('portland-trail-'));
+    return Promise.all(
+      names.map(async name => {
+        const keys = await (await caches.open(name)).keys();
+        return { name, scenes: keys.filter(request => /\/assets\/scenes\/.+\.webp$/.test(request.url)).length };
+      }),
+    );
+  });
+
+/**
+ * A returning player whose page is controlled by build 1 opens build 2 (the same files, a worker with another
+ * digest). The outgoing worker answers the first scene message, then the new one activates and deletes its
+ * cache: "Ready to play offline" must wait for the new worker, whose cache then holds every scene.
+ */
+async function upgrade() {
+  let build = 1;
+  const served = await serveDist('/upgrade/', (path, bytes) => {
+    if (path !== 'sw.js' || build === 1) return bytes;
+    const text = bytes.toString('utf8');
+    const changed = text.replace(/^const DIGEST = '([^']*)';$/m, "const DIGEST = '$1-next';");
+    if (changed === text) throw new Error('sw.js has no DIGEST line to change.');
+    return changed;
+  });
+  const { context, page, errors } = await openPage(browser, { url: served.url, width: 390, height: 664 });
+  try {
+    await context.addInitScript(countReadyToasts, READY);
+    await page.evaluate(() => navigator.serviceWorker.ready);
+    await page.reload();
+    await page.locator('#toasts .toast', { hasText: READY }).waitFor({ timeout: 20_000 });
+    const first = await sceneCaches(page);
+    check(first.length === 1 && first[0].scenes > 0, 'build 1: one cache, holding the scenes', first);
+
+    build = 2;
+    await page.reload();
+    await page.locator('[data-key="start"]').waitFor();
+    await page.locator('#toasts .toast', { hasText: READY }).waitFor({ timeout: 20_000 });
+    const next = `${first[0].name}-next`;
+    const second = (await sceneCaches(page)).find(entry => entry.name === next);
+    check(
+      second?.scenes === first[0].scenes,
+      'build 2: "Ready to play offline" comes after the new build’s cache holds every scene',
+      { first, second: await sceneCaches(page) },
+    );
+    // The new worker's activation deletes the old cache, perhaps a moment after it has answered.
+    let left = await sceneCaches(page);
+    for (let tries = 0; tries < 20 && left.length > 1; tries += 1) {
+      await pause(250);
+      left = await sceneCaches(page);
+    }
+    check(left.length === 1 && left[0].name === next, 'build 2: only the new build’s cache remains', left);
+    await pause(800);
+    check(
+      (await page.evaluate(() => window.__readyToasts)) === 1,
+      `build 2: "${READY}" is shown once`,
+      await page.evaluate(() => window.__readyToasts),
+    );
+    check(errors.length === 0, 'build 2: no page errors', errors);
+  } finally {
+    await context.close();
+    await served.close();
   }
 }
 
@@ -170,6 +252,7 @@ async function sourceHasNoWorker() {
 
 try {
   await step('stamp, worker and offline play', stampAndWorker);
+  await step('a visit that installs a newer build', upgrade);
   await step('manifest at the root', () => manifestAt(DIST_URL, 'root'));
   await step('manifest under a nested path', nestedPath);
   await step('source without a worker', sourceHasNoWorker);
