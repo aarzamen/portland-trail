@@ -40,6 +40,7 @@ import {
   readSettings,
   saveFileText,
   saveJourney,
+  writeSettings,
 } from './ui/storage.js';
 import { TRIP_SHELL, sceneIdOf, tripRegions } from './ui/trip-views.js';
 import {
@@ -66,6 +67,7 @@ const banner = /** @type {HTMLElement} */ (document.querySelector('#banner'));
 const toastRegion = /** @type {HTMLElement} */ (document.querySelector('#toasts'));
 const saveStatus = /** @type {HTMLElement} */ (document.querySelector('#save-status'));
 const headerNew = /** @type {HTMLButtonElement} */ (document.querySelector('#new-journey-header'));
+const soundToggle = /** @type {HTMLButtonElement} */ (document.querySelector('#sound-toggle'));
 const eventDialog = /** @type {HTMLDialogElement} */ (document.querySelector('#event-dialog'));
 const memorialElement = /** @type {HTMLDialogElement} */ (document.querySelector('#memorial-dialog'));
 const confirmElement = /** @type {HTMLDialogElement} */ (document.querySelector('#confirm-dialog'));
@@ -144,8 +146,11 @@ function toast(message, tone = 'ok') {
   toastTimer = window.setTimeout(clearToast, TOAST_MS);
 }
 
+// The banner shows one storage problem at a time, the one that matters most.
+const PROBLEM_ORDER = [PROBLEMS.unavailable, PROBLEMS.unsaved, PROBLEMS.unreadable];
+
 function drawChrome() {
-  const message = [...problems].join(' ');
+  const message = PROBLEM_ORDER.find(problem => problems.has(problem)) ?? '';
   if (banner.textContent !== message) banner.textContent = message;
   banner.hidden = !message;
   headerNew.hidden = screen !== 'game' || !game;
@@ -155,6 +160,24 @@ function drawChrome() {
   else if (screen === 'game') status = 'Journey saved';
   else if (game) status = 'Journey on file';
   if (saveStatus.textContent !== status) saveStatus.textContent = status;
+  drawSound();
+}
+
+/** The masthead's sound switch shows and announces its state. */
+function drawSound() {
+  const on = sound.isEnabled();
+  soundToggle.setAttribute('aria-pressed', String(on));
+  const state = soundToggle.querySelector('.sound-state');
+  if (state) state.textContent = on ? 'on' : 'off';
+}
+
+/** Sound on or off, remembered in the settings; switching it on plays a short tone to prove it. */
+function toggleSound() {
+  const on = !sound.isEnabled();
+  sound.setEnabled(on);
+  writeSettings({ ...readSettings(), sound: on });
+  drawSound();
+  if (on) sound.play('good');
 }
 
 // --- Saving ----------------------------------------------------------------------------------------------
@@ -606,6 +629,7 @@ function stepDrive(now) {
   set('[data-trip-distance]', element => (element.textContent = mile.toLocaleString('en-US')));
   set('[data-trip-progress]', element => (element.style.width = `${(mile / RULES.goalMiles) * 100}%`));
   set('[data-mile]', element => element.setAttribute('data-mile', String(mile)));
+  set('[data-route-van]', element => (element.style.left = `${(mile / RULES.goalMiles) * 100}%`));
   set('.route-track', element => element.setAttribute('aria-valuenow', String(mile)));
   set('[data-drive-distance]', element => (element.textContent = `+${mile - from} mi`));
   if (progress < 1) {
@@ -878,6 +902,7 @@ function onClick(event) {
   if (!control) return;
   const key = control.getAttribute('data-key');
   if (key === 'home') event.preventDefault();
+  if (key === 'sound') return toggleSound();
   if (playback) return;
   if (control.closest('#confirm-dialog')) {
     const action = confirmed;

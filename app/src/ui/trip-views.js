@@ -305,17 +305,58 @@ function notes(model) {
 
 // --- Route -----------------------------------------------------------------------------------------------
 
+// A shop on the map: a small symbol with its words for anyone who cannot see it.
+const SHOP_MARK = '<span class="route-shop" role="img" aria-label="supplies" title="Supplies">$</span>';
+// The van on the route map, thirteen by seven pixels drawn at twice the size: luggage, body, windows, wheels.
+const MAP_VAN = `<svg viewBox="0 0 13 7" width="26" height="14" shape-rendering="crispEdges" aria-hidden="true">
+  <rect class="map-van-load" x="2" y="0" width="7" height="1" /><rect x="1" y="1" width="10" height="4" />
+  <rect x="11" y="2" width="1" height="3" />
+  <rect class="map-van-glass" x="2" y="2" width="2" height="1" />
+  <rect class="map-van-glass" x="5" y="2" width="2" height="1" />
+  <rect class="map-van-glass" x="8" y="2" width="3" height="1" />
+  <rect class="map-van-wheel" x="2" y="5" width="2" height="2" />
+  <rect class="map-van-wheel" x="8" y="5" width="2" height="2" />
+</svg>`;
+
+/** The stops just behind, at and ahead of the van, for the phone's three labels. */
+function nearStops(stops) {
+  const current = stops.find(stop => stop.current);
+  const behind = stops.filter(stop => stop.passed && !stop.current).at(-1);
+  const ahead = stops.find(stop => !stop.passed && !stop.current);
+  return { behind, current, ahead };
+}
+
+function nearLabel(where, stop, fallback) {
+  if (!stop) return `<span data-near="${where}">${fallback}</span>`;
+  const shop = stop.kind === 'shop' ? '<span class="route-shop">$</span> ' : '';
+  return `<span data-near="${where}"><b>${escapeHtml(stop.shortName)}</b>
+    <small>${shop}${formatNumber(stop.miles)} mi</small></span>`;
+}
+
 function route(model) {
   const { state, stops, goal } = model;
   const mile = state.distance;
-  const percent = Math.max(0, Math.min(100, (mile / goal) * 100));
-  const markers = stops
-    .map(stop => {
-      const passed = stop.miles <= mile ? ' is-passed' : '';
-      const title = `${escapeHtml(stop.shortName)} · ${stop.miles} mi`;
-      return `<i class="route-marker${passed}" style="left:${(stop.miles / goal) * 100}%" title="${title}"></i>`;
+  const at = miles => `${Math.max(0, Math.min(100, (miles / goal) * 100))}%`;
+  const { behind, current, ahead } = nearStops(stops);
+  const points = stops
+    .map((stop, index) => {
+      let where = stop.passed ? ' is-passed' : '';
+      if (stop === current) where = ' is-current';
+      else if (stop === behind) where += ' is-behind';
+      else if (stop === ahead) where += ' is-ahead';
+      const lane = index % 2 ? ' lane-low' : ' lane-high';
+      const shop = stop.kind === 'shop' ? SHOP_MARK : '';
+      return `<li class="route-point kind-${stop.kind}${where}${lane}" data-stop="${escapeHtml(stop.id)}"
+        style="--at:${at(stop.miles)}"><span class="route-tick"></span>${shop}<span class="route-label"
+        >${escapeHtml(stop.shortName)}<span class="visually-hidden">, mile ${formatNumber(stop.miles)}</span></span
+        ></li>`;
     })
     .join('');
+  const near = `<div class="route-near" aria-hidden="true">${nearLabel('prev', behind, '')}${nearLabel(
+    'current',
+    current,
+    '<b>On the road</b>',
+  )}${nearLabel('next', ahead, '')}</div>`;
   const list = stops
     .map(stop => {
       const where = stop.passed ? ' is-passed' : stop.current ? ' is-current' : '';
@@ -334,10 +375,11 @@ function route(model) {
     </div>
     <div class="route-map">
       <div class="route-track" ${track} aria-label="Miles traveled">
-        <span data-trip-progress style="width:${percent}%"></span></div>
-      <div class="route-markers" aria-hidden="true">${markers}</div>
+        <span data-trip-progress style="width:${at(mile)}"></span></div>
+      <ol class="route-points" aria-label="Stops on the map">${points}</ol>
+      <span class="route-van" data-route-van style="left:${at(mile)}">${MAP_VAN}</span>
     </div>
-    <div class="route-endpoints"><span>Departure</span><span>Portland</span></div>
+    ${near}
     <details class="route-details"${open}>
       <summary data-key="route-list">${stops.length - 2} places along the way</summary><ol>${list}</ol>
     </details>
@@ -554,6 +596,10 @@ function actions(model) {
 
 // --- Settings and journal --------------------------------------------------------------------------------
 
+/**
+ * A setting as a select. The select itself is see-through over a face that shows the chosen option's label and
+ * may wrap, so a long label is never cut off on a phone; the select still takes every tap, key and reader.
+ */
 function select(key, label, options) {
   const list = options
     .map(option => {
@@ -561,7 +607,9 @@ function select(key, label, options) {
       return `<option value="${escapeHtml(option.id)}"${selected}>${escapeHtml(option.label)}</option>`;
     })
     .join('');
-  return `<label><span>${label}</span><select data-key="${key}">${list}</select></label>`;
+  const chosen = options.find(option => option.selected) ?? options[0];
+  return `<label><span>${label}</span><span class="select-face"><span class="select-text" aria-hidden="true"
+    >${escapeHtml(chosen?.label ?? '')}</span><select data-key="${key}">${list}</select></span></label>`;
 }
 
 function settings(model) {

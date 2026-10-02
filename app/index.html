@@ -15,6 +15,7 @@
     <link rel="icon" type="image/png" sizes="32x32" href="./assets/icons/favicon-32.png" />
     <link rel="icon" type="image/png" sizes="16x16" href="./assets/icons/favicon-16.png" />
     <link rel="apple-touch-icon" sizes="180x180" href="./assets/icons/apple-touch-icon.png" />
+    <link rel="preload" href="./assets/fonts/portland-pixel.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="stylesheet" href="./src/styles.css" />
     <script type="module" src="./src/main.js"></script>
   </head>
@@ -22,10 +23,20 @@
     <div class="app-shell">
       <header class="masthead">
         <a class="brand" href="./" data-key="home" aria-label="The Portland Trail, back to the title"
-          >The Portland Trail <span aria-hidden="true">✳</span></a
+          ><span class="brand-the">The </span>Portland Trail<span class="brand-mark" aria-hidden="true">✳</span></a
         >
         <div class="masthead-right">
           <span id="save-status" class="save-status" role="status" aria-live="polite"></span>
+          <button
+            id="sound-toggle"
+            class="text-button sound-toggle"
+            type="button"
+            data-key="sound"
+            aria-pressed="false"
+          >
+            <span class="sound-icon" aria-hidden="true">♪</span><span class="sound-word">Sound</span
+            ><span class="sound-state" aria-hidden="true">off</span>
+          </button>
           <button id="new-journey-header" class="text-button" type="button" data-key="new-header" hidden>
             New journey
           </button>
