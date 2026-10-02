@@ -1,6 +1,7 @@
 {
   ".github/workflows/test.yml": "86585024baea3a973f838c08e330c6c33e9df822a9d61baa523a1f3b26fdc9af",
   ".gitignore": "675ad135387b3d45d630a79501a1d67cff9852f9d8ecf8499c1fdbb597e12df5",
+  ".openai/hosting.json": "f5bccd669c7abaa07814c8c16f1779ba14c4eb5b63d4f52e9ff94e6d1f86241b",
   "AGENTS.md": "f08c9ed6e405b793aa1ccc2b208d9df6f3b5d4fe35227e427a98ea45c119a23f",
   "CLAUDE.md": "9d3ffdaff85a066f867bbbd50620f74299a7779681e7fbd3af77ae61d14403a9",
   "PROJECT_SETUP.md": "78113f3b78688bea1770cf3703e05ec326b67e63f0f12bf1d269c5f37f0365c2",
