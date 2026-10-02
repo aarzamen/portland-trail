@@ -33,7 +33,7 @@
   --text: var(--paper);
   --text-soft: color-mix(in srgb, var(--paper) 78%, var(--quiet));
   --text-quiet: var(--quiet);
-  --text-dim: color-mix(in srgb, var(--quiet) 75%, var(--ink-2));
+  --text-dim: color-mix(in srgb, var(--quiet) 90%, var(--ink-2));
 
   /* Accents and their tints. */
   --phosphor-bright: color-mix(in srgb, var(--phosphor) 70%, var(--paper));
@@ -45,6 +45,7 @@
   --amber-text: color-mix(in srgb, var(--amber) 40%, var(--paper));
   --rust-soft: color-mix(in srgb, var(--rust) 18%, var(--ink-2));
   --rust-dim: color-mix(in srgb, var(--rust) 55%, var(--quiet));
+  --rust-text: color-mix(in srgb, var(--rust) 65%, var(--paper));
   --stone: color-mix(in srgb, var(--quiet) 16%, var(--ink-2));
 
   /* Shade over pictures and behind dialogs. */
@@ -1305,6 +1306,7 @@ main {
 
 /* The trip: numbers, the route map with its van, and the full list of stops. */
 .trip-strip {
+  container: trip / inline-size;
   padding: 16px 20px 8px;
   border: 1px solid var(--edge);
   border-top: 0;
@@ -1649,21 +1651,21 @@ main {
   background-color: var(--rust);
 }
 .health[data-band='bad'] b {
-  color: var(--rust);
+  color: var(--rust-text);
 }
 .health[data-band='dead'] .health-track {
   border-color: var(--rust-dim);
   background: repeating-linear-gradient(135deg, var(--rust-soft) 0 4px, var(--well) 4px 8px);
 }
 .health[data-band='dead'] b {
-  color: var(--rust-dim);
+  color: var(--rust-text);
 }
 .traveler-deceased .traveler-top strong {
   color: var(--text-dim);
   text-decoration: line-through;
 }
 .traveler-deceased .traveler-top span {
-  color: var(--rust);
+  color: var(--rust-text);
   font-weight: 700;
   letter-spacing: var(--track-caps);
   text-transform: uppercase;
@@ -1832,7 +1834,7 @@ main {
   border: 1px solid var(--edge-bright);
   background: var(--well);
   color: var(--text);
-  font-size: var(--fs-14);
+  font-size: var(--fs-16);
   letter-spacing: 0;
   line-height: 1.35;
   text-transform: none;
@@ -2454,54 +2456,6 @@ main {
   }
 }
 
-/* The route map labels every stop where the track is wide enough; phones get the three nearest instead. */
-@media (max-width: 639px) {
-  .route-map {
-    margin: 20px 9px 12px;
-  }
-  .route-label {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-  }
-  .route-near {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 8px;
-    margin-bottom: 4px;
-    font-size: var(--fs-12);
-    line-height: 1.25;
-  }
-  .route-near > span {
-    min-width: 0;
-    overflow-wrap: anywhere;
-  }
-  .route-near b {
-    color: var(--text-soft);
-  }
-  .route-near small {
-    display: block;
-    color: var(--text-quiet);
-  }
-  .route-near b {
-    display: block;
-  }
-  .route-near [data-near='current'] {
-    text-align: center;
-  }
-  .route-near [data-near='current'] b {
-    color: var(--amber);
-  }
-  .route-near [data-near='next'] {
-    text-align: right;
-  }
-  .route-near [data-near='prev'] b {
-    color: var(--text-quiet);
-  }
-}
-
 /* --- Phones -------------------------------------------------------------------------------------------- */
 
 @media (max-width: 760px) {
@@ -3102,6 +3056,56 @@ main {
   .button-dialog {
     min-height: 44px;
     padding: 8px 12px;
+  }
+}
+
+/* The route map labels every stop when its strip is wide enough for them; a narrower strip (a phone, or the
+   two-column layout below 1200px) shows the previous, current and next stop in a row instead. It keys on the
+   strip's own width, not the viewport's. */
+@container trip (max-width: 699px) {
+  .route-map {
+    margin: 20px 9px 12px;
+  }
+  .route-label {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+  }
+  .route-near {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 8px;
+    margin-bottom: 4px;
+    font-size: var(--fs-12);
+    line-height: 1.25;
+  }
+  .route-near > span {
+    min-width: 0;
+    overflow-wrap: anywhere;
+  }
+  .route-near b {
+    color: var(--text-soft);
+  }
+  .route-near small {
+    display: block;
+    color: var(--text-quiet);
+  }
+  .route-near b {
+    display: block;
+  }
+  .route-near [data-near='current'] {
+    text-align: center;
+  }
+  .route-near [data-near='current'] b {
+    color: var(--amber);
+  }
+  .route-near [data-near='next'] {
+    text-align: right;
+  }
+  .route-near [data-near='prev'] b {
+    color: var(--text-quiet);
   }
 }
 

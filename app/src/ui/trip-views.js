@@ -159,7 +159,7 @@ function sceneText(model) {
     return {
       art: sceneIdOf(state, stop, model.region),
       alt: won ? 'The van rolls into Portland' : 'The end of the road',
-      overline: 'Journey complete',
+      overline: won ? 'Journey complete' : 'Journey over',
       heading: summary.heading,
       text: summary.cause || 'Against the odds, the van and at least some of its passengers made the city.',
     };
@@ -333,6 +333,15 @@ function nearLabel(where, stop, fallback) {
     <small>${shop}${formatNumber(stop.miles)} mi</small></span>`;
 }
 
+/** The third number: the next stop, or where the journey ended once it is over. */
+function endOrNext(model) {
+  if (!ended(model)) {
+    return `<div><span>Next stop</span><strong>${escapeHtml(model.next?.shortName ?? 'Portland')}</strong></div>`;
+  }
+  const where = model.summary.outcome === 'won' ? 'Portland' : `Mile ${formatNumber(model.state.distance)}`;
+  return `<div><span>Ended at</span><strong>${where}</strong></div>`;
+}
+
 function route(model) {
   const { state, stops, goal } = model;
   const mile = state.distance;
@@ -371,7 +380,7 @@ function route(model) {
       <div><span>Distance</span>
         <strong><b data-trip-distance>${formatNumber(mile)}</b> <small>/ ${formatNumber(goal)} mi</small></strong></div>
       <div><span>Day</span><strong>${formatNumber(state.day)}</strong></div>
-      <div><span>Next stop</span><strong>${escapeHtml(model.next?.shortName ?? 'Portland')}</strong></div>
+      ${endOrNext(model)}
     </div>
     <div class="route-map">
       <div class="route-track" ${track} aria-label="Miles traveled">
@@ -410,7 +419,9 @@ function supplies(model) {
   const { inventory } = model.state;
   const rows = SUPPLY_IDS.map(id => {
     const changed = model.cue.resources.includes(id) ? ' resource-changed' : '';
-    const value = id === 'money' ? `$${formatNumber(inventory[id])}` : formatNumber(inventory[id]);
+    // Food is eaten in fractions; the list shows the whole servings left. The engine keeps the exact amount.
+    const amount = id === 'food' ? Math.floor(inventory[id]) : inventory[id];
+    const value = id === 'money' ? `$${formatNumber(amount)}` : formatNumber(amount);
     return `<li class="resource${changed}" data-resource="${id}">
       <img src="./assets/sprites/resource-${id}.png" alt="" class="resource-icon" />
       <span class="resource-name">${escapeHtml(supplyLabel(id))}</span><strong>${value}</strong></li>`;

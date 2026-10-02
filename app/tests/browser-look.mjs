@@ -218,23 +218,6 @@ async function routeMap() {
       'shops carry a symbol with a text alternative',
       shops,
     );
-    const labels = await page.locator('.route-map .route-label').evaluateAll(list =>
-      list.map(label => {
-        const box = label.getBoundingClientRect();
-        return { text: label.textContent, left: box.left, right: box.right, top: box.top, width: box.width };
-      }),
-    );
-    const overlapping = labels.filter((label, index) =>
-      labels.some(
-        (other, at) =>
-          at !== index && other.top === label.top && other.left < label.right - 1 && label.left < other.right - 1,
-      ),
-    );
-    check(
-      labels.every(label => label.width > 1) && overlapping.length === 0,
-      '1440px: every stop is labelled without overlaps',
-      overlapping,
-    );
     check((await page.locator('.route-details li').count()) === marks, 'the full list stays available');
     await context.close();
   }
@@ -280,6 +263,125 @@ async function routeMap() {
       '390px: the three labels do not overlap',
       near,
     );
+    await context.close();
+  }
+}
+
+/** The route labels a player can see: on the map, or in the row of the three nearest stops. */
+function routeLabels(page) {
+  return page.evaluate(() => {
+    const seen = element => element.checkVisibility() && element.getBoundingClientRect().width > 1;
+    const box = element => {
+      const { left, right, top, bottom } = element.getBoundingClientRect();
+      return { text: element.textContent.trim().split('\n')[0], left, right, top, bottom };
+    };
+    const map = [...document.querySelectorAll('.route-map .route-label')];
+    const near = [...document.querySelectorAll('.route-near [data-near]')];
+    return { map: map.filter(seen).map(box), mapTotal: map.length, near: near.filter(seen).map(box) };
+  });
+}
+
+async function routeLabelWidths() {
+  for (const [width, height] of [
+    [756, 352],
+    [768, 900],
+    [844, 390],
+    [1000, 900],
+    [1024, 768],
+    [1200, 900],
+    [1440, 900],
+  ]) {
+    const { context, page } = await openJourney(browser, stop(), { width, height });
+    await fontsReady(page);
+    const { map, mapTotal, near } = await routeLabels(page);
+    const shown = [...map, ...near];
+    const overlapping = shown.filter((label, index) =>
+      shown.some(
+        (other, at) =>
+          at !== index &&
+          other.left < label.right - 1 &&
+          label.left < other.right - 1 &&
+          other.top < label.bottom - 1 &&
+          label.top < other.bottom - 1,
+      ),
+    );
+    check(overlapping.length === 0, `${width}px: no two route labels overlap`, overlapping);
+    const whole = map.length === mapTotal;
+    const nearest =
+      near.length === 3 && near.map(entry => entry.text).join('|') === 'Rest Stop|River Ferry|Roadside Motel';
+    check(whole || nearest, `${width}px: every stop or the three nearest are labelled`, { map: map.length, near });
+    if (width >= 1200) check(whole, `${width}px: every stop is labelled on the map`, map.length);
+    await page.locator('[data-region="route"]').screenshot({ path: shotPath(`route-${width}x${height}`) });
+    await context.close();
+  }
+}
+
+/** The contrast of an element's text against the first opaque background behind it. */
+function contrastOf(page, selector) {
+  return page
+    .locator(selector)
+    .first()
+    .evaluate(element => {
+      // Colours compute as rgb() or, for color-mix(), as color(srgb r g b / a) with channels from 0 to 1.
+      const rgb = text => {
+        const numbers = text.match(/[\d.]+/g).map(Number);
+        const scale = text.startsWith('color(') ? 255 : 1;
+        return [numbers[0] * scale, numbers[1] * scale, numbers[2] * scale, numbers[3] ?? 1];
+      };
+      const luminance = ([r, g, b]) => {
+        const channel = value => {
+          const v = value / 255;
+          return v <= 0.03928 ? v / 12.92 : ((v + 0.055) / 1.055) ** 2.4;
+        };
+        return 0.2126 * channel(r) + 0.7152 * channel(g) + 0.0722 * channel(b);
+      };
+      let node = element;
+      let background = null;
+      while (node && !background) {
+        const colour = rgb(getComputedStyle(node).backgroundColor);
+        if (colour[3] === 1) background = colour;
+        node = node.parentElement;
+      }
+      const [light, dark] = [luminance(rgb(getComputedStyle(element).color)), luminance(background ?? [0, 0, 0])].sort(
+        (first, second) => second - first,
+      );
+      return Math.round(((light + 0.05) / (dark + 0.05)) * 100) / 100;
+    });
+}
+
+async function smallTextContrast() {
+  const { context, page } = await openJourney(browser, banded(), { width: 390, height: 664 });
+  for (const [selector, label] of [
+    ['.traveler-deceased .traveler-top span', 'the DECEASED label'],
+    ['.health[data-band="bad"] b', 'a bad-band number'],
+    ['.health[data-band="dead"] b', "a dead traveler's 0"],
+    ['.traveler-deceased .traveler-top strong', "a dead traveler's dimmed name"],
+  ]) {
+    const ratio = await contrastOf(page, selector);
+    check(ratio >= 4.5, `${label} reaches 4.5:1`, ratio);
+  }
+  await context.close();
+}
+
+async function endings() {
+  for (const [game, overline, where] of [
+    [won, 'Journey complete', 'Portland'],
+    [lost, 'Journey over', `Mile ${lost.distance}`],
+  ]) {
+    const { context, page } = await openJourney(browser, game, { width: 390, height: 664 });
+    const scene = await page.locator('[data-region="scene"] .scene-overline').innerText();
+    const numbers = await page.locator('[data-region="route"] .trip-numbers').innerText();
+    check(scene.toLowerCase() === overline.toLowerCase(), `${game.outcome}: the overline says ${overline}`, scene);
+    check(
+      !/next stop/i.test(numbers) && numbers.includes(where),
+      `${game.outcome}: the numbers say where it ended, not a next stop`,
+      numbers,
+    );
+    const food = await page.locator('[data-resource="food"] strong').innerText();
+    check(food === String(Math.floor(game.inventory.food)), `${game.outcome}: food shows whole servings`, {
+      food,
+      exact: game.inventory.food,
+    });
     await context.close();
   }
 }
@@ -529,6 +631,9 @@ try {
   await step('text sizes', textSizes);
   await step('health bars', healthBars);
   await step('route map', routeMap);
+  await step('route labels across widths', routeLabelWidths);
+  await step('small text contrast', smallTextContrast);
+  await step('endings', endings);
   await step('toasts', toastTones);
   await step('focus ring', focusRing);
   await step('sound switch', soundSwitch);
