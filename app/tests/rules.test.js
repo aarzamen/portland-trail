@@ -28,8 +28,12 @@ import {
   REGIONS,
   RULES,
 } from '../src/data.js';
+import * as data from '../src/data.js';
 import { ACTIONS, refusalFor } from '../src/engine/actions.js';
 import { fill, finish, hurt } from '../src/engine/state.js';
+
+// The game data as it was before any test ran.
+const DATA_AT_LOAD = structuredClone({ ...data });
 
 const TRAVEL = { type: 'travel' };
 const ENDED = 'This journey has ended. Start a new one to play again.';
@@ -1399,4 +1403,8 @@ test('a crew that never shops runs dry, pushes, and is lost on the road', () => 
   }
   assert.ok(lost.some(state => state.journal.some(entry => entry.text === 'The tank is dry.')));
   assert.ok(lost.some(state => state.flags.luggageTraded));
+});
+
+test('playing never changes the game data', () => {
+  assert.deepEqual({ ...data }, DATA_AT_LOAD);
 });

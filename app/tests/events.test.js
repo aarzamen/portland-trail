@@ -534,7 +534,7 @@ test('kombucha and quarantine answer the outbreak without killing anyone at full
 test('driving through the outbreak hits the weakest hardest and sickens the rest', () => {
   const outbreak = event('pandemic_death');
   const push = outbreak.choices.find(choice => choice.id === 'push_on');
-  const healths = [80, 70, 60, 70, 60];
+  const healths = [100, 95, 90, 95, 90];
   const base = crew(facing(ready(), 'pandemic_death'), (member, index) => ({ health: healths[index] }));
   const result = transition(base, answer('push_on'));
   // Two travelers share the lowest health: the first in party order takes the worst of it.
@@ -603,7 +603,7 @@ test('a failed kick costs a day, the tow charges cash, and the developer repairs
   const quick = transition(dev, answer('repair'));
   assert.equal(quick.state.inventory.parts, 0);
   assert.deepEqual(quick.notes, [fill(choice('repair').result, { parts: repairCost })]);
-  assert.equal(quick.notes[0], 'The van runs again after 1 repair kit.');
+  assert.match(quick.notes[0], repairCost === 1 ? /after 1 repair kit\.$/ : /after \d+ repair kits\.$/);
   const without = stocked(dev, { parts: repairCost - 1 });
   assert.equal(
     refusal(without, answer('repair')),

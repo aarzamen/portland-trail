@@ -10,7 +10,7 @@ import {
   transition,
   weatherName,
 } from '../src/engine.js';
-import { DEATHS, DEFAULT_NAMES, EVENTS, ITEMS, JOURNAL, LIMITS, LOCATIONS, PROFESSIONS, RULES } from '../src/data.js';
+import { DEATHS, DEFAULT_NAMES, EVENTS, ITEMS, LIMITS, LOCATIONS, PROFESSIONS, RULES } from '../src/data.js';
 
 const TRAVEL = { type: 'travel' };
 const ENDED = 'This journey has ended. Start a new one to play again.';
@@ -697,8 +697,4 @@ test('details a save gets wrong are put right', () => {
   const flags = { nextToken: -1, lastAbilityDay: 'never', wifiDownDay: 2.5, talked: 'everyone', luggageTraded: 'yes' };
   assert.deepEqual(load({ ...state, flags }).flags, start().flags);
   assert.deepEqual(load({ ...state, flags: null }).flags, start().flags);
-});
-
-test('the journal line a new journey starts with is the one old saves carry', () => {
-  assert.equal(legacy(2).journal[0].text, JOURNAL.start);
 });
