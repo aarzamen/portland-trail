@@ -347,7 +347,7 @@ Measured by `app/scripts/balance.mjs` over 2,000 seeds for each background, with
 |---|---|---|
 | never shops | drives; when dry trades the luggage, then pushes | wins at most 5% |
 | autopilot | Auto-buy at every shop, Steady, Meager, never rests, eats, forages or uses items or the ability; takes the first enabled choice that is not `only` | wins 30–55% |
-| careful | Auto-buy; Filling rations while food lasts; talks; uses the ability; rests at stops when mean health is under 70; eats at the carts; kombucha when anyone is sick or under 40; treats, repairs and pays when it can; quarantines or doses in the outbreak | wins at least 80%, with at least 3.5 of 5 alive on average |
+| careful | Auto-buy; Filling rations while food lasts; talks; uses the ability; rests at stops when mean health is under 70; eats at the carts; kombucha when anyone is sick or under 40; treats, repairs and pays when it can; quarantines or doses in the outbreak | wins 85–97%, with at least 3.5 of 5 alive on average, and loses at least one traveler in at least 25% of journeys |
 
 No bot may lose a journey in which every death was unavoidable; in particular the careful bot loses at most 2% of journeys in which the outbreak occurred. Backgrounds stay within 10 points of each other for each bot. Auto-buy from the default settings must leave every background able to reach the next shop.
 
