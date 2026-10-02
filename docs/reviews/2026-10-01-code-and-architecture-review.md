@@ -4,6 +4,85 @@ Reviewed October 1, 2026 at commit `3e02b8a` on `main`. Scope: everything under 
 
 Line numbers refer to that commit. Function names are given as well, because line numbers move.
 
+## Status
+
+Updated October 2, 2026. Version 0.2.0 implements this review, following the [design spec](../superpowers/specs/2026-10-01-review-implementation-design.md); the [validation record](../validation/2026-10-01-review-implementation.md) lists the checks. Where a row says the change differs from the suggestion below, the spec's ruling applies. Everything after this section is the review as written at `3e02b8a`; its line links point at files that have since been rewritten, and the [evidence scripts](evidence/) run only against that commit.
+
+| Id | Status | Where |
+|---|---|---|
+| B1 | Done | The encounter dialog reopens on `close` while an encounter is pending, and a refusal redraws it: [main.js](../../app/src/main.js). Escape twice is tested in `browser-encounters.mjs` |
+| B2 | Done, differently | `depart` is gone and Drive sends `travel`, which refuses a dry tank. A dry tank never ends the journey: last resorts (push, walk for fuel, trade the luggage) replace the stranding, and the only loss is the death of the whole party (spec 3.4–3.5) |
+| B3 | Done | Stop activities are enforced by the engine; stop rests heal more than the roadside (motel 30 for $45, camp 16): [data.js](../../app/src/data.js) `LOCATIONS`, [actions.js](../../app/src/engine/actions.js). The ability shows wherever the engine allows it |
+| B4 | Done | Seed bombs cost $18 and yield 2–6 food at random |
+| B5 | Done | Weather has an end day and clears in `passDay`: [state.js](../../app/src/engine/state.js) |
+| B6 | Done | `hurt` records day, mile and cause, writes the death line and the default epitaph; a memorial dialog announces it |
+| B7 | Done | The drive is drawn from the previous state until the 950 ms animation ends: [main.js](../../app/src/main.js) |
+| B8 | Done | One journal line per drive: the win line, the arrival line or the mileage line, in that order of preference |
+| B9 | Done | Selection is a border and shadow; the focus ring shows on every control; `#app` has no outline: [styles.css](../../app/src/styles.css) |
+| B10 | Done | The route list's open state survives redraws (regions are patched, not rebuilt) |
+| B11 | Done | One crew list and one supplies list, placed by CSS; the dead are crossed out with "Deceased" |
+| B12 | Done | Toasts clear on every screen change |
+| B13 | Done | Typed names survive Back and Continue; focus selects the text |
+| B14 | Done | `statusOf` derives Deceased, Sick, Healthy, Worn down or Hanging on from health bands and the sick flag: [selectors.js](../../app/src/engine/selectors.js) |
+| B15 | Done | Refusals use display names ("You have no seed bombs to use.") |
+| B16 | Done | Start another journey skips the confirmation once a journey has ended |
+| B17 | Done | Drive is offered in the shop; the other button reads "Back to {stop}" |
+| B18 | Done, one residue | Heading and cause come from `summarize`; a loss reads "Journey over" with its cause; the trip numbers say where the journey ended. The won ending's line under the heading still reads "at least some of its passengers" when all five arrive ([trip-views.js](../../app/src/ui/trip-views.js) `sceneText`) |
+| B19 | Done | Step 1 has Back to the title, and the brand returns to the title |
+| D1 | Done | Health now matters: harsher heat, encounters every other day on average, sickness, rations. Autopilot wins 43.5–45.5% and loses a traveler in about 70% of journeys. Careful play wins every journey with all five alive; the ruling keeps that and puts the risk in the gap between careful and careless play ([balance](../validation/2026-10-01-balance.md)) |
+| D2 | Done, as suggested | The outbreak is a critical choice: dose with kombucha, quarantine, or drive through it. No branch kills the whole party; its description changed only to "catches up with the van". The owner can restore the old tone in one entry of `data.js` |
+| D3 | Done | Cash counts toward the score and days of Portland rent; four encounters have a response only one background can take. Backgrounds stay within 2 points of each other per bot |
+| D4 | Done | Fuel follows miles (`ceil(miles / milesPerFuel)`), and the pace labels show miles, fuel and health per day |
+| D5 | Done | The score rewards arriving before day 21 and penalises arriving after it |
+| D6 | Done | Foraging costs 3 health each, and its yield depends on the region or stop; the prepper finds 4 more |
+| D7 | Done, as a per-item limit | Each item has a maximum (food 100, fuel 40, others 5–6); purchases and gains respect it |
+| A1 | Done | `availableActions(state)` lists every option with label, detail, enabled and reason, built from the same checks `transition` runs; an agreement test drives 200 journeys: [actions.js](../../app/src/engine/actions.js), [selectors.test.js](../../app/tests/selectors.test.js) |
+| A2 | Done, one exception | Every tunable number is in [data.js](../../app/src/data.js), and sentences take numbers from slots; a test refuses spelled-out numbers. Number-free interface sentences stay as constants in `selectors.js` (`TEXT`) and `actions.js` (`NEED_TEXT`, `CONTINUE`), by ruling |
+| A3 | Done | Encounters have weights and optional mile ranges; effects are functions looked up by id: [events.js](../../app/src/engine/events.js) |
+| A4 | Done | Saves are rebuilt field by field with repairs instead of rejections; versions 1, 2 and 3 load: [save.js](../../app/src/engine/save.js) |
+| A5 | Done | The game screen is a fixed set of regions replaced only when their HTML changed: [render.js](../../app/src/ui/render.js) |
+| A6 | Done | Storage, rendering, views, dialogs and sound are separate modules in [app/src/ui/](../../app/src/ui/). `main.js` remains the controller (about 1,200 lines) |
+| A7 | Done | One record `the-portland-trail:save` holds the game and the last leg; legacy keys migrate: [storage.js](../../app/src/ui/storage.js) |
+| E1 | Done | Scenes are WebP: 54 files, 5.66 MB, from 13.9 MB of JPEG |
+| E2 | Done | The 640px set is gone; phones get the 960px file, desktops the full one |
+| E3 | Done | The next scene, and a pending encounter's art, are preloaded during the drive |
+| E4 | Done | "Read the whole journal" opens every stored line grouped by day |
+| E5 | Done | [checksums.mjs](../../app/scripts/checksums.mjs) writes both manifests and has `--check`; CI runs the check |
+| E6 | Not done | Moving the archive needs a published GitHub release and a history rewrite to shrink the repository; both are outside what AGENTS.md allows. The owner decides |
+| S1 | Done | Prettier at 120 columns over `app/`; `npm run format:check` passes |
+| S2 | Done | `npm run typecheck` (TypeScript over JSDoc, `checkJs`) passes; the state and actions have JSDoc types |
+| S3 | Done | Ten base colours in one token block, everything else derived with `color-mix()`; a rem type scale from 0.75rem; three letter-spacings |
+| S4 | Done | Storage problems stay in the banner; everything else is a toast, phosphor for success and amber for refusals |
+| S5 | Done | The save key is `the-portland-trail:save`; the old key is migrated and removed |
+| S6 | Done, one small new case | The weather-alert fallback, the unused `sceneAlt` branch, the old route tooltips and the dead CSS are gone. The new route map's shop mark carries `title="Supplies"` inside a list with `pointer-events: none`, so that tooltip never shows; its `aria-label` carries the meaning ([trip-views.js](../../app/src/ui/trip-views.js) `SHOP_MARK`) |
+| L1 | Done | Nothing below 12px; body 14px, controls 16px, all in rem |
+| L2 | Done | Health bars are phosphor, amber or rust by band and show the number |
+| L3 | Done | Supplies use short names and are never truncated (tested at 320, 390 and 1440) |
+| L4 | Done | Scanlines, a glow on the title, typed encounter text and a blinking cursor; all stop under reduced motion |
+| L5 | Done, differently | Portland Pixel, an original face drawn for this project ([pixel-font.txt](../../app/scripts/pixel-font.txt)), instead of downloading VT323 or Silkscreen |
+| L6 | Done | A labelled route map with shop marks and a van that moves during the drive; the full list stays |
+| L7 | Partly done | The title ("GLOBAL WARMING"), victory ("WHITE STAG", "POWELL'S BOOKS"), loss and breakdown signs are repaired. Garbled decorative lettering remains in the wifi, motel, nft, food-carts, free-box and rest-stop scenes; the motel's "VAC_NCY" was kept as a broken neon sign |
+| L8 | Done | Generated tones for drive, arrival, encounter, results, purchase, death, win and loss, off by default, with a remembered toggle: [sound.js](../../app/src/ui/sound.js). Not yet heard on a device |
+| F1 | Done | After a choice the dialog shows what happened with "Keep going"; new lines appear under the scene |
+| F2 | Done | A memorial for each death with an editable epitaph; headstones on the ending |
+| F3 | Done | The forecast shows today's miles, fuel and health, the range and the next fuel stop, with a warning when fuel falls short; last resorts replace the stranding |
+| F4 | Done | Score, rank, days of rent, headstones, the whole journal, Copy result and Share, best journeys |
+| F5 | Done | The built copy registers a service worker and plays offline: [sw.js](../../app/sw.js) |
+| F6 | Done | The footer shows `v0.2.0 · <sha> · <branch> · <date>`, stamped by [build.mjs](../../app/scripts/build.mjs) and by the dev server |
+| F7 | Done | A paid motel night, a free rest at the camp, a meal at the food carts, forage yields by region |
+| F8 | Done | Heat lasts two days and raises food use and wear; drizzle lasts two days, heals a little and caps Floor it at Steady |
+| F9 | Done | Five new encounters defined as data, with weights, mile ranges and background-only responses |
+| F10 | Done | Sick travelers lose health daily until cured by kombucha or a rest at a stop |
+| F11 | Done | Shuffle names from a pool of 24 |
+| F12 | Done | Surprise me, Today's road (a daily seed) or a typed seed; the ending shows the seed with Replay this seed |
+| F13 | Done | Move a journey between devices with a `PT2.` code or a save file |
+| T1 | Done, not yet green on GitHub | [test.yml](../../.github/workflows/test.yml) runs the tests, the checksum check, Prettier and the type check. Its one run so far, on an intermediate `main`, stopped at the format check, since fixed; the final branch has not run there |
+| T2 | Done | [fuzz.test.js](../../app/tests/fuzz.test.js) runs random journeys in every `npm test` |
+| T3 | Done | Playwright is a development dependency with a lock file; the suites use installed Chrome |
+| T4 | Done | One script, [prepare-assets.py](../../app/scripts/prepare-assets.py), with pinned dependencies through uv; no `sips`, no fixed temporary path |
+| T5 | Done | The build adds `?v=<sha>` to every module and stylesheet URL and leaves the `*.json` manifests out of `dist` |
+| T6 | Done in markup | `viewport-fit=cover` is set and safe-area paddings are active. The installed app has not been tried on a device |
+
 ## Summary
 
 The rebuild stands on a sound base. The rules engine is a pure function with seeded randomness and strict, versioned saves, and it held up under stress: 410,364 random actions across 4,000 journeys produced no crash, no negative inventory, no revived traveler and no state that failed to save. Every existing test suite passes at this commit.
@@ -217,7 +296,7 @@ Ordered by value for effort.
 
 ## Reproduce
 
-Run from the project root. Node 22 is enough; nothing needs installing. The balance run takes about 40 seconds.
+Run from the project root of a checkout at commit `3e02b8a` (for example `git worktree add ../portland-trail-3e02b8a 3e02b8a`); the scripts no longer run against the 0.2 engine. Node 22 is enough; nothing needs installing. The balance run takes about 40 seconds.
 
 ```bash
 cd "/Users/ama/The Portland Trail"

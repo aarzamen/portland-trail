@@ -32,4 +32,4 @@ Instructions for coding agents, including how to add new scenes, are in [AGENTS.
 
 ## Status
 
-Version 0.2 is being built from the October 1 code review. The rules engine, art pipeline, typeface, offline build and new interface are done. Endings and records, the visual pass with sound, and final documentation are in progress. Physical-iPhone testing and public hosting have not been done.
+Version 0.2.0 is complete: it implements the October 1 code review, item by item (see the status table at the top of the review). The rules engine, art pipeline, typeface, offline build, interface, endings and records, the visual pass with sound, and the documentation are done; the [validation record](docs/validation/2026-10-01-review-implementation.md) lists what was checked. Physical-iPhone testing, a WebKit run and public hosting have not been done.

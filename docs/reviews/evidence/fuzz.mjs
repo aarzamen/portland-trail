@@ -1,3 +1,4 @@
+// Historical: reproduces the review findings at commit 3e02b8a; it no longer runs against the current (0.2) engine.
 // Review evidence, 1 October 2026: random-action fuzz of the rules engine.
 // The engine must never throw, never mutate its input, and every state it
 // produces must survive a save round trip. Run from the project root:

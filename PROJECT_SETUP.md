@@ -1,16 +1,14 @@
 # The Portland Trail project setup
 
-Updated October 1, 2026. Project root: `/Users/ama/The Portland Trail` on the MacBook Pro.
+Updated October 2, 2026. Project root: `/Users/ama/The Portland Trail` on the MacBook Pro.
 
 ## Current state
 
-The first playable rebuild lives in [app/](app/). It is a static browser game with no runtime dependencies or backend. The original audit, source snapshots, and graphics masters are unpacked under [docs/handoff/](docs/handoff/). Their evidence and image bytes remain unchanged. The archive's duplicate AGENTS.md was removed at the user's request; the root [AGENTS.md](AGENTS.md) remains authoritative.
+Version 0.2.0 of the game lives in [app/](app/). It is a static browser game with no runtime dependencies or backend. It implements the [code and architecture review](docs/reviews/2026-10-01-code-and-architecture-review.md) as designed in [the 0.2 spec](docs/superpowers/specs/2026-10-01-review-implementation-design.md); the review opens with a status row for each item, and the [0.2 validation record](docs/validation/2026-10-01-review-implementation.md) lists the checks and the limits. The original audit, source snapshots, and graphics masters are unpacked under [docs/handoff/](docs/handoff/). Their evidence and image bytes remain unchanged. The archive's duplicate AGENTS.md was removed at the user's request; the root [AGENTS.md](AGENTS.md) remains authoritative.
 
-The project is tracked on `main` in the public GitHub repository [aarzamen/portland-trail](https://github.com/aarzamen/portland-trail). The `origin` remote uses SSH; `feat/playable-rebuild` preserves the last development checkpoint. The existing private `aarzamen/The-Portland-Trail` repository is separate. The original staging README and local-image status are preserved as `docs/handoff/README.archive-v2.md` and `docs/handoff/LOCAL_IMAGE_REVIEW.archive-v2.md`. The original setup document remains inside the handoff ZIP.
+The project is tracked on `main` in the public GitHub repository [aarzamen/portland-trail](https://github.com/aarzamen/portland-trail). The `origin` remote uses SSH; `feat/playable-rebuild` preserves the first development checkpoint, and version 0.2 was built on `feat/review-implementation`. The existing private `aarzamen/The-Portland-Trail` repository is separate. The original staging README and local-image status are preserved as `docs/handoff/README.archive-v2.md` and `docs/handoff/LOCAL_IMAGE_REVIEW.archive-v2.md`. The original setup document remains inside the handoff ZIP.
 
-The roadtrip update adds Auto-buy essentials, animated travel and daily summaries, four new illustrated stops (11 locations total), and desktop/home-screen icons. Save version 2 imports the original version 1 journeys without resetting progress. See the [update validation](docs/validation/2026-10-01-roadtrip-update.md).
-
-The [iPhone polish pass](docs/validation/2026-10-01-iphone-polish.md) adds compact portrait and landscape playback, 44px touch controls, 16px editable text, three new scenes, brief atmosphere effects, and smaller phone images. Safari in the iPhone 17 Pro simulator was checked alongside WebKit and Chrome at 11 viewports. Physical iPhone performance remains untested.
+What 0.2 changed, in short: a rules engine that tells the interface what it can do (save version 3, older saves still load), every number in [data.js](app/src/data.js), fourteen encounters, deaths with epitaphs, last resorts instead of an empty-tank loss, scored endings with headstones and records, moving a journey between devices, a token-based look with the in-house Portland Pixel typeface, a route map, optional sound, WebP art from one asset script, a stamped build that plays offline, and Prettier, type checking, a checksum script and CI. Earlier records: the [first rebuild](docs/validation/2026-10-01.md), the [roadtrip update](docs/validation/2026-10-01-roadtrip-update.md) and the [iPhone polish pass](docs/validation/2026-10-01-iphone-polish.md).
 
 ## Run and verify
 
@@ -21,31 +19,50 @@ cd "/Users/ama/The Portland Trail/app"
 npm run dev
 ```
 
-Open [the local game](http://127.0.0.1:4173). Keep that terminal running. Saves belong to that browser and origin; switching ports or browsers creates a separate save area. `npm start` builds a stamped copy into `app/dist/` and serves that instead; the built copy registers a service worker and plays offline.
+Open [the local game](http://127.0.0.1:4173). Keep that terminal running. Saves belong to that browser and origin; switching ports or browsers creates a separate save area. `npm start` builds a stamped copy into `app/dist/` and serves that instead; the built copy registers a service worker and plays offline. In a second checkout or worktree, start servers with `PORT=0` (a free port is chosen and printed) so they never collide with the main checkout on 4173.
 
 ```bash
 cd "/Users/ama/The Portland Trail/app"
-npm test               # rules, fuzz and balance tests, no install needed
+npm test               # rules, encounters, saves, fuzz, balance and tooling tests; no install needed
 npm ci                 # once: Playwright, Prettier, TypeScript
 npm run test:browser   # builds, starts servers on free ports, runs every browser suite in installed Chrome
+npm run build          # stamped, versioned copy in app/dist/
+npm run balance        # win rates of three bots over 2,000 seeds per background
+npm run format         # Prettier (npm run format:check only reports)
+npm run typecheck      # TypeScript over the JSDoc types
+npm run assets         # regenerate every file in app/assets from the preserved originals (needs uv)
 npm run checksums      # refresh checksums.json and docs/handoff/checksums.json before merging to main
 ```
 
-Browser evidence is written beneath `app/test-results/`, which Git ignores. Regenerating art needs [uv](https://docs.astral.sh/uv/): `npm run assets`.
+`npm run test:browser -- layout` runs only the suites whose names match. Browser evidence and screenshots are written beneath `app/test-results/`, which Git ignores. Asset previews go to `app/test-results/assets/`. `npm run assets` needs [uv](https://docs.astral.sh/uv/); its Python dependencies are pinned inside the script. `npm run checksums:check` (or `node app/scripts/checksums.mjs --check` from the root) reports stale, missing and extra entries without changing anything; CI runs it.
 
-Version 0.2 is in progress on the `feat/review-implementation` branch and merged to `main` as it is reviewed; see [the plan](docs/superpowers/plans/2026-10-01-review-implementation.md) and [AGENTS.md](AGENTS.md).
+CI is [.github/workflows/test.yml](.github/workflows/test.yml): on every push and pull request it runs `npm test`, the checksum check, `npm ci`, the format check and the type check with Node 22.
 
 ## Development map
 
-- [Game data](app/src/data.js): professions, items, route, paces, rations, encounters.
-- [Game rules](app/src/engine.js): pure transitions, seeded randomness, versioned save validation.
-- [Browser interface](app/src/main.js) and [styles](app/src/styles.css): setup, shops, travel, dialogs, endings, local saves.
-- [Asset manifest](app/assets/manifest.json): source paths, hashes, extraction rectangles, and output sizes.
-- [Validation record](docs/validation/2026-10-01.md): checks, outcomes, and limits.
-- [Code and architecture review](docs/reviews/2026-10-01-code-and-architecture-review.md): open defects, balance measurements, and recommended order of work, with [runnable evidence](docs/reviews/evidence/).
+- [Game data](app/src/data.js): every tunable number and every sentence: rules, paces, rations, items, backgrounds and abilities, stops, regions, encounters, deaths, ranks, names.
+- [Engine facade](app/src/engine.js) and [app/src/engine/](app/src/engine/): `random.js` (generator, seeds), `state.js` (new game, journal, health, days, the van), `actions.js` (the action table, `transition`, `availableActions`), `events.js` (encounter choice and effects), `selectors.js` (forecast, status, shop rows, Auto-buy plan, summary, route), `save.js` (save versions 1–3).
+- [Controller](app/src/main.js) and [app/src/ui/](app/src/ui/): `storage.js` (the save record, records, settings, transfer codes), `render.js` (region patching and focus), `views.js` (title and setup), `trip-views.js` (the game screen and the ending), `dialogs.js` (encounter, memorial, journal, transfer, confirm), `sound.js` (generated tones).
+- [Styles](app/src/styles.css): tokens, type scale, components; the [Portland Pixel glyphs](app/scripts/pixel-font.txt) are the source of the heading face.
+- [Build stamp](app/src/build-info.js), [service worker](app/sw.js), [web manifest](app/manifest.webmanifest).
+- Scripts in [app/scripts/](app/scripts/): `serve.mjs`, `build.mjs`, `test-browser.mjs`, `balance.mjs`, `checksums.mjs`, `prepare-assets.py`, `pixelfont.py`.
+- Tests in [app/tests/](app/tests/): `*.test.js` for the Node test runner; `browser-*.mjs` suites (encounters, flow, journey, layout, look, offline) with the shared helper in `support/browser.mjs`.
+- [Asset manifest](app/assets/manifest.json): source paths and hashes, crops, sign repairs, sizes and output hashes for every derived file.
+- Records: the [0.2 validation record](docs/validation/2026-10-01-review-implementation.md), the [balance measurement](docs/validation/2026-10-01-balance.md), the [review](docs/reviews/2026-10-01-code-and-architecture-review.md) with its historical [evidence scripts](docs/reviews/evidence/) (they run only at commit `3e02b8a`), the [design](docs/superpowers/specs/2026-10-01-review-implementation-design.md) and the [plan](docs/superpowers/plans/2026-10-01-review-implementation.md).
 
-The travel screen animates the existing van over illustrated scenery. The [location artwork](docs/handoff/graphics-v2/README.md) and [river, city and heatwave artwork](docs/handoff/graphics-v3/README.md) preserve the generated masters and exact prompts. A strict pixel palette, physical-device Safari validation, and hosting remain future work. Phone scene variants can be regenerated on macOS with `node app/scripts/prepare-mobile-art.mjs` from the project root; they are already included in the app and do not require regeneration to build.
+The preserved masters are documented in [location artwork](docs/handoff/graphics-v2/README.md) and [river, city and heatwave artwork](docs/handoff/graphics-v3/README.md). Those two READMEs still mention the old JPEG exports and scripts; [prepare-assets.py](app/scripts/prepare-assets.py) and the asset manifest replaced them. New art goes through the steps in the "Adding new scenes and artwork" section of [AGENTS.md](AGENTS.md).
 
-## Desktop and home-screen icon
+## Offline and the installed app
 
-The game supplies browser icons, a 180px Apple touch icon, and 192/512px app icons through a web manifest. Launch paths are relative, including when hosted in a subdirectory. The app still needs its server running; there is no offline cache. A shortcut saved before this update may need to be removed and added again to refresh its cached icon. Native OS installation has not been tested.
+The game supplies browser icons, a 180px Apple touch icon, and 192/512px app icons through a web manifest. Launch paths are relative, including when hosted in a subdirectory. `index.html` sets `viewport-fit=cover`, so the safe-area paddings take effect in an installed app with a translucent status bar.
+
+Only a built copy (`npm start`, or `app/dist/` on any static host) registers the service worker. It precaches the page, code, icons, sprites and font, and caches the scenes for the device's image size in the background; "Ready to play offline" appears once that finishes. Code and pages are fetched network-first, so a new build replaces an old one on the next load; each build has its own cache. `npm run dev` registers no worker and removes one left by a built copy on the same port. A shortcut saved before 0.2 may need to be removed and added again to refresh its icon.
+
+## What remains
+
+- Physical iPhone play, the installed home-screen app on a device, and hearing the sound on a device.
+- A WebKit run (it needs a browser download) and the Safari check in the iOS Simulator.
+- A green CI run on GitHub for this version.
+- Garbled decorative lettering in six older scenes, new art for the regions and encounters that reuse road scenes (see AGENTS.md), and one ending line (review B18).
+- Careful play almost never loses a traveler; more risk would need rule changes, listed in the [balance note](docs/validation/2026-10-01-balance.md).
+- Moving the handoff archive to a GitHub release (review E6) and public hosting are the owner's decisions.

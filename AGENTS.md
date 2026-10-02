@@ -8,7 +8,7 @@ The user-designated project root is `/Users/ama/The Portland Trail` on ama's Mac
 
 Preserve the premise: a funny Oregon Trail-inspired road trip to Portland, five named travelers, four satirical backgrounds, a scruffy loaded van, scarce resources and absurd Pacific Northwest encounters. Preserve the green handheld-game / terminal visual identity. The delivered audit and artwork provide a starting point, not a requirement to reproduce every defect or accept every proposal.
 
-The game is a working static browser game in `app/` (version 0.2.0 in progress). A request to build, fix, continue an approved implementation, or publish authorizes the work necessary to complete that request. Do not infer a deployment request from the mere presence of this file.
+The game is a working static browser game in `app/` (version 0.2.0). A request to build, fix, continue an approved implementation, or publish authorizes the work necessary to complete that request. Do not infer a deployment request from the mere presence of this file.
 
 ## Work autonomously within the user's task
 

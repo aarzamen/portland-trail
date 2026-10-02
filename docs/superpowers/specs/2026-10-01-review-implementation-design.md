@@ -69,13 +69,13 @@ Nothing that can be derived is stored: the current stop comes from `distance` an
 
 ### 3.2 Numbers
 
-Starting values. Task 3 retunes the ones marked (T) against the targets in 3.11 and may not change the others.
+Task 3 retuned the numbers marked (T) against the targets in 3.11 and changed no others. The values below are the final ones for 0.2.0. Three changed from their starting values: `eventChance` 0.3 → 0.5, the heatwave's `damage` 6 → 16 and the Wi-Fi outage's `influencerDamage` 8 → 5 (see the [balance validation](../../validation/2026-10-01-balance.md)). `app/src/data.js` is authoritative; where this document and `data.js` disagree, `data.js` holds the number the game uses.
 
 ```js
 export const RULES = {
   goalMiles: 1000,
   journalLimit: 200,
-  eventChance: 0.3,            // (T) per driving day
+  eventChance: 0.5,            // (T) per driving day
   starvationDamage: 9,         // (T)
   sickDamage: 3,               // (T) per day while sick
   roadRest: { heal: 6 },       // (T)
@@ -285,9 +285,9 @@ Effects. Numbers (T) live on the encounter's data object under the names in brac
   - `tow` "Pay a tow truck" (needs money {towCost: 90}): "A tow truck named Destiny hauled the van to a mechanic for ${money}."
   - `kick` "Try percussive encouragement": a roll below {kickChance: 0.45} works: "A gentle kick worked. Nobody understands why." Otherwise a day passes (not traveling) and every living traveler loses {kickDamage: 5} (cause `breakdown`): "The kick cost a day and {damage} health per survivor."
 - `good_weather`: weather becomes drizzle. In phase `location`: gain `RULES.drizzle.bonusFuel` fuel, "Arriving early saved {fuel} fuel before the next stretch." Otherwise the van moves `RULES.drizzle.bonusMiles` miles with normal arrival and win handling, "Clear roads add {miles} miles."
-- `bad_weather`: every living traveler loses {damage: 6} (cause `heat`); weather becomes heat. "The heatwave costs every survivor {damage} health and will last {days} more days."
+- `bad_weather`: every living traveler loses {damage: 16} (cause `heat`); weather becomes heat. "The heatwave costs every survivor {damage} health and will last {days} more days."
 - `found_supplies`: gain {food: 8} food and {fuel: 2} fuel. "The free box held {food} food and {fuel} fuel."
-- `wifi_outage`: every living traveler loses {damage: 3}, or {influencerDamage: 8} when the profession is `influencer` (cause `wifi`); `flags.wifiDownDay = day`. "The Wi-Fi outage drained the party’s spirit."
+- `wifi_outage`: every living traveler loses {damage: 3}, or {influencerDamage: 5} when the profession is `influencer` (cause `wifi`); `flags.wifiDownDay = day`. "The Wi-Fi outage drained the party’s spirit."
 - `pandemic_death` (D2: answerable; nobody dies of a roll the player could not influence):
   - `kombucha` "Dose everyone with kombucha" (needs kombucha {kombuchaCost: 2}): every living traveler loses {dosedDamage: 6} (cause `pandemic`). "It took {bottles} {bottle|bottles} of kombucha and a lot of confidence to hold the outbreak to {damage} health each."
   - `quarantine` "Quarantine in the van": {quarantineDays: 2} days pass (not traveling), every living traveler loses {quarantineDamage: 8} (cause `pandemic`) and sickness is cured. "A {days}-day quarantine cost {damage} health each and most of the snacks."

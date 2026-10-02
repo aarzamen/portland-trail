@@ -1,3 +1,4 @@
+// Historical: reproduces the review findings at commit 3e02b8a; it no longer runs against the current (0.2) engine.
 // Review evidence, 1 October 2026: play thousands of seeded journeys with
 // simple bots through the real engine and count how each one ends.
 // Run from the project root (optional argument: seeds per background):

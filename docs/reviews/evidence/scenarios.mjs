@@ -1,3 +1,4 @@
+// Historical: reproduces the review findings at commit 3e02b8a; it no longer runs against the current (0.2) engine.
 // Review evidence, 1 October 2026: one short reproduction per rules finding.
 // Each section prints what the engine does today. Run from the project root:
 //   node docs/reviews/evidence/scenarios.mjs
