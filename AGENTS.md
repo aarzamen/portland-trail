@@ -75,7 +75,7 @@ New art must stay inside the existing style and contracts. Read `docs/handoff/AS
 5. **Use.** Point a stop, region or encounter at the scene id in `app/src/data.js` (`scene: '<id>'`). New encounters are data: an entry in `EVENTS` with weight, optional `where` range, choices and numbers, plus its effect in `app/src/engine/events.js` and a test in `app/tests/events.test.js`; keep `npm run balance` inside its targets.
 6. **Check.** `npm test`, `npm run test:browser`, then look at the scene in the game at 390px and 1440px.
 
-Good first candidates: the regions `pines` and `outskirts` and the encounters `sasquatch`, `toll_troll` and `brunch_line` currently reuse road scenes.
+Good first candidates: the regions `pines` and `outskirts` and the encounters `sasquatch`, `toll_troll` and `brunch_line` currently reuse road scenes. Their full brief, with the shared style block, steering words, a prompt per scene and an acceptance checklist, is [docs/art/2026-10-02-scene-brief-v4.md](docs/art/2026-10-02-scene-brief-v4.md).
 
 ## Read and maintain these documents
 

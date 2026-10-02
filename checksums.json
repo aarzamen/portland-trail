@@ -1,7 +1,7 @@
 {
   ".github/workflows/test.yml": "86585024baea3a973f838c08e330c6c33e9df822a9d61baa523a1f3b26fdc9af",
   ".gitignore": "675ad135387b3d45d630a79501a1d67cff9852f9d8ecf8499c1fdbb597e12df5",
-  "AGENTS.md": "8f360f0dbc5db341ab9806fa4fb41fb1d33d25b6e99b10c7dd912e2d17873358",
+  "AGENTS.md": "53804324709b5265e273b84c3b340fc1f9ca2ed8cf209498ac70c65a67ac42c0",
   "CLAUDE.md": "9d3ffdaff85a066f867bbbd50620f74299a7779681e7fbd3af77ae61d14403a9",
   "PROJECT_SETUP.md": "78113f3b78688bea1770cf3703e05ec326b67e63f0f12bf1d269c5f37f0365c2",
   "Portland_Trail_Project_Handoff_v2.zip": "d603b0996436f73954b84cb7c36b7280604473a41f688de5699373169a70d753",
@@ -128,6 +128,7 @@
   "app/tests/shop.test.js": "0eea0bcce15335c43b4e955b02b89c9454e16ec2ba58eda44193df350d4a9c56",
   "app/tests/support/browser.mjs": "5f61de13541dbf4daf87d8247ea33cf6c352cddd071bb9f02e1dfc054b97a206",
   "app/tests/tooling.test.js": "3d9af2e7e1f5104a603ac5a7ff9793b435865986330cd579dc0fed2d74832171",
+  "docs/art/2026-10-02-scene-brief-v4.md": "03317251c45ee7d4fed7a810ad54c2da67a86a39b17a7e078db4019061d5578e",
   "docs/handoff/ASSET_BRIEF.txt": "08c2c3847b84f979c8a59c40397ad3232e3e311da0731b638458d5be649f01d2",
   "docs/handoff/HANDOFF_TO_CODEX.txt": "6a87d81c17c65b455fb4f952f0fd25963c5e1a34624b19343137074f5e1dcc72",
   "docs/handoff/LOCAL_IMAGE_REVIEW.archive-v2.md": "26aae00c96d4a66b51e7ee74e3fedb408f8a6c161028507d4055da812fc5d193",
