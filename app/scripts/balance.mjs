@@ -11,6 +11,7 @@ import { availableActions, createGame, forecast, seedFromText, summarize, transi
 import { EVENTS, PROFESSIONS, RATIONS } from '../src/data.js';
 
 const MAX_STEPS = 1500;
+const PARTY = 5;
 const EVENT_BY_ID = new Map(EVENTS.map(event => [event.id, event]));
 
 // --- Helpers a bot may use: what is on offer, and what the screen shows ------------------------
@@ -244,14 +245,26 @@ export const sampleSeed = n => seedFromText(`balance-${n}`);
  * @param {number} seeds  seeds per background
  * @returns {Record<string, Record<string, { journeys: number, wins: number, winRate: number,
  *   losses: Record<string, number>, meanDay: number, meanAlive: number, meanScore: number, meanCash: number,
- *   outbreaks: number, outbreakLosses: number }>>}  by bot id, then by background id
+ *   bereaved: number, outbreaks: number, outbreakLosses: number }>>}  by bot id, then by background id;
+ *   `bereaved` is the share of journeys in which at least one traveler died
  */
 export function measure(seeds) {
   const results = {};
   for (const bot of BOTS) {
     results[bot.id] = {};
     for (const { id: profession } of PROFESSIONS) {
-      const tally = { journeys: 0, wins: 0, losses: {}, day: 0, alive: 0, score: 0, cash: 0, outbreaks: 0, lost: 0 };
+      const tally = {
+        journeys: 0,
+        wins: 0,
+        losses: {},
+        day: 0,
+        alive: 0,
+        score: 0,
+        cash: 0,
+        bereaved: 0,
+        outbreaks: 0,
+        lost: 0,
+      };
       for (let n = 1; n <= seeds; n++) {
         const run = play(sampleSeed(n), profession, bot);
         tally.journeys += 1;
@@ -259,6 +272,7 @@ export function measure(seeds) {
         tally.alive += run.alive;
         tally.score += run.score;
         tally.cash += run.money;
+        if (run.alive < PARTY) tally.bereaved += 1;
         if (run.outbreak) tally.outbreaks += 1;
         if (run.outcome === 'won') {
           tally.wins += 1;
@@ -277,6 +291,7 @@ export function measure(seeds) {
         meanAlive: mean(tally.alive),
         meanScore: mean(tally.score),
         meanCash: mean(tally.cash),
+        bereaved: mean(tally.bereaved),
         outbreaks: tally.outbreaks,
         outbreakLosses: tally.lost,
       };
@@ -308,8 +323,10 @@ export function formatTables(results, seeds) {
   const lines = [];
   for (const bot of BOTS) {
     lines.push(`### ${bot.label} (${seeds} seeds per background)`, '');
-    lines.push('| background | won | losses by last cause of death | mean day | mean alive | mean score | mean cash |');
-    lines.push('|---|---:|---|---:|---:|---:|---:|');
+    lines.push(
+      '| background | won | lost anyone | losses by last cause of death | mean day | mean alive | mean score | mean cash |',
+    );
+    lines.push('|---|---:|---:|---|---:|---:|---:|---:|');
     let outbreaks = 0;
     let outbreakLosses = 0;
     for (const [profession, row] of Object.entries(results[bot.id])) {
@@ -318,7 +335,8 @@ export function formatTables(results, seeds) {
         .map(([cause, count]) => `${cause} ${percent(count / row.journeys)}`)
         .join(', ');
       lines.push(
-        `| ${profession} | ${percent(row.winRate)} | ${causes || '—'} | ${row.meanDay.toFixed(1)} | ` +
+        `| ${profession} | ${percent(row.winRate)} | ${percent(row.bereaved)} | ${causes || '—'} | ` +
+          `${row.meanDay.toFixed(1)} | ` +
           `${row.meanAlive.toFixed(2)} | ${Math.round(row.meanScore)} | $${Math.round(row.meanCash)} |`,
       );
       outbreaks += row.outbreaks;
