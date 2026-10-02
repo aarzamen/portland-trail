@@ -18,6 +18,8 @@ For a publication, push the exact clean source commit to both repositories befor
 
 The home-screen icon comes from the preserved v2 icon master through the asset pipeline: `index.html` links the 180px Apple touch icon, and `manifest.webmanifest` lists the 192/512px app icons. Verify their public URLs, MIME types and dimensions after publishing. Do not claim a physical phone installation from browser or manifest checks.
 
+On October 2, 2026, the user confirmed successful testing on their physical iPhone 15 Pro after extensive prior phone testing. Phone play is confirmed by the user. Preserve this evidence in future handoffs instead of listing physical phone play as unverified; repeat testing only when a new change or reported issue warrants it.
+
 Current publication evidence and remaining limits are in [docs/validation/2026-10-02-sites-publication.md](docs/validation/2026-10-02-sites-publication.md). Start the next session with [docs/handoff/SESSION_CLOSEOUT.md](docs/handoff/SESSION_CLOSEOUT.md). No new deployment or device work is implied by the handoff.
 
 ## Work autonomously within the user's task

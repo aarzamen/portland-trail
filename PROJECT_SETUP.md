@@ -58,14 +58,13 @@ The preserved masters are documented in [location artwork](docs/handoff/graphics
 
 ## Offline and the installed app
 
-The game supplies browser icons, a 180px Apple touch icon, and 192/512px app icons through a web manifest. Their public URLs decode at the declared sizes and match the built files, and the public page links them correctly. This verifies the home-screen configuration; physical installation remains a separate check. Launch paths are relative, including when hosted in a subdirectory. `index.html` sets `viewport-fit=cover`, so the safe-area paddings take effect in an installed app with a translucent status bar.
+The game supplies browser icons, a 180px Apple touch icon, and 192/512px app icons through a web manifest. Their public URLs decode at the declared sizes and match the built files, and the public page links them correctly. This verifies the home-screen configuration. The user also confirmed successful testing on their physical iPhone 15 Pro on October 2; see the [publication record](docs/validation/2026-10-02-sites-publication.md). Launch paths are relative, including when hosted in a subdirectory. `index.html` sets `viewport-fit=cover`, so the safe-area paddings take effect in an installed app with a translucent status bar.
 
 Only a built copy (`npm start`, or `app/dist/` on any static host) registers the service worker. It precaches the page, code, icons, sprites and font, and caches the scenes for the device's image size in the background; "Ready to play offline" appears once that finishes. Code and pages are fetched network-first, so a new build replaces an old one on the next load; each build has its own cache. `npm run dev` registers no worker and removes one left by a built copy on the same port. A shortcut saved before 0.2 may need to be removed and added again to refresh its icon.
 
 ## What remains
 
-- Physical iPhone play, the installed home-screen app on a device, and hearing the sound on a device.
-- A WebKit run (it needs a browser download) and the Safari check in the iOS Simulator.
+- An optional automated WebKit run (it needs a browser download) and Safari check in the iOS Simulator; physical iPhone play is already confirmed by the user.
 - Garbled decorative lettering in six older scenes, new art for the regions and encounters that reuse road scenes (see AGENTS.md), and one ending line (review B18).
 - Careful play almost never loses a traveler; more risk would need rule changes, listed in the [balance note](docs/validation/2026-10-01-balance.md).
 - Moving the handoff archive to a GitHub release (review E6) remains the owner's decision. Public hosting is complete at the Site linked above.

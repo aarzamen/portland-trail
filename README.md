@@ -38,4 +38,4 @@ Instructions for coding agents, including how to add new scenes, are in [AGENTS.
 
 ## Status
 
-Version 0.2.0 implements the October 1 code review, item by item (see the status table at the top of the review). The [implementation validation](docs/validation/2026-10-01-review-implementation.md), [scene validation](docs/validation/2026-10-02-scene-art-v4.md), [splash validation](docs/validation/2026-10-02-splash-v5.md), and [public hosting validation](docs/validation/2026-10-02-sites-publication.md) list the checks and their limits. GitHub CI passes. Physical-iPhone installation/play and a WebKit run remain unverified.
+Version 0.2.0 implements the October 1 code review, item by item (see the status table at the top of the review). The [implementation validation](docs/validation/2026-10-01-review-implementation.md), [scene validation](docs/validation/2026-10-02-scene-art-v4.md), [splash validation](docs/validation/2026-10-02-splash-v5.md), and [public hosting validation](docs/validation/2026-10-02-sites-publication.md) list the checks and their limits. GitHub CI passes. On October 2, the user confirmed that the game works on their physical iPhone 15 Pro.

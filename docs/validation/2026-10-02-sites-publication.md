@@ -27,4 +27,10 @@ The [public journey smoke check](sites-publication/public-flow.json) used the vi
 - Project instructions, setup, README and handoff index identify the public Site and preserved image sources. The [session closeout](../handoff/SESSION_CLOSEOUT.md) records remaining follow-ups.
 - Checksum manifests are refreshed before each task-owned commit. Final publication is built from the pushed clean `main` snapshot; final status is checked in Sites and against the public build stamp.
 
-The phone checks are viewport emulation, not a physical iPhone installation. Physical home-screen installation/play, WebKit, and hearing sound on a device remain unverified. No signing/account changes, schedules, private network bindings or custom domains were created.
+No signing/account changes, schedules, private network bindings or custom domains were created.
+
+## User-confirmed physical phone testing
+
+After publication on October 2, the user reported: “I just tested it on my iPhone 15 Pro, and it's fine.” They also described extensive prior phone testing. This confirms successful physical iPhone 15 Pro use and clears phone play from the outstanding handoff checks.
+
+The automated browser receipts above describe viewport emulation; the physical-device result is direct user evidence. The report does not enumerate installation mode, audio or offline steps separately. An automated WebKit run remains optional additional coverage, not a blocker to this release.
