@@ -2,12 +2,13 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <meta name="theme-color" content="#07110a" />
     <meta name="description" content="Five travelers, one unreliable van, and a thousand miles to Portland." />
     <meta name="application-name" content="The Portland Trail" />
     <meta name="apple-mobile-web-app-title" content="Portland Trail" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     <title>The Portland Trail</title>
     <link rel="manifest" href="./manifest.webmanifest" />
@@ -20,27 +21,28 @@
   <body>
     <div class="app-shell">
       <header class="masthead">
-        <a class="brand" href="#top" aria-label="The Portland Trail home">The Portland Trail <span aria-hidden="true">✳</span></a>
+        <a class="brand" href="./" data-key="home" aria-label="The Portland Trail, back to the title"
+          >The Portland Trail <span aria-hidden="true">✳</span></a
+        >
         <div class="masthead-right">
           <span id="save-status" class="save-status" role="status" aria-live="polite"></span>
-          <button id="new-journey-header" class="text-button" type="button" hidden>New journey</button>
+          <button id="new-journey-header" class="text-button" type="button" data-key="new-header" hidden>
+            New journey
+          </button>
         </div>
       </header>
-      <div id="notice" class="notice" role="alert" hidden></div>
+      <div id="banner" class="notice" role="alert" hidden></div>
       <main id="app" tabindex="-1"></main>
-      <footer class="site-footer"><span>One thousand miles. Questionable preparation.</span><span>Made for the long way north.</span></footer>
+      <footer class="site-footer">
+        <span>One thousand miles. Questionable preparation.</span
+        ><span id="build-stamp" class="build-stamp">v0.2.0 · dev</span>
+      </footer>
     </div>
+    <div id="toasts" class="toast-region"></div>
     <dialog id="event-dialog" class="game-dialog" aria-labelledby="event-title"></dialog>
-    <dialog id="replace-dialog" class="game-dialog confirm-dialog" aria-labelledby="replace-title">
-      <div class="dialog-inner">
-        <p class="overline">Saved journey</p>
-        <h2 id="replace-title">Start over?</h2>
-        <p>Your current journey will be replaced when the new crew leaves the city.</p>
-        <div class="dialog-actions">
-          <button type="button" class="button button-quiet" data-confirm="cancel">Keep playing</button>
-          <button type="button" class="button button-primary" data-confirm="replace">Start a new journey</button>
-        </div>
-      </div>
-    </dialog>
+    <dialog id="memorial-dialog" class="game-dialog memorial-dialog" aria-labelledby="memorial-title"></dialog>
+    <dialog id="confirm-dialog" class="game-dialog confirm-dialog" aria-labelledby="confirm-title"></dialog>
+    <dialog id="journal-dialog" class="game-dialog"></dialog>
+    <dialog id="transfer-dialog" class="game-dialog"></dialog>
   </body>
 </html>

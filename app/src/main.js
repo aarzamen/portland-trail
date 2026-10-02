@@ -1,646 +1,851 @@
-import { PROFESSIONS, ITEMS, LOCATIONS, EVENTS, PACES, RATIONS, DEFAULT_NAMES } from './data.js';
-import { createGame, transition, serializeGame, deserializeGame, recommendSupplies } from './engine.js';
+// The controller (spec 9). It keeps the journey, sends every engine action through one dispatch path, saves,
+// changes screens through one show path, and asks the views to draw. It holds no rules: what can be done, what
+// it costs and why it is refused all come from the engine.
 
-const SAVE_KEY = 'the-portland-trail:v1';
-const LEG_KEY = 'the-portland-trail:last-leg:v1';
-const DRIVE_DURATION = 950;
-const app = document.querySelector('#app');
-const notice = document.querySelector('#notice');
-const saveStatus = document.querySelector('#save-status');
-const newJourneyHeader = document.querySelector('#new-journey-header');
-const eventDialog = document.querySelector('#event-dialog');
-const replaceDialog = document.querySelector('#replace-dialog');
+import { BUILD } from './build-info.js';
+import { DEFAULT_NAMES, EVENTS, LIMITS, LOCATIONS, NAME_POOL, PROFESSIONS, REGIONS, RULES } from './data.js';
+import {
+  availableActions,
+  createGame,
+  currentStop,
+  dailySeed,
+  forecast,
+  lastStop,
+  nextStop,
+  paceOptions,
+  rationOptions,
+  recommendSupplies,
+  regionAt,
+  seedFromText,
+  shopItems,
+  statusOf,
+  summarize,
+  transition,
+  weatherName,
+} from './engine.js';
+import { confirmDialog, encounterDialog, memorialDialog } from './ui/dialogs.js';
+import { drawScreen, forget, patchRegions } from './ui/render.js';
+import * as sound from './ui/sound.js';
+import { PROBLEMS, SAVE_KEY, loadJourney, readSettings, saveJourney } from './ui/storage.js';
+import { TRIP_SHELL, tripRegions } from './ui/trip-views.js';
+import {
+  PHONE_ART,
+  SUPPLY_IDS,
+  backgroundView,
+  crewView,
+  sceneUrl,
+  stampText,
+  supplyLabel,
+  formatNumber,
+  titleView,
+} from './ui/views.js';
 
-const resourceLabels = {
-  money: 'Cash', food: 'Food', fuel: 'Fuel', ammo: 'Seed bombs',
-  parts: 'Repair supplies', kombucha: 'Kombucha', nft: 'NFTs',
-};
-const resourceIds = ['money', 'food', 'fuel', 'ammo', 'parts', 'kombucha', 'nft'];
-const abilityLabels = {
-  influencer: 'Run a collab', dev: 'Salvage parts',
-  prepper: 'Scout for food', barista: 'Brew coffee',
-};
+const DRIVE_MS = 950;
+const TOAST_MS = 5000;
+const CUE_MS = 2400;
+const TYPE_MS = 18;
+const PRIMARY = '[data-key="travel"]';
+const EVENT_FOCUS = '[data-key="event:done"], #event-dialog [data-key^="event:"]:not([aria-disabled="true"])';
 
-let savedState = null;
-let state = null;
-let screen = 'title';
-let selectedProfession = PROFESSIONS[0]?.id ?? null;
-let flash = '';
-let storageWarning = '';
-let returnFocus = null;
-let lastEventToken = null;
+const app = /** @type {HTMLElement} */ (document.querySelector('#app'));
+const banner = /** @type {HTMLElement} */ (document.querySelector('#banner'));
+const toastRegion = /** @type {HTMLElement} */ (document.querySelector('#toasts'));
+const saveStatus = /** @type {HTMLElement} */ (document.querySelector('#save-status'));
+const headerNew = /** @type {HTMLButtonElement} */ (document.querySelector('#new-journey-header'));
+const eventDialog = /** @type {HTMLDialogElement} */ (document.querySelector('#event-dialog'));
+const memorialElement = /** @type {HTMLDialogElement} */ (document.querySelector('#memorial-dialog'));
+const confirmElement = /** @type {HTMLDialogElement} */ (document.querySelector('#confirm-dialog'));
+
+// The stops as the route list shows them.
+const STOPS = LOCATIONS.map(stop => ({
+  id: stop.id,
+  name: stop.name,
+  shortName: stop.shortName,
+  miles: stop.miles,
+  kind:
+    stop.miles >= RULES.goalMiles
+      ? 'Destination'
+      : stop.activities.includes('shop')
+        ? 'Supplies'
+        : stop.activities.includes('rest')
+          ? 'Rest stop'
+          : 'Explore',
+}));
+
+// --- What the interface remembers ------------------------------------------------------------------------
+
+/** @type {any} the journey in play, or on file before it is resumed */
+let game = null;
+/** @type {any} the receipt of the last drive */
 let lastLeg = null;
+/** @type {'title'|'background'|'crew'|'game'} */
+let screen = 'title';
+const setup = { profession: PROFESSIONS[0].id, names: [...DEFAULT_NAMES], road: 'surprise', seedText: '' };
+/** @type {string[]} the journal lines of the latest action */
+let notes = [];
+/** @type {null | { at: number, resources: string[], party: string[], atmosphere: boolean }} */
+let cue = null;
+let routeOpen = false;
+/** @type {Record<string, number>} the quantity chosen in each shop row */
+const shopQuantity = {};
+/** @type {null | { before: any, notes: string[], started: number, focus: string | null }} */
 let playback = null;
-let visualCue = null;
-const shopQuantities = Object.fromEntries(ITEMS.map(item => [item.id, 1]));
+/**
+ * @type {null | { token: number, id: string, step: 'choose'|'outcome', results: string[], fallen: any[],
+ *   error: string, typed: string }}
+ */
+let encounter = null;
+/** @type {{ memberId: string, name: string, line: string, epitaph: string, error: string }[]} */
+let memorials = [];
+const problems = new Set();
+let toastTimer = 0;
+let typingTimer = 0;
+let offlineNoted = false;
 
-function escapeHtml(value) {
-  return String(value ?? '').replace(/[&<>"']/g, character => ({
-    '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;',
-  })[character]);
+const motionAllowed = () => !matchMedia('(prefers-reduced-motion: reduce)').matches;
+const eventOf = id => EVENTS.find(event => event.id === id);
+
+// --- Messages (spec 9.4) ---------------------------------------------------------------------------------
+
+function clearToast() {
+  clearTimeout(toastTimer);
+  toastRegion.replaceChildren();
 }
 
-function asset(path) {
-  if (!path) return './assets/travel.jpg';
-  return `./${String(path).replace(/^\.\/?/, '').replace(/^\//, '')}`;
+/** A transient message near the bottom: 'ok' in the phosphor style, 'error' in amber. */
+function toast(message, tone = 'ok') {
+  clearToast();
+  const element = document.createElement('div');
+  element.className = 'toast';
+  element.dataset.tone = tone;
+  element.setAttribute('role', tone === 'error' ? 'alert' : 'status');
+  element.textContent = message;
+  toastRegion.append(element);
+  toastTimer = window.setTimeout(clearToast, TOAST_MS);
 }
 
-function image(path, alt, className = '') {
-  const source = asset(path);
-  const img = `<img class="${className}" src="${escapeHtml(source)}" alt="${escapeHtml(alt)}" loading="eager" decoding="async" />`;
-  if (!source.endsWith('.jpg')) return img;
-  const mobile = source.replace('/assets/', '/assets/mobile/').replace(/\.jpg$/, '');
-  return `<picture class="responsive-picture"><source media="(max-width: 760px), (max-height: 500px) and (pointer: coarse)" srcset="${escapeHtml(mobile)}-640.jpg 640w, ${escapeHtml(mobile)}-960.jpg 960w" sizes="calc(100vw - 24px)" />${img}</picture>`;
+function drawChrome() {
+  const message = [...problems].join(' ');
+  if (banner.textContent !== message) banner.textContent = message;
+  banner.hidden = !message;
+  headerNew.hidden = screen !== 'game' || !game;
+  headerNew.disabled = Boolean(playback);
+  let status = 'Local game';
+  if (problems.has(PROBLEMS.unsaved) || problems.has(PROBLEMS.unavailable)) status = 'Playing without a save';
+  else if (screen === 'game') status = 'Journey saved';
+  else if (game) status = 'Journey on file';
+  if (saveStatus.textContent !== status) saveStatus.textContent = status;
 }
 
-function hasVisualCue() {
-  return visualCue && performance.now() - visualCue.started < 2400;
+// --- Saving ----------------------------------------------------------------------------------------------
+
+function persist() {
+  if (saveJourney(game, lastLeg)) problems.delete(PROBLEMS.unsaved);
+  else problems.add(PROBLEMS.unsaved);
 }
 
-function button(label, action, className = 'button button-quiet', extra = '') {
-  return `<button type="button" class="${className}" data-action="${escapeHtml(action)}" ${extra}>${escapeHtml(label)}</button>`;
+// --- Drawing ---------------------------------------------------------------------------------------------
+
+function activeCue() {
+  if (!cue || playback || performance.now() - cue.at > CUE_MS) return { resources: [], party: [], atmosphere: false };
+  return cue;
 }
 
-function setNotice(message, persistent = false) {
-  if (persistent) storageWarning = message;
-  else flash = message;
-  const current = flash || storageWarning;
-  notice.textContent = current;
-  notice.hidden = !current;
-  const dialogError = eventDialog.querySelector('.dialog-error');
-  if (dialogError && eventDialog.open) {
-    dialogError.textContent = message || '';
-    dialogError.hidden = !message;
-  }
+/** The shop's rows with the chosen quantities, held between 0 and what can be bought, and Auto-buy. */
+function shopModel(state) {
+  const items = shopItems(state).map(item => {
+    const quantity = Math.max(0, Math.min(shopQuantity[item.id] ?? 1, item.canBuy));
+    shopQuantity[item.id] = quantity;
+    let reason = '';
+    if (item.canBuy < 1) reason = transition(state, { type: 'purchase', cart: { [item.id]: 1 } }).error ?? '';
+    else if (quantity < 1) reason = 'Choose how many to buy.';
+    return { ...item, qty: quantity, buyEnabled: quantity >= 1, reason };
+  });
+  const probe = transition(state, { type: 'autoPurchase' });
+  return { items, plan: recommendSupplies(state), autoBuy: { enabled: !probe.error, reason: probe.error ?? '' } };
 }
 
-function readSavedGame() {
-  try {
-    const raw = localStorage.getItem(SAVE_KEY);
-    if (!raw) return null;
-    const restored = deserializeGame(raw);
-    if (!restored) {
-      setNotice('This browser has an unreadable saved journey. You can start a new one; the old data has not been changed.', true);
-      return null;
-    }
-    // This optional UI receipt is bound to the exact game save. It never alters
-    // the rules state, and an old or malformed receipt is safe to ignore.
-    try {
-      const receipt = JSON.parse(localStorage.getItem(LEG_KEY));
-      const leg = receipt?.leg;
-      if (receipt?.savedGame === raw && leg &&
-        ['fromDistance', 'toDistance', 'fromDay', 'toDay', 'fuelUsed', 'foodUsed'].every(key => Number.isFinite(leg[key]) && leg[key] >= 0) &&
-        leg.toDistance >= leg.fromDistance && leg.toDistance <= restored.distance && leg.toDay >= leg.fromDay && leg.toDay <= restored.day &&
-        typeof leg.arrived === 'string' && leg.arrived.length <= 150) lastLeg = leg;
-    } catch { /* A receipt is optional; the journey itself is valid. */ }
-    return restored;
-  } catch {
-    setNotice('Browser storage is unavailable. You can still play, but this journey may not resume after you leave.', true);
-    return null;
-  }
-}
-
-function saveGame() {
-  if (!state) return;
-  try {
-    const raw = serializeGame(state);
-    localStorage.setItem(SAVE_KEY, raw);
-    savedState = state;
-    storageWarning = '';
-    saveStatus.textContent = 'Journey saved';
-    try {
-      if (lastLeg) localStorage.setItem(LEG_KEY, JSON.stringify({ savedGame: raw, leg: lastLeg }));
-      else localStorage.removeItem(LEG_KEY);
-    } catch { /* Optional visual history must not disable a working game save. */ }
-  } catch {
-    saveStatus.textContent = 'Playing without a save';
-    setNotice('Your browser could not save this journey. You can keep playing here, but progress may be lost when you close the tab.', true);
-  }
-}
-
-function stateAction(action) {
-  if (!state || playback) return;
-  const before = state;
-  const order = action.type === 'autoPurchase' ? recommendSupplies(state) : null;
-  const result = transition(state, action);
-  if (result.error) {
-    returnFocus = null;
-    setNotice(result.error);
-    return;
-  }
-  flash = '';
-  state = result.state;
-  visualCue = {
-    started: performance.now(),
-    resources: resourceIds.filter(id => state.inventory[id] !== before.inventory[id]),
-    party: state.party.filter((member, index) => member.health !== before.party[index].health || member.status !== before.party[index].status).map(member => member.id),
-    // Arrival encounters cover the scene. Restart its brief atmosphere only
-    // after the player closes the encounter, including after a saved resume.
-    atmosphere: state.phase === 'location' && (before.locationId !== state.locationId || ['rest', 'forage', 'talk', 'resolveEvent'].includes(action.type)),
+function tripModel() {
+  const playing = Boolean(playback);
+  const state = playing ? playback.before : game;
+  const ended = state.phase === 'ended';
+  return {
+    state,
+    playing,
+    options: availableActions(state),
+    forecast: ended ? null : forecast(state),
+    summary: ended ? summarize(state) : null,
+    shop: state.phase === 'shop' ? shopModel(state) : null,
+    paces: paceOptions(state),
+    rations: rationOptions(state),
+    notes: playing ? playback.notes : notes,
+    lastLeg,
+    routeOpen,
+    cue: activeCue(),
+    professionName: PROFESSIONS.find(item => item.id === state.profession)?.name ?? '',
+    weather: weatherName(state),
+    stop: currentStop(state),
+    next: nextStop(state.distance),
+    region: regionAt(state.distance),
+    crew: state.party.map(member => ({
+      id: member.id,
+      name: member.name,
+      health: member.health,
+      status: statusOf(member),
+      // The bar's colour follows health alone, so a sick traveler's bar still shows how much is left.
+      band: statusOf({ health: member.health, sick: false }).id,
+      epitaph: member.epitaph,
+    })),
+    stops: STOPS,
+    goal: RULES.goalMiles,
   };
-  if (action.type === 'travel' && (state.day > before.day || state.distance > before.distance)) {
-    lastLeg = {
-      fromDistance: before.distance, toDistance: state.distance,
-      fromDay: before.day, toDay: state.day,
-      fuelUsed: Math.max(0, before.inventory.fuel - state.inventory.fuel),
-      foodUsed: Math.max(0, before.inventory.food - state.inventory.food),
-      arrived: state.phase === 'location' || state.outcome === 'won' ? location().shortName || location().name : '',
-    };
-  } else if (action.type === 'resolveEvent' && lastLeg && state.distance > before.distance) {
-    // A clear-road encounter can add miles to the same leg or reach a stop.
-    lastLeg = { ...lastLeg, toDistance: state.distance, arrived: state.phase === 'location' || state.outcome === 'won' ? location().shortName || location().name : '' };
-  }
-  saveGame();
-  if (action.type === 'autoPurchase' && order?.cost > 0) {
-    const packed = `Packed ${Object.entries(order.cart).filter(([, count]) => count > 0).map(([id, count]) => `${count} ${resourceLabels[id].toLowerCase()}`).join(', ')} for $${formatNumber(order.cost)}. $${formatNumber(state.inventory.money)} left for the road.`;
-    setNotice(storageWarning ? `${packed} ${storageWarning}` : packed);
-  }
-  if (action.type === 'travel' && state.distance > before.distance && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    playback = { fromDistance: before.distance, fromDay: before.day, started: performance.now() };
-    render();
-    requestAnimationFrame(animateDrive);
-    return;
-  }
-  render();
 }
 
-function animateDrive(now) {
-  if (!playback) return;
-  const elapsed = Math.min(1, (now - playback.started) / DRIVE_DURATION);
-  const progress = 1 - (1 - elapsed) ** 2;
-  const distance = Math.round(playback.fromDistance + (state.distance - playback.fromDistance) * progress);
-  const distanceLabel = app.querySelector('[data-trip-distance]');
-  if (distanceLabel) distanceLabel.textContent = formatNumber(distance);
-  const marker = app.querySelector('[data-trip-progress]');
-  if (marker) marker.style.width = `${distance / 10}%`;
-  app.querySelector('.route-track')?.setAttribute('aria-valuenow', String(distance));
-  const drivingCounter = app.querySelector('[data-drive-distance]');
-  if (drivingCounter) drivingCounter.textContent = `+${distance - playback.fromDistance} mi`;
-  if (elapsed < 1) requestAnimationFrame(animateDrive);
-  else {
-    playback = null;
-    render();
-  }
-}
-
-function profession() {
-  return PROFESSIONS.find(item => item.id === state?.profession);
-}
-
-function location() {
-  return LOCATIONS.find(item => item.id === state?.locationId) ?? LOCATIONS[0];
-}
-
-function nextLocation() {
-  return [...LOCATIONS].sort((a, b) => a.miles - b.miles).find(item => item.miles > state.distance);
-}
-
-function pendingEvent() {
-  return EVENTS.find(item => item.id === state?.pendingEvent?.id);
-}
-
-function formatNumber(value) {
-  return Number(value ?? 0).toLocaleString('en-US');
-}
-
-function renderResource(id, compact = false) {
-  const value = state.inventory?.[id] ?? 0;
-  const label = resourceLabels[id];
-  const icon = `<img src="./assets/resource-${id}.png" alt="" class="resource-icon" loading="eager" />`;
-  return `<div class="resource ${compact ? 'resource-compact' : ''} ${!playback && hasVisualCue() && visualCue.resources.includes(id) ? 'resource-changed' : ''}" data-resource="${id}" title="${escapeHtml(label)}: ${escapeHtml(value)}">${icon}<span class="resource-name">${escapeHtml(label)}</span><strong>${formatNumber(value)}</strong></div>`;
-}
-
-function renderResources(compact = false) {
-  return `<div class="resources ${compact ? 'resources-compact' : ''}" aria-label="Supplies">${resourceIds.map(id => renderResource(id, compact)).join('')}</div>`;
-}
-
-function renderParty() {
-  return `<section class="party-section" aria-labelledby="party-heading">
-    <div class="section-heading"><h2 id="party-heading">The crew</h2><span>${state.party.filter(member => member.status !== 'Deceased').length} traveling</span></div>
-    <div class="party-list">${state.party.map(member => {
-      const health = Math.max(0, Math.min(100, Number(member.health) || 0));
-      return `<div class="traveler ${member.status === 'Deceased' ? 'traveler-deceased' : ''} ${!playback && hasVisualCue() && visualCue.party.includes(member.id) ? 'health-changed' : ''}">
-        <div class="traveler-top"><strong>${escapeHtml(member.name)}</strong><span>${escapeHtml(member.status)}</span></div>
-        <div class="health-track" role="meter" aria-label="${escapeHtml(member.name)} health" aria-valuenow="${health}" aria-valuemin="0" aria-valuemax="100"><span style="width:${health}%"></span></div>
-      </div>`;
-    }).join('')}</div>
-  </section>`;
-}
-
-function renderMobileParty() {
-  const living = state.party.filter(member => member.status !== 'Deceased').length;
-  return `<section class="mobile-party" aria-labelledby="crew-glance-heading"><div class="section-heading"><h2 id="crew-glance-heading">The crew</h2><span>${living} traveling</span></div><div class="mobile-party-list">${state.party.map(member => {
-    const health = Math.max(0, Math.min(100, Number(member.health) || 0));
-    return `<div class="mobile-traveler ${member.status === 'Deceased' ? 'traveler-deceased' : ''} ${!playback && hasVisualCue() && visualCue.party.includes(member.id) ? 'health-changed' : ''}" title="${escapeHtml(member.name)}: ${escapeHtml(member.status)}, ${health} health"><strong>${escapeHtml(member.name)}</strong><span>${escapeHtml(member.status)}</span><div class="health-track" role="meter" aria-label="${escapeHtml(member.name)} health" aria-valuenow="${health}" aria-valuemin="0" aria-valuemax="100"><span style="width:${health}%"></span></div></div>`;
-  }).join('')}</div></section>`;
-}
-
-function renderJournal() {
-  const entries = [...(state.journal ?? [])].reverse().slice(0, 6);
-  return `<section class="journal" aria-labelledby="journal-heading"><div class="section-heading"><h2 id="journal-heading">Road notes</h2><span>Latest first</span></div>
-    <ol>${entries.length ? entries.map(entry => `<li><span>Day ${escapeHtml(entry.day)}</span><p>${escapeHtml(entry.text)}</p></li>`).join('') : '<li><p>The journal is still clean. Give it a day.</p></li>'}</ol>
-  </section>`;
-}
-
-function renderTitle() {
-  const resumeText = savedState?.phase === 'ended' ? 'View saved ending' : 'Resume journey';
-  return `<section class="title-screen" id="top">
-    <div class="title-art">${image('assets/title.jpg', 'A scruffy van stacked high for the long drive to Portland', 'title-image')}</div>
-    <div class="title-copy"><p class="title-kicker">A road trip of dubious judgment</p>
-      <h1>The Portland<br />Trail<span class="title-period">.</span></h1>
-      <p class="title-deck">Five travelers. One overburdened van. A thousand miles of detours, bad decisions, and surprisingly expensive snacks.</p>
-      <div class="title-actions">${button('Start a new journey', 'new', 'button button-primary button-large')}${savedState ? button(resumeText, 'resume', 'button button-outline button-large') : ''}</div>
-      <p class="title-footnote">Every choice sticks. The road rarely does.</p>
-    </div>
-  </section>`;
-}
-
-function startingSupplies(inventory) {
-  return ['money', 'food', 'fuel', 'ammo', 'parts', 'kombucha', 'nft']
-    .filter(id => Number(inventory?.[id]) > 0)
-    .map(id => `<span>${escapeHtml(resourceLabels[id])} <strong>${escapeHtml(inventory[id])}</strong></span>`).join('');
-}
-
-function renderProfessionSetup() {
-  return `<section class="setup-screen" id="top"><div class="setup-head"><span class="step-mark">1 / 2</span><p class="overline">Before the wheels turn</p><h1>Who booked this trip?</h1><p>Pick your background. Your training may help. Your baggage definitely will.</p></div>
-    <div class="profession-grid" role="radiogroup" aria-label="Choose a background">${PROFESSIONS.map((item, index) => {
-      const selected = selectedProfession === item.id;
-      return `<button type="button" class="profession-card ${selected ? 'is-selected' : ''}" role="radio" aria-checked="${selected}" data-profession="${escapeHtml(item.id)}" tabindex="${selected ? '0' : '-1'}">
-        <span class="profession-card-top"><span class="profession-number">0${index + 1}</span><img src="./assets/portrait-${escapeHtml(item.id)}.png" alt="" class="profession-portrait" /></span>
-        <strong>${escapeHtml(item.name)}</strong><span class="profession-description">${escapeHtml(item.description)}</span>
-        <span class="profession-ability"><b>Specialty</b>${escapeHtml(item.ability)}</span>
-        <span class="profession-start"><b>Starting kit</b>${startingSupplies(item.inventory)}</span>
-      </button>`;
-    }).join('')}</div>
-    <div class="setup-footer">${button('Continue to the crew', 'names', 'button button-primary button-large')}</div>
-  </section>`;
-}
-
-function renderNamesSetup() {
-  return `<section class="setup-screen setup-names" id="top"><div class="setup-head"><span class="step-mark">2 / 2</span><p class="overline">Passenger manifest</p><h1>Name the five travelers.</h1><p>They will all fit in the van. Personal space is another matter.</p></div>
-    <form id="names-form" class="names-form"><div class="name-fields">${DEFAULT_NAMES.map((name, index) => `<label class="name-field"><span>Traveler ${index + 1}</span><input name="traveler-${index}" type="text" value="${escapeHtml(name)}" maxlength="32" autocomplete="off" required /></label>`).join('')}</div>
-      <div class="setup-footer"><button type="button" class="button button-quiet" data-action="back-professions">Back to backgrounds</button><button type="submit" class="button button-primary button-large">Pack the van</button></div>
-    </form>
-  </section>`;
-}
-
-function roadRegion(distance) {
-  if (distance < 200) return { name: 'Into the foothills', image: 'assets/road-forest.jpg', theme: 'foothills' };
-  if (distance < 350) return { name: 'Along the river', image: 'assets/road-river.jpg', theme: 'river' };
-  if (distance < 570) return { name: 'The long way through the pines', image: 'assets/road-forest.jpg', theme: 'pines' };
-  if (distance < 750) return { name: 'Deep in Cascadia', image: 'assets/road-forest.jpg', theme: 'forest' };
-  if (distance < 870) return { name: 'The outskirts of somewhere', image: 'assets/road-forest.jpg', theme: 'outskirts' };
-  return { name: 'Portland is getting closer', image: 'assets/road-city.jpg', theme: 'city' };
-}
-
-function renderRoadStage() {
-  const distance = playback?.fromDistance ?? state.distance;
-  const region = roadRegion(distance);
-  const light = state.day % 3 === 0 ? 'dusk' : state.day % 3 === 1 ? 'morning' : 'daylight';
-  const weather = /drizzle|rain/i.test(state.weather) ? 'rain' : /heat/i.test(state.weather) ? 'heat' : 'clear';
-  return `<div class="road-stage region-${region.theme} light-${light} weather-${weather} ${playback ? 'is-driving' : ''}" aria-label="${escapeHtml(region.name)}, ${escapeHtml(state.weather)}" data-region="${region.theme}">
-    ${image(region.image, '', 'road-backdrop')}
-    <div class="road-clouds" aria-hidden="true"></div>
-    <div class="road-light"></div><div class="road-mist"></div><div class="road-surface"><div class="road-stripes"></div></div>
-    <div class="road-verge"></div><div class="road-rain"></div>
-    <div class="road-dust" aria-hidden="true"><span></span><span></span><span></span></div><div class="road-speed-lines" aria-hidden="true"></div>
-    <div class="road-van">${image('assets/van.png', 'Your loaded van on the road', 'van-cutout')}<span class="van-shadow"></span></div>
-    <div class="road-sign"><span>${escapeHtml(playback ? 'Rolling on' : region.name)}</span><strong data-drive-distance>${playback ? '+0 mi' : escapeHtml(state.weather)}</strong></div>
-  </div>`;
-}
-
-function renderAtmosphere(placeId) {
-  const kind = { mushroom_market: 'leaves', river_ferry: 'rain', forest_camp: 'embers', bookshop: 'rain', food_truck_fest: 'steam', first_stop: 'leaves' }[placeId];
-  if (!kind) return '';
-  const active = hasVisualCue() && visualCue.atmosphere;
-  return `<div class="scene-atmosphere atmosphere-${kind} ${active ? 'is-active' : ''}" aria-hidden="true">${Array.from({ length: 6 }, (_, index) => `<span style="--i:${index}"></span>`).join('')}</div>`;
-}
-
-function renderScene() {
-  const place = location();
-  const upcoming = nextLocation();
-  const isEnded = !playback && state.phase === 'ended';
-  const isShop = !playback && state.phase === 'shop';
-  const atLocation = !playback && state.phase === 'location';
-  const onRoad = Boolean(playback) || state.phase === 'travel';
-  const isAtStart = isShop && place?.id === 'start_city' && state.distance === 0;
-  let sceneImage = 'assets/travel.jpg';
-  let heading = playback ? 'Making a little progress.' : roadRegion(state.distance).name;
-  let description = upcoming ? `${formatNumber(Math.max(0, upcoming.miles - state.distance))} miles to ${upcoming.name}.` : 'Portland is on the horizon.';
-  if (playback) description = 'The scenery changes. The snack situation deteriorates.';
-  if (isEnded) {
-    sceneImage = state.outcome === 'won' ? 'assets/victory.jpg' : 'assets/loss.jpg';
-    heading = state.outcome === 'won' ? 'You made it to Portland.' : 'The road won this round.';
-    description = state.outcome === 'won' ? 'Against the odds, the van and at least some of its passengers made the city.' : 'The journey ends here, but the story deserves one more telling.';
-  } else if (atLocation) {
-    sceneImage = place?.image || 'assets/landmark.jpg';
-    heading = place?.name || 'A stop along the way';
-    description = place?.description || '';
-  } else if (isShop) {
-    sceneImage = isAtStart ? 'assets/departure.jpg' : (place?.image || 'assets/rest-stop.jpg');
-    heading = isAtStart ? 'Stock up before departure.' : `Supplies at ${place?.shortName || place?.name}`;
-    description = isAtStart ? 'Every mile starts with the choices you make in the parking lot.' : 'Spend carefully. The next stop may be farther than it looks.';
-  }
-  const sceneAlt = isEnded ? 'Illustrated journey ending' : isShop ? 'Illustrated roadside supply stop' : state.phase === 'travel' ? 'A loaded van crossing the Pacific Northwest' : `Illustration of ${heading}`;
-  return `<section class="scene-panel scene-${state.phase} ${onRoad ? 'scene-on-road' : ''}" aria-labelledby="scene-heading"><div class="scene-image-wrap">${onRoad ? renderRoadStage() : image(sceneImage, sceneAlt, 'scene-image')}${atLocation ? renderAtmosphere(place.id) : ''}
-      <div class="scene-image-vignette"></div><div class="scene-stamp"><span>THE PORTLAND TRAIL</span><b>${String(state.day).padStart(2, '0')} / ${String(Math.floor(state.distance)).padStart(4, '0')}</b></div></div>
-    <div class="scene-body"><div class="scene-text"><p class="scene-overline">${isEnded ? 'Journey complete' : isShop ? 'Supply stop' : atLocation ? 'You have arrived' : 'Day ' + escapeHtml(state.day) + ' on the road'}</p>
-      <h1 id="scene-heading">${escapeHtml(heading)}</h1><p>${escapeHtml(description)}</p></div>${renderPrimaryAction()}</div>
-  </section>`;
-}
-
-function renderPrimaryAction() {
-  if (playback) return `<div class="primary-action">${button('On the road…', 'travel', 'button button-primary button-large', 'disabled')}</div>`;
-  if (state.phase === 'ended') return `<div class="primary-action">${button('Start another journey', 'new', 'button button-primary button-large')}</div>`;
-  if (state.phase === 'shop') {
-    const start = location()?.id === 'start_city' && state.distance === 0;
-    return `<div class="primary-action">${button(start ? 'Leave for Portland' : 'Return to the road', start ? 'depart' : 'leaveShop', 'button button-primary button-large')}</div>`;
-  }
-  if (state.phase === 'location') return `<div class="primary-action">${button('Keep driving', 'depart', 'button button-primary button-large')}</div>`;
-  const next = nextLocation();
-  return `<div class="primary-action">${button(next ? `Drive toward ${next.shortName || next.name}` : 'Keep driving', 'travel', 'button button-primary button-large')}</div>`;
-}
-
-function renderTripStrip() {
-  const next = playback ? LOCATIONS.find(stop => stop.miles > playback.fromDistance) : nextLocation();
-  const distance = playback?.fromDistance ?? state.distance;
-  const percent = Math.max(0, Math.min(100, distance / 10));
-  return `<section class="trip-strip" aria-label="Trip progress"><div class="trip-numbers"><div><span>Distance</span><strong><b data-trip-distance>${formatNumber(distance)}</b> <small>/ 1,000 mi</small></strong></div><div><span>Day</span><strong>${formatNumber(state.day)}</strong></div><div><span>Next stop</span><strong>${escapeHtml(next?.shortName || next?.name || 'Portland')}</strong></div></div>
-    <div class="route-map"><div class="route-track" role="progressbar" aria-valuemin="0" aria-valuemax="1000" aria-valuenow="${Math.floor(distance)}" aria-label="Miles traveled"><span data-trip-progress style="width:${percent}%"></span></div>
-      <div class="route-markers" aria-hidden="true">${LOCATIONS.map(stop => `<i class="route-marker ${stop.miles <= distance ? 'is-passed' : ''}" style="left:${stop.miles / 10}%" title="${escapeHtml(stop.shortName || stop.name)} · ${stop.miles} mi"></i>`).join('')}</div></div>
-    <div class="route-endpoints"><span>Departure</span><span>Portland</span></div>
-    <details class="route-details"><summary>${LOCATIONS.length - 2} places along the way</summary><ol>${LOCATIONS.map(stop => `<li class="route-stop ${stop.miles < state.distance ? 'is-passed' : stop.id === state.locationId ? 'is-current' : ''}"><span>${stop.miles} mi</span><strong>${escapeHtml(stop.shortName || stop.name)}</strong><small>${stop.activities.includes('shop') ? 'Supplies' : stop.activities.includes('rest') ? 'Rest stop' : stop.id === 'portland' ? 'Destination' : 'Explore'}</small></li>`).join('')}</ol></details>
-    </section>`;
-}
-
-function renderLastLeg() {
-  if (!lastLeg || playback) return '';
-  const miles = lastLeg.toDistance - lastLeg.fromDistance;
-  return `<section class="last-leg" aria-labelledby="last-leg-heading" role="status"><div class="last-leg-heading"><h2 id="last-leg-heading">${lastLeg.arrived ? `Arrived at ${escapeHtml(lastLeg.arrived)}` : 'Another stretch behind you.'}</h2><span>Day ${lastLeg.fromDay} → ${lastLeg.toDay}</span></div>
-    <div class="leg-receipt"><strong>+${formatNumber(miles)} mi</strong><span>−${formatNumber(lastLeg.fuelUsed)} fuel</span><span>−${formatNumber(lastLeg.foodUsed)} food</span><span>Mile ${formatNumber(lastLeg.toDistance)}</span></div></section>`;
-}
-
-function renderAutoBuy() {
-  const plan = recommendSupplies(state);
-  const entries = Object.entries(plan.cart).filter(([, quantity]) => quantity > 0);
-  const hasOrder = entries.length > 0;
-  const heading = !hasOrder && plan.complete ? 'The essentials are packed.' : 'Let the van do the math.';
-  return `<section class="auto-buy-preview" aria-labelledby="auto-buy-heading"><div class="auto-buy-heading"><img src="./assets/resource-parts.png" alt="" /><div><h2 id="auto-buy-heading">${heading}</h2><p>Food and fuel to ${escapeHtml(plan.nextShopName)}, plus a buffer, repairs and kombucha when cash allows.</p></div></div>
-    ${hasOrder ? `<ul class="auto-buy-cart">${entries.map(([id, quantity]) => `<li><strong>+${formatNumber(quantity)}</strong> ${escapeHtml(resourceLabels[id].toLowerCase())}</li>`).join('')}</ul>` : ''}
-    <p class="auto-buy-note">${plan.complete ? `Your current supplies ${hasOrder ? 'plus this top-up cover' : 'cover'} the recommended loadout. ${plan.travelDays} driving ${plan.travelDays === 1 ? 'day' : 'days'} to the next shop.` : hasOrder ? 'Cash is tight. This buys what you can afford, starting with fuel and food. You may still need more supplies.' : 'There is not enough cash for a useful top-up. Sell an NFT if you have one, or review your pace and supplies.'}</p>
-    <div class="auto-buy-footer"><div class="auto-buy-cost" data-auto-buy-cost="${plan.cost}"><strong>$${formatNumber(plan.cost)}</strong><span>$${formatNumber(plan.remainingCash)} left after buying</span></div>${button(hasOrder ? 'Auto-buy essentials' : plan.complete ? 'Essentials packed' : 'Not enough cash', 'autoPurchase', 'button button-outline', hasOrder ? '' : 'disabled')}</div></section>`;
-}
-
-function renderShop() {
-  return `<section class="activity-panel" aria-labelledby="shop-heading"><div class="section-heading"><h2 id="shop-heading">Roadside supplies</h2><span>Cash: $${formatNumber(state.inventory.money)}</span></div>
-    <p class="panel-intro">Buy what the van can carry. Prices are shown per unit.</p>
-    <div class="shop-list">${ITEMS.map(item => {
-      const quantity = shopQuantities[item.id] || 1;
-      const total = Number(item.price) * quantity;
-      const affordable = Number(state.inventory.money) >= total;
-      return `<div class="shop-item"><div class="shop-item-copy"><strong>${escapeHtml(item.name)}</strong><p>${escapeHtml(item.description)}</p><span>${escapeHtml(item.unit)} · ${escapeHtml(resourceLabels[item.id] || item.id)} owned: ${formatNumber(state.inventory[item.id])}</span></div>
-        <div class="shop-item-controls"><label>Qty<select data-shop-quantity="${escapeHtml(item.id)}" aria-label="Quantity of ${escapeHtml(item.name)} to buy">${[1, 5, 10].map(count => `<option value="${count}" ${count === quantity ? 'selected' : ''}>${count}</option>`).join('')}</select></label>
-        <button type="button" class="button button-shop" data-buy="${escapeHtml(item.id)}" ${affordable ? '' : 'disabled aria-describedby="shop-unaffordable"'}><b>$${formatNumber(total)}</b><span>${affordable ? 'Buy' : 'Need more cash'}</span></button></div></div>`;
-    }).join('')}</div><p id="shop-unaffordable" class="visually-hidden">You do not have enough cash for this item.</p>
-    ${Number(state.inventory.nft) > 0 ? `<div class="shop-trade"><p>Ready to unload that pixelated Sasquatch?</p><button type="button" class="button button-outline" data-use-item="nft">Sell one NFT for $50</button></div>` : ''}</section>`;
-}
-
-function renderRouteControls() {
-  const paceOptions = Object.entries(PACES).map(([id, entry]) => `<option value="${escapeHtml(id)}" ${state.pace === id ? 'selected' : ''}>${escapeHtml(entry.name)} · ${escapeHtml(entry.miles)} mi / ${escapeHtml(entry.fuel)} fuel</option>`).join('');
-  const rationOptions = Object.entries(RATIONS).map(([id, entry]) => `<option value="${escapeHtml(id)}" ${state.rations === id ? 'selected' : ''}>${escapeHtml(entry.name)} · ${escapeHtml(entry.food)} food / traveler</option>`).join('');
-  return `<section class="activity-panel route-settings" aria-labelledby="settings-heading"><div class="section-heading"><h2 id="settings-heading">On the road</h2><span>${escapeHtml(state.weather || 'Weather unknown')}</span></div>
-    <div class="setting-fields"><label><span>Driving pace</span><select id="pace-select" aria-label="Driving pace">${paceOptions}</select></label><label><span>Daily rations</span><select id="rations-select" aria-label="Daily rations">${rationOptions}</select></label></div>
-    <p class="panel-intro">Pace spends fuel. Rations use food for each living traveler.</p></section>`;
-}
-
-function renderActions() {
-  if (state.phase === 'shop' || state.phase === 'ended') return '';
-  const activities = location()?.activities ?? [];
-  const atLocation = state.phase === 'location';
-  const can = name => !atLocation || activities.includes(name);
-  const choiceButton = (label, action, explanation, available = true) => available ? `<div class="activity"><button type="button" class="button button-action" data-action="${action}">${escapeHtml(label)}</button><p>${escapeHtml(explanation)}</p></div>` : '';
-  const availableItems = ITEMS.filter(item => ['kombucha', 'ammo'].includes(item.id) && Number(state.inventory[item.id]) > 0);
-  const ability = profession();
-  const cooldown = ability?.id === 'barista' ? 1 : 4;
-  const daysUntilAbility = Math.max(0, cooldown - (state.day - Number(state.flags?.lastAbilityDay ?? -99)));
-  const abilityBlocked = daysUntilAbility > 0 || (ability?.id === 'barista' && Number(state.inventory.food) < 1) || (ability?.id === 'influencer' && state.flags?.wifiDownDay === state.day);
-  const abilityReason = daysUntilAbility > 0 ? `Ready in ${daysUntilAbility} ${daysUntilAbility === 1 ? 'day' : 'days'}.` : ability?.id === 'barista' && Number(state.inventory.food) < 1 ? 'Needs 1 food.' : ability?.id === 'influencer' && state.flags?.wifiDownDay === state.day ? 'Wi-Fi is out today.' : '';
-  const canTalk = atLocation && can('talk') && !(state.flags?.talked ?? []).includes(state.locationId);
-  return `<section class="activity-panel" aria-labelledby="actions-heading"><div class="section-heading"><h2 id="actions-heading">What now?</h2><span>Every choice has a cost</span></div>
-    <div class="activity-grid">
-      ${choiceButton('Rest', 'rest', 'Take a day to recover. The crew still needs supplies.', can('rest'))}
-      ${choiceButton('Forage', 'forage', 'Search nearby. Time and energy are not free.', can('forage'))}
-      ${choiceButton('Talk to locals', 'talk', 'Hear what this place offers. One conversation per stop.', canTalk)}
-      ${choiceButton('Visit the shop', 'openShop', 'Top up supplies before the next stretch.', atLocation && can('shop'))}
-      ${ability && can('ability') ? `<div class="activity"><button type="button" class="button button-action" data-action="ability" ${abilityBlocked ? 'disabled' : ''}>${escapeHtml(abilityLabels[ability.id] || 'Use your specialty')}</button><p>${escapeHtml(abilityBlocked ? abilityReason + ' ' + ability.ability : ability.ability)}</p></div>` : ''}
-    </div>
-    ${availableItems.length ? `<div class="item-actions"><h3>Use a supply</h3><div>${availableItems.map(item => `<button type="button" class="button button-item" data-use-item="${escapeHtml(item.id)}"><span>${escapeHtml(item.name)} <b>${formatNumber(state.inventory[item.id])}</b></span><small>${escapeHtml(item.description)}</small></button>`).join('')}</div></div>` : ''}
-  </section>`;
-}
-
-function renderTrip() {
-  const ending = state.phase === 'ended';
-  return `<div class="game-screen" id="top"><div class="game-topline"><span>${escapeHtml(profession()?.name || 'The crew')} expedition</span><span>${ending ? 'Final record' : `${escapeHtml(state.weather || 'Road weather')} / Day ${formatNumber(state.day)}`}</span></div>
-    <div class="game-layout"><div class="main-column">${renderScene()}${state.phase === 'shop' ? renderAutoBuy() : ''}${renderTripStrip()}${state.phase !== 'shop' ? renderLastLeg() : ''}${renderResources(true)}${renderMobileParty()}${state.phase === 'shop' ? renderShop() : ending ? renderEnding() : `${renderActions()}${renderRouteControls()}`}</div>
-    <aside class="field-journal" aria-label="Field journal"><div class="journal-cover"><span class="journal-mark">✳</span><span>Field journal<br />No. ${String(state.day).padStart(3, '0')}</span></div>${renderResources()}${renderParty()}${renderJournal()}</aside></div></div>`;
-}
-
-function renderEnding() {
-  const survivors = state.party.filter(member => member.status !== 'Deceased');
-  return `<section class="ending-panel" aria-labelledby="ending-heading"><p class="overline">The final record</p><h2 id="ending-heading">${state.outcome === 'won' ? 'The city is yours.' : 'The trip is over.'}</h2>
-    <div class="ending-stats"><div><strong>${formatNumber(state.distance)}</strong><span>miles traveled</span></div><div><strong>${formatNumber(state.day)}</strong><span>days on the road</span></div><div><strong>${survivors.length}</strong><span>survivors</span></div></div>
-    <p>${survivors.length ? `Still standing: ${survivors.map(member => escapeHtml(member.name)).join(', ')}.` : 'No one survived the trip.'}</p></section>`;
-}
-
-function renderEventDialog() {
-  if (playback) return;
-  const current = pendingEvent();
-  if (!current || !state.pendingEvent) {
-    if (eventDialog.open) eventDialog.close();
-    lastEventToken = null;
-    return;
-  }
-  const controls = current.type === 'choice'
-    ? (current.choices ?? []).map(choice => {
-      let needs = '';
-      if (current.id === 'van_breakdown' && choice.id === 'repair') {
-        const cost = state.profession === 'dev' ? 1 : 2;
-        if (Number(state.inventory.parts) < cost) needs = `Need ${cost} repair ${cost === 1 ? 'supply' : 'supplies'}`;
-      }
-      if (current.id === 'nft_auction' && choice.id === 'invest' && Number(state.inventory.nft) < 1) needs = 'Need one NFT';
-      return `<button type="button" class="button button-dialog" data-event-choice="${escapeHtml(choice.id)}" ${needs ? 'disabled' : ''}><span>${escapeHtml(choice.label)}</span>${needs ? `<small>${escapeHtml(needs)}</small>` : ''}</button>`;
-    }).join('')
-    : `<button type="button" class="button button-primary" data-event-choice="">${current.type === 'critical' ? 'Face what happens' : 'Continue'}</button>`;
-  eventDialog.innerHTML = `${current.image ? `<div class="event-art">${image(current.image, `Illustration for ${current.title}`, 'event-image')}</div>` : '<div class="event-art event-art-text"><span>Weather alert</span><strong>☀</strong></div>'}
-    <div class="dialog-inner"><p class="overline">${current.type === 'critical' ? 'Critical moment' : 'Road encounter'}</p><h2 id="event-title">${escapeHtml(current.title)}</h2><p>${escapeHtml(current.description)}</p><p class="dialog-error" role="alert" hidden></p><div class="dialog-actions">${controls}</div></div>`;
-  if (!eventDialog.open) {
-    eventDialog.showModal();
-    lastEventToken = state.pendingEvent.token;
-    eventDialog.querySelector('[data-event-choice]')?.focus();
-  } else if (lastEventToken !== state.pendingEvent.token) {
-    lastEventToken = state.pendingEvent.token;
-    eventDialog.querySelector('[data-event-choice]')?.focus();
-  }
-}
-
-function render() {
-  app.innerHTML = screen === 'title' ? renderTitle() : screen === 'profession' ? renderProfessionSetup() : screen === 'names' ? renderNamesSetup() : state ? renderTrip() : renderTitle();
-  app.inert = Boolean(playback);
-  app.setAttribute('aria-busy', String(Boolean(playback)));
-  newJourneyHeader.hidden = !state || screen !== 'game';
-  newJourneyHeader.disabled = Boolean(playback);
-  if (!state) saveStatus.textContent = savedState ? 'Journey on file' : 'Local game';
-  if (!flash && !storageWarning) setNotice('');
-  if (screen === 'game') renderEventDialog();
-  else if (eventDialog.open) eventDialog.close();
-  if (returnFocus && !playback) {
-    const target = returnFocus;
-    returnFocus = null;
-    if (!state?.pendingEvent) requestAnimationFrame(() => {
-      const match = app.querySelector(target);
-      const fallback = match?.dataset.buy ? app.querySelector(`[data-shop-quantity="${CSS.escape(match.dataset.buy)}"]`) : app.querySelector('.primary-action button');
-      (match && !match.disabled ? match : fallback)?.focus({ preventScroll: Boolean(match && !match.disabled) });
+function screenHtml() {
+  if (screen === 'background') return backgroundView({ selected: setup.profession });
+  if (screen === 'crew') {
+    return crewView({
+      names: setup.names,
+      maxName: LIMITS.name,
+      road: /** @type {any} */ (setup.road),
+      seedText: setup.seedText,
+      dailySeed: dailySeed(),
     });
   }
+  return titleView({ saved: game ? { ended: game.phase === 'ended' } : null, stamp: stampText(BUILD) });
 }
 
-function focusScreen() {
-  window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
-  if (!eventDialog.open && !replaceDialog.open) app.focus({ preventScroll: true });
+/** Draw the current screen, then open whatever dialog the journey is waiting on. */
+function draw() {
+  if (screen === 'game' && game) {
+    drawScreen(app, TRIP_SHELL);
+    patchRegions(app, tripRegions(tripModel()), PRIMARY);
+  } else {
+    drawScreen(app, screenHtml());
+  }
+  app.inert = Boolean(playback);
+  app.setAttribute('aria-busy', String(Boolean(playback)));
+  drawChrome();
+  if (screen === 'game' && game && !playback) openDialogs();
 }
+
+/** The one path for every change of screen. Transient messages do not follow the player (B12). */
+function show(next) {
+  if (playback) return;
+  screen = next;
+  clearToast();
+  if (next !== 'game') {
+    for (const dialog of [eventDialog, memorialElement, confirmElement]) if (dialog.open) dialog.close();
+  }
+  draw();
+  window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+  if (!document.querySelector('dialog[open]')) app.focus({ preventScroll: true });
+}
+
+// --- Dialogs: memorials, then the encounter (spec 9.3 steps 4 to 6) --------------------------------------
+
+function openDialogs() {
+  if (memorialElement.open || confirmElement.open) return;
+  if (encounter?.step === 'outcome') {
+    drawEncounter();
+    return;
+  }
+  if (memorials.length) {
+    if (eventDialog.open) eventDialog.close();
+    drawMemorial();
+    return;
+  }
+  const pending = game?.pendingEvent;
+  if (pending) {
+    if (!encounter || encounter.token !== pending.token) {
+      const full = eventOf(pending.id).description;
+      encounter = {
+        token: pending.token,
+        id: pending.id,
+        step: 'choose',
+        results: [],
+        fallen: [],
+        error: '',
+        typed: '',
+      };
+      encounter.typed = motionAllowed() ? '' : full;
+      sound.play('event');
+    }
+    drawEncounter();
+    return;
+  }
+  encounter = null;
+  if (eventDialog.open) {
+    eventDialog.close();
+    focusPrimary();
+  }
+}
+
+function focusPrimary() {
+  const target = app.querySelector(PRIMARY) ?? app.querySelector('[data-key]');
+  if (target instanceof HTMLElement) target.focus({ preventScroll: true });
+  else app.focus({ preventScroll: true });
+}
+
+function drawEncounter() {
+  const event = eventOf(encounter.id);
+  const options = encounter.step === 'choose' ? availableActions(game).filter(option => option.group === 'event') : [];
+  const html = encounterDialog({
+    event,
+    step: encounter.step,
+    options,
+    results: encounter.results,
+    typed: encounter.typed,
+    error: encounter.error,
+  });
+  drawScreen(eventDialog, html, EVENT_FOCUS);
+  if (!eventDialog.open) {
+    eventDialog.showModal();
+    const first = eventDialog.querySelector(EVENT_FOCUS);
+    if (first instanceof HTMLElement) first.focus();
+  }
+  if (encounter.step === 'choose' && encounter.typed.length < event.description.length && !typingTimer) {
+    typingTimer = window.setInterval(typeOn, TYPE_MS);
+  }
+}
+
+/** One more character of the encounter text (L4). */
+function typeOn() {
+  const full = encounter && eventOf(encounter.id).description;
+  if (!encounter || encounter.step !== 'choose' || encounter.typed.length >= full.length) {
+    clearInterval(typingTimer);
+    typingTimer = 0;
+    return;
+  }
+  encounter.typed = full.slice(0, encounter.typed.length + 1);
+  const span = eventDialog.querySelector('[data-typed]');
+  if (span) span.textContent = encounter.typed;
+}
+
+function completeTyping() {
+  if (!encounter || encounter.step !== 'choose') return;
+  encounter.typed = eventOf(encounter.id).description;
+  const span = eventDialog.querySelector('[data-typed]');
+  if (span) span.textContent = encounter.typed;
+}
+
+function keepGoing() {
+  const fallen = encounter?.fallen ?? [];
+  encounter = null;
+  memorials.push(...fallen);
+  eventDialog.close();
+  openDialogs();
+  if (!document.querySelector('dialog[open]')) focusPrimary();
+}
+
+function memorialFor(member) {
+  const record = summarize(game).fallen.find(entry => entry.id === member.id);
+  return { memberId: member.id, name: member.name, line: record?.line ?? '', epitaph: member.epitaph, error: '' };
+}
+
+function drawMemorial() {
+  const current = memorials[0];
+  drawScreen(memorialElement, memorialDialog({ ...current, max: LIMITS.epitaph }), '[data-key="epitaph"]');
+  if (!memorialElement.open) {
+    memorialElement.showModal();
+    sound.play('death');
+    const field = memorialElement.querySelector('[data-key="epitaph"]');
+    if (field instanceof HTMLInputElement) field.focus();
+  }
+}
+
+function carve() {
+  const current = memorials[0];
+  const field = memorialElement.querySelector('[data-key="epitaph"]');
+  const text = field instanceof HTMLInputElement ? field.value : '';
+  if (dispatch({ type: 'setEpitaph', memberId: current.memberId, text })) memorialElement.close();
+}
+
+function openConfirm() {
+  drawScreen(
+    confirmElement,
+    confirmDialog({
+      overline: 'Saved journey',
+      title: 'Start over?',
+      text: 'Your current journey will be replaced when the new crew leaves the city.',
+      confirm: 'Start a new journey',
+      cancel: 'Keep playing',
+    }),
+  );
+  confirmElement.showModal();
+  const cancel = confirmElement.querySelector('[data-key="cancel"]');
+  if (cancel instanceof HTMLElement) cancel.focus();
+}
+
+// --- The one path for engine actions ---------------------------------------------------------------------
+
+const arrivedAt = state =>
+  state.phase === 'location' || state.outcome === 'won' ? lastStop(state.distance).shortName : '';
+const twoDecimals = value => Math.round(value * 100) / 100;
+
+/** The receipt of a drive (or a push), and the miles an encounter adds to it. */
+function updateLeg(before, after, action) {
+  const moved = after.distance > before.distance || after.day > before.day;
+  if ((action.type === 'travel' || action.type === 'push') && moved) {
+    lastLeg = {
+      fromDistance: before.distance,
+      toDistance: after.distance,
+      fromDay: before.day,
+      toDay: after.day,
+      fuelUsed: Math.max(0, twoDecimals(before.inventory.fuel - after.inventory.fuel)),
+      foodUsed: Math.max(0, twoDecimals(before.inventory.food - after.inventory.food)),
+      arrived: arrivedAt(after),
+    };
+  } else if (action.type === 'resolveEvent' && lastLeg && after.distance > before.distance) {
+    lastLeg = { ...lastLeg, toDistance: after.distance, toDay: after.day, arrived: arrivedAt(after) };
+  }
+}
+
+function soundsFor(before, after, action, fallen) {
+  if (after.outcome && !before.outcome) sound.play(after.outcome === 'won' ? 'win' : 'lose');
+  else if (action.type === 'purchase' || action.type === 'autoPurchase') sound.play('buy');
+  else if (after.phase === 'location' && before.phase !== 'location' && after.distance !== before.distance) {
+    sound.play('arrive');
+  } else if (action.type === 'resolveEvent') {
+    const hurt = after.party.some((member, index) => member.health < before.party[index].health);
+    sound.play(fallen.length || hurt ? 'bad' : 'good');
+  }
+}
+
+/** A toast that says what Auto-buy packed. */
+function packedMessage(before, after) {
+  const bought = SUPPLY_IDS.filter(id => id !== 'money' && after.inventory[id] > before.inventory[id]).map(
+    id => `${after.inventory[id] - before.inventory[id]} ${supplyLabel(id).toLowerCase()}`,
+  );
+  const spent = formatNumber(before.inventory.money - after.inventory.money);
+  return `Packed ${bought.join(', ')} for $${spent}. $${formatNumber(after.inventory.money)} left for the road.`;
+}
+
+/**
+ * Send one action to the engine. A refusal is shown where the player is looking: in the open dialog, or as an
+ * amber toast. On success: save, play the drive from the previous state (B7), draw, then memorials and the
+ * encounter. Returns true when the engine accepted the action.
+ */
+function dispatch(action) {
+  if (!game || playback) return false;
+  clearToast();
+  const before = game;
+  const result = transition(game, action);
+  if (result.error) {
+    if (memorialElement.open && memorials.length) {
+      memorials[0].error = result.error;
+      drawMemorial();
+    } else if (eventDialog.open && encounter) {
+      encounter.error = result.error;
+      drawEncounter();
+    } else {
+      toast(result.error, 'error');
+    }
+    return false;
+  }
+  game = result.state;
+  const previousNotes = notes;
+  if (result.notes.length) notes = result.notes;
+  updateLeg(before, game, action);
+  cue = {
+    at: performance.now(),
+    resources: SUPPLY_IDS.filter(id => before.inventory[id] !== game.inventory[id]),
+    party: game.party
+      .filter(
+        (member, index) => member.health !== before.party[index].health || member.sick !== before.party[index].sick,
+      )
+      .map(member => member.id),
+    atmosphere:
+      game.phase === 'location' &&
+      (before.distance !== game.distance || ['rest', 'forage', 'talk', 'meal', 'resolveEvent'].includes(action.type)),
+  };
+  persist();
+  const fallen = game.party.filter((member, index) => member.health === 0 && before.party[index].health > 0);
+  soundsFor(before, game, action, fallen);
+  if (action.type === 'resolveEvent') {
+    encounter = { ...encounter, step: 'outcome', results: result.notes, fallen: fallen.map(memorialFor), error: '' };
+  } else {
+    memorials.push(...fallen.map(memorialFor));
+  }
+  if (action.type === 'autoPurchase') toast(packedMessage(before, game), 'ok');
+  if (action.type === 'travel' && game.distance > before.distance && motionAllowed()) {
+    startDrive(before, previousNotes);
+    return true;
+  }
+  draw();
+  return true;
+}
+
+// --- The drive (B7, E3) ----------------------------------------------------------------------------------
+
+/** The scene the journey shows now, for this device. */
+function sceneFor(state) {
+  const stop = currentStop(state);
+  let id = regionAt(state.distance).scene;
+  if (state.phase === 'ended') id = state.outcome === 'won' ? 'victory' : 'loss';
+  else if (stop) id = stop.scene;
+  return sceneUrl(id, matchMedia(PHONE_ART).matches);
+}
+
+function preload(url) {
+  const image = new Image();
+  image.decoding = 'async';
+  image.src = url;
+}
+
+function startDrive(before, previousNotes) {
+  const active = document.activeElement;
+  const focus = active instanceof HTMLElement ? active.getAttribute('data-key') : null;
+  playback = { before, notes: previousNotes, started: performance.now(), focus };
+  preload(sceneFor(game));
+  if (game.pendingEvent) preload(sceneUrl(eventOf(game.pendingEvent.id).scene, matchMedia(PHONE_ART).matches));
+  sound.play('drive');
+  draw();
+  requestAnimationFrame(stepDrive);
+}
+
+function stepDrive(now) {
+  if (!playback) return;
+  const progress = Math.max(0, Math.min(1, (now - playback.started) / DRIVE_MS));
+  const eased = 1 - (1 - progress) ** 2;
+  const from = playback.before.distance;
+  const mile = Math.round(from + (game.distance - from) * eased);
+  const set = (selector, apply) => {
+    const element = app.querySelector(selector);
+    if (element instanceof HTMLElement) apply(element);
+  };
+  set('[data-trip-distance]', element => (element.textContent = mile.toLocaleString('en-US')));
+  set('[data-trip-progress]', element => (element.style.width = `${(mile / RULES.goalMiles) * 100}%`));
+  set('[data-mile]', element => element.setAttribute('data-mile', String(mile)));
+  set('.route-track', element => element.setAttribute('aria-valuenow', String(mile)));
+  set('[data-drive-distance]', element => (element.textContent = `+${mile - from} mi`));
+  if (progress < 1) {
+    requestAnimationFrame(stepDrive);
+    return;
+  }
+  const { focus } = playback;
+  playback = null;
+  draw();
+  if (!document.querySelector('dialog[open]')) {
+    const target = (focus && app.querySelector(`[data-key="${CSS.escape(focus)}"]`)) || app.querySelector(PRIMARY);
+    if (target instanceof HTMLElement) target.focus({ preventScroll: true });
+  }
+}
+
+// --- Setup -----------------------------------------------------------------------------------------------
 
 function startNewJourney() {
   if (playback) return;
-  if (state || savedState) {
-    replaceDialog.showModal();
-    replaceDialog.querySelector('[data-confirm="cancel"]')?.focus();
-  } else {
-    screen = 'profession';
-    render();
-    focusScreen();
+  if (game && !game.outcome) openConfirm();
+  else show('background');
+}
+
+function shuffleNames() {
+  const pool = [...NAME_POOL];
+  for (let index = pool.length - 1; index > 0; index -= 1) {
+    const other = Math.floor(Math.random() * (index + 1));
+    [pool[index], pool[other]] = [pool[other], pool[index]];
+  }
+  setup.names = pool.slice(0, setup.names.length);
+  draw();
+}
+
+function randomSeed() {
+  return crypto.getRandomValues(new Uint32Array(1))[0];
+}
+
+function packVan() {
+  let seed;
+  if (setup.road === 'daily') seed = dailySeed();
+  else if (setup.road === 'own') {
+    if (!setup.seedText.trim()) {
+      toast('Type a seed, or choose another road.', 'error');
+      const field = app.querySelector('[data-key="seed"]');
+      if (field instanceof HTMLElement) field.focus();
+      return;
+    }
+    seed = seedFromText(setup.seedText);
+  } else seed = randomSeed();
+  const names = setup.names.map((name, index) => (name.trim() ? name : DEFAULT_NAMES[index]));
+  try {
+    game = createGame({ profession: setup.profession, names, seed });
+  } catch (error) {
+    toast(error instanceof Error ? error.message : String(error), 'error');
+    return;
+  }
+  lastLeg = null;
+  notes = [game.journal.at(-1).text];
+  cue = null;
+  routeOpen = false;
+  encounter = null;
+  memorials = [];
+  for (const id of Object.keys(shopQuantity)) delete shopQuantity[id];
+  persist();
+  show('game');
+}
+
+/** Arrow keys move through a radio group (backgrounds, roads); the choice follows focus. */
+function moveRadio(target, step) {
+  const group = target.closest('[role="radiogroup"]');
+  const radios = [...group.querySelectorAll('[role="radio"]')];
+  const next = radios[(radios.indexOf(target) + step + radios.length) % radios.length];
+  choose(next.getAttribute('data-key'));
+  const focus = app.querySelector(`[data-key="${CSS.escape(next.getAttribute('data-key'))}"]`);
+  if (focus instanceof HTMLElement) focus.focus();
+}
+
+/** A radio-like choice on a setup screen. Returns true when the key was one. */
+function choose(key) {
+  if (key.startsWith('profession:')) setup.profession = key.slice('profession:'.length);
+  else if (key.startsWith('road:')) setup.road = key.slice('road:'.length);
+  else return false;
+  draw();
+  return true;
+}
+
+// --- The shop's stepper ----------------------------------------------------------------------------------
+
+function step(id, change) {
+  const row = shopItems(game).find(item => item.id === id);
+  if (!row) return;
+  const current = shopQuantity[id] ?? 1;
+  const next = change === 'max' ? row.canBuy : current + change;
+  shopQuantity[id] = Math.max(0, Math.min(next, row.canBuy));
+  draw();
+}
+
+function buy(id) {
+  const quantity = shopQuantity[id] ?? 1;
+  const before = game;
+  if (dispatch({ type: 'purchase', cart: { [id]: quantity } })) {
+    const spent = formatNumber(before.inventory.money - game.inventory.money);
+    toast(`Bought ${quantity} ${supplyLabel(id).toLowerCase()} for $${spent}.`);
+    shopQuantity[id] = 1;
+    draw();
   }
 }
 
-app.addEventListener('click', event => {
-  if (playback) return;
-  const professionTarget = event.target.closest('[data-profession]');
-  if (professionTarget) {
-    selectedProfession = professionTarget.dataset.profession;
-    render();
-    app.querySelector(`[data-profession="${CSS.escape(selectedProfession)}"]`)?.focus();
-    return;
-  }
-  const purchase = event.target.closest('[data-buy]');
-  if (purchase && !purchase.disabled) {
-    returnFocus = `[data-buy="${CSS.escape(purchase.dataset.buy)}"]`;
-    return stateAction({ type: 'purchase', cart: { [purchase.dataset.buy]: shopQuantities[purchase.dataset.buy] || 1 } });
-  }
-  const useItem = event.target.closest('[data-use-item]');
-  if (useItem) {
-    returnFocus = `[data-use-item="${CSS.escape(useItem.dataset.useItem)}"]`;
-    return stateAction({ type: 'useItem', itemId: useItem.dataset.useItem });
-  }
-  const target = event.target.closest('[data-action]');
+// --- Events ----------------------------------------------------------------------------------------------
+
+function onClick(event) {
+  const target = event.target instanceof Element ? event.target : null;
   if (!target) return;
-  switch (target.dataset.action) {
-    case 'new': startNewJourney(); break;
-    case 'resume':
-      if (savedState) { state = savedState; screen = 'game'; render(); focusScreen(); }
-      break;
-    case 'names': screen = 'names'; render(); focusScreen(); app.querySelector('input')?.focus(); break;
-    case 'back-professions': screen = 'profession'; render(); focusScreen(); break;
-    default: {
-      if (!state) return;
-      const actionType = target.dataset.action;
-      returnFocus = `[data-action="${CSS.escape(actionType)}"]`;
-      stateAction({ type: actionType });
-    }
-  }
-});
-
-app.addEventListener('keydown', event => {
-  const card = event.target.closest('[data-profession]');
-  if (!card || !['ArrowRight', 'ArrowDown', 'ArrowLeft', 'ArrowUp'].includes(event.key)) return;
-  event.preventDefault();
-  const index = PROFESSIONS.findIndex(item => item.id === card.dataset.profession);
-  const direction = ['ArrowRight', 'ArrowDown'].includes(event.key) ? 1 : -1;
-  selectedProfession = PROFESSIONS[(index + direction + PROFESSIONS.length) % PROFESSIONS.length].id;
-  render();
-  app.querySelector(`[data-profession="${CSS.escape(selectedProfession)}"]`)?.focus();
-});
-
-app.addEventListener('change', event => {
+  if (target.closest('#event-dialog .event-text')) completeTyping();
+  const control = target.closest('[data-key]');
+  if (!control) return;
+  const key = control.getAttribute('data-key');
+  if (key === 'home') event.preventDefault();
   if (playback) return;
-  if (event.target.matches('[data-shop-quantity]')) {
-    const id = event.target.dataset.shopQuantity;
-    const quantity = Number(event.target.value);
-    if (![1, 5, 10].includes(quantity) || !ITEMS.some(item => item.id === id)) return;
-    shopQuantities[id] = quantity;
-    const item = ITEMS.find(entry => entry.id === id);
-    const row = event.target.closest('.shop-item');
-    const buy = row?.querySelector('[data-buy]');
-    if (buy) {
-      const affordable = Number(state.inventory.money) >= Number(item.price) * quantity;
-      buy.disabled = !affordable;
-      buy.querySelector('b').textContent = `$${formatNumber(Number(item.price) * quantity)}`;
-      buy.querySelector('span').textContent = affordable ? 'Buy' : 'Need more cash';
-      if (affordable) buy.removeAttribute('aria-describedby');
-      else buy.setAttribute('aria-describedby', 'shop-unaffordable');
+  if (control.closest('#confirm-dialog')) {
+    confirmElement.close();
+    if (key === 'confirm') show('background');
+    return;
+  }
+  if (control.closest('#memorial-dialog')) {
+    if (key === 'leave') memorialElement.close();
+    if (key === 'carve') {
+      event.preventDefault();
+      carve();
     }
     return;
   }
-  if (event.target.id === 'pace-select') { returnFocus = '#pace-select'; stateAction({ type: 'setPace', pace: event.target.value }); }
-  if (event.target.id === 'rations-select') { returnFocus = '#rations-select'; stateAction({ type: 'setRations', rations: event.target.value }); }
-});
+  if (choose(key)) return;
+  switch (key) {
+    case 'start':
+    case 'new':
+    case 'new-header':
+      startNewJourney();
+      return;
+    case 'resume':
+      if (game) show('game');
+      return;
+    case 'home':
+      show('title');
+      return;
+    case 'back-title':
+      show('title');
+      return;
+    case 'to-crew':
+      show('crew');
+      return;
+    case 'back-background':
+      show('background');
+      return;
+    case 'shuffle':
+      shuffleNames();
+      return;
+    case 'event:done':
+      keepGoing();
+      return;
+    case 'autoPurchase':
+      dispatch({ type: 'autoPurchase' });
+      return;
+    default:
+  }
+  const [kind, id] = key.split(':');
+  if (kind === 'less') return step(id, -1);
+  if (kind === 'more') return step(id, 1);
+  if (kind === 'max') return step(id, 'max');
+  if (kind === 'buy') return buy(id);
+  if (!game || control.tagName === 'SELECT' || control.tagName === 'INPUT' || control.tagName === 'SUMMARY') return;
+  const option = availableActions(game).find(entry => entry.key === key);
+  if (option) dispatch(option.action);
+}
 
-app.addEventListener('submit', event => {
-  if (event.target.id !== 'names-form') return;
+function onInput(event) {
+  const field = event.target;
+  if (!(field instanceof HTMLInputElement)) return;
+  const key = field.getAttribute('data-key') ?? '';
+  if (key.startsWith('name:')) setup.names[Number(key.slice(5))] = field.value;
+  else if (key === 'seed') {
+    setup.seedText = field.value;
+    if (setup.road !== 'own') {
+      setup.road = 'own';
+      draw();
+    }
+  } else if (key.startsWith('qty:') && game) {
+    const id = key.slice(4);
+    const row = shopItems(game).find(item => item.id === id);
+    const typed = Number.parseInt(field.value.replace(/\D/g, ''), 10);
+    shopQuantity[id] = Math.max(0, Math.min(Number.isNaN(typed) ? 0 : typed, row?.canBuy ?? 0));
+    if (field.value !== String(shopQuantity[id]) && field.value !== '') field.value = String(shopQuantity[id]);
+    draw();
+  }
+}
+
+function onChange(event) {
+  const field = event.target;
+  if (!(field instanceof HTMLSelectElement) || playback) return;
+  const key = field.getAttribute('data-key');
+  if (key === 'setPace') dispatch({ type: 'setPace', pace: field.value });
+  if (key === 'setRations') dispatch({ type: 'setRations', rations: field.value });
+}
+
+function onKeydown(event) {
+  const target = event.target instanceof Element ? event.target : null;
+  if (eventDialog.open && target?.closest('#event-dialog') && !['Tab', 'Shift'].includes(event.key)) completeTyping();
+  const arrows = { ArrowRight: 1, ArrowDown: 1, ArrowLeft: -1, ArrowUp: -1 };
+  if (target?.matches('[role="radio"]') && event.key in arrows) {
+    event.preventDefault();
+    moveRadio(target, arrows[event.key]);
+  }
+}
+
+// Text fields select what they hold when they gain focus; the click that focused one does not undo it.
+let selectedOnFocus = null;
+function onFocusIn(event) {
+  const field = event.target;
+  if (!(field instanceof HTMLInputElement) || field.type !== 'text') return;
+  field.select();
+  selectedOnFocus = field;
+}
+
+function onMouseUp(event) {
+  if (event.target === selectedOnFocus) event.preventDefault();
+  selectedOnFocus = null;
+}
+
+function onSubmit(event) {
+  const form = event.target;
+  if (!(form instanceof HTMLFormElement)) return;
   event.preventDefault();
-  const fields = [...event.target.querySelectorAll('input')];
-  const names = fields.map((field, index) => field.value.trim().slice(0, 32) || DEFAULT_NAMES[index]);
-  const professionId = selectedProfession || PROFESSIONS[0].id;
-  try {
-    state = createGame({ profession: professionId, names, seed: Date.now() >>> 0 });
-    lastLeg = null;
-    visualCue = null;
-    screen = 'game';
-    flash = '';
-    saveGame();
-    render();
-    focusScreen();
-  } catch {
-    setNotice('The journey could not start. Check the traveler names and try again.');
+  if (form.id === 'names-form') packVan();
+  else if (form.closest('#memorial-dialog')) carve();
+}
+
+function onToggle(event) {
+  if (event.target instanceof HTMLDetailsElement && event.target.closest('[data-region="route"]')) {
+    routeOpen = event.target.open;
   }
-});
+}
 
-eventDialog.addEventListener('click', event => {
-  if (playback) return;
-  const choice = event.target.closest('[data-event-choice]');
-  if (!choice || !state?.pendingEvent) return;
-  const action = { type: 'resolveEvent', token: state.pendingEvent.token };
-  if (choice.dataset.eventChoice) action.choiceId = choice.dataset.eventChoice;
-  returnFocus = '[data-action="travel"], [data-action="depart"], [data-action="new"]';
-  stateAction(action);
-});
+document.addEventListener('click', onClick);
+document.addEventListener('input', onInput);
+document.addEventListener('change', onChange);
+document.addEventListener('keydown', onKeydown);
+document.addEventListener('focusin', onFocusIn);
+document.addEventListener('mouseup', onMouseUp);
+document.addEventListener('submit', onSubmit);
+document.addEventListener('toggle', onToggle, true);
 
+// The encounter cannot be dismissed (B1): Escape is cancelled, and a dialog the browser closes anyway reopens.
 eventDialog.addEventListener('cancel', event => event.preventDefault());
-replaceDialog.addEventListener('click', event => {
-  const choice = event.target.closest('[data-confirm]');
-  if (!choice) return;
-  replaceDialog.close();
-  if (choice.dataset.confirm === 'replace') {
-    state = null;
-    lastLeg = null;
-    visualCue = null;
-    screen = 'profession';
-    selectedProfession = PROFESSIONS[0]?.id ?? null;
-    ITEMS.forEach(item => { shopQuantities[item.id] = 1; });
-    render();
-    focusScreen();
-  }
+eventDialog.addEventListener('close', () => {
+  forget(eventDialog);
+  clearInterval(typingTimer);
+  typingTimer = 0;
+  if (screen === 'game' && !playback && (game?.pendingEvent || encounter?.step === 'outcome')) openDialogs();
+});
+// A memorial closes any way the player likes; the default epitaph stays unless one was carved.
+memorialElement.addEventListener('close', () => {
+  forget(memorialElement);
+  memorials.shift();
+  if (screen !== 'game') return;
+  openDialogs();
+  if (!document.querySelector('dialog[open]')) focusPrimary();
 });
 
-newJourneyHeader.addEventListener('click', startNewJourney);
+// Another tab changed the save: the title's Resume follows it.
+window.addEventListener('storage', event => {
+  if (event.key !== SAVE_KEY || screen !== 'title') return;
+  const loaded = loadJourney();
+  game = loaded.game;
+  lastLeg = loaded.lastLeg;
+  draw();
+});
 
-savedState = readSavedGame();
-render();
+// --- Offline (spec 8, F5) --------------------------------------------------------------------------------
+
+/** Every scene the journey can show, for this device. */
+function sceneUrls() {
+  const small = matchMedia(PHONE_ART).matches;
+  const ids = new Set(['title', 'departure', 'victory', 'loss']);
+  for (const entry of [...LOCATIONS, ...REGIONS, ...EVENTS]) ids.add(entry.scene);
+  return [...ids].map(id => new URL(sceneUrl(id, small), document.baseURI).href);
+}
+
+async function setUpOffline() {
+  if (!('serviceWorker' in navigator)) return;
+  const workers = navigator.serviceWorker;
+  if (BUILD.mode !== 'build') {
+    // A built copy served earlier on this origin must not shadow the source.
+    try {
+      const scope = new URL('./', document.baseURI).href;
+      for (const registration of await workers.getRegistrations()) {
+        if (registration.scope.startsWith(scope)) await registration.unregister();
+      }
+      if ('caches' in window) {
+        for (const name of await caches.keys()) if (name.startsWith('portland-trail-')) await caches.delete(name);
+      }
+    } catch {
+      // Nothing to clean up.
+    }
+    return;
+  }
+  workers.addEventListener('message', event => {
+    if (event.data?.type !== 'scenes-cached' || offlineNoted) return;
+    offlineNoted = true;
+    toast('Ready to play offline', 'ok');
+  });
+  workers.startMessages();
+  try {
+    await workers.register('./sw.js');
+    const registration = await workers.ready;
+    registration.active?.postMessage({ type: 'cache-scenes', urls: sceneUrls() });
+  } catch {
+    // The game plays online without a worker.
+  }
+}
+
+// --- Start -----------------------------------------------------------------------------------------------
+
+const loaded = loadJourney();
+game = loaded.game;
+lastLeg = loaded.lastLeg;
+if (loaded.problem) problems.add(loaded.problem);
+notes = game?.journal.length ? [game.journal.at(-1).text] : [];
+sound.setEnabled(readSettings().sound);
+const stamp = document.querySelector('#build-stamp');
+if (stamp) stamp.textContent = stampText(BUILD);
+draw();
+setUpOffline();
