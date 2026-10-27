@@ -1,6 +1,6 @@
 # Separate local image folder — review pending
 
-The user asked for a review of a folder called “the Portland Trail images,” associated with `/Users/ama/The Portland Trail` on ama's MacBook Pro.
+The user asked for a review of a folder called “the Portland Trail images,” associated with `/Users/ama/Projects/portland-trail` on ama's MacBook Pro.
 
 **Status:** the MacBook Pro was offline when this package was prepared. The folder's exact path, file list and image contents have not been inspected. Do not mistake the findings below for a review of that folder.
 

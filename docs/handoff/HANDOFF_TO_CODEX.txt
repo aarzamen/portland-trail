@@ -3,7 +3,7 @@ Inspection date: 1 October 2026
 Reference app: https://heuxnwuv.gensparkspace.com/
 
 PROJECT LOCATION
-Use /Users/ama/The Portland Trail on ama's MacBook Pro as the project root.
+Use /Users/ama/Projects/portland-trail on ama's MacBook Pro as the project root.
 This document and its sibling references belong under docs/handoff/ in that
 project. All unqualified document/evidence paths below are relative to that
 handoff directory. Read the project-root AGENTS.md for autonomous working

@@ -1,5 +1,5 @@
 THE PORTLAND TRAIL - GRAPHIC PRODUCTION BRIEF
-Project root: /Users/ama/The Portland Trail on ama's MacBook Pro.
+Project root: /Users/ama/Projects/portland-trail on ama's MacBook Pro.
 This file lives at docs/handoff/ASSET_BRIEF.txt. Unqualified file and folder
 references in this brief are relative to docs/handoff/.
 Proposed direction, based on the live app inspected 1 October 2026.

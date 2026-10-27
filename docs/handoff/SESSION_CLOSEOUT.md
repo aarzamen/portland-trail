@@ -1,6 +1,6 @@
 # Session closeout — October 2, 2026
 
-Public game: [The Portland Trail](https://the-portland-trail.annonable.chatgpt.site). GitHub source: [aarzamen/portland-trail](https://github.com/aarzamen/portland-trail), branch `main`. Project root remains `/Users/ama/The Portland Trail`.
+Public game: [The Portland Trail](https://the-portland-trail.annonable.chatgpt.site). GitHub source: [aarzamen/portland-trail](https://github.com/aarzamen/portland-trail), branch `main`. Project root remains `/Users/ama/Projects/portland-trail`.
 
 ## Completed
 

@@ -1,6 +1,6 @@
 # The Portland Trail project setup
 
-Updated October 2, 2026. Project root: `/Users/ama/The Portland Trail` on the MacBook Pro.
+Updated October 2, 2026. Project root: `/Users/ama/Projects/portland-trail` on the MacBook Pro.
 
 Public game: [The Portland Trail](https://the-portland-trail.annonable.chatgpt.site). No sign-in is required. Sites registration lives in [.openai/hosting.json](.openai/hosting.json), and [publication validation](docs/validation/2026-10-02-sites-publication.md) records the public checks. The [session closeout](docs/handoff/SESSION_CLOSEOUT.md) is the next-session starting point.
 
@@ -17,14 +17,14 @@ What 0.2 changed, in short: a rules engine that tells the interface what it can 
 Node 22 or newer is required. Playing needs no install.
 
 ```bash
-cd "/Users/ama/The Portland Trail/app"
+cd "/Users/ama/Projects/portland-trail/app"
 npm run dev
 ```
 
 Open [the local game](http://127.0.0.1:4173). Keep that terminal running. Saves belong to that browser and origin; switching ports or browsers creates a separate save area. `npm start` builds a stamped copy into `app/dist/` and serves that instead; the built copy registers a service worker and plays offline. In a second checkout or worktree, start servers with `PORT=0` (a free port is chosen and printed) so they never collide with the main checkout on 4173.
 
 ```bash
-cd "/Users/ama/The Portland Trail/app"
+cd "/Users/ama/Projects/portland-trail/app"
 npm test               # rules, encounters, saves, fuzz, balance and tooling tests; no install needed
 npm ci                 # once: Playwright, Prettier, TypeScript
 npm run test:browser   # builds, starts servers on free ports, runs every browser suite in installed Chrome

@@ -1,6 +1,6 @@
 # SDD ledger — plan: docs/superpowers/plans/2026-10-01-review-implementation.md
 
-Worktree: /Users/ama/The Portland Trail/.worktrees/review-implementation (branch feat/review-implementation, from main 2143195).
+Worktree: /Users/ama/Projects/portland-trail/.worktrees/review-implementation (branch feat/review-implementation, from main 2143195).
 Spec: docs/superpowers/specs/2026-10-01-review-implementation-design.md
 Plan/spec commit: 1b5b3bd (BASE for wave 1).
 Skill scripts: /Users/ama/.claude/plugins/cache/claude-plugins-official/superpowers/6.4.1/skills/subagent-driven-development/scripts/

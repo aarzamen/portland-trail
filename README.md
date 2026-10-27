@@ -15,7 +15,7 @@ The selected Road Ahead splash and five dedicated region/encounter scenes are in
 Node 22 or newer. No install is needed to play.
 
 ```bash
-cd "/Users/ama/The Portland Trail/app"
+cd "/Users/ama/Projects/portland-trail/app"
 npm run dev
 ```
 
@@ -24,7 +24,7 @@ Open http://127.0.0.1:4173. `npm start` builds a stamped copy into `app/dist/` a
 ## Develop
 
 ```bash
-cd "/Users/ama/The Portland Trail/app"
+cd "/Users/ama/Projects/portland-trail/app"
 npm test               # rules, fuzz and balance tests
 npm ci                 # once, for Playwright, Prettier and TypeScript
 npm run test:browser   # browser suites in installed Chrome

@@ -10,7 +10,7 @@
     {
       "id": "title-road-ahead",
       "name": "The Road Ahead",
-      "source": "/Users/ama/The Portland Trail/docs/handoff/graphics-v5/title-road-ahead.png",
+      "source": "/Users/ama/Projects/portland-trail/docs/handoff/graphics-v5/title-road-ahead.png",
       "masterSha256": "5c1170558afcd9cefccea5cc7d535b8912bd911a025f061048e45704ccc7ee56",
       "variants": [
         {
@@ -18,7 +18,7 @@
           "height": 1024,
           "quality": 82,
           "method": 6,
-          "path": "/Users/ama/The Portland Trail/tmp/splash-v5/preview-title-road-ahead.webp",
+          "path": "/Users/ama/Projects/portland-trail/tmp/splash-v5/preview-title-road-ahead.webp",
           "bytes": 255494,
           "sha256": "8c1149c626249fed6993d311f43b10e524ca43e8d9906486e8120c4d294a21fc"
         },
@@ -27,7 +27,7 @@
           "height": 640,
           "quality": 78,
           "method": 6,
-          "path": "/Users/ama/The Portland Trail/tmp/splash-v5/preview-title-road-ahead-960.webp",
+          "path": "/Users/ama/Projects/portland-trail/tmp/splash-v5/preview-title-road-ahead-960.webp",
           "bytes": 118676,
           "sha256": "b230dd86a3bc9d6c6384bd5053d2018be7a4e7b92f4d3c7a04d39618fc052ef6"
         }
@@ -36,7 +36,7 @@
     {
       "id": "title-five-travelers",
       "name": "The Departure Crew",
-      "source": "/Users/ama/The Portland Trail/docs/handoff/graphics-v5/title-five-travelers.png",
+      "source": "/Users/ama/Projects/portland-trail/docs/handoff/graphics-v5/title-five-travelers.png",
       "masterSha256": "0a3ba99256a190f030dc338f84f5789a32121afc309a54079c6949472eaf7abf",
       "variants": [
         {
@@ -44,7 +44,7 @@
           "height": 1024,
           "quality": 82,
           "method": 6,
-          "path": "/Users/ama/The Portland Trail/tmp/splash-v5/preview-title-five-travelers.webp",
+          "path": "/Users/ama/Projects/portland-trail/tmp/splash-v5/preview-title-five-travelers.webp",
           "bytes": 238808,
           "sha256": "b7e4cee9e16b226fd1c2427b67f51db69a958895d683c8af3a4e48832a16b438"
         },
@@ -53,7 +53,7 @@
           "height": 640,
           "quality": 78,
           "method": 6,
-          "path": "/Users/ama/The Portland Trail/tmp/splash-v5/preview-title-five-travelers-960.webp",
+          "path": "/Users/ama/Projects/portland-trail/tmp/splash-v5/preview-title-five-travelers-960.webp",
           "bytes": 105778,
           "sha256": "0d883a2b542e98efd22c1bc2db8c62890f55332fe72207b99c13f5d3c1ccde77"
         }
@@ -62,7 +62,7 @@
     {
       "id": "title-portland-beckons",
       "name": "Portland Beckons",
-      "source": "/Users/ama/The Portland Trail/docs/handoff/graphics-v5/title-portland-beckons.png",
+      "source": "/Users/ama/Projects/portland-trail/docs/handoff/graphics-v5/title-portland-beckons.png",
       "masterSha256": "7256d1d92c12de9e46cc6bb6d861382a1e8ee016cb2a201031ee06e443f2beae",
       "variants": [
         {
@@ -70,7 +70,7 @@
           "height": 1024,
           "quality": 82,
           "method": 6,
-          "path": "/Users/ama/The Portland Trail/tmp/splash-v5/preview-title-portland-beckons.webp",
+          "path": "/Users/ama/Projects/portland-trail/tmp/splash-v5/preview-title-portland-beckons.webp",
           "bytes": 288428,
           "sha256": "78f177f151bd7b80191e6cfd1cefcd09ab8e14e2e2bd66afc60cc2fe9038882a"
         },
@@ -79,7 +79,7 @@
           "height": 640,
           "quality": 78,
           "method": 6,
-          "path": "/Users/ama/The Portland Trail/tmp/splash-v5/preview-title-portland-beckons-960.webp",
+          "path": "/Users/ama/Projects/portland-trail/tmp/splash-v5/preview-title-portland-beckons-960.webp",
           "bytes": 133646,
           "sha256": "5b99653f1c2ff875536d30a1277575773b5138dbdb5c38cab0169620be9644a1"
         }
@@ -96,18 +96,18 @@
       "routeHits": [
         {
           "url": "http://127.0.0.1:60795/assets/scenes/title-960.webp",
-          "fulfilledPath": "/Users/ama/The Portland Trail/tmp/splash-v5/preview-title-road-ahead-960.webp",
+          "fulfilledPath": "/Users/ama/Projects/portland-trail/tmp/splash-v5/preview-title-road-ahead-960.webp",
           "width": 960
         }
       ],
       "screenshots": [
         {
           "kind": "full-page",
-          "path": "/Users/ama/The Portland Trail/docs/validation/splash-candidates-v5/title-road-ahead-390x844.png"
+          "path": "/Users/ama/Projects/portland-trail/docs/validation/splash-candidates-v5/title-road-ahead-390x844.png"
         },
         {
           "kind": "initial-viewport",
-          "path": "/Users/ama/The Portland Trail/docs/validation/splash-candidates-v5/title-road-ahead-390x844-viewport.png"
+          "path": "/Users/ama/Projects/portland-trail/docs/validation/splash-candidates-v5/title-road-ahead-390x844-viewport.png"
         }
       ],
       "checks": {
@@ -208,14 +208,14 @@
       "routeHits": [
         {
           "url": "http://127.0.0.1:60795/assets/scenes/title-960.webp",
-          "fulfilledPath": "/Users/ama/The Portland Trail/tmp/splash-v5/preview-title-road-ahead-960.webp",
+          "fulfilledPath": "/Users/ama/Projects/portland-trail/tmp/splash-v5/preview-title-road-ahead-960.webp",
           "width": 960
         }
       ],
       "screenshots": [
         {
           "kind": "full-page",
-          "path": "/Users/ama/The Portland Trail/docs/validation/splash-candidates-v5/title-road-ahead-414x896.png"
+          "path": "/Users/ama/Projects/portland-trail/docs/validation/splash-candidates-v5/title-road-ahead-414x896.png"
         }
       ],
       "checks": {
@@ -316,14 +316,14 @@
       "routeHits": [
         {
           "url": "http://127.0.0.1:60795/assets/scenes/title-960.webp",
-          "fulfilledPath": "/Users/ama/The Portland Trail/tmp/splash-v5/preview-title-road-ahead-960.webp",
+          "fulfilledPath": "/Users/ama/Projects/portland-trail/tmp/splash-v5/preview-title-road-ahead-960.webp",
           "width": 960
         }
       ],
       "screenshots": [
         {
           "kind": "full-page",
-          "path": "/Users/ama/The Portland Trail/docs/validation/splash-candidates-v5/title-road-ahead-430x932.png"
+          "path": "/Users/ama/Projects/portland-trail/docs/validation/splash-candidates-v5/title-road-ahead-430x932.png"
         }
       ],
       "checks": {
@@ -424,14 +424,14 @@
       "routeHits": [
         {
           "url": "http://127.0.0.1:60795/assets/scenes/title.webp",
-          "fulfilledPath": "/Users/ama/The Portland Trail/tmp/splash-v5/preview-title-road-ahead.webp",
+          "fulfilledPath": "/Users/ama/Projects/portland-trail/tmp/splash-v5/preview-title-road-ahead.webp",
           "width": 1536
         }
       ],
       "screenshots": [
         {
           "kind": "full-page",
-          "path": "/Users/ama/The Portland Trail/docs/validation/splash-candidates-v5/title-road-ahead-1440x900.png"
+          "path": "/Users/ama/Projects/portland-trail/docs/validation/splash-candidates-v5/title-road-ahead-1440x900.png"
         }
       ],
       "checks": {
@@ -532,23 +532,23 @@
       "routeHits": [
         {
           "url": "http://127.0.0.1:60795/assets/scenes/title-960.webp",
-          "fulfilledPath": "/Users/ama/The Portland Trail/tmp/splash-v5/preview-title-road-ahead-960.webp",
+          "fulfilledPath": "/Users/ama/Projects/portland-trail/tmp/splash-v5/preview-title-road-ahead-960.webp",
           "width": 960
         },
         {
           "url": "http://127.0.0.1:60795/assets/scenes/title.webp",
-          "fulfilledPath": "/Users/ama/The Portland Trail/tmp/splash-v5/preview-title-road-ahead.webp",
+          "fulfilledPath": "/Users/ama/Projects/portland-trail/tmp/splash-v5/preview-title-road-ahead.webp",
           "width": 1536
         }
       ],
       "screenshots": [
         {
           "kind": "full-page",
-          "path": "/Users/ama/The Portland Trail/docs/validation/splash-candidates-v5/title-road-ahead-844x390.png"
+          "path": "/Users/ama/Projects/portland-trail/docs/validation/splash-candidates-v5/title-road-ahead-844x390.png"
         },
         {
           "kind": "initial-viewport",
-          "path": "/Users/ama/The Portland Trail/docs/validation/splash-candidates-v5/title-road-ahead-844x390-viewport.png"
+          "path": "/Users/ama/Projects/portland-trail/docs/validation/splash-candidates-v5/title-road-ahead-844x390-viewport.png"
         }
       ],
       "checks": {
@@ -649,18 +649,18 @@
       "routeHits": [
         {
           "url": "http://127.0.0.1:60795/assets/scenes/title-960.webp",
-          "fulfilledPath": "/Users/ama/The Portland Trail/tmp/splash-v5/preview-title-five-travelers-960.webp",
+          "fulfilledPath": "/Users/ama/Projects/portland-trail/tmp/splash-v5/preview-title-five-travelers-960.webp",
           "width": 960
         }
       ],
       "screenshots": [
         {
           "kind": "full-page",
-          "path": "/Users/ama/The Portland Trail/docs/validation/splash-candidates-v5/title-five-travelers-390x844.png"
+          "path": "/Users/ama/Projects/portland-trail/docs/validation/splash-candidates-v5/title-five-travelers-390x844.png"
         },
         {
           "kind": "initial-viewport",
-          "path": "/Users/ama/The Portland Trail/docs/validation/splash-candidates-v5/title-five-travelers-390x844-viewport.png"
+          "path": "/Users/ama/Projects/portland-trail/docs/validation/splash-candidates-v5/title-five-travelers-390x844-viewport.png"
         }
       ],
       "checks": {
@@ -761,14 +761,14 @@
       "routeHits": [
         {
           "url": "http://127.0.0.1:60795/assets/scenes/title-960.webp",
-          "fulfilledPath": "/Users/ama/The Portland Trail/tmp/splash-v5/preview-title-five-travelers-960.webp",
+          "fulfilledPath": "/Users/ama/Projects/portland-trail/tmp/splash-v5/preview-title-five-travelers-960.webp",
           "width": 960
         }
       ],
       "screenshots": [
         {
           "kind": "full-page",
-          "path": "/Users/ama/The Portland Trail/docs/validation/splash-candidates-v5/title-five-travelers-414x896.png"
+          "path": "/Users/ama/Projects/portland-trail/docs/validation/splash-candidates-v5/title-five-travelers-414x896.png"
         }
       ],
       "checks": {
@@ -869,14 +869,14 @@
       "routeHits": [
         {
           "url": "http://127.0.0.1:60795/assets/scenes/title-960.webp",
-          "fulfilledPath": "/Users/ama/The Portland Trail/tmp/splash-v5/preview-title-five-travelers-960.webp",
+          "fulfilledPath": "/Users/ama/Projects/portland-trail/tmp/splash-v5/preview-title-five-travelers-960.webp",
           "width": 960
         }
       ],
       "screenshots": [
         {
           "kind": "full-page",
-          "path": "/Users/ama/The Portland Trail/docs/validation/splash-candidates-v5/title-five-travelers-430x932.png"
+          "path": "/Users/ama/Projects/portland-trail/docs/validation/splash-candidates-v5/title-five-travelers-430x932.png"
         }
       ],
       "checks": {
@@ -977,14 +977,14 @@
       "routeHits": [
         {
           "url": "http://127.0.0.1:60795/assets/scenes/title.webp",
-          "fulfilledPath": "/Users/ama/The Portland Trail/tmp/splash-v5/preview-title-five-travelers.webp",
+          "fulfilledPath": "/Users/ama/Projects/portland-trail/tmp/splash-v5/preview-title-five-travelers.webp",
           "width": 1536
         }
       ],
       "screenshots": [
         {
           "kind": "full-page",
-          "path": "/Users/ama/The Portland Trail/docs/validation/splash-candidates-v5/title-five-travelers-1440x900.png"
+          "path": "/Users/ama/Projects/portland-trail/docs/validation/splash-candidates-v5/title-five-travelers-1440x900.png"
         }
       ],
       "checks": {
@@ -1085,23 +1085,23 @@
       "routeHits": [
         {
           "url": "http://127.0.0.1:60795/assets/scenes/title-960.webp",
-          "fulfilledPath": "/Users/ama/The Portland Trail/tmp/splash-v5/preview-title-five-travelers-960.webp",
+          "fulfilledPath": "/Users/ama/Projects/portland-trail/tmp/splash-v5/preview-title-five-travelers-960.webp",
           "width": 960
         },
         {
           "url": "http://127.0.0.1:60795/assets/scenes/title.webp",
-          "fulfilledPath": "/Users/ama/The Portland Trail/tmp/splash-v5/preview-title-five-travelers.webp",
+          "fulfilledPath": "/Users/ama/Projects/portland-trail/tmp/splash-v5/preview-title-five-travelers.webp",
           "width": 1536
         }
       ],
       "screenshots": [
         {
           "kind": "full-page",
-          "path": "/Users/ama/The Portland Trail/docs/validation/splash-candidates-v5/title-five-travelers-844x390.png"
+          "path": "/Users/ama/Projects/portland-trail/docs/validation/splash-candidates-v5/title-five-travelers-844x390.png"
         },
         {
           "kind": "initial-viewport",
-          "path": "/Users/ama/The Portland Trail/docs/validation/splash-candidates-v5/title-five-travelers-844x390-viewport.png"
+          "path": "/Users/ama/Projects/portland-trail/docs/validation/splash-candidates-v5/title-five-travelers-844x390-viewport.png"
         }
       ],
       "checks": {
@@ -1202,18 +1202,18 @@
       "routeHits": [
         {
           "url": "http://127.0.0.1:60795/assets/scenes/title-960.webp",
-          "fulfilledPath": "/Users/ama/The Portland Trail/tmp/splash-v5/preview-title-portland-beckons-960.webp",
+          "fulfilledPath": "/Users/ama/Projects/portland-trail/tmp/splash-v5/preview-title-portland-beckons-960.webp",
           "width": 960
         }
       ],
       "screenshots": [
         {
           "kind": "full-page",
-          "path": "/Users/ama/The Portland Trail/docs/validation/splash-candidates-v5/title-portland-beckons-390x844.png"
+          "path": "/Users/ama/Projects/portland-trail/docs/validation/splash-candidates-v5/title-portland-beckons-390x844.png"
         },
         {
           "kind": "initial-viewport",
-          "path": "/Users/ama/The Portland Trail/docs/validation/splash-candidates-v5/title-portland-beckons-390x844-viewport.png"
+          "path": "/Users/ama/Projects/portland-trail/docs/validation/splash-candidates-v5/title-portland-beckons-390x844-viewport.png"
         }
       ],
       "checks": {
@@ -1314,14 +1314,14 @@
       "routeHits": [
         {
           "url": "http://127.0.0.1:60795/assets/scenes/title-960.webp",
-          "fulfilledPath": "/Users/ama/The Portland Trail/tmp/splash-v5/preview-title-portland-beckons-960.webp",
+          "fulfilledPath": "/Users/ama/Projects/portland-trail/tmp/splash-v5/preview-title-portland-beckons-960.webp",
           "width": 960
         }
       ],
       "screenshots": [
         {
           "kind": "full-page",
-          "path": "/Users/ama/The Portland Trail/docs/validation/splash-candidates-v5/title-portland-beckons-414x896.png"
+          "path": "/Users/ama/Projects/portland-trail/docs/validation/splash-candidates-v5/title-portland-beckons-414x896.png"
         }
       ],
       "checks": {
@@ -1422,14 +1422,14 @@
       "routeHits": [
         {
           "url": "http://127.0.0.1:60795/assets/scenes/title-960.webp",
-          "fulfilledPath": "/Users/ama/The Portland Trail/tmp/splash-v5/preview-title-portland-beckons-960.webp",
+          "fulfilledPath": "/Users/ama/Projects/portland-trail/tmp/splash-v5/preview-title-portland-beckons-960.webp",
           "width": 960
         }
       ],
       "screenshots": [
         {
           "kind": "full-page",
-          "path": "/Users/ama/The Portland Trail/docs/validation/splash-candidates-v5/title-portland-beckons-430x932.png"
+          "path": "/Users/ama/Projects/portland-trail/docs/validation/splash-candidates-v5/title-portland-beckons-430x932.png"
         }
       ],
       "checks": {
@@ -1530,14 +1530,14 @@
       "routeHits": [
         {
           "url": "http://127.0.0.1:60795/assets/scenes/title.webp",
-          "fulfilledPath": "/Users/ama/The Portland Trail/tmp/splash-v5/preview-title-portland-beckons.webp",
+          "fulfilledPath": "/Users/ama/Projects/portland-trail/tmp/splash-v5/preview-title-portland-beckons.webp",
           "width": 1536
         }
       ],
       "screenshots": [
         {
           "kind": "full-page",
-          "path": "/Users/ama/The Portland Trail/docs/validation/splash-candidates-v5/title-portland-beckons-1440x900.png"
+          "path": "/Users/ama/Projects/portland-trail/docs/validation/splash-candidates-v5/title-portland-beckons-1440x900.png"
         }
       ],
       "checks": {
@@ -1638,23 +1638,23 @@
       "routeHits": [
         {
           "url": "http://127.0.0.1:60795/assets/scenes/title-960.webp",
-          "fulfilledPath": "/Users/ama/The Portland Trail/tmp/splash-v5/preview-title-portland-beckons-960.webp",
+          "fulfilledPath": "/Users/ama/Projects/portland-trail/tmp/splash-v5/preview-title-portland-beckons-960.webp",
           "width": 960
         },
         {
           "url": "http://127.0.0.1:60795/assets/scenes/title.webp",
-          "fulfilledPath": "/Users/ama/The Portland Trail/tmp/splash-v5/preview-title-portland-beckons.webp",
+          "fulfilledPath": "/Users/ama/Projects/portland-trail/tmp/splash-v5/preview-title-portland-beckons.webp",
           "width": 1536
         }
       ],
       "screenshots": [
         {
           "kind": "full-page",
-          "path": "/Users/ama/The Portland Trail/docs/validation/splash-candidates-v5/title-portland-beckons-844x390.png"
+          "path": "/Users/ama/Projects/portland-trail/docs/validation/splash-candidates-v5/title-portland-beckons-844x390.png"
         },
         {
           "kind": "initial-viewport",
-          "path": "/Users/ama/The Portland Trail/docs/validation/splash-candidates-v5/title-portland-beckons-844x390-viewport.png"
+          "path": "/Users/ama/Projects/portland-trail/docs/validation/splash-candidates-v5/title-portland-beckons-844x390-viewport.png"
         }
       ],
       "checks": {

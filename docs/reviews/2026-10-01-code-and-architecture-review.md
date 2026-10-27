@@ -299,7 +299,7 @@ Ordered by value for effort.
 Run from the project root of a checkout at commit `3e02b8a` (for example `git worktree add ../portland-trail-3e02b8a 3e02b8a`); the scripts no longer run against the 0.2 engine. Node 22 is enough; nothing needs installing. The balance run takes about 40 seconds.
 
 ```bash
-cd "/Users/ama/The Portland Trail"
+cd "/Users/ama/Projects/portland-trail"
 node docs/reviews/evidence/fuzz.mjs
 node docs/reviews/evidence/scenarios.mjs
 node docs/reviews/evidence/balance.mjs 3000

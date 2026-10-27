@@ -4,7 +4,7 @@ This file is the single source of truth for every agent working here (Claude, Co
 
 ## Project and intent
 
-The user-designated project root is `/Users/ama/The Portland Trail` on ama's MacBook Pro. Use this checkout as the working project. Derive paths from the actual project root when running elsewhere; do not hard-code cloud scratch paths into the app or documentation.
+The user-designated project root is `/Users/ama/Projects/portland-trail` on ama's MacBook Pro. Use this checkout as the working project. Derive paths from the actual project root when running elsewhere; do not hard-code cloud scratch paths into the app or documentation.
 
 Preserve the premise: a funny Oregon Trail-inspired road trip to Portland, five named travelers, four satirical backgrounds, a scruffy loaded van, scarce resources and absurd Pacific Northwest encounters. Preserve the green handheld-game / terminal visual identity. The delivered audit and artwork provide a starting point, not a requirement to reproduce every defect or accept every proposal.
 

@@ -4,7 +4,7 @@ Package version 2 adds the first generated graphics batch. Read `graphics-v1/REA
 
 Inspected 1 October 2026. Source: https://heuxnwuv.gensparkspace.com/
 
-Intended project root: `/Users/ama/The Portland Trail` on ama's MacBook Pro. This handoff belongs at `docs/handoff/` within that project. References in this index and the two text briefs are relative to this handoff directory. Root instructions are in `../../AGENTS.md`; placement status is in `../../PROJECT_SETUP.md`.
+Intended project root: `/Users/ama/Projects/portland-trail` on ama's MacBook Pro. This handoff belongs at `docs/handoff/` within that project. References in this index and the two text briefs are relative to this handoff directory. Root instructions are in `../../AGENTS.md`; placement status is in `../../PROJECT_SETUP.md`.
 
 The MacBook Pro was offline during package preparation. Existing documents on that Mac and its separate “the Portland Trail images” folder remain to be inspected. See `LOCAL_IMAGE_REVIEW.md`; the export-art audit is already complete and is a separate source of evidence.
 

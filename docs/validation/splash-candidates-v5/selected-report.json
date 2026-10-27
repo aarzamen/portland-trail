@@ -11,7 +11,7 @@
     {
       "id": "title-road-ahead",
       "name": "The Road Ahead",
-      "source": "/Users/ama/The Portland Trail/docs/handoff/graphics-v5/title-road-ahead.png",
+      "source": "/Users/ama/Projects/portland-trail/docs/handoff/graphics-v5/title-road-ahead.png",
       "masterSha256": "5c1170558afcd9cefccea5cc7d535b8912bd911a025f061048e45704ccc7ee56",
       "variants": [
         {
@@ -19,7 +19,7 @@
           "height": 1024,
           "quality": 82,
           "method": 6,
-          "path": "/Users/ama/The Portland Trail/tmp/splash-v5/preview-title-road-ahead.webp",
+          "path": "/Users/ama/Projects/portland-trail/tmp/splash-v5/preview-title-road-ahead.webp",
           "bytes": 255494,
           "sha256": "8c1149c626249fed6993d311f43b10e524ca43e8d9906486e8120c4d294a21fc"
         },
@@ -28,7 +28,7 @@
           "height": 640,
           "quality": 78,
           "method": 6,
-          "path": "/Users/ama/The Portland Trail/tmp/splash-v5/preview-title-road-ahead-960.webp",
+          "path": "/Users/ama/Projects/portland-trail/tmp/splash-v5/preview-title-road-ahead-960.webp",
           "bytes": 118676,
           "sha256": "b230dd86a3bc9d6c6384bd5053d2018be7a4e7b92f4d3c7a04d39618fc052ef6"
         }
@@ -53,11 +53,11 @@
       "screenshots": [
         {
           "kind": "full-page",
-          "path": "/Users/ama/The Portland Trail/docs/validation/splash-candidates-v5/selected-title-390x844.png"
+          "path": "/Users/ama/Projects/portland-trail/docs/validation/splash-candidates-v5/selected-title-390x844.png"
         },
         {
           "kind": "initial-viewport",
-          "path": "/Users/ama/The Portland Trail/docs/validation/splash-candidates-v5/selected-title-390x844-viewport.png"
+          "path": "/Users/ama/Projects/portland-trail/docs/validation/splash-candidates-v5/selected-title-390x844-viewport.png"
         }
       ],
       "checks": {
@@ -167,7 +167,7 @@
       "screenshots": [
         {
           "kind": "full-page",
-          "path": "/Users/ama/The Portland Trail/docs/validation/splash-candidates-v5/selected-title-414x896.png"
+          "path": "/Users/ama/Projects/portland-trail/docs/validation/splash-candidates-v5/selected-title-414x896.png"
         }
       ],
       "checks": {
@@ -277,7 +277,7 @@
       "screenshots": [
         {
           "kind": "full-page",
-          "path": "/Users/ama/The Portland Trail/docs/validation/splash-candidates-v5/selected-title-430x932.png"
+          "path": "/Users/ama/Projects/portland-trail/docs/validation/splash-candidates-v5/selected-title-430x932.png"
         }
       ],
       "checks": {
@@ -387,7 +387,7 @@
       "screenshots": [
         {
           "kind": "full-page",
-          "path": "/Users/ama/The Portland Trail/docs/validation/splash-candidates-v5/selected-title-1440x900.png"
+          "path": "/Users/ama/Projects/portland-trail/docs/validation/splash-candidates-v5/selected-title-1440x900.png"
         }
       ],
       "checks": {
@@ -502,11 +502,11 @@
       "screenshots": [
         {
           "kind": "full-page",
-          "path": "/Users/ama/The Portland Trail/docs/validation/splash-candidates-v5/selected-title-844x390.png"
+          "path": "/Users/ama/Projects/portland-trail/docs/validation/splash-candidates-v5/selected-title-844x390.png"
         },
         {
           "kind": "initial-viewport",
-          "path": "/Users/ama/The Portland Trail/docs/validation/splash-candidates-v5/selected-title-844x390-viewport.png"
+          "path": "/Users/ama/Projects/portland-trail/docs/validation/splash-candidates-v5/selected-title-844x390-viewport.png"
         }
       ],
       "checks": {

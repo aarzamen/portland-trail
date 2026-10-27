@@ -57,14 +57,14 @@ This is simulator evidence, not physical-phone performance evidence. Battery use
 With the local preview already running, the Mac's bundled Playwright and installed Chrome can run:
 
 ```bash
-cd "/Users/ama/The Portland Trail"
+cd "/Users/ama/Projects/portland-trail"
 PLAYWRIGHT_MODULE="/Users/ama/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright" BROWSER=chromium node app/tests/browser-iphone.mjs
 ```
 
 For this session, Playwright's official WebKit runtime was installed into `/private/tmp/portland-playwright` rather than globally. While that temporary runtime exists:
 
 ```bash
-cd "/Users/ama/The Portland Trail"
+cd "/Users/ama/Projects/portland-trail"
 PLAYWRIGHT_BROWSERS_PATH="/private/tmp/portland-playwright" PLAYWRIGHT_MODULE="/Users/ama/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright" BROWSER=webkit node app/tests/browser-iphone.mjs
 ```
 
