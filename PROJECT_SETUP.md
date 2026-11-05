@@ -21,7 +21,7 @@ cd "/Users/ama/Projects/portland-trail/app"
 npm run dev
 ```
 
-Open [the local game](http://127.0.0.1:4173). Keep that terminal running. Saves belong to that browser and origin; switching ports or browsers creates a separate save area. `npm start` builds a stamped copy into `app/dist/` and serves that instead; the built copy registers a service worker and plays offline. In a second checkout or worktree, start servers with `PORT=0` (a free port is chosen and printed) so they never collide with the main checkout on 4173.
+Open [the local game](http://127.0.0.1:4173). Keep that terminal running. Saves belong to that browser and origin; switching ports or browsers creates a separate save area. `npm start` builds a stamped copy into `app/dist/` and serves that instead; the built copy registers a service worker and plays offline. In a second checkout or worktree, start servers with `PORT=0` (a free port is chosen and printed) so they never collide with the main checkout on 4173. The root `package.json` runs the same scripts from the project root (`npm run dev`, `npm run build`, `npm run preview`, `npm test`); it delegates to `app/` and adds no dependencies.
 
 ```bash
 cd "/Users/ama/Projects/portland-trail/app"
