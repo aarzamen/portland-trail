@@ -82,4 +82,6 @@ The scope of a 1.0 is undecided. Known limits:
 
 ## Licence
 
-MIT, Copyright (c) 2026 Aaron Arzamendi.
+MIT, Copyright (c) 2026 Aaron Arzamendi. See [LICENSE](LICENSE).
+
+The game ships no third-party code or assets: the runtime has no dependencies, the Portland Pixel typeface is drawn in-house from the glyph sheet in [app/scripts/pixel-font.txt](app/scripts/pixel-font.txt), and the artwork is the project's own (the owner's scene collection in [images/](images/) and the generated masters, with their prompts, under [docs/handoff/](docs/handoff/README.md) graphics-v1 to v5). Development tools are fetched at development time under their own permissive licences and are not part of the game: Playwright and TypeScript (Apache-2.0), Prettier and @types/node (MIT), and the asset pipeline's Pillow, fontTools and Brotli (MIT-style).
