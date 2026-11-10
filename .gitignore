@@ -1,5 +1,7 @@
 .DS_Store
 node_modules/
+# The root package.json declares no dependencies; app/package-lock.json is the only lockfile.
+/package-lock.json
 app/dist/
 app/test-results/
 .superpowers/

@@ -65,6 +65,8 @@ npm run format         # Prettier
 npm run typecheck      # TypeScript over JSDoc
 ```
 
+The same commands run from the repository root (`npm run dev`, `npm run build`, `npm run preview`, `npm test`, …): the root `package.json` delegates every script to `app/` with `npm --prefix app` and declares no dependencies of its own. `npm ci` still runs in `app/`, which holds the only lockfile.
+
 ## Rules that keep the code sound
 
 - One rule lives in one place. The interface contains no game logic: every button, label, reason, cost and forecast comes from the engine's read-only functions. If the interface needs a fact, add a read-only engine function.

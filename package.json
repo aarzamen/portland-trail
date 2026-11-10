@@ -1,0 +1,28 @@
+{
+  "name": "portland-trail",
+  "private": true,
+  "description": "Build definition for The Portland Trail at the repository root. The game and its package (version, dependencies, lockfile) live in app/; every script here delegates to app/ with npm --prefix app.",
+  "homepage": "https://the-portland-trail.annonable.chatgpt.site",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/aarzamen/portland-trail.git"
+  },
+  "scripts": {
+    "dev": "npm --prefix app run dev",
+    "build": "npm --prefix app run build",
+    "preview": "npm --prefix app start",
+    "start": "npm --prefix app start",
+    "test": "npm --prefix app test",
+    "test:browser": "npm --prefix app run test:browser",
+    "balance": "npm --prefix app run balance",
+    "checksums": "npm --prefix app run checksums",
+    "checksums:check": "npm --prefix app run checksums:check",
+    "format": "npm --prefix app run format",
+    "format:check": "npm --prefix app run format:check",
+    "typecheck": "npm --prefix app run typecheck",
+    "assets": "npm --prefix app run assets"
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}
